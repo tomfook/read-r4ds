@@ -10,8 +10,22 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
+
+<style>
+.column-left{
+  float: left;
+  width: 47.5%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 47.5%;
+  text-align: left;
+}
+</style>
+
 
 ## この本を読みます
 <img src="../img/cover.png" width=250>
@@ -22,14 +36,16 @@ by Hadley Wickham (R界の神)
 [英語は無料](https://r4ds.had.co.nz/)
 
 ## 全体的な話
-### この本の狙い
+### 狙い
 Rを使ってデータサイエンスができる状態になること
 
 ### データサイエンスとは
 生のデータを **理解** 、**洞察** 、 **知識** に変えること 
 
 ### 資料
-資料は下記に置いてあります。
+下記に置きます
+
+https://github.com/tomfook/read-r4ds/
 
 
 ## 学ぶこと
@@ -43,12 +59,139 @@ Rを使ってデータサイエンスができる状態になること
 - コミュニケーション
 - プログラミング
 
-## インポート
+## インポート (Import)
+<div style="text-align: center"><img src="../img/01-data-science.png"></div>
 
+外部のデータを取り込むこと。
 
-<!--
-```{r cars, echo = TRUE, eval=FALSE}
-summary(cars)
+- まずはこれから始まる
+- ファイル、データベース、ウェブ
+- 表データとして取り込む 
+
+## 整理 (Tidy)
+<div style="text-align: center"><img src="../img/01-data-science.png"></div>
+
+データを分析できる状態にすること
+
+- データが一貫したルールを持った状態にする
+- 各列が **変数** で、各行が **観測**
+- このようなデータを **tidy** と呼ぶ
+
+## 変換 (Transform)
+<div style="text-align: center"><img src="../img/01-data-science.png"></div>
+ 
+- 絞り込む（e.g. 昨年のデータだけにする）
+- 新しい変数を作る (e.g. 距離と時間から速度を求める)
+- 集計する (e.g. 平均を求める)
+など
+
+整理し変換する作業を **data wrangling** ともいう
+
+## 理解 (Understand)
+<div style="text-align: center"><img src="../img/01-data-science.png"></div>
+tidyなデータから知識を生み出す二つのエンジン
+
+二つはお互いを補完する
+
+<div class="column-left">
+### 可視化 (Visualise)
+- データから予想外の事実を引き出す。そして新たな質問を生み出す
+- 仮説やデータの間違いを正すヒントになる
+- びっくりする
+- 人間が解釈する　⇒　スケールしない
+</div>
+
+<div class="column-right">
+### モデル化 (Model)
+- 質問に対する答えを得る
+- たくさんの仮説を前提としている。仮説が正しいかどうかに答えられない
+- びっくりしない
+- 数学的な計算を行うだけなのでスケールする
+</div>
+
+## コミュニケーション (Communication)
+<div style="text-align: center"><img src="../img/01-data-science.png"></div>
+分析プロジェクトで決定的に重要な箇所
+
+どれだけ素晴らしい分析をして得た知識も、それを他人に伝えられなかったら無意味
+
+## プログラミング (Programming)
+<div style="text-align: center"><img src="../img/01-data-science.png"></div>
+道具
+
+- データサイエンティストになるのにプログラミングのエキスパートになる必要はない
+- ただプログラミングを学ぶことは見返りがある (e.g. 繰り返し作業の自動化)
+
+## 全体の流れ
+- まずはきれいなデータを使って **可視化** と **変換** から
+    - 実務上はきれいなデータを得るまでが80%...
+- 次にデータを取り込むところ
+- 個人的にコミュニケーションを次にやりたい
+- で最後にモデル化
+
+## やらないこと
+- ビッグデータ
+    - ターゲットのファイルサイズは1-2GB程度を上限とする
+- Python, Juliaとか
+- 表データでないもの
+    - 画像
+    - 音声
+    - 文章
+- 仮説の検証
+    - データを探索し、仮説を見つけ出すことに専念する
+   
+## 用意
+- R
+    - 統計解析用プログラミング言語
+    - https://cran.r-project.org/
+- RStudio
+    - RのIDE(Integrated Development Environment)
+    - http://www.rstudio.com/download
+- tidyverse
+    - 決定的に重要な Rの**パッケージ**
+
+## パッケージ
+Rの機能を拡張するための関数、データ、ドキュメント群
+
+インストールする
+```{r install.tidyverse, echo = TRUE, eval=FALSE}
+# R
+install.packages("tidyverse")
 ```
--->
+- 全自動でインターネットを通じてダウンロードしてインストールしてくれる
+- 一度だけ実行する
+    - パッケージのバージョンを上げたい場合も同じコマンドを再度実行
 
+読み込む
+```{r load.tidyvesre, echo = TRUE, eval = FALSE}
+library(tidyverse)
+```
+- 関数`library`でインストールされているパッケージを読み込む
+- 読み込んではじめてパッケージを使う状態になる
+- Rを起動するたび毎回実行
+
+## Rコード
+コンソールにコードを打ち込んでエンターを押す⇒実行
+
+```
+> 1 + 2
+[1] 3
+```
+
+- Rは一行ごとに実行される
+    - CやFortranなどのコンパイル型言語とは違う
+- \>があれば入力受付状態
+ 
+ 
+<!-- 本とは関係ない -->
+## 進め方
+- 前もって予習してきてほしい
+    - コードは自分で実行してほしい
+    - 練習問題を自分で解いてほしい
+        - 解けなくても練習問題の内容くらいは理解できる状態
+        - [答え](http://funyakofunyao.click/category/r/r4ds/)見てもいいから
+- 当日
+    - 本の内容で重要だと思うポイントについて説明する
+    - 解けなかった練習問題を一緒に解きましょう
+   
+- 一週間に一章くらいのペースで進める

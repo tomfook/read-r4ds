@@ -1,0 +1,44 @@
+---
+title: "Intro Explore - r4ds"
+author: 
+  name: "Tomoya Fukumoto"
+  affiliation: "Operation Planning"
+date: "2019-03-07"
+output: 
+  ioslides_presentation:
+    smaller: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<style>
+.column-left{
+  float: left;
+  width: 47.5%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 47.5%;
+  text-align: left;
+}
+</style>
+
+## 探索 (Explore)
+<div style="text-align: center"><img src="../img/data-science-explore.png"></div>
+- すばやくデータを見て、仮説を生み出し、それを検証する技術
+    - これを高速に繰り返す 
+- 一番やってて楽しい
+
+## メニュー
+- 可視化
+    - データを理解するための最初にして最強のツール
+- データ変換 
+    - 重要な変数を抜き出したり、条件絞ったり、集計したり
+- 探索的データ分析
+    - 仮説を生み出すフレームワークとそれを確認する技術
+
+- モデル化は難しいからあとで
+
