@@ -1,0 +1,185 @@
+---
+title: "Data visualisation - r4ds"
+author: 
+  name: "Tomoya Fukumoto"
+  affiliation: "Operation Planning"
+date: "2019-03-15"
+output: 
+  ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<style>
+.column-left{
+  float: left;
+  width: 47.5%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 47.5%;
+  text-align: left;
+}
+</style>
+
+
+## データ可視化
+> シンプルなグラフはいかなる道具よりもdata analystに情報をもたらす。   
+> 絵が最大の価値を持つのは全く想定していなかったものに気付かされる時である。   
+> --John Tukey
+
+### ggplot2
+- グラフィックを扱うための言語 **Grammer of graphics** を使うためのライブラリ
+- 慣れるまでに時間がかかるけど、一度使うと離れられない
+
+### [神の論文](http://vita.had.co.nz/papers/layered-grammar.pdf)
+余裕があるときにどうぞ
+
+## 準備
+```{r load.tidyverse, eval = FALSE}
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+```{r loadtidyverse, include = FALSE}
+library(tidyverse)
+```
+
+### `tidyverse`とは
+- Hadley神が作ったHadley宇宙
+  - `ggplot2`も含んだライブラリ群が一括ロードされる
+
+### 復習
+- `install.packages`は一回だけ
+- `library`は起動のたびに
+
+
+## データフレーム
+- 各列には変数が、各行は測定が収められている
+- Rで分析するデータの**基本形**
+    - 「すべて対象はdata.frame」の気持ちで構わない 
+
+```{r mpg, eval = FALSE}
+ggplot2::mpg
+#># A tibble: 234 x 11
+#>  manufacturer model displ  year   cyl trans drv     cty   hwy fl
+#>  <chr>        <chr> <dbl> <int> <int> <chr> <chr> <int> <int> <chr>
+#>  1 audi         a4      1.8  1999     4 auto… f        18    29 p
+#>  2 audi         a4      1.8  1999     4 manu… f        21    29 p
+#>  3 audi         a4      2    2008     4 manu… f        20    31 p
+#>  4 audi         a4      2    2008     4 auto… f        21    30 p
+#>  5 audi         a4      2.8  1999     6 auto… f        16    26 p
+#>  6 audi         a4      2.8  1999     6 manu… f        18    26 p
+#>  # ... with 228 more rows, and 1 more variable: class <chr>
+
+```
+
+## ヘルプ
+```{r help, eval = FALSE}
+?mpg
+help(mpg)
+```
+
+わからんかったらとりあえずヘルプをひこう
+
+関数、オブジェクト、パッケージなんでも
+
+RstudioならF1キーでも可
+
+## ggplotを作る
+```{r first.ggplot, fig.width = 7}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy))
+```
+
+
+## 説明
+```{r first.ggplot2, eval=FALSE}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy))
+```
+
+- `ggplot`: ggplot作るよ
+    - `data = mpg`: データは`mpg`で
+- `+ geom_point`: 散布図書くよ
+    - `mapping = aes(x = displ, y = hwy)`:  
+   x軸は`displ`、y軸は`hwy`で
+
+
+## ルール
+```
+ggplot(data = <DATA>) +
+  <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
+```
+
+1. `ggplot()`でグラフの土台を作成する
+    - データとしてデータフレームのみを受け付ける
+2. `geom_***`で何のグラフを書くか決める
+    - `aes()`で使う変数を指定する
+
+
+
+## 練習問題 
+1~5
+
+## エステティック
+```{r aes, eval=FALSE}
+geom_point(mapping = aes( ... ))
+``` 
+変数を追加で指定してグラフが持つ情報を増やす
+
+### 使い方
+属性=変数 という形で`aes`関数の中に置き、`geom`に`mapping`として渡す
+
+## 散布図の例(color)
+```{r color.class, fig.width = 7}
+ggplot(data = mpg) + 
+    geom_point(mapping = aes(x = displ, y = hwy, color = class))
+```
+
+## 散布図の例(連続color)
+```{r color.class.continuous, fig.width = 7, fig.height = 3.8}
+ggplot(data = mpg) + 
+    geom_point(mapping = aes(x = displ, y = hwy, color = displ))
+``` 
+
+連続変数を指定するとグラデーションになる
+
+## 散布図の例(size)
+```{r scatter.size, fig.width = 7, fig.height = 3.5, warning = FALSE}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, size = class))
+```
+
+- 連続変数のマッピングにお勧め
+
+## 散布図の例(alpha)
+```{r scatter.alpha, fig.width = 7, fig.height = 3.5, warning = FALSE}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, alpha = class))
+```
+
+- `alpha`は連続変数で使うのが推奨されている
+
+## 散布図の例(shape)
+```{r scatter.shape, fig.width = 7, fig.height = 3.5, warning = FALSE}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, shape = class)) 
+```
+
+`shape`はデフォルトで６種類までなので`suv`が表示されていない
+
+## エステティックの直接指定
+```{r scatter.color.direct, fig.width = 7, fig.height = 3.5}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
+```
+
+- 変数でなく直接エステティックを指定することもできる
+- その場合は`aes`の外で値を指定する
+
+## 練習問題
+1~6
