@@ -63,7 +63,7 @@ library(tidyverse)
     - 「すべて対象はdata.frame」の気持ちで構わない 
 
 ```{r mpg, eval = FALSE}
-ggplot2::mpg
+mpg
 #># A tibble: 234 x 11
 #>  manufacturer model displ  year   cyl trans drv     cty   hwy fl
 #>  <chr>        <chr> <dbl> <int> <int> <chr> <chr> <int> <int> <chr>
@@ -76,18 +76,6 @@ ggplot2::mpg
 #>  # ... with 228 more rows, and 1 more variable: class <chr>
 
 ```
-
-## ヘルプ
-```{r help, eval = FALSE}
-?mpg
-help(mpg)
-```
-
-わからんかったらとりあえずヘルプをひこう
-
-関数、オブジェクト、パッケージなんでも
-
-RstudioならF1キーでも可
 
 ## ggplotを作る
 ```{r first.ggplot}
@@ -116,7 +104,7 @@ ggplot(data = <DATA>) +
 ```
 
 1. `ggplot()`でグラフの土台を作成する
-    - データとしてデータフレームのみを受け付ける
+    - 元データとしてデータフレームを受け付ける
 2. `geom_***`で何のグラフを書くか決める
     - `aes()`で使う変数を指定する
 
@@ -195,12 +183,6 @@ ggplot(data = mpg)
 ```
 ダメなコードの例(なぜ？)
 
-### ステータス
-- コンソールの左端に \> があるときコマンドを入力できる状態
-- コンソールの左端に \+ があるときは何かの途中
-    - たとえば " を閉じ忘れているとか
-    - そういうときはESCAPEキーを押すと \> に戻る
-    
 ## ファセット
 グラフをカテゴリごとに作る。
 
@@ -219,7 +201,7 @@ ggplot(data = mpg) +
   facet_grid(drv ~ cyl)
 ```
 
-## 縦だけに並べる
+## 応用：縦に並べる
 ```{r facet.grid2, fig.height = 4}
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy)) +
@@ -272,7 +254,7 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
   geom_smooth()
 ```
 
-## データも変えられる 
+## データを差し替える
 ```{r twogeom4, message=FALSE, fig.width=7.5}
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
   geom_point(mapping = aes(color = class)) +
@@ -282,7 +264,7 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
 ## 練習問題
 1~6
  
-## geom_bar 
+## 棒グラフ
 ```{r geom.bar, fig.height = 3.5}
 ggplot(data = diamonds) +
   geom_bar(mapping = aes(x = cut))
@@ -291,11 +273,150 @@ ggplot(data = diamonds) +
 `y`は？
 
 ## Stat
-`stat`はどのような集計方法でグラフを書くかを制御する。 
+書くグラフによってはそのために集計が必要になることがある。
 
+### 例
+- ヒストグラム
+- 箱ひげ図
+
+`stat`はどのような集計方法でグラフを書くかを制御する。 
 `geom_bar`の`stat`はcount
 
-実はgeomとstatは常にペアになっている 
+## geomとstat
+すべてのgeomはデフォルトのstatを持つ。
 
-### 個人的な意見
-statはややこしいのであまり複雑に使わないほうがよいと思う
+### 例
+- `geom_bar`は`count`
+- `geom_point`は`identity`
+
+`stat`を指定すれば上書きして変更できる
+```{r stat, eval = FALSE}
+ggplot(data = demo) +
+  geom_bar(mapping = aes(x = cut, y = freq), stat = "identity")
+```
+```{r statprop, eval = FALSE}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, y = ..prop.., group = 1))
+```
+
+## stat_summary
+```{r stat.summary, fig.height = 3}
+ggplot(data = diamonds) +
+  stat_summary(
+    mapping = aes(x = cut, y = depth),
+    fun.ymin = min,
+    fun.ymax = max,
+    fun.y = median
+  )
+```
+
+## 個人的な意見
+- `geom`と`stat`はややこしくてわかりにくい
+- 基本`geom`を使うようにして`stat`は使わない
+    - 唯一`stat_summary`だけは使うことがあるかな・・・
+- 基本的に`stat`の操作もしない
+    - データを変形して直接集計する
+    - `ggplot`の集計は処理が重い
+
+## 練習問題
+1~5
+
+## 棒グラフのエステティックcolor
+```{r geombar2, fig.height=3.5}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, color = cut))
+```
+
+colorは周りの線だけ(最初は間違いがち)
+
+## 棒グラフのエステティックfill
+```{r geombar3}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, fill = clarity))
+```
+
+## ポジション
+デフォルトでは積み上げ棒グラフになる    
+```{r geombar3a, echo = FALSE, fig.height = 2.5}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, fill = clarity))
+```
+
+`position`を直接指定することでレイアウト変更
+
+- `position = "stack"`(デフォルト)
+- `position = identity`
+- `position = fill`
+- `position = dodge`
+
+## position identity
+```{r pos.id}
+ggplot(data = diamonds, mapping = aes(x = cut, fill = clarity)) +
+  geom_bar(alpha = 1/5, position = "identity")
+```
+
+## position fill
+```{r pos.fill}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = "fill")
+```
+
+## position dodge
+```{r pos.dodge}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge")
+```
+
+## 散布図のposition
+```{r scatter.jitter, fig.height = 3.5}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy), position = "jitter")
+```
+
+散布図の点が重なってしまうときに
+
+## 個人的にはこっちの方が好み
+```{r scatter.alpha2}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy), alpha = 1/3)
+```
+
+## 練習問題
+1~4
+
+## 座標系
+デフォルトの座標系は直交座標
+
+直接指定して変更することもできる
+
+- `coord_flip()`
+- `coord_quickmap()`
+- `coord_polar()`
+
+## coord_flip
+```{r coord.flip}
+ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
+  geom_boxplot() +
+  coord_flip()
+```
+
+## 練習問題
+1~4
+
+## Grammer of graphicsまとめ
+```
+ggplot(data = <DATA>) +
+  <GEOM_FUNCTION>(
+    mapping = aes(<MAPPINGS>),
+    stat = <STAT>,
+    position = <POSITION>
+  ) +
+  <COORDINATE_FUNCTION> +
+  <FACET_FUNCTION>
+```
+
+このシステムですべてのグラフを表現できます！
+
+## お勧めリンク
+https://heavywatal.github.io/rstats/ggplot2.html    
+よく使う関数たちが整理されている
