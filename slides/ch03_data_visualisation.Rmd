@@ -9,7 +9,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
 ```
 
 <style>
@@ -90,7 +90,7 @@ help(mpg)
 RstudioならF1キーでも可
 
 ## ggplotを作る
-```{r first.ggplot, fig.width = 7}
+```{r first.ggplot}
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy))
 ```
@@ -135,13 +135,13 @@ geom_point(mapping = aes( ... ))
 属性=変数 という形で`aes`関数の中に置き、`geom`に`mapping`として渡す
 
 ## 散布図の例(color)
-```{r color.class, fig.width = 7}
+```{r color.class}
 ggplot(data = mpg) + 
     geom_point(mapping = aes(x = displ, y = hwy, color = class))
 ```
 
 ## 散布図の例(連続color)
-```{r color.class.continuous, fig.width = 7, fig.height = 3.8}
+```{r color.class.continuous, fig.height = 3.8}
 ggplot(data = mpg) + 
     geom_point(mapping = aes(x = displ, y = hwy, color = displ))
 ``` 
@@ -149,7 +149,7 @@ ggplot(data = mpg) +
 連続変数を指定するとグラデーションになる
 
 ## 散布図の例(size)
-```{r scatter.size, fig.width = 7, fig.height = 3.5, warning = FALSE}
+```{r scatter.size, fig.height = 3.5, warning = FALSE}
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy, size = class))
 ```
@@ -157,7 +157,7 @@ ggplot(data = mpg) +
 - 連続変数のマッピングにお勧め
 
 ## 散布図の例(alpha)
-```{r scatter.alpha, fig.width = 7, fig.height = 3.5, warning = FALSE}
+```{r scatter.alpha, fig.height = 3.5, warning = FALSE}
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy, alpha = class))
 ```
@@ -165,7 +165,7 @@ ggplot(data = mpg) +
 - `alpha`は連続変数で使うのが推奨されている
 
 ## 散布図の例(shape)
-```{r scatter.shape, fig.width = 7, fig.height = 3.5, warning = FALSE}
+```{r scatter.shape, fig.height = 3.5, warning = FALSE}
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy, shape = class)) 
 ```
@@ -173,7 +173,7 @@ ggplot(data = mpg) +
 `shape`はデフォルトで６種類までなので`suv`が表示されていない
 
 ## エステティックの直接指定
-```{r scatter.color.direct, fig.width = 7, fig.height = 3.5}
+```{r scatter.color.direct, fig.height = 3.5}
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
 ```
@@ -183,3 +183,119 @@ ggplot(data = mpg) +
 
 ## 練習問題
 1~6
+
+## REPL
+
+Rのコンソールは対話型で一行がプログラムの実行    
+(Cやjavascriptはセミコロンまでが実行)
+
+```
+ggplot(data = mpg)
+  + geom_point(mapping = aes(x = displ, y = hwy))
+```
+ダメなコードの例(なぜ？)
+
+### ステータス
+- コンソールの左端に \> があるときコマンドを入力できる状態
+- コンソールの左端に \+ があるときは何かの途中
+    - たとえば " を閉じ忘れているとか
+    - そういうときはESCAPEキーを押すと \> に戻る
+    
+## ファセット
+グラフをカテゴリごとに作る。
+
+```{r facet, fig.height=3.5}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~ class, nrow = 2)
+```
+
+## ファセット（２）
+二次元配置
+
+```{r facet.grid, fig.height = 3.5}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ cyl)
+```
+
+## 縦だけに並べる
+```{r facet.grid2, fig.height = 4}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
+```
+
+## 練習問題
+1~6
+
+## Geom
+何のグラフを書くかをコントロールする
+
+- 散布図
+- 棒グラフ
+- 折れ線グラフ
+- 近似曲線
+
+など
+
+## geom_point
+```{r geom.point}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy))
+```
+
+## geom_smooth
+```{r geom.smooth, message=FALSE}
+ggplot(data = mpg) +
+  geom_smooth(mapping = aes(x = displ, y = hwy))
+```
+
+## 重ねる
+```{r twogeom, message=FALSE}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  geom_smooth(mapping = aes(x = displ, y = hwy)) 
+```
+
+## これでもいいよ
+```{r twogeom2, message=FALSE}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth()
+```
+
+## 必要に応じて個別指定 
+```{r twogeom3, message=FALSE, fig.width=7.5}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point(mapping = aes(color = class)) +
+  geom_smooth()
+```
+
+## データも変えられる 
+```{r twogeom4, message=FALSE, fig.width=7.5}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point(mapping = aes(color = class)) +
+  geom_smooth(data = filter(mpg, class == "subcompact"), se = FALSE)
+```
+
+## 練習問題
+1~6
+ 
+## geom_bar 
+```{r geom.bar, fig.height = 3.5}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut))
+```
+
+`y`は？
+
+## Stat
+`stat`はどのような集計方法でグラフを書くかを制御する。 
+
+`geom_bar`の`stat`はcount
+
+実はgeomとstatは常にペアになっている 
+
+### 個人的な意見
+statはややこしいのであまり複雑に使わないほうがよいと思う
