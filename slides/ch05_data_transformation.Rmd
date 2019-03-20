@@ -1,0 +1,129 @@
+---
+title: "Data transformation - r4ds"
+author: 
+  name: "Tomoya Fukumoto"
+  affiliation: "Operation Planning"
+date: "2019-03-22"
+output: 
+  ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
+```
+
+<style>
+.column-left{
+  float: left;
+  width: 47.5%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 47.5%;
+  text-align: left;
+}
+</style>
+
+
+## データ変換
+持っているデータを必要な形に変形したり集計したりといったデータの基本操作
+
+### dplyr
+- データの基本操作を行うためのライブラリ
+- `tidyverse`に含まれている
+- 無人島に一つだけ持っていくライブラリを選ぶならこれかも
+ 
+### 準備 
+```{r load.dplyr, eval = FALSE}
+install.packages("nycflights13")
+library(nycflights13)
+library(tidyverse)
+```
+
+```{r load2, include = FALSE}
+library(nycflights13)
+library(tidyverse)
+```
+ 
+## テストデータ
+### `nycflights13::flights`
+2013年にニューヨークの３つの空港から出発した336,776フライトのデータ
+ 
+```{r nycflighs}
+flights
+```
+
+## `View`
+```{r view, eval = FALSE}
+View(flights)
+```
+
+とすればデータの中身がGUIで見える（よく使う）
+
+## データ変換の基本操作と`dplyr`の関数
+- 行の絞り込み(`filter()`)
+- ソート(`arrange()`)
+- 列の選択(`select()`)
+- 既存の変数から新たな変数を作る(`mutate()`)
+- 集計する(`summarise()`)
+
+またこれらの関数の働き方をコントロールする`group_by()`
+
+## `dplyr`関数の共通点(超重要)
+`dplyr`の関数はすべて以下の共通点を持ちます。
+この性質こそが`dplyr`が類を見ない強力な道具になる源泉です。
+
+1. 一つ目の引数はデータフレームである
+2. それ以降の引数はデータフレームに何をするかを表現する。データフレームが持つ既存の変数を使うときは引用符なしで指定できる
+3. 関数の戻り値はデータフレームである
+
+## 行の絞り込み(`filter()`)
+```{r filtermonthday}
+filter(flights, month == 1, day == 1)
+```
+
+## 論理演算
+### 比較演算子
+```
+>, >=, <, <=, !=, ==
+``` 
+#### 注意
+浮動小数点の等号には関数`near`を使ってね
+
+### 論理演算子
+```
+&, |, !
+```
+
+```{r logi, eval=FALSE}
+filter(flights, month == 11 | month == 12)
+```
+
+### かなり便利なやつ
+```{r pinp, eval = FALSE}
+x %in% y
+```
+
+## `NA`
+値が欠損していることを表す。
+
+演算結果が少々トリッキー(ただし合理的)なので注意。
+
+```{r na}
+NA > 5
+NA == NA
+is.na(NA)
+```
+
+## `NA`と`filter`
+### `filter()`の性質
+`filter()`は`TRUE`だけを残し、`FALSE`と`NA`は除く
+
+### とてもとてもよく使う形
+```{r filterisna, eval=FALSE}
+filter(df, !is.na(val))
+```
+
+## 練習問題
+1~4
