@@ -127,3 +127,214 @@ filter(df, !is.na(val))
 
 ## 練習問題
 1~4
+
+## 行のソート`arrange()`
+関数`arrange()`は行を昇順にソートします。
+```{r arrange}
+arrange(flights, year, month, day)
+```
+
+## 降順ソート
+関数`desc()`をかませると降順になります。
+```{r arrange.desc}
+arrange(flights, desc(dep_delay))
+```
+
+## NAのソート
+`NA`は昇順でも降順でも一番最後に並べられます。
+
+## 練習問題
+1~4
+
+## 列の選択`select()`
+関数`select()`は列(変数)を選択します。
+```{r select}
+select(flights, year, month, day)
+```
+
+## 変数を範囲で指定
+```{r select.colon}
+select(flights, year:day)
+```
+
+## 除外する変数を指定
+マイナスをつけると指定した変数以外の選択
+```{r select.minus}
+select(flights, -(year:day))
+```
+
+## 変数選択のヘルパー関数
+- `start_with("abc")`
+- `ends_with("xyz")`
+- `contains("ijk")`
+- `matches("(.)\\1")`: 正規表現
+- `num_range("x", 1:3)`
+  
+## `everything()`で列を全選択
+列の順番を入れ替えるのに使える
+```{r select.everything}
+select(flights, time_hour, air_time, everything())
+```
+
+
+## 名前の変更`rename()`
+おおよそ一緒（並び順が違うけど）
+```{r rename, eval=FALSE}
+rename(flights, tail_num = tailnum)
+select(flights, tail_num = tailnum, everything())
+```
+
+
+## メモ
+`select()`以外でも変数を選択する必要があるときは使える
+
+- `group_by`
+- `tidyr::gather`
+- `tidyr:nest`
+- など
+
+## 練習問題
+1~4
+
+## 列の追加`mutate()`
+既存の変数を使って新たな変数を作る
+```{r mutate, eval = FALSE}
+mutate(flights,
+       year = year - 2000,
+       gain = dep_delay - arr_delay,
+       speed = distance / air_time * 60,
+       gain_per_hour = gain / hours
+)
+```
+
+- 上書きもできる
+- 遅延評価
+
+## 変形`transmute()`
+`mutate()`してその変数のみ`select`するの省略版
+```{r transmute}
+transmute(flights, 
+          gain = dep_delay - arr_delay,
+          hours = air_time / 60,
+          gain_per_hour = gain / hours
+)
+```
+
+## ベクトル演算
+- Rの演算の多くがベクトル化されている
+    - ベクトルin/ベクトルout 
+- `mutate`の中ではベクトル化された演算をしましょう
+- ループよりも分かりやすいでしょう？
+
+## 基本のベクトル演算たち
+- 四則演算 `+`, `-`, `*`, `/`, `^`
+    - スカラー演算もできる `air_time / 60`
+    - スカラー演算の応用 `y - mean(y)`
+- 割り算 `%/%`, `%%`
+    - `air_time %/% 60`
+- `log()`, `log2()`, `log10()`, `exp()`
+- 前にシフト`lead()`, 後ろにシフト`lag()`
+- 論理演算 `<`, `<=`, `>`, `!=`, `==`
+    - これらをさらにつないで `&`, `|`
+
+## 累積計算
+### 累積和
+```{r cumsum}
+x <- 1:10
+x
+cumsum(1:10)
+```
+
+### 他
+- `cumprod()`, `cummin()`, `cummax()`, `cummean()`
+
+## ランク
+```{r rank}
+y <- c(1, 2, 2, NA, 3, 4)
+min_rank(y)
+min_rank(desc(y))
+row_number(y)
+dense_rank(y)
+percent_rank(y)
+```
+
+## よくやるパターン
+```{r rownum}
+mutate(flights, row_number()) %>%
+  select(`row_number()`, everything())
+```
+
+## 練習問題
+1~6
+
+## 集計`summarise()`
+縦方向に集計する
+```{r summarise}
+summarise(flights, delay = mean(dep_delay, na.rm = TRUE))
+```
+
+## グルーピング
+集計の単位をコントロールする
+```{r groupby}
+by_day <- group_by(flights, year, month, day)
+summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))
+```
+
+ふつうは`group_by`と`summarise`とがセットになる
+
+## 目的地ごとの距離と平均遅延時間
+```{r calc.ave}
+by_dest <- group_by(flights, dest) # 目的地でグルーピング
+delay <- summarise(by_dest, 
+                 count = n(), #行数を数える
+                 dist = mean(distance, na.rm = TRUE), #平均距離
+                 delay = mean(arr_delay, na.rm = TRUE) #平均遅延時間
+)
+delay <- filter(delay, count > 20, dest != "HNL") #データ数が少ないのは除外
+```
+
+### パイプを使った表現
+```{r calc.ave.pipe}
+delays <- flights %>% 
+  group_by(dest) %>% 
+  summarise(
+    count = n(),
+    dist = mean(distance, na.rm = TRUE),
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %>% 
+  filter(count > 20, dest != "HNL")
+```
+
+## パイプ
+### からくり
+- `x %>% f(y)`は`f(x, y)`に自動変換される 
+- `dplyr`関数の一つ目の引数と出力とが両方データフレームだから成立
+    - あとで学ぶ他の`tidyverse`の関数群も同様
+
+### **絶対の絶対に身につける**
+    - ソースコードの可読性が劇的に向上するから
+
+### キーボードショートカット
+- Ctrl+M (Rstudio)
+
+## もう一度
+```{r calc.ave2}
+by_dest <- group_by(flights, dest) 
+delay <- summarise(by_dest, 
+                 count = n(), 
+                 dist = mean(distance, na.rm = TRUE), 
+                 delay = mean(arr_delay, na.rm = TRUE) 
+)
+delay <- filter(delay, count > 20, dest != "HNL") 
+```
+
+```{r calc.ave.pipe2}
+delays <- flights %>% 
+  group_by(dest) %>% 
+  summarise(
+    count = n(),
+    dist = mean(distance, na.rm = TRUE),
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %>% 
+  filter(count > 20, dest != "HNL")
+```

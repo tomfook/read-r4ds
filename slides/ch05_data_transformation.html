@@ -255,7 +255,430 @@ library(tidyverse)</pre>
 
 <h3>とてもとてもよく使う形</h3>
 
-<pre class = 'prettyprint lang-r'>filter(df, !is.na(val))</pre></article></slide>
+<pre class = 'prettyprint lang-r'>filter(df, !is.na(val))</pre>
+
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article >
+
+<p>1~4</p>
+
+</article></slide><slide class=""><hgroup><h2>行のソート<code>arrange()</code></h2></hgroup><article  id="arrange">
+
+<p>関数<code>arrange()</code>は行を昇順にソートします。</p>
+
+<pre class = 'prettyprint lang-r'>arrange(flights, year, month, day)</pre>
+
+<pre >## # A tibble: 336,776 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+##  1  2013     1     1      517            515         2      830
+##  2  2013     1     1      533            529         4      850
+##  3  2013     1     1      542            540         2      923
+##  4  2013     1     1      544            545        -1     1004
+##  5  2013     1     1      554            600        -6      812
+##  6  2013     1     1      554            558        -4      740
+##  7  2013     1     1      555            600        -5      913
+##  8  2013     1     1      557            600        -3      709
+##  9  2013     1     1      557            600        -3      838
+## 10  2013     1     1      558            600        -2      753
+## # ... with 336,766 more rows, and 12 more variables: sched_arr_time &lt;int&gt;,
+## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
+## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
+## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</pre>
+
+</article></slide><slide class=""><hgroup><h2>降順ソート</h2></hgroup><article >
+
+<p>関数<code>desc()</code>をかませると降順になります。</p>
+
+<pre class = 'prettyprint lang-r'>arrange(flights, desc(dep_delay))</pre>
+
+<pre >## # A tibble: 336,776 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+##  1  2013     1     9      641            900      1301     1242
+##  2  2013     6    15     1432           1935      1137     1607
+##  3  2013     1    10     1121           1635      1126     1239
+##  4  2013     9    20     1139           1845      1014     1457
+##  5  2013     7    22      845           1600      1005     1044
+##  6  2013     4    10     1100           1900       960     1342
+##  7  2013     3    17     2321            810       911      135
+##  8  2013     6    27      959           1900       899     1236
+##  9  2013     7    22     2257            759       898      121
+## 10  2013    12     5      756           1700       896     1058
+## # ... with 336,766 more rows, and 12 more variables: sched_arr_time &lt;int&gt;,
+## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
+## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
+## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</pre>
+
+</article></slide><slide class=""><hgroup><h2>NAのソート</h2></hgroup><article  id="na">
+
+<p><code>NA</code>は昇順でも降順でも一番最後に並べられます。</p>
+
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="-1">
+
+<p>1~4</p>
+
+</article></slide><slide class=""><hgroup><h2>列の選択<code>select()</code></h2></hgroup><article  id="select">
+
+<p>関数<code>select()</code>は列(変数)を選択します。</p>
+
+<pre class = 'prettyprint lang-r'>select(flights, year, month, day)</pre>
+
+<pre >## # A tibble: 336,776 x 3
+##     year month   day
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1  2013     1     1
+##  2  2013     1     1
+##  3  2013     1     1
+##  4  2013     1     1
+##  5  2013     1     1
+##  6  2013     1     1
+##  7  2013     1     1
+##  8  2013     1     1
+##  9  2013     1     1
+## 10  2013     1     1
+## # ... with 336,766 more rows</pre>
+
+</article></slide><slide class=""><hgroup><h2>変数を範囲で指定</h2></hgroup><article >
+
+<pre class = 'prettyprint lang-r'>select(flights, year:day)</pre>
+
+<pre >## # A tibble: 336,776 x 3
+##     year month   day
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1  2013     1     1
+##  2  2013     1     1
+##  3  2013     1     1
+##  4  2013     1     1
+##  5  2013     1     1
+##  6  2013     1     1
+##  7  2013     1     1
+##  8  2013     1     1
+##  9  2013     1     1
+## 10  2013     1     1
+## # ... with 336,766 more rows</pre>
+
+</article></slide><slide class=""><hgroup><h2>除外する変数を指定</h2></hgroup><article >
+
+<p>マイナスをつけると指定した変数以外の選択</p>
+
+<pre class = 'prettyprint lang-r'>select(flights, -(year:day))</pre>
+
+<pre >## # A tibble: 336,776 x 16
+##    dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay
+##       &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;
+##  1      517            515         2      830            819        11
+##  2      533            529         4      850            830        20
+##  3      542            540         2      923            850        33
+##  4      544            545        -1     1004           1022       -18
+##  5      554            600        -6      812            837       -25
+##  6      554            558        -4      740            728        12
+##  7      555            600        -5      913            854        19
+##  8      557            600        -3      709            723       -14
+##  9      557            600        -3      838            846        -8
+## 10      558            600        -2      753            745         8
+## # ... with 336,766 more rows, and 10 more variables: carrier &lt;chr&gt;,
+## #   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,
+## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</pre>
+
+</article></slide><slide class=""><hgroup><h2>変数選択のヘルパー関数</h2></hgroup><article >
+
+<ul>
+<li><code>start_with(&quot;abc&quot;)</code></li>
+<li><code>ends_with(&quot;xyz&quot;)</code></li>
+<li><code>contains(&quot;ijk&quot;)</code></li>
+<li><code>matches(&quot;(.)\\1&quot;)</code>: 正規表現</li>
+<li><code>num_range(&quot;x&quot;, 1:3)</code></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2><code>everything()</code>で列を全選択</h2></hgroup><article  id="everything">
+
+<p>列の順番を入れ替えるのに使える</p>
+
+<pre class = 'prettyprint lang-r'>select(flights, time_hour, air_time, everything())</pre>
+
+<pre >## # A tibble: 336,776 x 19
+##    time_hour           air_time  year month   day dep_time sched_dep_time
+##    &lt;dttm&gt;                 &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;
+##  1 2013-01-01 05:00:00      227  2013     1     1      517            515
+##  2 2013-01-01 05:00:00      227  2013     1     1      533            529
+##  3 2013-01-01 05:00:00      160  2013     1     1      542            540
+##  4 2013-01-01 05:00:00      183  2013     1     1      544            545
+##  5 2013-01-01 06:00:00      116  2013     1     1      554            600
+##  6 2013-01-01 05:00:00      150  2013     1     1      554            558
+##  7 2013-01-01 06:00:00      158  2013     1     1      555            600
+##  8 2013-01-01 06:00:00       53  2013     1     1      557            600
+##  9 2013-01-01 06:00:00      140  2013     1     1      557            600
+## 10 2013-01-01 06:00:00      138  2013     1     1      558            600
+## # ... with 336,766 more rows, and 12 more variables: dep_delay &lt;dbl&gt;,
+## #   arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+## #   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;</pre>
+
+</article></slide><slide class=""><hgroup><h2>名前の変更<code>rename()</code></h2></hgroup><article  id="rename">
+
+<p>おおよそ一緒（並び順が違うけど）</p>
+
+<pre class = 'prettyprint lang-r'>rename(flights, tail_num = tailnum)
+select(flights, tail_num = tailnum, everything())</pre>
+
+</article></slide><slide class=""><hgroup><h2>メモ</h2></hgroup><article >
+
+<p><code>select()</code>以外でも変数を選択する必要があるときは使える</p>
+
+<ul>
+<li><code>group_by</code></li>
+<li><code>tidyr::gather</code></li>
+<li><code>tidyr:nest</code></li>
+<li>など</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="-2">
+
+<p>1~4</p>
+
+</article></slide><slide class=""><hgroup><h2>列の追加<code>mutate()</code></h2></hgroup><article  id="mutate">
+
+<p>既存の変数を使って新たな変数を作る</p>
+
+<pre class = 'prettyprint lang-r'>mutate(flights,
+       year = year - 2000,
+       gain = dep_delay - arr_delay,
+       speed = distance / air_time * 60,
+       gain_per_hour = gain / hours
+)</pre>
+
+<ul>
+<li>上書きもできる</li>
+<li>遅延評価</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>変形<code>transmute()</code></h2></hgroup><article  id="transmute">
+
+<p><code>mutate()</code>してその変数のみ<code>select</code>するの省略版</p>
+
+<pre class = 'prettyprint lang-r'>transmute(flights, 
+          gain = dep_delay - arr_delay,
+          hours = air_time / 60,
+          gain_per_hour = gain / hours
+)</pre>
+
+<pre >## # A tibble: 336,776 x 3
+##     gain hours gain_per_hour
+##    &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;
+##  1    -9 3.78          -2.38
+##  2   -16 3.78          -4.23
+##  3   -31 2.67         -11.6 
+##  4    17 3.05           5.57
+##  5    19 1.93           9.83
+##  6   -16 2.5           -6.4 
+##  7   -24 2.63          -9.11
+##  8    11 0.883         12.5 
+##  9     5 2.33           2.14
+## 10   -10 2.3           -4.35
+## # ... with 336,766 more rows</pre>
+
+</article></slide><slide class=""><hgroup><h2>ベクトル演算</h2></hgroup><article >
+
+<ul>
+<li>Rの演算の多くがベクトル化されている
+
+<ul>
+<li>ベクトルin/ベクトルout</li>
+</ul></li>
+<li><code>mutate</code>の中ではベクトル化された演算をしましょう</li>
+<li>ループよりも分かりやすいでしょう？</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>基本のベクトル演算たち</h2></hgroup><article >
+
+<ul>
+<li>四則演算 <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>
+
+<ul>
+<li>スカラー演算もできる <code>air_time / 60</code></li>
+<li>スカラー演算の応用 <code>y - mean(y)</code></li>
+</ul></li>
+<li>割り算 <code>%/%</code>, <code>%%</code>
+
+<ul>
+<li><code>air_time %/% 60</code></li>
+</ul></li>
+<li><code>log()</code>, <code>log2()</code>, <code>log10()</code>, <code>exp()</code></li>
+<li>前にシフト<code>lead()</code>, 後ろにシフト<code>lag()</code></li>
+<li>論理演算 <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>!=</code>, <code>==</code>
+
+<ul>
+<li>これらをさらにつないで <code>&amp;</code>, <code>|</code></li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>累積計算</h2></hgroup><article >
+
+<h3>累積和</h3>
+
+<pre class = 'prettyprint lang-r'>x &lt;- 1:10
+x</pre>
+
+<pre >##  [1]  1  2  3  4  5  6  7  8  9 10</pre>
+
+<pre class = 'prettyprint lang-r'>cumsum(1:10)</pre>
+
+<pre >##  [1]  1  3  6 10 15 21 28 36 45 55</pre>
+
+<h3>他</h3>
+
+<ul>
+<li><code>cumprod()</code>, <code>cummin()</code>, <code>cummax()</code>, <code>cummean()</code></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>ランク</h2></hgroup><article >
+
+<pre class = 'prettyprint lang-r'>y &lt;- c(1, 2, 2, NA, 3, 4)
+min_rank(y)</pre>
+
+<pre >## [1]  1  2  2 NA  4  5</pre>
+
+<pre class = 'prettyprint lang-r'>min_rank(desc(y))</pre>
+
+<pre >## [1]  5  3  3 NA  2  1</pre>
+
+<pre class = 'prettyprint lang-r'>row_number(y)</pre>
+
+<pre >## [1]  1  2  3 NA  4  5</pre>
+
+<pre class = 'prettyprint lang-r'>dense_rank(y)</pre>
+
+<pre >## [1]  1  2  2 NA  3  4</pre>
+
+<pre class = 'prettyprint lang-r'>percent_rank(y)</pre>
+
+<pre >## [1] 0.00 0.25 0.25   NA 0.75 1.00</pre>
+
+</article></slide><slide class=""><hgroup><h2>よくやるパターン</h2></hgroup><article >
+
+<pre class = 'prettyprint lang-r'>mutate(flights, row_number()) %&gt;%
+  select(`row_number()`, everything())</pre>
+
+<pre >## # A tibble: 336,776 x 20
+##    `row_number()`  year month   day dep_time sched_dep_time dep_delay
+##             &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;
+##  1              1  2013     1     1      517            515         2
+##  2              2  2013     1     1      533            529         4
+##  3              3  2013     1     1      542            540         2
+##  4              4  2013     1     1      544            545        -1
+##  5              5  2013     1     1      554            600        -6
+##  6              6  2013     1     1      554            558        -4
+##  7              7  2013     1     1      555            600        -5
+##  8              8  2013     1     1      557            600        -3
+##  9              9  2013     1     1      557            600        -3
+## 10             10  2013     1     1      558            600        -2
+## # ... with 336,766 more rows, and 13 more variables: arr_time &lt;int&gt;,
+## #   sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,
+## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</pre>
+
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="-3">
+
+<p>1~6</p>
+
+</article></slide><slide class=""><hgroup><h2>集計<code>summarise()</code></h2></hgroup><article  id="summarise">
+
+<p>縦方向に集計する</p>
+
+<pre class = 'prettyprint lang-r'>summarise(flights, delay = mean(dep_delay, na.rm = TRUE))</pre>
+
+<pre >## # A tibble: 1 x 1
+##   delay
+##   &lt;dbl&gt;
+## 1  12.6</pre>
+
+</article></slide><slide class=""><hgroup><h2>グルーピング</h2></hgroup><article >
+
+<p>集計の単位をコントロールする</p>
+
+<pre class = 'prettyprint lang-r'>by_day &lt;- group_by(flights, year, month, day)
+summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))</pre>
+
+<pre >## # A tibble: 365 x 4
+## # Groups:   year, month [?]
+##     year month   day delay
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+##  1  2013     1     1 11.5 
+##  2  2013     1     2 13.9 
+##  3  2013     1     3 11.0 
+##  4  2013     1     4  8.95
+##  5  2013     1     5  5.73
+##  6  2013     1     6  7.15
+##  7  2013     1     7  5.42
+##  8  2013     1     8  2.55
+##  9  2013     1     9  2.28
+## 10  2013     1    10  2.84
+## # ... with 355 more rows</pre>
+
+<p>ふつうは<code>group_by</code>と<code>summarise</code>とがセットになる</p>
+
+</article></slide><slide class=""><hgroup><h2>目的地ごとの距離と平均遅延時間</h2></hgroup><article >
+
+<pre class = 'prettyprint lang-r'>by_dest &lt;- group_by(flights, dest) # 目的地でグルーピング
+delay &lt;- summarise(by_dest, 
+                 count = n(), #行数を数える
+                 dist = mean(distance, na.rm = TRUE), #平均距離
+                 delay = mean(arr_delay, na.rm = TRUE) #平均遅延時間
+)
+delay &lt;- filter(delay, count &gt; 20, dest != &quot;HNL&quot;) #データ数が少ないのは除外</pre>
+
+<h3>パイプを使った表現</h3>
+
+<pre class = 'prettyprint lang-r'>delays &lt;- flights %&gt;% 
+  group_by(dest) %&gt;% 
+  summarise(
+    count = n(),
+    dist = mean(distance, na.rm = TRUE),
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %&gt;% 
+  filter(count &gt; 20, dest != &quot;HNL&quot;)</pre>
+
+</article></slide><slide class=""><hgroup><h2>パイプ</h2></hgroup><article >
+
+<h3>からくり</h3>
+
+<ul>
+<li><code>x %&gt;% f(y)</code>は<code>f(x, y)</code>に自動変換される</li>
+<li><code>dplyr</code>の関数は一つ目の引数と出力とがデータフレームだからできる！
+
+<ul>
+<li>あとで学ぶ他の<code>tidyverse</code>の関数群も同様</li>
+</ul></li>
+</ul>
+
+<h3><strong>絶対の絶対に身につける</strong></h3>
+
+<pre >- ソースコードの可読性が劇的に向上するから</pre>
+
+<h3>キーボードショートカット</h3>
+
+<ul>
+<li>Ctrl+M (Rstudio)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>もう一度</h2></hgroup><article >
+
+<pre class = 'prettyprint lang-r'>by_dest &lt;- group_by(flights, dest) # 目的地でグルーピング
+delay &lt;- summarise(by_dest, 
+                 count = n(), #行数を数える
+                 dist = mean(distance, na.rm = TRUE), #平均距離
+                 delay = mean(arr_delay, na.rm = TRUE) #平均遅延時間
+)
+delay &lt;- filter(delay, count &gt; 20, dest != &quot;HNL&quot;) #データ数が少ないのは除外</pre>
+
+<pre class = 'prettyprint lang-r'>delays &lt;- flights %&gt;% 
+  group_by(dest) %&gt;% 
+  summarise(
+    count = n(),
+    dist = mean(distance, na.rm = TRUE),
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %&gt;% 
+  filter(count &gt; 20, dest != &quot;HNL&quot;)</pre></article></slide>
 
 
   <slide class="backdrop"></slide>
