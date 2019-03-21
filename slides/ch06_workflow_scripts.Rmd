@@ -1,0 +1,62 @@
+---
+title: "Workflow: scripts - r4ds"
+author: 
+  name: "Tomoya Fukumoto"
+  affiliation: "Operation Planning"
+date: "2019-03-22"
+output: 
+  ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
+```
+
+<style>
+.column-left{
+  float: left;
+  width: 47.5%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 47.5%;
+  text-align: left;
+}
+</style>
+
+
+## スクリプト
+コンソールだけで複雑な分析は無理
+
+&rArr; 複雑な分析するならスクリプトを書くべし
+
+### 基本ワークフロー
+コンソールで実験して、問題なければスクリプトに書く 
+
+### キーボード・ショートカット
+- Rstudio: Ctrl + Shift + N(新規スクリプト)
+
+## スクリプトエディタ
+スクリプトエディタ上でCtrl + Enterを押すと
+
+- カーソルが置いてあるブロックがコンソールで実行される
+- カーソルは次のブロックへ移動する
+
+&rArr; Ctrl + Enter連打で次々と実行
+
+### スクリプト全実行
+Ctrl + Shift + S
+
+## Hadley神のお告げ
+- 必要なライブラリはスクリプトの先頭で読み込むべし
+    - インストールするべきリストが分かりやすいやろ？
+- スクリプトに`install.packages()`やら`setwd()`やらを書くな
+    - It's very antisocial!
+
+## ゴミが言いたいこと
+- スクリプトの拡張子は.R
+- `attach`は使うな
+- インデントはスペース２つ
+
+[Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml)
