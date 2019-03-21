@@ -61,6 +61,10 @@ View(flights)
 
 とすればデータの中身がGUIで見える（よく使う）
 
+Rstudioの右上ペインのenvironmentからデータフレームをクリックしても起動
+
+<img src="../img/rstudio-env-flights.png", width = 700>
+
 ## データ変換の基本操作と`dplyr`の関数
 - 行の絞り込み(`filter()`)
 - ソート(`arrange()`)
