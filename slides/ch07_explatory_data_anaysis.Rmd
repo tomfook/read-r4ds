@@ -1,0 +1,380 @@
+---
+title: "Explatory Data Analysis - r4ds"
+author: 
+  name: "Tomoya Fukumoto"
+  affiliation: "Operation Planning"
+date: "2019-03-29"
+output: 
+  ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
+```
+
+<style>
+.column-left{
+  float: left;
+  width: 47.5%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 47.5%;
+  text-align: left;
+}
+</style>
+
+
+## 探索的データ分析(EDA)
+1. データに対する仮説を作る
+2. 可視化したり集計したりで仮説を確かめる
+3. 仮説を改善したり別の仮説を考えたりする
+
+というサイクルを回す分析
+
+ 
+### 準備 
+
+```{r load, eval=FALSE}
+library(tidyverse)
+```
+
+実際に使うのは`ggplot2`と`dplyr`
+ 
+## データへの質問
+> 『緻密だが間違った質問に対する厳密な答えよりも、曖昧な正しい質問に対するそれなりな答えの方が遥かに優れている。』 John Tukey
+
+### 原則
+- 仮説の**質**を上げるために**量**を増やす
+
+### フレームワーク
+- 変数の変動(variation)はどうなっているか？
+- 変数の間の共変動(covariation)はどうなっているか？
+ 
+## 用語の整理
+- **変数** あなたが測定した量、質、性質などのこと(列)
+- **値** 変数の状態 (表に入っている値)
+- **観測** ある条件下での変数の値の集まり。(行)
+- **表データ** それぞれの変数が観測ごとの値の集まり(表)
+
+詳しいことはchapter 12 Tidy dataでやります
+
+## 変動はどうなっているのか
+ある変数が測定たちの間でどのように変化するのか？
+
+### 目次
+- 可視化
+    - カテゴリ変数の変動
+    - 連続変数の変動
+- 典型的な値
+- まれな値
+
+## カテゴリ変数
+限られた値のみを取る変数
+
+### カテゴリ変数の例
+- 文字列
+- ファクタ
+
+### tips
+yearは数字だけどカテゴリ変数として扱いたいからファクタに変換
+```{r asfactor, eval=FALSE}
+year(date) %>% as.factor
+```
+
+## カテゴリ変数の変動
+棒グラフを使う
+
+```{r geombar, fig.height = 3.7}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut))
+```
+
+## カテゴリ変数の変動の集計
+`dplyr::count`
+
+```{r count}
+diamonds %>%
+  count(cut)
+```
+
+## 連続変数の変動
+ヒストグラムを使う
+
+```{r hist, fig.height = 3.7}
+ggplot(data = diamonds) +
+    geom_histogram(mapping = aes(x = carat), binwidth = 0.5)
+```
+
+## ヒストグラムのコツ
+`binwidth`を色々と変えてみること
+
+```{r histbinwid1, fig.height = 3.5}
+smaller <- diamonds %>% 
+  filter(carat < 3) 
+ggplot(data = smaller, mapping = aes(x = carat)) +
+  geom_histogram(binwidth = 0.1)
+```
+
+## 連続変数の集計
+カットを作成する。`ggplot2::cut_width`
+
+```{r cutwidth}
+diamonds %>% 
+  count(cut_width(carat, 0.5))
+```
+
+## 連続変数の集計２
+カットを作成（２）
+
+```{r cutnum}
+diamonds %>%
+  count(cut_number(carat, 5))
+```
+
+## 度数分布多角形
+ヒストグラムを複数比較したい場合
+
+```{r freqpoly, fig.height=3.7}
+ggplot(data = smaller, mapping = aes(x = carat, colour = cut)) +
+  geom_freqpoly(binwidth = 0.1)
+```
+
+## 典型的な値
+ある変数について
+
+- どの値が一番多いか？それはなぜ？
+- どの値がまれか？それはなぜ？
+- おかしなパターンはあるか？
+
+## ダイヤモンドの例
+```{r smallerhist, fig.height=3.1}
+ggplot(data = smaller, mapping = aes(x = carat)) +
+  geom_histogram(binwidth = 0.01)
+```
+
+- なぜ一部のカラットに偏っているのか？
+- なぜピークの左は崖で右は坂なのか？
+- なぜ３カラット以上のダイヤがないのか？
+
+## もう一つ例
+```{r faithful}
+ggplot(data = faithful, mapping = aes(x = eruptions)) + 
+  geom_histogram(binwidth = 0.25)
+```
+
+## まれな値
+入力エラーの可能性
+    - 新発見の可能性もある
+
+```{r diamondshist, fig.height=3.5}
+ggplot(diamonds) + 
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5)
+```
+
+## ズームアップ
+```{r coordcartesian, fig.height=4}
+ggplot(diamonds) + 
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5) +
+  coord_cartesian(ylim = c(0, 50))
+```
+
+## 練習問題
+1~4
+
+## 異常値への対応
+
+1.捨てる
+```{r drop, eval=FALSE}
+diamonds2 <- diamonds %>% 
+  filter(between(y, 3, 20))
+```
+
+2.欠損値にする(神推し)
+```{r missing, results="hide"}
+diamonds2 <- diamonds %>% 
+  mutate(y = ifelse(y < 3 | y > 20, NA, y))
+```
+
+## 欠損値
+`ggplot`で欠損値があればwarningがあがるのでチェックな
+
+```{r nawarning, fig.height=3.5}
+ggplot(data = diamonds2, mapping = aes(x = x, y = y)) + 
+  geom_point()
+```
+
+## 欠損値の意味
+- データのエラー
+    - 入力の時
+    - 処理の時
+- 他の特別な意味
+    - `flights$dep_time`
+
+## 練習問題
+1~2
+
+## 共変動(covariation)
+共変動は変数と変数との間の振る舞い
+
+&vArr;
+
+変動は変数の中の振る舞い
+
+### 目次
+- カテゴリ変数と連続変数
+- カテゴリ変数とカテゴリ変数
+- 連続変数と連続変数
+
+## カテゴリ変数と連続変数
+カテゴリ変数で分割した連続変数の変動を比べる
+
+```{r density, fig.height=3}
+ggplot(data = diamonds, mapping = aes(x = price, y = ..density..)) + 
+  geom_freqpoly(mapping = aes(colour = cut), binwidth = 500)
+```
+
+縦軸のスケールを合わせる
+
+## カテゴリ変数と連続変数２
+箱ひげ図を書くのも有り
+
+```{r boxplot, fig.height=3.5}
+ggplot(data = diamonds, mapping = aes(x = cut, y = price)) +
+  geom_boxplot()
+```
+
+
+## カテゴリ変数の順序
+わかりにくい例
+
+```{r mpgclasshwy, fig.height=3}
+ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
+  geom_boxplot()
+```
+
+カテゴリ変数の順序を連続変数の値によって並べ替えする
+
+## わかりやすい
+```{r mpgclasshwyreorder, fig.height=4}
+ggplot(data = mpg) +
+  geom_boxplot(mapping = aes(x = reorder(class, hwy, FUN = median), y = hwy))
+```
+
+## 横向き箱ひげ図
+変数名が長い場合は横向きにするのもアリ
+
+```{r mpgclasshwyflip, fig.height=3.5}
+ggplot(data = mpg) +
+  geom_boxplot(mapping = aes(x = reorder(class, hwy, FUN = median), y = hwy)) +
+  coord_flip()
+```
+
+## 練習問題
+1~6
+
+## カテゴリ変数二つ（１）
+素直に数を数える
+
+```{r geomcount, fig.height=3.5}
+ggplot(data = diamonds) +
+  geom_count(mapping = aes(x = cut, y = color))
+```
+
+## カテゴリ変数二つ（２）
+`geom_tile`も(個人的には好み)
+
+```{r geomtile, fig.height=3.5}
+diamonds %>% 
+  count(color, cut) %>%  
+  ggplot(mapping = aes(x = color, y = cut)) +
+    geom_tile(mapping = aes(fill = n))
+```
+
+## 練習問題
+1~3
+
+## 連続変数二つ（１）
+散布図が基本
+
+```{r scatter, fig.height=3.5}
+ggplot(data = diamonds) +
+  geom_point(mapping = aes(x = carat, y = price), alpha = 1/100)
+```
+
+## 連続変数二つ（２）
+両軸でbinを切って集計
+
+```{r geombin2d, fig.height=3.5}
+ggplot(data = smaller) +
+  geom_bin2d(mapping = aes(x = carat, y = price)) 
+```
+
+## 連続変数二つ（３）
+データ数が多い場合はcutを切ってカテゴリ×連続に落とし込む
+
+```{r cutbox, fig.height=3.5}
+ggplot(data = smaller, mapping = aes(x = carat, y = price)) + 
+    geom_boxplot(mapping = aes(group = cut_width(carat, 0.1)))
+```
+
+## 練習問題
+1~5
+
+## パターンとモデル
+データの中にパターンを見つけることができたとき
+
+- このパターンは偶然ではないか？
+- パターンの意味を説明できるか？
+- パターンの強さはどのくらいか？
+- その関係には他の変数が影響していないか？
+- データを部分集合にしたときにもそのパターンは残るか？
+
+## 変動と共変動
+### パターンとは
+パターンはほとんどが変数の間に発生する=共変動
+
+### 変動とは
+不確実性そのもの
+
+### すなわち
+共変動は変動を減らす
+
+## モデルと残差
+### 疑問
+`diamonds`でcutが良いほうがpriceが高い、というパターンが観察された。なぜ？
+
+### 仮説
+`carat`という中間変数が作用している。
+すなわち`carat`が大きい方が`price`が高くなるが、`cut`が悪い方が`carat`が大きく、またその逆も成立するのでは？
+
+## モデルを使った分析
+```{r model, fig.height=3}
+library(modelr) 
+mod <- lm(log(price) ~ log(carat), data = diamonds) 
+diamonds %>% 
+  add_residuals(mod) %>% 
+  mutate(resid = exp(resid)) %>%
+  ggplot() +
+    geom_boxplot(mapping = aes(x = cut, y = resid))
+```
+
+## ggplot2 call
+```{r full, eval=FALSE}
+ggplot(data = faithful, mapping = aes(x = eruptions)) + 
+  geom_freqpoly(binwidth = 0.25)
+```
+
+実は
+
+```{r short, eval=FALSE}
+ggplot(faithful, aes(eruptions)) + 
+  geom_freqpoly(binwidth = 0.25)
+```
+
+今後はこの書き方を標準にする。
+
+## Learning more
+実践あるのみ
+
