@@ -322,8 +322,8 @@ ggplot(data = smaller, mapping = aes(x = carat, y = price)) +
 ## 練習問題
 1~5
 
-## パターンとモデル
-データの中にパターンを見つけることができたとき
+## パターン
+データの中にパターンを見つけることができたとき次のことを考える。
 
 - このパターンは偶然ではないか？
 - パターンの意味を説明できるか？
@@ -331,25 +331,36 @@ ggplot(data = smaller, mapping = aes(x = carat, y = price)) +
 - その関係には他の変数が影響していないか？
 - データを部分集合にしたときにもそのパターンは残るか？
 
-## 変動と共変動
-### パターンとは
-パターンはほとんどが変数の間に発生する=共変動
+## パターンとモデル
+### なぜパターンはありがたいのか
+パターンは共変動をあらわにするから 
 
-### 変動とは
-不確実性そのもの
+### ワークフロー
+1. EDAでパターンを見つける
+2. パターンをモデル化する
+3. モデルを使って変動を減らす
 
-### すなわち
-共変動は変動を減らす
-
-## モデルと残差
+## 例
 ### 疑問
-`diamonds`でcutが良いほうがpriceが高い、というパターンが観察された。なぜ？
+`diamonds`でcutが良いほうがpriceが高い傾向が観察された。なぜ？
 
-### 仮説
+### パターン
 `carat`という中間変数が作用している。
-すなわち`carat`が大きい方が`price`が高くなるが、`cut`が悪い方が`carat`が大きく、またその逆も成立するのでは？
+すなわち`carat`が大きい方が`price`が高くなる(パターン)、かつ`cut`が悪い方が`carat`が大きいためでは？
 
-## モデルを使った分析
+### 方針
+このパターンを使って`cut`と`price`の間の共変動を減らす。
+これにより`cut`と`price`との真の関係をあらわにする。
+
+
+## モデル化
+```{r caratprice, fig.height = 4}
+ggplot(data = diamonds2, mapping = aes(x = log2(carat), y = log2(price))) +
+  geom_point(alpha = 1/2) +
+  geom_smooth(method = "lm")
+```
+
+## `cut`とモデル残差
 ```{r model, fig.height=3}
 library(modelr) 
 mod <- lm(log(price) ~ log(carat), data = diamonds) 
