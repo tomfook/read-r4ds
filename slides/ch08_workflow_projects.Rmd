@@ -1,0 +1,61 @@
+---
+title: "Workflow: projects - r4ds"
+author: 
+  name: "Tomoya Fukumoto"
+  affiliation: "Operation Planning"
+date: "2019-04-04"
+output: 
+  ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
+```
+
+<style>
+.column-left{
+  float: left;
+  width: 47.5%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 47.5%;
+  text-align: left;
+}
+</style>
+
+
+## 分析することと同じくらい大事なこと
+ 
+あなたの分析を再現できること 
+
+- 分析を読んだ人が
+- 未来のあなたが
+
+そのために何をしなければならないのか？
+ 
+## What is real?
+- 数字が出力されたコンソール？ 
+    - 一瞬で流れていく **No**
+- 目的の数字を持っているR上のオブジェクト？ 
+    - もう一度同じものを作る自信ある？ **No**
+- Rスクリプト **Yes**
+
+Rスクリプトから上の二つは作れるが、逆は不可
+
+## 神からのお告げ
+ 
+![rstudio-workspace](img/rstudio-workspace.png)
+
+再現できない環境を作るな！
+ 
+## 真のリアル
+次のコマンドでできあがるものだけがリアル
+
+1. Ctrl + Shift + F10 (restart Rstudio)
+2. Ctrl + Shift + S (run script)
+ 
+手癖にするべし
+
+## Where does your analysis live?
