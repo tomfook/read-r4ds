@@ -63,10 +63,6 @@
       font-style: italic;
     }
 
-    summary {
-      display: list-item;
-    }
-
     slides > slide {
       -webkit-transition: all 0.4s ease-in-out;
       -moz-transition: all 0.4s ease-in-out;
@@ -115,38 +111,125 @@
 }
 </style>
 
-<slide class=""><hgroup><h2>分析することと同じくらい大事なこと</h2></hgroup><article >
+<slide class=''><hgroup><h2>分析の再現性</h2></hgroup><article >
 
-<p>あなたの分析を再現できること</p>
+<p>分析の質と同じくらい重要なことは <strong>分析が再現できること</strong></p>
 
 <ul>
 <li>分析を読んだ人が</li>
 <li>未来のあなたが</li>
 </ul>
 
-<p>そのために何をしなければならないのか？</p>
+<p>そのためになすべきことは？</p>
 
-</article></slide><slide class=""><hgroup><h2>What is real?</h2></hgroup><article  id="what-is-real">
+</article></slide><slide class=''><hgroup><h2>真実は何？</h2></hgroup><article >
+
+<p>そもそも何を残すべきだろうか？</p>
 
 <ul>
 <li>数字が出力されたコンソール？
 
 <ul>
-<li>一瞬で流れていく <strong>No</strong></li>
+<li>一瞬で流れていく。儚い <strong>No</strong></li>
 </ul></li>
 <li>目的の数字を持っているR上のオブジェクト？
 
 <ul>
-<li>もう一度同じものを作る自信ある？ <strong>No</strong></li>
+<li>再起動したら消えてしまう。儚い</li>
+<li>もう一度全く同じものを作る自信ある？ <strong>No</strong></li>
 </ul></li>
 <li>Rスクリプト <strong>Yes</strong></li>
 </ul>
 
 <p>Rスクリプトから上の二つは作れるが、逆は不可</p>
 
-</article></slide><slide class=""><hgroup><h2>神からのお告げ</h2></hgroup><article >
+</article></slide><slide class=''><hgroup><h2>神からのお告げ</h2></hgroup><article >
 
-<img src='%22img/rstudio-workspace.png%22' title='fig:'/><p class='caption'>rstudio-workspace</p></article></slide>
+<img src='img/rstudio-workspace.png' title='fig:'/><p class='caption'>rstudio-workspace</p>
+
+<p>環境はunder controlにする</p>
+
+</article></slide><slide class=''><hgroup><h2>真のリアル</h2></hgroup><article >
+
+<p>次のコマンドでできあがるものだけがリアル</p>
+
+<ol>
+<li>Ctrl + Shift + F10 (restart Rstudio)</li>
+<li>Ctrl + Shift + S (run script)</li>
+</ol>
+
+<p>手癖にするべし</p>
+
+</article></slide><slide class=''><hgroup><h2>分析はどこに住んでいる？</h2></hgroup><article >
+
+<p><strong>working directory</strong></p>
+
+<pre class = 'prettyprint lang-r'>getwd()</pre>
+
+<pre >## [1] &quot;/home/tomoya/Documents/r/read-r4ds/slides&quot;</pre>
+
+<p>スクリプトが実行される場所</p>
+
+<ul>
+<li>windowsではいわゆる『フォルダ』と一致する</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>神のお告げ</h2></hgroup><article >
+
+<ul>
+<li><code>setwd()</code>は使うな。
+
+<ul>
+<li>そうではなく、そもそもworking directoryにスクリプトが置かれてあるべき</li>
+</ul></li>
+<li>ディレクトリの階層はスラッシュで切れ
+
+<ul>
+<li>\ではない（できるけど）</li>
+</ul></li>
+<li>絶対パスは使うな</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>プロジェクト</h2></hgroup><article >
+
+<p>一つの分析に伴うスクリプト、元データ、アウトプットなどを一つの場所に格納する</p>
+
+<p>この集まりを<strong>プロジェクト</strong>と呼ぶ。</p>
+
+<ul>
+<li>Click File &gt; New Project</li>
+<li>プロジェクトを作った場所がworking directoryになる
+
+<ul>
+<li>.Rprojファイル</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>再現性</h2></hgroup><article >
+
+<ul>
+<li>diamonds.pdfを検索</li>
+<li>diamonds.Rが検索で見つかる(中身に&quot;diamonds.pdf&quot;という文字列が含まれているので)</li>
+<li>見つけたdiamonds.Rを実行すればdiamonds.pdfを作り直せる。</li>
+</ul>
+
+<p>reproducible!!!!</p>
+
+</article></slide><slide class=''><hgroup><h2>まとめ</h2></hgroup><article >
+
+<p>厳守することを強く勧める</p>
+
+<ul>
+<li>新しい分析テーマのたびにRstudioでprojectを作る
+
+<ul>
+<li>必要に応じてフォルダも</li>
+</ul></li>
+<li>元データをすべてその中に保存する</li>
+<li>スクリプトをその中に置き、その中で実行する</li>
+<li>出力もそこに保存する</li>
+<li>相対パスだけを使う</li>
+</ul></article></slide>
 
 
   <slide class="backdrop"></slide>
