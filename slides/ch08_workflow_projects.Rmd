@@ -49,9 +49,9 @@ Rスクリプトから上の二つは作れるが、逆は不可
 
 ## 神からのお告げ
  
-![rstudio-workspace](img/rstudio-workspace.png)
+<img src="../img/rstudio-workspace.png" width = 450>
 
-環境はunder controlにする
+環境をunder controlにする
  
 ## 真のリアル
 次のコマンドでできあがるものだけがリアル

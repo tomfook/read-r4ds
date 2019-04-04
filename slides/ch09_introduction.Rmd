@@ -1,0 +1,45 @@
+---
+title: "Introduction - r4ds"
+author: 
+  name: "Tomoya Fukumoto"
+  affiliation: "Operation Planning"
+date: "2019-04-04"
+output: 
+  ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
+```
+
+<style>
+.column-left{
+  float: left;
+  width: 47.5%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 47.5%;
+  text-align: left;
+}
+</style>
+
+
+## data wrangling 
+データをうまいこと操作する技術
+
+手癖にしてストレスフリーで分析しよう！
+
+ここまで理解すればこの勉強会の目標の90%は達成
+
+## 目次
+<center><img src="../img/data-science-wrangle.png"></center>
+
+- tibble: 長方形データの持ち方
+- data import: 外部データの取り込み方
+- tidy data: データをtidyにする技術
+- relational data: 複数テーブルの扱い方
+- strings: 文字列操作の技術
+- factors: カテゴリデータの扱い方
+- dates and times: 日時データの扱い方 

@@ -1,0 +1,94 @@
+---
+title: "Tibbles - r4ds"
+author: 
+  name: "Tomoya Fukumoto"
+  affiliation: "Operation Planning"
+date: "2019-04-04"
+output: 
+  ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
+```
+
+<style>
+.column-left{
+  float: left;
+  width: 47.5%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 47.5%;
+  text-align: left;
+}
+</style>
+
+
+## Tibbleとは
+Rで長方形データを格納するためのフォーマット
+
+- Hadley神により創造された
+
+```{r prereq, eval = FALSE}
+library(tibble)
+```
+
+Rで伝統的なのは**データフレーム**
+
+だけどデータフレームよりもtibbleの方が優れているよ
+
+## tibbleの作り方
+- `as_tibble`
+- `tibble`
+- `tribble`
+
+## `as_tibble`
+```{r astibble}
+as_tibble(iris)
+```
+
+## `tibble`
+```{r tibble}
+tibble(
+  x = 1:5,
+  y = 1,
+  z = x^2 + y
+)
+```
+
+列名に特殊文字を使う場合はバックティック\` (Shift + @)
+
+## `tribble`
+方向が直感に近い
+
+```{r tribble}
+tribble(
+  ~x, ~y, ~z,
+  #--|---|---
+  "a", 2, 3.6,
+  "b", 1, 8.5
+)
+```
+
+## 伝統的データフレームとの違い 
+### `print`
+- デフォルトは10行だけ
+    - それ以上出力したければ`print(n = 20)`とか
+
+### 部分抽出
+- \$と\[\[
+    - `df$x`, `df[["x"]]`
+    - `df %>% .$x`とか`df %>% .[["x"]]`とかもできる
+
+## データフレームに戻す
+一部のtidyverseでない関数ではtibbleがうまく走らないケースあり
+
+その場合はdata.frameに戻す
+
+```{r asdataframe, eval = FALSE}
+as.data.frame(tb)
+```
+
+たしか`randomForest`とかtibbleのままではうまくいかなかった
