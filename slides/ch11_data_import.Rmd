@@ -1,0 +1,276 @@
+---
+title: "Data import - r4ds"
+author: 
+  name: "Tomoya Fukumoto"
+  affiliation: "Operation Planning"
+date: "2019-04-12"
+output: 
+  ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
+```
+
+<style>
+.column-left{
+  float: left;
+  width: 47.5%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 47.5%;
+  text-align: left;
+}
+</style>
+
+
+## Data Import
+分析の始まりは外部データを読み込むところから
+
+世の中にはたくさんの種類のデータが存在する
+
+技術の種類も限りがない
+
+## readr
+使うパッケージは`readr`
+
+ただし`tidyverse`に含まれているので、一括読み込み
+
+```{r readr, results = 'hide'}
+library(tidyverse)
+```
+
+## 基本関数`read_csv`
+```{r readcsv, eval = FALSE}
+heights <- read_csv("data/heights.csv")
+```
+
+csvをtibbleとして読み込む。
+
+## オプション`skip`
+```{r readcsv.skip}
+read_csv("The first line of metadata
+	   The second line of metadata
+	     x,y,z
+	     1,2,3", skip = 2)
+```
+
+`skip`で始めのn行を無視する
+
+## オプション`col_names`
+```{r readcsv.colname}
+read_csv("1,2,3\n4,5,6", col_names = c("x", "y", "z"))
+```
+
+列名を直接指定する。
+
+### 個人的な基本方針
+- 基本は変数名を直接指定する
+- 直接指定したらセットで`skip=1`をすること多し
+
+## `read.csv`との比較
+- `read_csv`の方が１０倍くらい早い
+    - もっとスピードを求めるなら`data.table::fread()`
+- `read_csv`はtibbleを作る。`read.csv`はデータフレーム
+    - `read_csv`は列名を変えない。`read.csv`は自動的に変換する
+- `read_csv`は文字列を文字列として読む。`read.csv`はファクタにする。
+- `read.csv`はOSの設定によって柔軟に動作が変わる。
+    - `read_csv`の方が再現性が高い
+
+## 練習問題
+1~5
+
+## パース
+`parse_**`という関数群を用いて、**文字列**を他の型に変換する。
+
+- ベクトル&rArr; ベクトル
+
+```{r parse_}
+str(parse_logical(c("TRUE", "FALSE", "NA")))
+str(parse_integer(c("1", "2", "3")))
+str(parse_date(c("2010-01-01", "1979-10-14")))
+```
+
+## パースの失敗
+パースに失敗するとWarningが出るので要チェック
+
+```{r parsewarn}
+x <- parse_integer(c("123", "345", "abc", "123.45"))
+```
+
+## 家族
+- `parse_logical`, `parse_integer()`　簡単
+- `parse_double`, `parse_number`
+- `parse_character` 文字エンコーディング問題
+- `parse_factor` カテゴリ変数を扱うための型
+- `parse_date`, `parse_datetime` 
+
+順に見ていく
+
+## 数
+やっかいなこと
+
+- ある国は小数点として`,`を使ったりする
+     - 実問題で見たこと無いが・・・
+- 余計なものがついてる
+     - `$1000`とか`10%`とか
+- 桁区切り文字
+     - `1,000,000`
+
+## 無敵の`parse_number`
+`parse_number`は数字でない文字は無視する
+
+```{r parsenumber}
+parse_number("$100")
+parse_number("$123,456,789")
+```
+
+途中で文字が入るとそれより後ろは読まない
+
+## 文字列
+### 文字エンコーディング
+コンピュータが文字を表現する方法
+
+アルファベットではASCIIが正義
+
+アルファベット以外では？
+
+### 日本語
+- Shift-JIS (Windows)
+- UTF-8 (宇宙すべて。ただしWindows除く）
+
+## 文字化け
+文字エンコーディングを失敗すると文字化けする。
+
+```{r sjis}
+"\x82\xb1\x82\xf1\x82\xc9\x82\xbf\x82\xcd" %>% 
+  parse_character(locale = locale(encoding = "Shift-JIS"))
+```
+
+困ったらとりあえずsjisかutf-8かのどちらかにすれば解決する
+
+## ファクタ
+- ややこしいから初心者にはお勧めしない
+    - 基本は文字列で持つ
+    - 必要な時に使う直前だけ変換する
+- 必要になったときとは・・・
+    - 集計するとき
+    - 順序を持たせるとき
+    - 数値をカテゴリ変数として扱いたい時
+
+## 日付時刻
+`parse_datetime`はISO8601に準拠した型をデフォルトとする。
+
+```{r parsedatetime}
+parse_datetime("2010-10-01T2010")
+parse_datetime("20101010")
+```
+
+## 日付
+年は４桁、区切り文字は-か/を想定する。
+
+```{r parsedate}
+parse_date("2010-10-01")
+```
+
+## オプション`format`
+`format`で入力形式を指定できる。
+
+### 例
+- `%Y`は四桁で年、`%y`は二桁で年
+- `%m`は二桁数値で月、`%B`は文字列で月
+
+など。詳細は教科書やヘルプを引くべし
+
+```{r strptime, eval=FALSE}
+?strptime
+```
+
+## 練習問題
+1~7
+
+## ファイルのパース
+`read_***`は自動で型推定する。
+
+### ルール
+推定には最初の１０００行だけを使う
+
+1. 最初の１０００行に限定された値だけが入っていると失敗する
+     - 最初の１０００行には整数が、その後に小数が入っているとか
+2. 最初の１０００行が欠損していると文字列として取り込む
+
+オプション`n_max`で変更できるよ
+
+## オプション`col_types`
+型推定はせずに直接指定
+
+```{r readrcoltypes, eval=FALSE}
+read_csv('mydata.csv', col_types = cols(
+					x = col_double(),
+					y = col_character()
+					))
+```
+
+### 省略版（こっちしか使わない）
+```{r readcoltypesabbr, eval=FALSE}
+read_csv('mydata.csv', col_types='dc___i')
+```
+
+## 基本方針
+### 神からのアドバイス
+`col_types`は指定した方がいいよ
+
+### ゴミの意見
+- 指定した方がいい
+- 考えるのが面倒なら全部characterで読み込む
+    - その後でdplyrと`parse_***`でコツコツ修正すればよい
+
+### より原始的に
+- `read_lines`一行を一つの文字列としてベクトルで読み込み
+- `read_file`たった一つの文字列データとして読み込み
+
+## ファイル出力
+```{r writecsv, eval=FALSE}
+write_csv(challenge, "challenge.csv")
+```
+
+- 文字コードはUTF-8で出力
+     - エクセルで読むことを想定するのであれば`locale = locale(encoding = "sjis")`
+- 日付はISO8601に準拠
+     - YYYY-MM-DD
+
+## 他の保存方法
+1. `write_rds`, `read_rds`
+    - Rだけで読めるバイナリファイル
+    - オブジェクトを保存するので、読み書きの間で型が変わる危険がない
+    - ファイルサイズ小さい。軽い
+2. `feather`
+    - さらに軽くて早い
+    - ただし保存対象はデータフレームのみ
+
+## 他のやり方
+- **haven** SPSS, Stata, SASなどのバイナリを直接読み込む
+- **DBI** データベースにSQLを投げる。
+    - **RMySQL, RSQLite, RPostgreSQL**
+    - windowsでやるなら**RODBC**も忘れずに
+- **jsonlite** jsonファイル
+
+## EXCEL
+避けられない
+
+```{r readexcel, eval=FALSE}
+install.packages("readxl")
+library(readxl)
+excel_sheets("myexcel.xlsx") #シート名の一覧を取得
+read_excel(
+   "myexcel.xlsx",
+   sheet="Sheet1",
+   col_names= c("date", "col1", "col2"),
+   col_types= c("date", "text", "numeric"),
+   skip=0)
+```
+
+## 参考サイト
+[いつもの](https://heavywatal.github.io/rstats/readr.html)
