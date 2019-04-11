@@ -1,0 +1,208 @@
+---
+title: "Tidy data - r4ds"
+author: 
+  name: "Tomoya Fukumoto"
+  affiliation: "Operation Planning"
+date: "2019-04-12"
+output: 
+  ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
+```
+
+<style>
+.column-left{
+  float: left;
+  width: 47.5%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 47.5%;
+  text-align: left;
+}
+</style>
+
+
+## Tidy data
+> 「幸せな家族はどれもみな同じようにみえるが、不幸な家族にはそれぞれの不幸の形がある」-- トルストイ
+
+> 「Tidy dataはどれもみな同じようにみえるが、Messy dataはそれぞれのMessyさがある」-- Hadley神
+
+
+tidy dataとは分析のためにデータをorganizeするフレームワーク。
+最初に少しの投資をしてデータをtidyにしよう！
+後から抜群の見返りを得られる。
+
+### 準備
+```{r prep, result = 'hide'}
+library(tidyverse)
+library(tidyr)
+```
+
+## 定義
+1. 変数がそれぞれの列になっている
+2. 観測がそれぞれの行になっている
+3. 値がセルになっている
+
+<img src="../img/tidy-1.png" style="align:center;" width = 700>
+
+## Messy 1
+```{r table2}
+tidyr::table2
+```
+
+## Messy 2
+```{r table3}
+tidyr::table3
+```
+
+## Messy 3
+```{r table4}
+tidyr::table4a
+tidyr::table4b
+```
+
+## Tidy
+```{r table1}
+tidyr::table1
+```
+
+## tidyが素晴らしい理由
+変数=列ならば変数名で列ベクトルの演算ができる
+
+```{r rate10000}
+table1 %>% 
+  mutate(rate = cases / population * 10000)
+```
+
+## 練習問題
+1~3
+
+## messyをtidyにする技術
+> 世の中のほとんどのデータはtidyじゃないから分析プロフェッショナルがやるしかない
+
+### 超重要な二つの関数
+- 変数が複数列にちらばっている
+    - `gather`
+- 観測が複数行にちらばっている
+    - `spread`
+
+## `gather`
+```{r table4a}
+table4a
+table4a %>% gather(`1999`, `2000`, key = "year", value = "cases")
+```
+
+## `spread`
+```{r table2spread}
+table2 %>% head(4)
+table2 %>% spread(key = type, value = count)
+```
+
+## 練習問題
+1~4
+
+## もう一つの技術
+- 一列に複数変数が混ざっている
+     - `separate`
+- ある変数が複数列に散らばっている
+     - `unite`
+
+### 重要度は大分落ちる
+`mutate`と文字列操作(`stringr`)でなんとかなるから
+
+## `separate`
+```{r table3separate}
+table3 %>% head(4)
+table3 %>% separate(rate, into = c("cases", "population"), sep = "/")
+```
+
+## `unite`
+```{r table5unite}
+table5 %>% head(4)
+table5 %>% unite(new, century, year)
+```
+
+## 練習問題
+1~3
+
+## 欠損値
+欠損値は二種類ある
+
+- Explicitly: `NA`が入ってる
+    - 存在しないことが存在している
+- Implicitly: 行が無い
+    - 存在が存在しない
+
+<div align="center"><img src="../img/buddha-221742_1280.jpg" width = 300></div>
+
+## 例
+```{r na}
+stocks <- tibble(
+  year = c(2015, 2015, 2015, 2015, 2016, 2016, 2016),
+  qtr    = c(   1,    2,    3,    4,    2,    3,    4),
+  return = c(1.88, 0.59, 0.35,   NA, 0.92, 0.17, 2.66)
+)
+```
+
+- 2015-4Q Explicit
+- 2016-1Q Implicit
+
+## `complete`
+```{r complete}
+stocks %>% complete(year, qtr)
+```
+
+## `fill`
+```{r fill}
+tribble(
+  ~ person,           ~ treatment, ~response,
+  "Derrick Whitmore", 1,           7,
+  NA,                 2,           10,
+  NA,                 3,           9,
+  "Katherine Burke",  1,           4
+) %>% fill(person)
+```
+
+セル結合されたエクセルにどうぞ
+
+## 練習問題
+1~2
+
+## Case study
+```{r casestudy, results = "hide"}
+who %>%
+  gather(key, value, new_sp_m014:newrel_f65, na.rm = TRUE) %>% 
+  mutate(key = stringr::str_replace(key, "newrel", "new_rel")) %>%
+  separate(key, c("new", "var", "sexage")) %>% 
+  select(-new, -iso2, -iso3) %>% 
+  separate(sexage, c("sex", "age"), sep = 1)
+```
+
+これが理解できれば本章はOK
+
+それにしてもパイプは美しい
+
+## 練習問題
+1~4
+
+## Non-tidy
+tidyでないデータが望ましいケースもごく稀に存在する
+
+- 行列
+- データがバカでかい
+
+でも多くの場合はtidyでいいよ
+
+
+## 参考サイト
+[整然データとは何か](http://id.fnshr.info/2017/01/09/tidy-data-intro/)
+よくまとまっている
+
+[整然データ](http://id.fnshr.info/2017/01/09/trans-tidy-data/)
+神の論文の和訳。 **包括的な「データの哲学」(philosophy of data) を提供する**
+
+[いつもの](https://heavywatal.github.io/rstats/tidyr.html)
