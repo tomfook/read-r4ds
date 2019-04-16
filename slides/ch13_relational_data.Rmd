@@ -1,0 +1,58 @@
+---
+title: "Tidy data - r4ds"
+author: 
+  name: "Tomoya Fukumoto"
+  affiliation: "Operation Planning"
+date: "2019-04-12"
+output: 
+  ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
+```
+
+<style>
+.column-left{
+  float: left;
+  width: 47.5%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 47.5%;
+  text-align: left;
+}
+</style>
+
+
+## 関係データ
+複数のデータを併せて扱う技術
+
+### Excelなら
+vlookup
+
+### 準備
+```{r prereq, result = "hide"}
+library(tidyverse)
+library(dplyr)
+```
+
+```{r load.diagrammer, include = FALSE}
+library(DiagrammeR)
+```
+
+## 関係とは
+### テーブルとテーブルとの関係
+```{r two.table, echo = FALSE}
+
+```
+
+
+## `nycflights13`
+- `airlines`
+- `airports`
+- `planes`
+
+## 参考サイト
+[dplyrを使いこなす！JOIN編](https://qiita.com/matsuou1/items/b1bd9778610e3a586e71)
