@@ -1,5 +1,5 @@
 ---
-title: "Tidy data - r4ds"
+title: "Relational data - r4ds"
 author: 
   name: "Tomoya Fukumoto"
   affiliation: "Operation Planning"
