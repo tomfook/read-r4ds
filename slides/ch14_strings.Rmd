@@ -1,0 +1,165 @@
+---
+title: "Strings - r4ds"
+author: 
+  name: "Tomoya Fukumoto"
+  affiliation: "Operation Planning"
+date: "2019-04-26"
+output: 
+  ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
+```
+
+<style>
+.column-left{
+  float: left;
+  width: 47.5%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 47.5%;
+  text-align: left;
+}
+</style>
+
+
+## 文字列
+文字列を扱う技術
+
+半分くらい正規表現(regular expression)の技術
+
+### 準備
+```{r prereq, result = "hide"}
+library(tidyverse)
+library(stringr)
+```
+
+神世界の一部だが、一括でロードはされない
+
+関数はすべて`str_`で始まる
+
+## 文字列とは
+シングルクォートかダブルクォートのどちらかでくくられてる
+
+```{r quote}
+string1 <- "This is a string"
+string2 <- 'If I want to include a "quote" inside a string, I use single quotes'
+```
+
+### 引用符を閉じ忘れたら
+Escapeキーを押してね
+
+### 文字列ベクトル
+```{r vector}
+c("one", "two", "three")
+```
+
+## 特別なやつら
+### エスケープ
+```{r escape}
+double_quote <- "\""
+single_quote <- '\''
+```
+
+### 特殊文字
+- `\n` 改行
+- `\t` タブ
+- `\u00b5` ユニコード
+
+## 文字列の長さ
+```{r strlength}
+str_length(c("a", "R for data science", NA))
+```
+
+関数がベクトル化されていることに注目
+
+## 文字列の結合(1)
+```{r strc}
+str_c("x", "y")
+str_c("x", "y", sep = ",")
+str_c("|-", c("abc", NA), "-|")
+```
+
+## 文字列の結合(2)
+```{r strc2}
+str_c("prefix-", c("a", "b", "c"), "-suffix")
+str_c("Hello", NULL, " World")
+str_c(c("x", "y", "z"), collapse = ",")
+```
+
+## 文字列の抜き出し
+```{r strsub}
+x <- c("Apple", "Banana", "Pear")
+str_sub(x, 1, 3)
+str_sub(x, -3, -1)
+```
+
+相変わらずベクトル化されている
+
+## 練習問題
+1~6
+
+## 正規表現を使ったマッチング
+### 正規表現とは
+文字列のパターンを表現するための言語
+
+Rに限らずすべての宇宙で使える
+
+- grep
+- vi, emacs
+- Google Sheets
+
+たぶん２０年後も残っている
+
+## 基本のマッチ
+```{r basicmatch}
+x <- c("apple", "banana", "pear")
+str_view(x, "an")
+```
+
+## ピリオド
+任意の文字にマッチする 
+```{r period}
+str_view(x, ".a.")
+```
+
+先頭や改行にはマッチしない
+
+## エスケープ２
+文字としてのピリオドにヒットさせたい
+
+1. 正規表現`\.`が必要
+2. 文字列`"\\."`が必要 
+
+### ではバックスラッシュは？
+`"\\\\"`
+
+## アンカー
+- `^`で文字列の先頭に
+- `$`で文字列の後端に
+
+```{r anchors}
+x <- c("apple", "banana", "pear")
+str_view(x, "^a")
+str_view(x, "a$")
+```
+
+## 文字クラス
+- `\d` 任意の数字
+- `\s` 空白系（スペース、タブ、改行）
+- `[abc]` aかbかcのどれか
+- `[^abc]` a,b,c以外の文字
+- `(ab|cd)` "ab"か"cd"のどちらか
+
+### 例
+```
+^[aiueo] # 母音で始まる
+[^e]ed$ # edで終わるが、eedではない
+(ing|ise)$ #ingかiseで終わる
+```
+
+## 練習問題
+1~5
