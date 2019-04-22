@@ -163,3 +163,30 @@ str_view(x, "a$")
 
 ## 練習問題
 1~5
+
+## 繰り返し
+- `?` 0回 or 1回
+- `+` 1回以上
+- `*` 0回以上
+
+```
+colou?r
+bana(na)+
+```
+
+## 繰り返し２
+- `{n}` ぴったりn回
+- `{n,}` n回以上
+- `{,m}` m回以下
+- `{n,m}` n回以上m回以下
+
+デフォルトはgreedyにマッチする。
+`?`でlazyに
+
+```{r lazyrep}
+str_view("MDCCCLXXXVIII", "C{2,3}")
+str_view("MDCCCLXXXVIII", "C{2,3}?")
+```
+
+## 練習問題
+1~4

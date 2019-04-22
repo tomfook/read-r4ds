@@ -235,8 +235,8 @@ str_sub(x, 1, 3)</pre>
 <pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
 str_view(x, &quot;an&quot;)</pre>
 
-<div id="htmlwidget-81a340be23057baf6184" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-81a340be23057baf6184">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>b<span class='match'>an<\/span>ana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-83764e815225fbdef316" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-83764e815225fbdef316">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>b<span class='match'>an<\/span>ana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>ピリオド</h2></hgroup><article >
 
@@ -244,8 +244,8 @@ str_view(x, &quot;an&quot;)</pre>
 
 <pre class = 'prettyprint lang-r'>str_view(x, &quot;.a.&quot;)</pre>
 
-<div id="htmlwidget-2318288fa4d741e72aa7" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2318288fa4d741e72aa7">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li><span class='match'>ban<\/span>ana<\/li>\n  <li>p<span class='match'>ear<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-2c2abc3115b272223b27" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2c2abc3115b272223b27">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li><span class='match'>ban<\/span>ana<\/li>\n  <li>p<span class='match'>ear<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <p>先頭や改行にはマッチしない</p>
 
@@ -272,13 +272,13 @@ str_view(x, &quot;an&quot;)</pre>
 <pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
 str_view(x, &quot;^a&quot;)</pre>
 
-<div id="htmlwidget-12e12c2a773dd5ccd958" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-12e12c2a773dd5ccd958">{"x":{"html":"<ul>\n  <li><span class='match'>a<\/span>pple<\/li>\n  <li>banana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-aa80951be8896554ed14" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-aa80951be8896554ed14">{"x":{"html":"<ul>\n  <li><span class='match'>a<\/span>pple<\/li>\n  <li>banana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <pre class = 'prettyprint lang-r'>str_view(x, &quot;a$&quot;)</pre>
 
-<div id="htmlwidget-b4b9b7151753daff4483" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b4b9b7151753daff4483">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>banan<span class='match'>a<\/span><\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-e3933137179d170ca6e3" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e3933137179d170ca6e3">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>banan<span class='match'>a<\/span><\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>文字クラス</h2></hgroup><article >
 
@@ -298,7 +298,39 @@ str_view(x, &quot;^a&quot;)</pre>
 
 </article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-1">
 
-<p>1~5</p></article></slide>
+<p>1~5</p>
+
+</article></slide><slide class=''><hgroup><h2>繰り返し</h2></hgroup><article >
+
+<ul>
+<li><code>?</code> 0回 or 1回</li>
+<li><code>+</code> 1回以上</li>
+<li><code>*</code> 0回以上</li>
+</ul>
+
+<pre >colou?r
+bana(na)+</pre>
+
+</article></slide><slide class=''><hgroup><h2>繰り返し２</h2></hgroup><article  id="-1">
+
+<ul>
+<li><code>{n}</code> ぴったりn回</li>
+<li><code>{n,}</code> n回以上</li>
+<li><code>{,m}</code> m回以下</li>
+<li><code>{n,m}</code> n回以上m回以下</li>
+</ul>
+
+<p>デフォルトはgreedyにマッチする。 <code>?</code>でlazyに</p>
+
+<pre class = 'prettyprint lang-r'>str_view(&quot;MDCCCLXXXVIII&quot;, &quot;C{2,3}&quot;)</pre>
+
+<div id="htmlwidget-afbcb648d8aace10df9c" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-afbcb648d8aace10df9c">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CCC<\/span>LXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+
+<pre class = 'prettyprint lang-r'>str_view(&quot;MDCCCLXXXVIII&quot;, &quot;C{2,3}?&quot;)</pre>
+
+<div id="htmlwidget-7ef3c9dc3c807b17a156" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7ef3c9dc3c807b17a156">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CC<\/span>CLXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></article></slide>
 
 
   <slide class="backdrop"></slide>
