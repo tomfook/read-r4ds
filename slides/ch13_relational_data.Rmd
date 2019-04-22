@@ -3,7 +3,7 @@ title: "Relational data - r4ds"
 author: 
   name: "Tomoya Fukumoto"
   affiliation: "Operation Planning"
-date: "2019-04-12"
+date: "2019-04-19"
 output: 
   ioslides_presentation
 ---
