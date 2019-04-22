@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tidy data - r4ds</title>
+  <title>Relational data - r4ds</title>
 
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -10,7 +10,7 @@
 
 
 
-  <meta name="date" content="2019-04-12" />
+  <meta name="date" content="2019-04-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -21,7 +21,7 @@
     var SLIDE_CONFIG = {
       // Slide settings
       settings: {
-                title: 'Tidy data - r4ds',
+                title: 'Relational data - r4ds',
                         useBuilds: true,
         usePrettify: true,
         enableSlideAreas: true,
@@ -98,7 +98,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">2019-04-12</p>
+            <p style="margin-top: 6px; margin-left: -2px;">2019-04-19</p>
           </hgroup>
   </slide>
 
@@ -139,16 +139,16 @@ library(nycflights13)</pre>
 <h3>テーブルとテーブルとのつながり</h3>
 
 <div align="center">
-<div id="htmlwidget-a66effc0a16a2aad4dc4" style="width:500px;height:300px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a66effc0a16a2aad4dc4">{"x":{"diagram":"digraph dot{\n  graph[rankdir = LR]\n  node[shape = box]\n  tableA -> tableB[arrowhead = none]\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script></div>
+<div id="htmlwidget-791cf363e2ed3173e87a" style="width:500px;height:300px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-791cf363e2ed3173e87a">{"x":{"diagram":"digraph dot{\n  graph[rankdir = LR]\n  node[shape = box]\n  tableA -> tableB[arrowhead = none]\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script></div>
 
 </article></slide><slide class=''><hgroup><h2>たくさんの間の関係</h2></hgroup><article >
 
 <p>すべての関係は二者間の関係のあつまり</p>
 
 <div align="center">
-<div id="htmlwidget-798bf7300e8959ffb8a9" style="width:700px;height:400px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-798bf7300e8959ffb8a9">{"x":{"diagram":"digraph dot{\n  graph[rankdir = TB]\n  node[shape = box]\n  mother -> son[arrowhead = none]\n  mother -> daughter[arrowhead = none]\n  grandma -> mother[arrowhead = none]\n  {rank=same;son;daughter}\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script></div>
+<div id="htmlwidget-77fbe1d1857874700643" style="width:700px;height:400px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-77fbe1d1857874700643">{"x":{"diagram":"digraph dot{\n  graph[rankdir = TB]\n  node[shape = box]\n  mother -> son[arrowhead = none]\n  mother -> daughter[arrowhead = none]\n  grandma -> mother[arrowhead = none]\n  {rank=same;son;daughter}\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script></div>
 
 </article></slide><slide class=''><hgroup><h2>３つのカテゴリ</h2></hgroup><article >
 
