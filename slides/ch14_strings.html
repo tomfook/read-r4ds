@@ -235,8 +235,8 @@ str_sub(x, 1, 3)</pre>
 <pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
 str_view(x, &quot;an&quot;)</pre>
 
-<div id="htmlwidget-83764e815225fbdef316" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-83764e815225fbdef316">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>b<span class='match'>an<\/span>ana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-daf4f40874df62947fbf" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-daf4f40874df62947fbf">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>b<span class='match'>an<\/span>ana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>ピリオド</h2></hgroup><article >
 
@@ -244,8 +244,8 @@ str_view(x, &quot;an&quot;)</pre>
 
 <pre class = 'prettyprint lang-r'>str_view(x, &quot;.a.&quot;)</pre>
 
-<div id="htmlwidget-2c2abc3115b272223b27" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2c2abc3115b272223b27">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li><span class='match'>ban<\/span>ana<\/li>\n  <li>p<span class='match'>ear<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ab5403d38b9e2231b249" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ab5403d38b9e2231b249">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li><span class='match'>ban<\/span>ana<\/li>\n  <li>p<span class='match'>ear<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <p>先頭や改行にはマッチしない</p>
 
@@ -272,13 +272,17 @@ str_view(x, &quot;an&quot;)</pre>
 <pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
 str_view(x, &quot;^a&quot;)</pre>
 
-<div id="htmlwidget-aa80951be8896554ed14" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-aa80951be8896554ed14">{"x":{"html":"<ul>\n  <li><span class='match'>a<\/span>pple<\/li>\n  <li>banana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-944e16ddf46d04975937" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-944e16ddf46d04975937">{"x":{"html":"<ul>\n  <li><span class='match'>a<\/span>pple<\/li>\n  <li>banana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <pre class = 'prettyprint lang-r'>str_view(x, &quot;a$&quot;)</pre>
 
-<div id="htmlwidget-e3933137179d170ca6e3" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e3933137179d170ca6e3">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>banan<span class='match'>a<\/span><\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-07b70eeb91161d0524de" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-07b70eeb91161d0524de">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>banan<span class='match'>a<\/span><\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+
+</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-1">
+
+<p>重要だからチェック</p>
 
 </article></slide><slide class=''><hgroup><h2>文字クラス</h2></hgroup><article >
 
@@ -290,15 +294,11 @@ str_view(x, &quot;^a&quot;)</pre>
 <li><code>(ab|cd)</code> &quot;ab&quot;か&quot;cd&quot;のどちらか</li>
 </ul>
 
-<h3>例</h3>
-
-<pre >^[aiueo] # 母音で始まる
-[^e]ed$ # edで終わるが、eedではない
-(ing|ise)$ #ingかiseで終わる</pre>
-
-</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-1">
+</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-2">
 
 <p>1~5</p>
+
+<p>1をチェック</p>
 
 </article></slide><slide class=''><hgroup><h2>繰り返し</h2></hgroup><article >
 
@@ -324,13 +324,212 @@ bana(na)+</pre>
 
 <pre class = 'prettyprint lang-r'>str_view(&quot;MDCCCLXXXVIII&quot;, &quot;C{2,3}&quot;)</pre>
 
-<div id="htmlwidget-afbcb648d8aace10df9c" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-afbcb648d8aace10df9c">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CCC<\/span>LXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b3905fe172b64267ac7b" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b3905fe172b64267ac7b">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CCC<\/span>LXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <pre class = 'prettyprint lang-r'>str_view(&quot;MDCCCLXXXVIII&quot;, &quot;C{2,3}?&quot;)</pre>
 
-<div id="htmlwidget-7ef3c9dc3c807b17a156" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7ef3c9dc3c807b17a156">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CC<\/span>CLXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></article></slide>
+<div id="htmlwidget-46dca849ce16f84d51f7" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-46dca849ce16f84d51f7">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CC<\/span>CLXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+
+</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-3">
+
+<p>1~4</p>
+
+<p>2,3をチェック</p>
+
+</article></slide><slide class=''><hgroup><h2>グルーピングとバックリファレンス</h2></hgroup><article >
+
+<p>カッコでくくった語をあとから参照</p>
+
+<pre class = 'prettyprint lang-r'>str_view(fruit, &quot;(..)\\1&quot;, match = TRUE)</pre>
+
+<div id="htmlwidget-dca9627b29573a2e4124" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dca9627b29573a2e4124">{"x":{"html":"<ul>\n  <li>b<span class='match'>anan<\/span>a<\/li>\n  <li><span class='match'>coco<\/span>nut<\/li>\n  <li><span class='match'>cucu<\/span>mber<\/li>\n  <li><span class='match'>juju<\/span>be<\/li>\n  <li><span class='match'>papa<\/span>ya<\/li>\n  <li>s<span class='match'>alal<\/span> berry<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+
+<h3>独り言</h3>
+
+<p>実際には『正規』表現の範囲を越えてるんやけど</p>
+
+</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-4">
+
+<p>1~2</p>
+
+<p>重要だからチェック</p>
+
+</article></slide><slide class=''><hgroup><h2>道具</h2></hgroup><article >
+
+<p>やっと正規表現のお勉強はおしまい</p>
+
+<p>正規表現を使って文字列処理をするぞ</p>
+
+<ul>
+<li>文字列がパターンを含むか調べる <code>str_detect</code></li>
+<li>文字列の中にあるパターンの位置を調べる</li>
+<li>文字列から一部を抜き出す</li>
+<li>文字列の一部を変換する</li>
+<li>文字列を分割する</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>神のお告げ</h2></hgroup><article >
+
+<p>正規表現はめっちゃ強力</p>
+
+<p>けど正規表現だけに頼ると複雑で分かりにくいケースも多い</p>
+
+<p>プログラミング言語と合わせ技でシンプルにすること</p>
+
+</article></slide><slide class=''><hgroup><h2><code>str_detect</code></h2></hgroup><article  id="str_detect">
+
+<pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
+str_detect(x, &quot;e&quot;)</pre>
+
+<pre >## [1]  TRUE FALSE  TRUE</pre>
+
+<p>関数はベクトル化されている</p>
+
+<pre class = 'prettyprint lang-r'>sum(str_detect(words, &quot;^t&quot;))</pre>
+
+<pre >## [1] 65</pre>
+
+</article></slide><slide class=''><hgroup><h2><code>str_detect</code>の利用法</h2></hgroup><article  id="str_detect">
+
+<pre class = 'prettyprint lang-r'>df &lt;- tibble(word = words, i = seq_along(word))
+df %&gt;% filter(str_detect(word, &quot;x$&quot;))</pre>
+
+<pre >## # A tibble: 4 x 2
+##   word      i
+##   &lt;chr&gt; &lt;int&gt;
+## 1 box     108
+## 2 sex     747
+## 3 six     772
+## 4 tax     841</pre>
+
+<p>まあよく使う</p>
+
+</article></slide><slide class=''><hgroup><h2><code>str_count</code></h2></hgroup><article  id="str_count">
+
+<pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
+str_count(x, &quot;a&quot;)</pre>
+
+<pre >## [1] 1 3 1</pre>
+
+<p>相変わらずベクトル化されている</p>
+
+<pre class = 'prettyprint lang-r'>df %&gt;% mutate(
+          vowels = str_count(word, &quot;[aeiou]&quot;),
+          consonants = str_count(word, &quot;[^aeiou]&quot;)
+          )</pre>
+
+<pre >## # A tibble: 980 x 4
+##    word         i vowels consonants
+##    &lt;chr&gt;    &lt;int&gt;  &lt;int&gt;      &lt;int&gt;
+##  1 a            1      1          0
+##  2 able         2      2          2
+##  3 about        3      3          2
+##  4 absolute     4      4          4
+##  5 accept       5      2          4
+##  6 account      6      3          4
+##  7 achieve      7      4          3
+##  8 across       8      2          4
+##  9 act          9      1          2
+## 10 active      10      3          3
+## # ... with 970 more rows</pre>
+
+</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-5">
+
+<p>それぞれチェック</p>
+
+</article></slide><slide class=''><hgroup><h2><code>str_extract</code></h2></hgroup><article  id="str_extract">
+
+<pre class = 'prettyprint lang-r'>noun &lt;- &quot;(a|the) ([^ ]+)&quot;
+tibble(sentences, extract = str_extract(sentences, noun)) %&gt;% head(6)</pre>
+
+<pre >## # A tibble: 6 x 2
+##   sentences                                   extract   
+##   &lt;chr&gt;                                       &lt;chr&gt;     
+## 1 The birch canoe slid on the smooth planks.  the smooth
+## 2 Glue the sheet to the dark blue background. the sheet 
+## 3 It&#39;s easy to tell the depth of a well.      the depth 
+## 4 These days a chicken leg is a rare dish.    a chicken 
+## 5 Rice is often served in round bowls.        &lt;NA&gt;      
+## 6 The juice of lemons makes fine punch.       &lt;NA&gt;</pre>
+
+<p>マッチした部分だけ抜き出す</p>
+
+<ul>
+<li>見つからなかったら<code>NA</code>を返す</li>
+<li>複数あれば最初のマッチ
+
+<ul>
+<li>全部見つけたければ<code>str_extract_all</code></li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-6">
+
+<p>1~2</p>
+
+<p>2をチェック</p>
+
+</article></slide><slide class=''><hgroup><h2><code>str_match</code></h2></hgroup><article  id="str_match">
+
+<pre class = 'prettyprint lang-r'>sentences %&gt;% str_match(noun) %&gt;% head(10)</pre>
+
+<pre >##       [,1]         [,2]  [,3]     
+##  [1,] &quot;the smooth&quot; &quot;the&quot; &quot;smooth&quot; 
+##  [2,] &quot;the sheet&quot;  &quot;the&quot; &quot;sheet&quot;  
+##  [3,] &quot;the depth&quot;  &quot;the&quot; &quot;depth&quot;  
+##  [4,] &quot;a chicken&quot;  &quot;a&quot;   &quot;chicken&quot;
+##  [5,] NA           NA    NA       
+##  [6,] NA           NA    NA       
+##  [7,] &quot;the parked&quot; &quot;the&quot; &quot;parked&quot; 
+##  [8,] NA           NA    NA       
+##  [9,] NA           NA    NA       
+## [10,] NA           NA    NA</pre>
+
+<p>全部見つけたければ<code>str_match_all</code></p>
+
+</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-7">
+
+<p>1~2</p>
+
+</article></slide><slide class=''><hgroup><h2><code>str_replace</code></h2></hgroup><article  id="str_replace">
+
+<pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;pear&quot;, &quot;banana&quot;)
+str_replace(x, &quot;[aeiou]&quot;, &quot;-&quot;)</pre>
+
+<pre >## [1] &quot;-pple&quot;  &quot;p-ar&quot;   &quot;b-nana&quot;</pre>
+
+<pre class = 'prettyprint lang-r'>str_replace_all(x, &quot;[aeiou]&quot;, &quot;-&quot;)</pre>
+
+<pre >## [1] &quot;-ppl-&quot;  &quot;p--r&quot;   &quot;b-n-n-&quot;</pre>
+
+</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-8">
+
+<p>1~3</p>
+
+</article></slide><slide class=''><hgroup><h2><code>str_split</code></h2></hgroup><article  id="str_split">
+
+<pre class = 'prettyprint lang-r'>sentences %&gt;% head(3) %&gt;% str_split(&quot; &quot;)</pre>
+
+<pre >## [[1]]
+## [1] &quot;The&quot;     &quot;birch&quot;   &quot;canoe&quot;   &quot;slid&quot;    &quot;on&quot;      &quot;the&quot;     &quot;smooth&quot; 
+## [8] &quot;planks.&quot;
+## 
+## [[2]]
+## [1] &quot;Glue&quot;        &quot;the&quot;         &quot;sheet&quot;       &quot;to&quot;          &quot;the&quot;        
+## [6] &quot;dark&quot;        &quot;blue&quot;        &quot;background.&quot;
+## 
+## [[3]]
+## [1] &quot;It&#39;s&quot;  &quot;easy&quot;  &quot;to&quot;    &quot;tell&quot;  &quot;the&quot;   &quot;depth&quot; &quot;of&quot;    &quot;a&quot;     &quot;well.&quot;</pre>
+
+</article></slide><slide class=''><hgroup><h2>参考情報</h2></hgroup><article >
+
+<ul>
+<li><a href='https://regexcrossword.com/' title=''>Regex Crossword</a></li>
+<li><a href='https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression/201378#201378' title=''>How to validate an email address using a regular expression</a></li>
+</ul></article></slide>
 
 
   <slide class="backdrop"></slide>
