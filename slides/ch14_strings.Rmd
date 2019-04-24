@@ -317,7 +317,58 @@ sentences[1] %>% str_locate("canoe")
 
 使う場面なし
 
+## `regex`
+実は正規表現の裏で関数`regex`が走っていた。
+
+### オプション
+
+- `ignore_case=TRUE` 大文字小文字を区別せず
+- `multiline=TRUE` 改行ごとに単語が切れるようにする
+- `comments=TRUE` `#`の後ろをコメントアウトする
+- `dotall=TRUE` `.`がすべてにマッチする。`\n`も
+
+## マニアックな話
+`regex`以外の検索方法もある
+
+- `fixed` バイト列。早い
+- `coll` トルコ人以外は関係ない
+
+必要なし！
+
+### `boundary("word")`
+単語で区切る
+
+## 練習問題
+1~2
+
+## 正規表現の他の使いみち
+- `apropos` オブジェクトの検索
+- `dir` ファイル検索
+
+正規表現を覚えておくと色々と役に立つ
+
+## `stringi`
+実は`stringr`は`stringi`の部分集合
+
+`stringi`はテキストマイニングをするための超強力な関数群(接頭語は`stri_`)
+
+**英語** の文章なら`stringi`で大体のことはできる。
+
+### 日本語なら？
+形態素解析をせねばならん
+
+- 単語ごとに分解する
+- 文法ごとに選別する（助詞は省く、など）
+- 動詞や形容詞など活用する単語を原型に戻す
+
+一番有名なソフトウェア[MeCab](http://taku910.github.io/mecab/)
+
+
 
 ## 参考情報
 - [Regex Crossword](https://regexcrossword.com/) 
 - [How to validate an email address using a regular expression](https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression/201378#201378)
+
+- [stringiで輝く☆テキストショリスト](https://qiita.com/kohske/items/85d49da04571e9055c44)
+
+- [RMeCabの導入(Windows編)](https://momokogumi.com/r-mecab-rmecab)

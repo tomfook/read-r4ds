@@ -235,8 +235,8 @@ str_sub(x, 1, 3)</pre>
 <pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
 str_view(x, &quot;an&quot;)</pre>
 
-<div id="htmlwidget-daf4f40874df62947fbf" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-daf4f40874df62947fbf">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>b<span class='match'>an<\/span>ana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9934ab7776845e677c11" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9934ab7776845e677c11">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>b<span class='match'>an<\/span>ana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>ピリオド</h2></hgroup><article >
 
@@ -244,8 +244,8 @@ str_view(x, &quot;an&quot;)</pre>
 
 <pre class = 'prettyprint lang-r'>str_view(x, &quot;.a.&quot;)</pre>
 
-<div id="htmlwidget-ab5403d38b9e2231b249" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ab5403d38b9e2231b249">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li><span class='match'>ban<\/span>ana<\/li>\n  <li>p<span class='match'>ear<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9633c74d2b5efa022ace" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9633c74d2b5efa022ace">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li><span class='match'>ban<\/span>ana<\/li>\n  <li>p<span class='match'>ear<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <p>先頭や改行にはマッチしない</p>
 
@@ -272,13 +272,13 @@ str_view(x, &quot;an&quot;)</pre>
 <pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
 str_view(x, &quot;^a&quot;)</pre>
 
-<div id="htmlwidget-944e16ddf46d04975937" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-944e16ddf46d04975937">{"x":{"html":"<ul>\n  <li><span class='match'>a<\/span>pple<\/li>\n  <li>banana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-89643a516de36a2cacdd" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-89643a516de36a2cacdd">{"x":{"html":"<ul>\n  <li><span class='match'>a<\/span>pple<\/li>\n  <li>banana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <pre class = 'prettyprint lang-r'>str_view(x, &quot;a$&quot;)</pre>
 
-<div id="htmlwidget-07b70eeb91161d0524de" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-07b70eeb91161d0524de">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>banan<span class='match'>a<\/span><\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d89d9694542c53a2d9a2" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d89d9694542c53a2d9a2">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>banan<span class='match'>a<\/span><\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-1">
 
@@ -324,13 +324,13 @@ bana(na)+</pre>
 
 <pre class = 'prettyprint lang-r'>str_view(&quot;MDCCCLXXXVIII&quot;, &quot;C{2,3}&quot;)</pre>
 
-<div id="htmlwidget-b3905fe172b64267ac7b" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b3905fe172b64267ac7b">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CCC<\/span>LXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-7326f4cdb2b19f7edc8c" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7326f4cdb2b19f7edc8c">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CCC<\/span>LXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <pre class = 'prettyprint lang-r'>str_view(&quot;MDCCCLXXXVIII&quot;, &quot;C{2,3}?&quot;)</pre>
 
-<div id="htmlwidget-46dca849ce16f84d51f7" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-46dca849ce16f84d51f7">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CC<\/span>CLXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c7cfe15450bf25247900" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c7cfe15450bf25247900">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CC<\/span>CLXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-3">
 
@@ -344,8 +344,8 @@ bana(na)+</pre>
 
 <pre class = 'prettyprint lang-r'>str_view(fruit, &quot;(..)\\1&quot;, match = TRUE)</pre>
 
-<div id="htmlwidget-dca9627b29573a2e4124" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-dca9627b29573a2e4124">{"x":{"html":"<ul>\n  <li>b<span class='match'>anan<\/span>a<\/li>\n  <li><span class='match'>coco<\/span>nut<\/li>\n  <li><span class='match'>cucu<\/span>mber<\/li>\n  <li><span class='match'>juju<\/span>be<\/li>\n  <li><span class='match'>papa<\/span>ya<\/li>\n  <li>s<span class='match'>alal<\/span> berry<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9d688253ece30c01b8fc" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9d688253ece30c01b8fc">{"x":{"html":"<ul>\n  <li>b<span class='match'>anan<\/span>a<\/li>\n  <li><span class='match'>coco<\/span>nut<\/li>\n  <li><span class='match'>cucu<\/span>mber<\/li>\n  <li><span class='match'>juju<\/span>be<\/li>\n  <li><span class='match'>papa<\/span>ya<\/li>\n  <li>s<span class='match'>alal<\/span> berry<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <h3>独り言</h3>
 
@@ -524,11 +524,89 @@ str_replace(x, &quot;[aeiou]&quot;, &quot;-&quot;)</pre>
 ## [[3]]
 ## [1] &quot;It&#39;s&quot;  &quot;easy&quot;  &quot;to&quot;    &quot;tell&quot;  &quot;the&quot;   &quot;depth&quot; &quot;of&quot;    &quot;a&quot;     &quot;well.&quot;</pre>
 
+<p>リストが返る</p>
+
+</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-9">
+
+<p>1~3</p>
+
+</article></slide><slide class=''><hgroup><h2><code>str_locate</code></h2></hgroup><article  id="str_locate">
+
+<pre class = 'prettyprint lang-r'>sentences[1] %&gt;% str_locate(&quot;canoe&quot;)</pre>
+
+<pre >##      start end
+## [1,]    11  15</pre>
+
+<p>使う場面なし</p>
+
+</article></slide><slide class=''><hgroup><h2><code>regex</code></h2></hgroup><article  id="regex">
+
+<p>実は正規表現の裏で関数<code>regex</code>が走っていた。</p>
+
+<h3>オプション</h3>
+
+<ul>
+<li><code>ignore_case=TRUE</code> 大文字小文字を区別せず</li>
+<li><code>multiline=TRUE</code> 改行ごとに単語が切れるようにする</li>
+<li><code>comments=TRUE</code> <code>#</code>の後ろをコメントアウトする</li>
+<li><code>dotall=TRUE</code> <code>.</code>がすべてにマッチする。<code>\n</code>も</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>マニアックな話</h2></hgroup><article >
+
+<p><code>regex</code>以外の検索方法もある</p>
+
+<ul>
+<li><code>fixed</code> バイト列。早い</li>
+<li><code>coll</code> トルコ人以外は関係ない</li>
+</ul>
+
+<p>必要なし！</p>
+
+<h3><code>boundary(&quot;word&quot;)</code></h3>
+
+<p>単語で区切る</p>
+
+</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-10">
+
+<p>1~2</p>
+
+</article></slide><slide class=''><hgroup><h2>正規表現の他の使いみち</h2></hgroup><article >
+
+<ul>
+<li><code>apropos</code> オブジェクトの検索</li>
+<li><code>dir</code> ファイル検索</li>
+</ul>
+
+<p>正規表現を覚えておくと色々と役に立つ</p>
+
+</article></slide><slide class=''><hgroup><h2><code>stringi</code></h2></hgroup><article  id="stringi">
+
+<p>実は<code>stringr</code>は<code>stringi</code>の部分集合</p>
+
+<p><code>stringi</code>はテキストマイニングをするための超強力な関数群(接頭語は<code>stri_</code>)</p>
+
+<p><strong>英語</strong> の文章なら<code>stringi</code>で大体のことはできる。</p>
+
+<h3>日本語なら？</h3>
+
+<p>形態素解析をせねばならん</p>
+
+<ul>
+<li>単語ごとに分解する</li>
+<li>文法ごとに選別する（助詞は省く、など）</li>
+<li>動詞や形容詞など活用する単語を原型に戻す</li>
+</ul>
+
+<p>一番有名なソフトウェア<a href='http://taku910.github.io/mecab/' title=''>MeCab</a></p>
+
 </article></slide><slide class=''><hgroup><h2>参考情報</h2></hgroup><article >
 
 <ul>
 <li><a href='https://regexcrossword.com/' title=''>Regex Crossword</a></li>
-<li><a href='https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression/201378#201378' title=''>How to validate an email address using a regular expression</a></li>
+<li><p><a href='https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression/201378#201378' title=''>How to validate an email address using a regular expression</a></p></li>
+<li><p><a href='https://qiita.com/kohske/items/85d49da04571e9055c44' title=''>stringiで輝く☆テキストショリスト</a></p></li>
+<li><p><a href='https://momokogumi.com/r-mecab-rmecab' title=''>RMeCabの導入(Windows編)</a></p></li>
 </ul></article></slide>
 
 
