@@ -66,6 +66,10 @@
       font-style: italic;
     }
 
+    summary {
+      display: list-item;
+    }
+
     slides > slide {
       -webkit-transition: all 0.4s ease-in-out;
       -moz-transition: all 0.4s ease-in-out;
@@ -114,7 +118,7 @@
 }
 </style>
 
-<slide class=''><hgroup><h2>文字列</h2></hgroup><article >
+<slide class=""><hgroup><h2>文字列</h2></hgroup><article >
 
 <p>文字列を扱う技術</p>
 
@@ -122,14 +126,30 @@
 
 <h3>準備</h3>
 
-<pre class = 'prettyprint lang-r'>library(tidyverse)
-library(stringr)</pre>
+<pre class = 'prettyprint lang-r'>library(tidyverse)</pre>
+
+<pre >## -- Attaching packages ---------------------------------------------------------------------------------------------- tidyverse 1.2.1 --</pre>
+
+<pre >## √ ggplot2 3.0.0     √ purrr   0.2.5
+## √ tibble  2.1.1     √ dplyr   0.7.6
+## √ tidyr   0.8.1     √ stringr 1.3.1
+## √ readr   1.3.1     √ forcats 0.3.0</pre>
+
+<pre >## Warning: package &#39;tibble&#39; was built under R version 3.5.3</pre>
+
+<pre >## Warning: package &#39;readr&#39; was built under R version 3.5.2</pre>
+
+<pre >## -- Conflicts ------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</pre>
+
+<pre class = 'prettyprint lang-r'>library(stringr)</pre>
 
 <p>神世界の一部だが、一括でロードはされない</p>
 
 <p>関数はすべて<code>str_</code>で始まる</p>
 
-</article></slide><slide class=''><hgroup><h2>文字列とは</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>文字列とは</h2></hgroup><article >
 
 <p>シングルクォートかダブルクォートのどちらかでくくられてる</p>
 
@@ -146,7 +166,7 @@ string2 &lt;- &#39;If I want to include a &quot;quote&quot; inside a string, I u
 
 <pre >## [1] &quot;one&quot;   &quot;two&quot;   &quot;three&quot;</pre>
 
-</article></slide><slide class=''><hgroup><h2>特別なやつら</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>特別なやつら</h2></hgroup><article >
 
 <h3>エスケープ</h3>
 
@@ -161,7 +181,7 @@ single_quote &lt;- &#39;\&#39;&#39;</pre>
 <li><code>\u00b5</code> ユニコード</li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>文字列の長さ</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>文字列の長さ</h2></hgroup><article >
 
 <pre class = 'prettyprint lang-r'>str_length(c(&quot;a&quot;, &quot;R for data science&quot;, NA))</pre>
 
@@ -169,7 +189,7 @@ single_quote &lt;- &#39;\&#39;&#39;</pre>
 
 <p>関数がベクトル化されていることに注目</p>
 
-</article></slide><slide class=''><hgroup><h2>文字列の結合(1)</h2></hgroup><article  id="1">
+</article></slide><slide class=""><hgroup><h2>文字列の結合(1)</h2></hgroup><article  id="1">
 
 <pre class = 'prettyprint lang-r'>str_c(&quot;x&quot;, &quot;y&quot;)</pre>
 
@@ -183,7 +203,7 @@ single_quote &lt;- &#39;\&#39;&#39;</pre>
 
 <pre >## [1] &quot;|-abc-|&quot; NA</pre>
 
-</article></slide><slide class=''><hgroup><h2>文字列の結合(2)</h2></hgroup><article  id="2">
+</article></slide><slide class=""><hgroup><h2>文字列の結合(2)</h2></hgroup><article  id="2">
 
 <pre class = 'prettyprint lang-r'>str_c(&quot;prefix-&quot;, c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), &quot;-suffix&quot;)</pre>
 
@@ -197,7 +217,7 @@ single_quote &lt;- &#39;\&#39;&#39;</pre>
 
 <pre >## [1] &quot;x,y,z&quot;</pre>
 
-</article></slide><slide class=''><hgroup><h2>文字列の抜き出し</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>文字列の抜き出し</h2></hgroup><article >
 
 <pre class = 'prettyprint lang-r'>x &lt;- c(&quot;Apple&quot;, &quot;Banana&quot;, &quot;Pear&quot;)
 str_sub(x, 1, 3)</pre>
@@ -210,11 +230,11 @@ str_sub(x, 1, 3)</pre>
 
 <p>相変わらずベクトル化されている</p>
 
-</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article >
 
 <p>1~6</p>
 
-</article></slide><slide class=''><hgroup><h2>正規表現を使ったマッチング</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>正規表現を使ったマッチング</h2></hgroup><article >
 
 <h3>正規表現とは</h3>
 
@@ -230,26 +250,26 @@ str_sub(x, 1, 3)</pre>
 
 <p>たぶん２０年後も残っている</p>
 
-</article></slide><slide class=''><hgroup><h2>基本のマッチ</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>基本のマッチ</h2></hgroup><article >
 
 <pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
 str_view(x, &quot;an&quot;)</pre>
 
-<div id="htmlwidget-9934ab7776845e677c11" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9934ab7776845e677c11">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>b<span class='match'>an<\/span>ana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-350b3ab04ad84da971e7" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-350b3ab04ad84da971e7">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>b<span class='match'>an<\/span>ana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
-</article></slide><slide class=''><hgroup><h2>ピリオド</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>ピリオド</h2></hgroup><article >
 
 <p>任意の文字にマッチする</p>
 
 <pre class = 'prettyprint lang-r'>str_view(x, &quot;.a.&quot;)</pre>
 
-<div id="htmlwidget-9633c74d2b5efa022ace" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9633c74d2b5efa022ace">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li><span class='match'>ban<\/span>ana<\/li>\n  <li>p<span class='match'>ear<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-44d2eed7a742808fcc2c" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-44d2eed7a742808fcc2c">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li><span class='match'>ban<\/span>ana<\/li>\n  <li>p<span class='match'>ear<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <p>先頭や改行にはマッチしない</p>
 
-</article></slide><slide class=''><hgroup><h2>エスケープ２</h2></hgroup><article  id="-1">
+</article></slide><slide class=""><hgroup><h2>エスケープ２</h2></hgroup><article  id="-1">
 
 <p>文字としてのピリオドにヒットさせたい</p>
 
@@ -262,7 +282,7 @@ str_view(x, &quot;an&quot;)</pre>
 
 <p><code>&quot;\\\\&quot;</code></p>
 
-</article></slide><slide class=''><hgroup><h2>アンカー</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>アンカー</h2></hgroup><article >
 
 <ul>
 <li><code>^</code>で文字列の先頭に</li>
@@ -272,19 +292,19 @@ str_view(x, &quot;an&quot;)</pre>
 <pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
 str_view(x, &quot;^a&quot;)</pre>
 
-<div id="htmlwidget-89643a516de36a2cacdd" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-89643a516de36a2cacdd">{"x":{"html":"<ul>\n  <li><span class='match'>a<\/span>pple<\/li>\n  <li>banana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a1c60fe448af6ef809d7" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a1c60fe448af6ef809d7">{"x":{"html":"<ul>\n  <li><span class='match'>a<\/span>pple<\/li>\n  <li>banana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <pre class = 'prettyprint lang-r'>str_view(x, &quot;a$&quot;)</pre>
 
-<div id="htmlwidget-d89d9694542c53a2d9a2" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d89d9694542c53a2d9a2">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>banan<span class='match'>a<\/span><\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d776b84b7b5893e13257" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d776b84b7b5893e13257">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>banan<span class='match'>a<\/span><\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
-</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-1">
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="-1">
 
 <p>重要だからチェック</p>
 
-</article></slide><slide class=''><hgroup><h2>文字クラス</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>文字クラス</h2></hgroup><article >
 
 <ul>
 <li><code>\d</code> 任意の数字</li>
@@ -294,13 +314,13 @@ str_view(x, &quot;^a&quot;)</pre>
 <li><code>(ab|cd)</code> &quot;ab&quot;か&quot;cd&quot;のどちらか</li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-2">
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="-2">
 
 <p>1~5</p>
 
 <p>1をチェック</p>
 
-</article></slide><slide class=''><hgroup><h2>繰り返し</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>繰り返し</h2></hgroup><article >
 
 <ul>
 <li><code>?</code> 0回 or 1回</li>
@@ -311,7 +331,7 @@ str_view(x, &quot;^a&quot;)</pre>
 <pre >colou?r
 bana(na)+</pre>
 
-</article></slide><slide class=''><hgroup><h2>繰り返し２</h2></hgroup><article  id="-1">
+</article></slide><slide class=""><hgroup><h2>繰り返し２</h2></hgroup><article  id="-1">
 
 <ul>
 <li><code>{n}</code> ぴったりn回</li>
@@ -324,40 +344,40 @@ bana(na)+</pre>
 
 <pre class = 'prettyprint lang-r'>str_view(&quot;MDCCCLXXXVIII&quot;, &quot;C{2,3}&quot;)</pre>
 
-<div id="htmlwidget-7326f4cdb2b19f7edc8c" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7326f4cdb2b19f7edc8c">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CCC<\/span>LXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a00d9b61d6461b9ff262" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a00d9b61d6461b9ff262">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CCC<\/span>LXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <pre class = 'prettyprint lang-r'>str_view(&quot;MDCCCLXXXVIII&quot;, &quot;C{2,3}?&quot;)</pre>
 
-<div id="htmlwidget-c7cfe15450bf25247900" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c7cfe15450bf25247900">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CC<\/span>CLXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f00f8d3097959c598143" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f00f8d3097959c598143">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CC<\/span>CLXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
-</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-3">
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="-3">
 
 <p>1~4</p>
 
 <p>2,3をチェック</p>
 
-</article></slide><slide class=''><hgroup><h2>グルーピングとバックリファレンス</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>グルーピングとバックリファレンス</h2></hgroup><article >
 
 <p>カッコでくくった語をあとから参照</p>
 
 <pre class = 'prettyprint lang-r'>str_view(fruit, &quot;(..)\\1&quot;, match = TRUE)</pre>
 
-<div id="htmlwidget-9d688253ece30c01b8fc" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9d688253ece30c01b8fc">{"x":{"html":"<ul>\n  <li>b<span class='match'>anan<\/span>a<\/li>\n  <li><span class='match'>coco<\/span>nut<\/li>\n  <li><span class='match'>cucu<\/span>mber<\/li>\n  <li><span class='match'>juju<\/span>be<\/li>\n  <li><span class='match'>papa<\/span>ya<\/li>\n  <li>s<span class='match'>alal<\/span> berry<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-47de4858e2e30bc426b3" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-47de4858e2e30bc426b3">{"x":{"html":"<ul>\n  <li>b<span class='match'>anan<\/span>a<\/li>\n  <li><span class='match'>coco<\/span>nut<\/li>\n  <li><span class='match'>cucu<\/span>mber<\/li>\n  <li><span class='match'>juju<\/span>be<\/li>\n  <li><span class='match'>papa<\/span>ya<\/li>\n  <li>s<span class='match'>alal<\/span> berry<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
-<h3>独り言</h3>
+<h3>マニアックな独り言</h3>
 
-<p>実際には『正規』表現の範囲を越えてるんやけど</p>
+<p>これを含めると『<a href='https://ja.wikipedia.org/wiki/チョムスキー階層' title=''>正規言語</a>』の範囲を越えるんやけど</p>
 
-</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-4">
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="-4">
 
 <p>1~2</p>
 
 <p>重要だからチェック</p>
 
-</article></slide><slide class=''><hgroup><h2>道具</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>道具</h2></hgroup><article >
 
 <p>やっと正規表現のお勉強はおしまい</p>
 
@@ -371,15 +391,15 @@ bana(na)+</pre>
 <li>文字列を分割する</li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>神のお告げ</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>神のお告げ</h2></hgroup><article >
 
 <p>正規表現はめっちゃ強力</p>
 
-<p>けど正規表現だけに頼ると複雑で分かりにくいケースも多い</p>
+<p>けど正規表現だけに頼ると複雑で分かりにくくなるケースも多い</p>
 
 <p>プログラミング言語と合わせ技でシンプルにすること</p>
 
-</article></slide><slide class=''><hgroup><h2><code>str_detect</code></h2></hgroup><article  id="str_detect">
+</article></slide><slide class=""><hgroup><h2><code>str_detect</code></h2></hgroup><article  id="str_detect">
 
 <pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
 str_detect(x, &quot;e&quot;)</pre>
@@ -392,7 +412,7 @@ str_detect(x, &quot;e&quot;)</pre>
 
 <pre >## [1] 65</pre>
 
-</article></slide><slide class=''><hgroup><h2><code>str_detect</code>の利用法</h2></hgroup><article  id="str_detect">
+</article></slide><slide class=""><hgroup><h2><code>str_detect</code>の利用法</h2></hgroup><article  id="str_detect">
 
 <pre class = 'prettyprint lang-r'>df &lt;- tibble(word = words, i = seq_along(word))
 df %&gt;% filter(str_detect(word, &quot;x$&quot;))</pre>
@@ -407,7 +427,7 @@ df %&gt;% filter(str_detect(word, &quot;x$&quot;))</pre>
 
 <p>まあよく使う</p>
 
-</article></slide><slide class=''><hgroup><h2><code>str_count</code></h2></hgroup><article  id="str_count">
+</article></slide><slide class=""><hgroup><h2><code>str_count</code></h2></hgroup><article  id="str_count">
 
 <pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
 str_count(x, &quot;a&quot;)</pre>
@@ -436,24 +456,23 @@ str_count(x, &quot;a&quot;)</pre>
 ## 10 active      10      3          3
 ## # ... with 970 more rows</pre>
 
-</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-5">
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="-5">
 
 <p>それぞれチェック</p>
 
-</article></slide><slide class=''><hgroup><h2><code>str_extract</code></h2></hgroup><article  id="str_extract">
+</article></slide><slide class=""><hgroup><h2><code>str_extract</code></h2></hgroup><article  id="str_extract">
 
 <pre class = 'prettyprint lang-r'>noun &lt;- &quot;(a|the) ([^ ]+)&quot;
-tibble(sentences, extract = str_extract(sentences, noun)) %&gt;% head(6)</pre>
+tibble(sentences, extract = str_extract(sentences, noun)) %&gt;% head(5)</pre>
 
-<pre >## # A tibble: 6 x 2
+<pre >## # A tibble: 5 x 2
 ##   sentences                                   extract   
 ##   &lt;chr&gt;                                       &lt;chr&gt;     
 ## 1 The birch canoe slid on the smooth planks.  the smooth
 ## 2 Glue the sheet to the dark blue background. the sheet 
 ## 3 It&#39;s easy to tell the depth of a well.      the depth 
 ## 4 These days a chicken leg is a rare dish.    a chicken 
-## 5 Rice is often served in round bowls.        &lt;NA&gt;      
-## 6 The juice of lemons makes fine punch.       &lt;NA&gt;</pre>
+## 5 Rice is often served in round bowls.        &lt;NA&gt;</pre>
 
 <p>マッチした部分だけ抜き出す</p>
 
@@ -466,13 +485,13 @@ tibble(sentences, extract = str_extract(sentences, noun)) %&gt;% head(6)</pre>
 </ul></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-6">
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="-6">
 
 <p>1~2</p>
 
 <p>2をチェック</p>
 
-</article></slide><slide class=''><hgroup><h2><code>str_match</code></h2></hgroup><article  id="str_match">
+</article></slide><slide class=""><hgroup><h2><code>str_match</code></h2></hgroup><article  id="str_match">
 
 <pre class = 'prettyprint lang-r'>sentences %&gt;% str_match(noun) %&gt;% head(10)</pre>
 
@@ -490,11 +509,11 @@ tibble(sentences, extract = str_extract(sentences, noun)) %&gt;% head(6)</pre>
 
 <p>全部見つけたければ<code>str_match_all</code></p>
 
-</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-7">
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="-7">
 
 <p>1~2</p>
 
-</article></slide><slide class=''><hgroup><h2><code>str_replace</code></h2></hgroup><article  id="str_replace">
+</article></slide><slide class=""><hgroup><h2><code>str_replace</code></h2></hgroup><article  id="str_replace">
 
 <pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;pear&quot;, &quot;banana&quot;)
 str_replace(x, &quot;[aeiou]&quot;, &quot;-&quot;)</pre>
@@ -505,11 +524,11 @@ str_replace(x, &quot;[aeiou]&quot;, &quot;-&quot;)</pre>
 
 <pre >## [1] &quot;-ppl-&quot;  &quot;p--r&quot;   &quot;b-n-n-&quot;</pre>
 
-</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-8">
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="-8">
 
 <p>1~3</p>
 
-</article></slide><slide class=''><hgroup><h2><code>str_split</code></h2></hgroup><article  id="str_split">
+</article></slide><slide class=""><hgroup><h2><code>str_split</code></h2></hgroup><article  id="str_split">
 
 <pre class = 'prettyprint lang-r'>sentences %&gt;% head(3) %&gt;% str_split(&quot; &quot;)</pre>
 
@@ -526,11 +545,11 @@ str_replace(x, &quot;[aeiou]&quot;, &quot;-&quot;)</pre>
 
 <p>リストが返る</p>
 
-</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-9">
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="-9">
 
 <p>1~3</p>
 
-</article></slide><slide class=''><hgroup><h2><code>str_locate</code></h2></hgroup><article  id="str_locate">
+</article></slide><slide class=""><hgroup><h2><code>str_locate</code></h2></hgroup><article  id="str_locate">
 
 <pre class = 'prettyprint lang-r'>sentences[1] %&gt;% str_locate(&quot;canoe&quot;)</pre>
 
@@ -539,7 +558,7 @@ str_replace(x, &quot;[aeiou]&quot;, &quot;-&quot;)</pre>
 
 <p>使う場面なし</p>
 
-</article></slide><slide class=''><hgroup><h2><code>regex</code></h2></hgroup><article  id="regex">
+</article></slide><slide class=""><hgroup><h2><code>regex</code></h2></hgroup><article  id="regex">
 
 <p>実は正規表現の裏で関数<code>regex</code>が走っていた。</p>
 
@@ -552,7 +571,7 @@ str_replace(x, &quot;[aeiou]&quot;, &quot;-&quot;)</pre>
 <li><code>dotall=TRUE</code> <code>.</code>がすべてにマッチする。<code>\n</code>も</li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>マニアックな話</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>マニアックな話</h2></hgroup><article >
 
 <p><code>regex</code>以外の検索方法もある</p>
 
@@ -561,17 +580,17 @@ str_replace(x, &quot;[aeiou]&quot;, &quot;-&quot;)</pre>
 <li><code>coll</code> トルコ人以外は関係ない</li>
 </ul>
 
-<p>必要なし！</p>
+<p><strong>必要なし！</strong></p>
 
 <h3><code>boundary(&quot;word&quot;)</code></h3>
 
 <p>単語で区切る</p>
 
-</article></slide><slide class=''><hgroup><h2>練習問題</h2></hgroup><article  id="-10">
+</article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="-10">
 
 <p>1~2</p>
 
-</article></slide><slide class=''><hgroup><h2>正規表現の他の使いみち</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>正規表現の他の使いみち</h2></hgroup><article >
 
 <ul>
 <li><code>apropos</code> オブジェクトの検索</li>
@@ -580,7 +599,7 @@ str_replace(x, &quot;[aeiou]&quot;, &quot;-&quot;)</pre>
 
 <p>正規表現を覚えておくと色々と役に立つ</p>
 
-</article></slide><slide class=''><hgroup><h2><code>stringi</code></h2></hgroup><article  id="stringi">
+</article></slide><slide class=""><hgroup><h2><code>stringi</code></h2></hgroup><article  id="stringi">
 
 <p>実は<code>stringr</code>は<code>stringi</code>の部分集合</p>
 
@@ -600,7 +619,7 @@ str_replace(x, &quot;[aeiou]&quot;, &quot;-&quot;)</pre>
 
 <p>一番有名なソフトウェア<a href='http://taku910.github.io/mecab/' title=''>MeCab</a></p>
 
-</article></slide><slide class=''><hgroup><h2>参考情報</h2></hgroup><article >
+</article></slide><slide class=""><hgroup><h2>参考情報</h2></hgroup><article >
 
 <ul>
 <li><a href='https://regexcrossword.com/' title=''>Regex Crossword</a></li>

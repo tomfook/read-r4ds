@@ -199,8 +199,8 @@ str_view("MDCCCLXXXVIII", "C{2,3}?")
 str_view(fruit, "(..)\\1", match = TRUE)
 ```
 
-### 独り言
-実際には『正規』表現の範囲を越えてるんやけど
+### マニアックな独り言
+これを含めると『[正規言語](https://ja.wikipedia.org/wiki/チョムスキー階層)』の範囲を越えるんやけど
 
 ## 練習問題
 1~2
@@ -221,7 +221,7 @@ str_view(fruit, "(..)\\1", match = TRUE)
 ## 神のお告げ
 正規表現はめっちゃ強力
 
-けど正規表現だけに頼ると複雑で分かりにくいケースも多い
+けど正規表現だけに頼ると複雑で分かりにくくなるケースも多い
 
 プログラミング言語と合わせ技でシンプルにすること
 
@@ -266,7 +266,7 @@ df %>% mutate(
 ## `str_extract`
 ```{r strextract}
 noun <- "(a|the) ([^ ]+)"
-tibble(sentences, extract = str_extract(sentences, noun)) %>% head(6)
+tibble(sentences, extract = str_extract(sentences, noun)) %>% head(5)
 ```
 
 マッチした部分だけ抜き出す
@@ -333,7 +333,7 @@ sentences[1] %>% str_locate("canoe")
 - `fixed` バイト列。早い
 - `coll` トルコ人以外は関係ない
 
-必要なし！
+**必要なし！**
 
 ### `boundary("word")`
 単語で区切る
