@@ -32,7 +32,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
 半分くらい正規表現(regular expression)の技術
 
 ### 準備
-```{r prereq, result = "hide"}
+```{r prereq, results = "hide", message=FALSE, warning=FALSE}
 library(tidyverse)
 library(stringr)
 ```
