@@ -31,6 +31,9 @@ library(forcats)
 
 [wikipedia](https://en.wikipedia.org/wiki/Level_of_measurement)
 
+## 15.2 Creating Factor
+ファクタを作る 
+
 ## factor
 ```{r factor.basic}
 x1 <- c("Dec", "Apr", "Jan", "Mar")
@@ -62,6 +65,59 @@ factorの`levels`を文字列ベクトルとして取得
 y1 <- factor(x1, levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
 levels(y1)
 ```
+
+## 15.3 General Social Survey
+今回扱うデータについて
+
+## `gss_cat`
+```{r gss_cat}
+forcats::gss_cat
+```
+
+## 探索1
+```{r count_gsscat}
+gss_cat %>% count(race)
+```
+
+## 探索2
+```{r bar_gsscat}
+gss_cat %>%
+  ggplot(aes(race)) + geom_bar() + scale_x_discrete(drop = FALSE)
+```
+
+## 練習問題
+1~3
+
+##15.4 Modifying factor order
+ファクタの順序の変更
+
+特にグラフを作るときは順序を変更したいよね
+
+## 宗教ごとの平均テレビ視聴時間
+```{r tvhour_by_relig}
+relig_summary <- gss_cat %>%
+  group_by(relig) %>%
+  summarise(
+    age = mean(age, na.rm = TRUE),
+    tvhours = mean(tvhours, na.rm = TRUE),
+    n = n()
+  ) 
+relig_summary
+```
+
+## 可視化
+```{r tvhour_viz1}
+ggplot(relig_summary, aes(tvhours, relig)) + geom_point()
+```
+
+## `fct_reorder`
+```{r fct_reorder}
+relig_summary %>%
+  mutate(relig = fct_reorder(relig, tvhours)) %>%
+  ggplot(aes(tvhours, relig)) + geom_point()
+```
+
+
 
 ## 参考情報
 
