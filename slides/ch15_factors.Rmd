@@ -93,7 +93,9 @@ gss_cat %>%
 
 特にグラフを作るときは順序を変更したいよね
 
-## 宗教ごとの平均テレビ視聴時間
+## 準備
+宗教ごとの平均テレビ視聴時間
+
 ```{r tvhour_by_relig}
 relig_summary <- gss_cat %>%
   group_by(relig) %>%
@@ -106,17 +108,159 @@ relig_summary
 ```
 
 ## 可視化
+なんだか分かりにくい
+
 ```{r tvhour_viz1}
 ggplot(relig_summary, aes(tvhours, relig)) + geom_point()
 ```
 
 ## `fct_reorder`
-```{r fct_reorder}
+### Usage
+```{r fct_reorder_def, eval=FALSE}
+fct_reorder(.f, .x, .fun = median, ..., .desc = FALSE)
+```
+
+### Arguments 
+||
+|---|---|
+| **.f** | factor変数(char変数でも可) |
+| **.x** | funを使って順序を決定するために使う変数| 
+|**.fun**| 集計関数(ベクトルを受けて値を返す)。デフォルトは`median`|
+| **...**| 集計関数に渡すパラメータ。たとえば`na.rm = TRUE`|
+|**.desc**|順番を逆にする |
+
+## わかりやすくなった
+```{r fct_reorder_viz}
 relig_summary %>%
   mutate(relig = fct_reorder(relig, tvhours)) %>%
   ggplot(aes(tvhours, relig)) + geom_point()
+``` 
+
+## もう一例
+年齢と収入との関係
+
+```{r rincomevsage}
+rincome_summary <- gss_cat %>%
+  group_by(rincome) %>%
+  summarise(
+    age = mean(age, na.rm = TRUE),
+    tvhours = mean(tvhours, na.rm = TRUE),
+    n = n()
+  )
+rincome_summary
 ```
 
+## 可視化
+縦軸の順序に意味があるから`reorder`してはいけない
+
+```{r rincome_viz2} 
+ggplot(rincome_summary, aes(age, rincome)) + geom_point()
+```
+
+## `fct_relevel`
+### Usage
+```{r fct_relevel_def, eval=FALSE}
+fct_relevel(.f, ..., after = 0L)
+```
+
+### Auguments 
+||
+|---|---|
+|**.f** | factor変数(char変数でも可) |
+|**...**| 集計関数に渡すパラメータ。たとえば`na.rm = TRUE`|
+|**after**|どの位置に指定した値を置くか。デフォルトは一番うしろ|
+
+## 一個だけ動かした
+```{r rincome_viz3} 
+ggplot(rincome_summary, aes(age, fct_relevel(rincome, "Not applicable"))) +
+  geom_point()
+```
+
+
+## 色と線との対応が分かりにくい
+```{r byage1, fig.height = 3}
+by_age <- gss_cat %>%
+  filter(!is.na(age)) %>%
+  count(age, marital) %>%
+  group_by(age) %>%
+  mutate(prop = n / sum(n)) 
+ggplot(by_age, aes(age, prop, colour = marital)) +
+  geom_line(na.rm = TRUE)
+```
+
+## `fct_reorder2`
+ファクタ.fを.xが一番大きいときの.yの順序で並び替える
+
+```{r byage2, fig.height = 3}
+ggplot(by_age, aes(age, prop, colour = fct_reorder2(marital, age, prop))) +
+  geom_line() +
+  labs(colour = "marital")
+```
+
+## `fct_infreq`
+頻度でソート
+
+```{r fct_infreq, fig.height = 3.5}
+gss_cat %>%
+  mutate(marital = marital %>% fct_infreq() %>% fct_rev()) %>%
+  ggplot(aes(marital)) + geom_bar()
+```
+
+## 練習問題
+1~3
+
+## 15.5 Modifying factor levels
+ファクタの中身を修正する。
+
+実践で使う
+
+## 支持する政党
+```{r partyid}
+gss_cat %>% count(partyid)
+```
+
+表現が一貫していなくてクソ
+
+## 修正
+```{r partyid_mod, eval = FALSE}
+gss_cat %>%
+  mutate(partyid = fct_recode(partyid,
+    "Republican, strong"    = "Strong republican",
+    "Republican, weak"      = "Not str republican",
+    "Independent, near rep" = "Ind,near rep",
+    "Independent, near dem" = "Ind,near dem",
+    "Democrat, weak"        = "Not str democrat",
+    "Democrat, strong"      = "Strong democrat",
+    "Other"                 = "No answer",
+    "Other"                 = "Don't know",
+    "Other"                 = "Other party"
+  )) %>%
+  count(partyid)
+```
+
+## まとめて修正
+```{r fct_collapse}
+gss_cat %>%
+  mutate(partyid = fct_collapse(partyid,
+    other = c("No answer", "Don't know", "Other party"),
+    rep = c("Strong republican", "Not str republican"),
+    ind = c("Ind,near rep", "Independent", "Ind,near dem"),
+    dem = c("Not str democrat", "Strong democrat")
+  )) %>%
+  count(partyid)
+```
+
+## 集約
+```{r fct_lump}
+gss_cat %>%
+  mutate(relig = fct_lump(relig, n = 2)) %>%
+  count(relig)
+```
+
+グラフ描く時とか便利
+
+## 練習問題
+1~2
 
 
 ## 参考情報
