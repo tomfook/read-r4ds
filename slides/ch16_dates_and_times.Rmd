@@ -300,10 +300,10 @@ intervals
 
 ## intervalsの計算
 ```{r calc_interval}
-intervals / dyears(1)
-intervals / years(1)
 intervals / ddays(1)
 intervals / days(1)
+intervals / dyears(1)
+intervals / years(1)
 ```
 
 ## 16.4.4 Summary
@@ -315,9 +315,39 @@ intervals / days(1)
 1~5
 
 ## 16.5 Time zones
+タイムゾーン、すなわち時差の扱い。
 
+## 考え方
+- タイムゾーンは国ごとに定義できない
+    - 一つの国でも異なるタイムゾーンが利用される場合あり
+    - 異なる国でも同じタイムゾーンが利用される場合あり
+- タイムゾーンは都市ごとに定義する
+    - 長期でみて国名が頻繁に変わるのに大して都市名は変わりにくい
 
-## 参考情報
+### あなたのタイムゾーン
+```{r gettimezone}
+Sys.timezone()
+```
 
-- [尺度水準(wikipedia)](https://en.wikipedia.org/wiki/Level_of_measurement)
-- [変数の尺度(統計ことはじめ)](https://bellcurve.jp/statistics/course/1562.html)
+## タイムゾーンの設定
+```{r set_timezone}
+ymd_hm(201901010100)
+ymd_hm(201901010100, tz = "Japan")
+now() 
+```
+
+- デフォルトではUTC
+- `now`は自動的にRに設定されているタイムゾーンをセットする
+
+## 時間差の計算
+```{r calc_timezone}
+# ほぼゼロ
+now() - now(tz = "America/New_York")
+
+# tzを合わせれば時差が計算できる
+ny_now <- now(tz = "America/New_York")
+now() - force_tz(ny_now, tzone = "Japan")
+```
+
+## 参考情報 
+- [IANA timezones](https://www.iana.org/time-zones)

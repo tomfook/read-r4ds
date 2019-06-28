@@ -150,11 +150,11 @@ library(nycflights13)</pre>
 
 <pre class = 'prettyprint lang-r'>today()</pre>
 
-<pre >## [1] &quot;2019-06-27&quot;</pre>
+<pre >## [1] &quot;2019-06-28&quot;</pre>
 
 <pre class = 'prettyprint lang-r'>now()</pre>
 
-<pre >## [1] &quot;2019-06-27 01:27:11 JST&quot;</pre>
+<pre >## [1] &quot;2019-06-28 10:08:00 JST&quot;</pre>
 
 </article></slide><slide class=''><hgroup><h2>16.2.1 From strings</h2></hgroup><article  id="from-strings">
 
@@ -260,11 +260,11 @@ library(nycflights13)</pre>
 
 <pre class = 'prettyprint lang-r'>as_datetime(today())</pre>
 
-<pre >## [1] &quot;2019-06-27 UTC&quot;</pre>
+<pre >## [1] &quot;2019-06-28 UTC&quot;</pre>
 
 <pre class = 'prettyprint lang-r'>as_date(now())</pre>
 
-<pre >## [1] &quot;2019-06-27&quot;</pre>
+<pre >## [1] &quot;2019-06-28&quot;</pre>
 
 <p>エポック時間からの生成</p>
 
@@ -296,11 +296,11 @@ library(nycflights13)</pre>
 
 <pre class = 'prettyprint lang-r'>yday(now())</pre>
 
-<pre >## [1] 178</pre>
+<pre >## [1] 179</pre>
 
 <pre class = 'prettyprint lang-r'>wday(now())</pre>
 
-<pre >## [1] 5</pre>
+<pre >## [1] 6</pre>
 
 </article></slide><slide class=''><hgroup><h2>カテゴリとして抽出</h2></hgroup><article >
 
@@ -316,7 +316,7 @@ library(nycflights13)</pre>
 
 <pre class = 'prettyprint lang-r'>wday(now(), label = TRUE, abbr = TRUE)</pre>
 
-<pre >## [1] Thu
+<pre >## [1] Fri
 ## Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</pre>
 
 <p>ロケールの設定はシステムによって違うから注意</p>
@@ -345,7 +345,7 @@ library(nycflights13)</pre>
 
 <pre class = 'prettyprint lang-r'>today()</pre>
 
-<pre >## [1] &quot;2019-06-27&quot;</pre>
+<pre >## [1] &quot;2019-06-28&quot;</pre>
 
 <pre class = 'prettyprint lang-r'>floor_date(today(), &quot;year&quot;)</pre>
 
@@ -377,11 +377,11 @@ library(nycflights13)</pre>
 
 <pre class = 'prettyprint lang-r'>today()</pre>
 
-<pre >## [1] &quot;2019-06-27&quot;</pre>
+<pre >## [1] &quot;2019-06-28&quot;</pre>
 
 <pre class = 'prettyprint lang-r'>update(today(), year = 2020, month = 1)</pre>
 
-<pre >## [1] &quot;2020-01-27&quot;</pre>
+<pre >## [1] &quot;2020-01-28&quot;</pre>
 
 <p>実は<code>update</code>は日付以外でも使える汎用的な関数</p>
 
@@ -523,14 +523,6 @@ intervals</pre>
 
 </article></slide><slide class=''><hgroup><h2>intervalsの計算</h2></hgroup><article  id="intervals">
 
-<pre class = 'prettyprint lang-r'>intervals / dyears(1)</pre>
-
-<pre >## [1] 1.00274</pre>
-
-<pre class = 'prettyprint lang-r'>intervals / years(1)</pre>
-
-<pre >## [1] 1</pre>
-
 <pre class = 'prettyprint lang-r'>intervals / ddays(1)</pre>
 
 <pre >## [1] 366</pre>
@@ -538,6 +530,14 @@ intervals</pre>
 <pre class = 'prettyprint lang-r'>intervals / days(1)</pre>
 
 <pre >## [1] 366</pre>
+
+<pre class = 'prettyprint lang-r'>intervals / dyears(1)</pre>
+
+<pre >## [1] 1.00274</pre>
+
+<pre class = 'prettyprint lang-r'>intervals / years(1)</pre>
+
+<pre >## [1] 1</pre>
 
 </article></slide><slide class=''><hgroup><h2>16.4.4 Summary</h2></hgroup><article  id="summary">
 
@@ -550,11 +550,66 @@ intervals</pre>
 
 </article></slide><slide class=''><hgroup><h2>16.5 Time zones</h2></hgroup><article  id="time-zones">
 
+<p>タイムゾーン、すなわち時差の扱い。</p>
+
+</article></slide><slide class=''><hgroup><h2>考え方</h2></hgroup><article >
+
+<ul>
+<li>タイムゾーンは国ごとに定義できない
+
+<ul>
+<li>一つの国でも異なるタイムゾーンが利用される場合あり</li>
+<li>異なる国でも同じタイムゾーンが利用される場合あり</li>
+</ul></li>
+<li>タイムゾーンは都市ごとに定義する
+
+<ul>
+<li>長期でみて国名が頻繁に変わるのに大して都市名は変わりにくい</li>
+</ul></li>
+</ul>
+
+<h3>あなたのタイムゾーン</h3>
+
+<pre class = 'prettyprint lang-r'>Sys.timezone()</pre>
+
+<pre >## [1] &quot;Japan&quot;</pre>
+
+</article></slide><slide class=''><hgroup><h2>タイムゾーンの設定</h2></hgroup><article >
+
+<pre class = 'prettyprint lang-r'>ymd_hm(201901010100)</pre>
+
+<pre >## [1] &quot;2019-01-01 01:00:00 UTC&quot;</pre>
+
+<pre class = 'prettyprint lang-r'>ymd_hm(201901010100, tz = &quot;Japan&quot;)</pre>
+
+<pre >## [1] &quot;2019-01-01 01:00:00 JST&quot;</pre>
+
+<pre class = 'prettyprint lang-r'>now() </pre>
+
+<pre >## [1] &quot;2019-06-28 10:08:06 JST&quot;</pre>
+
+<ul>
+<li>デフォルトではUTC</li>
+<li><code>now</code>は自動的にRに設定されているタイムゾーンをセットする</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>時間差の計算</h2></hgroup><article >
+
+<pre class = 'prettyprint lang-r'># ほぼゼロ
+now() - now(tz = &quot;America/New_York&quot;)</pre>
+
+<pre >## Time difference of -9.012222e-05 secs</pre>
+
+<pre class = 'prettyprint lang-r'># tzを合わせれば時差が計算できる
+ny_now &lt;- now(tz = &quot;America/New_York&quot;)
+now() - force_tz(ny_now, tzone = &quot;Japan&quot;)</pre>
+
+<pre >## Time difference of 13 hours</pre>
+
 </article></slide><slide class=''><hgroup><h2>参考情報</h2></hgroup><article >
 
 <ul>
-<li><a href='https://en.wikipedia.org/wiki/Level_of_measurement' title=''>尺度水準(wikipedia)</a></li>
-<li><a href='https://bellcurve.jp/statistics/course/1562.html' title=''>変数の尺度(統計ことはじめ)</a></li>
+<li><a href='https://www.iana.org/time-zones' title=''>IANA timezones</a></li>
 </ul></article></slide>
 
 
