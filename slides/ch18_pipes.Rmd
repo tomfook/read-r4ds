@@ -1,0 +1,42 @@
+---
+title: "Pipes - r4ds"
+author: "Tomoya Fukumoto"
+date: "2019-07-10"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
+```
+
+## Pipe
+パイプはプログラムを明快にする
+
+現代的なRプログラミングの基本
+
+```{r pipe_}
+library(magrittr)
+```
+
+`%>%`は`tidyverse`で自動的にロードされる。
+明示的に`magrittr`をロードすると他のパイプもロード使えるようになる
+
+元々はUNIXの処理方式
+https://ja.wikipedia.org/wiki/パイプ_(コンピュータ)
+
+## 18.2 Piping alternatives
+処理のつなぎ方とその利点
+
+- 中間変数を置く
+- 順番に上書きしていく
+- 関数の処理の中に埋め込む
+- パイプを使う
+
+
+## 18.3 When not to use the pipe
+パイプを使うべきでないケース
+
+神のお告げ
+
+- パイプを１０ステップ以上つないではならない
+    - その場合は中間変数を作ってパイプを分割する
