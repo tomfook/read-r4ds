@@ -10,33 +10,188 @@ knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
 ```
 
 ## Pipe
-�p�C�v�̓v���O�����𖾉��ɂ���
+パイプはプログラムを明快にする
 
-����I��R�v���O���~���O�̊�{
+現代的なRプログラミングの基本
 
 ```{r pipe_}
 library(magrittr)
 ```
 
-`%>%`��`tidyverse`�Ŏ����I�Ƀ��[�h�����B
-�����I��`magrittr`�����[�h����Ƒ��̃p�C�v�����[�h�g����悤�ɂȂ�
+`%>%`は`tidyverse`で自動的にロードされる。
+明示的に`magrittr`をロードすると他のパイプも使えるようになる
 
-���X��UNIX�̏�������
-https://ja.wikipedia.org/wiki/�p�C�v_(�R���s���[�^)
+パイプラインを繋いでいくイメージ<br>
+https://ja.wikipedia.org/wiki/パイプ_(コンピュータ)
+
+
 
 ## 18.2 Piping alternatives
-�����̂Ȃ����Ƃ��̗��_
+複数の処理のつなぎ方とそれぞれの利点
 
-- ���ԕϐ���u��
-- ���Ԃɏ㏑�����Ă���
-- �֐��̏����̒��ɖ��ߍ���
-- �p�C�v���g��
+- 中間変数を置く
+- 順番に上書きしていく
+- 関数の処理の中に埋め込む
+- パイプを使う
+
+### <a href="https://www.youtube.com/watch?v=9pkx51y4ppg" target="_blank">例</a>
+```
+Little bunny Foo Foo
+Went hopping through the forest
+Scooping up the field mice
+And bopping them on the head
+```
+
+## 18.2.1 Intermediate steps
+中間変数を置くやり方
+
+```{r intermediate, eval = FALSE}
+foo_foo <- little_bunny()
+foo_foo_1 <- hop(foo_foo, through = forest)
+foo_foo_2 <- scoop(foo_foo_1, up = field_mice)
+foo_foo_3 <- bop(foo_foo_2, on = head)
+```
+
+### 悪いところ
+- 無意味な中間変数が乱立する
+  - 無意味な名称のオブジェクトがコードを埋めて邪魔
+  - 意味不明なオブジェクト名を管理するのが大変
+
+## メモリ節約機能
+データが重複したオブジェクトを複製してもメモリを圧迫しない
+```{r memory_saving}
+diamonds <- ggplot2::diamonds
+diamonds2 <- diamonds %>% dplyr::mutate(price_per_carat = price / carat)
+
+pryr::object_size(diamonds)
+pryr::object_size(diamonds2)
+pryr::object_size(diamonds, diamonds2)
+```
+
+## 18.2.2 Overwrite the original
+オブジェクトを上書きしていくやり方
+
+```{r overwrite, eval = FALSE}
+foo_foo <- little_bunny()
+foo_foo <- hop(foo_foo, through = forest)
+foo_foo <- scoop(foo_foo, up = field_mice)
+foo_foo <- bop(foo_foo, on = head)
+```
+
+### 悪いところ
+- デバッグがつらい
+    - プログラムを調べるときは必ず頭から全部実行しなければならない
+- オブジェクトを作ったコードを把握するのがつらい
+
+## 18.2.3 Function composition
+```{r function_comp, eval = FALSE}
+bop(
+    scoop(
+	  hop(foo_foo, through = forest),
+	  up = field_mice
+	  ), 
+    on = head
+)
+```
+
+### 悪いところ
+- **読みにくい**
+    - 処理の順番が右から左、下から上だから
+    - 関数名と引数が離れる
+
+## 18.2.4 Pipes
+パイプを使ったやり方
+
+```{r piping, eval = FALSE}
+foo_foo %>%
+  hop(through = forest) %>%
+  scoop(up = field_mice) %>%
+  bop(on = head)
+```
+
+### 最高な理由
+- 名詞でなく動詞に注目できる
+    - 「オブジェクト」でなく「処理」に
+
+## パイプの内部
+新たな関数を作ってそれで処理する
+    - 関数は利用後に破棄される
+```{r inside_piping, eval = FALSE}
+my_pipe <- function(.) {
+    . <- hop(., through = forest)
+  . <- scoop(., up = field_mice)
+    bop(., on = head)
+}
+my_pipe(foo_foo)
+```
+
+### パイプが使えない関数
+- environmentを操作する関数
+     - `assign`, `get`, `load`
+- 遅延評価を使う関数
+     - `tryCatch` 
 
 
 ## 18.3 When not to use the pipe
-�p�C�v���g���ׂ��łȂ��P�[�X
+パイプを使うべきでないケース
 
-�_�̂�����
+神のお告げ
 
-- �p�C�v���P�O�X�e�b�v�ȏ�Ȃ��ł͂Ȃ�Ȃ�
-    - ���̏ꍇ�͒��ԕϐ�������ăp�C�v�𕪊�����
+- パイプを１０ステップ以上つないではならない
+   - その場合は中間変数を作ってパイプを分割する
+- 複数の入出力がある場合はパイプを使わない
+    - 主な入力が一つで、他がおまけの場合はOK
+- 処理が分岐するのもやめておくこと
+    - 一直線の処理に使うべし
+
+## 18.4 Other tools from magrittr
+`magrittr`パッケージに含まれる他の道具
+
+活用度は`%>%`ほどではない
+
+- tee
+- explosion
+- assignment
+
+## tee
+左辺の結果をそのまま返す
+
+```{r tee, fig.height = 3}
+rnorm(100) %>% matrix(ncol = 2) %T>%
+  plot() %>% str()
+```
+
+## explosion(dollar)
+左辺のオブジェクトに含まれる変数を右辺で参照できる
+```{r dollar}
+ mtcars %$% cor(disp, mpg)
+```
+
+## assignment
+パイプラインの結果を左辺に代入する
+
+パイプラインの最初で使う
+
+```{r assignment} 
+mtcars <- mtcars %>% 
+    transform(cyl = cyl * 2)
+
+# 上と同じ処理
+mtcars %<>% transform(cyl = cyl * 2)
+```
+
+神はあまり好まれないようだ
+
+## 個人的に好きなmagrittrの関数
+- `extract2`
+- `set_colnames`
+
+```{r magrittr}
+diamonds %>% extract2("carat") %>% head
+iris %>% set_colnames(c("col1", "col2", "col3", "col4", "col5")) %>% head
+```
+
+## 参考文献
+- `vignette("magrittr")`
+     - magrittrの作者によるもう少し詳細な解説
+     - もしくは<a href="https://qiita.com/nozma/items/9e52b446c813d7e92c8a" target="_blank">その日本語訳</a>
