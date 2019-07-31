@@ -194,7 +194,7 @@ A. コピペの回数が２回を上回るとき
 
 \begin{frame}[fragile]{関数を書くためのstep1 コードを分析する}
 
-次の処理の入力は？
+処理の入力は？
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -267,6 +267,181 @@ A. コピペの回数が２回を上回るとき
 \begin{block}{まだコピペが残ってるやん}
 
 \(\Rightarrow\) 次の次の章iterationを待て
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{19.3 Functions are for humans and computers}
+
+関数はコンピュータのためだけではなく人間のために書く
+
+\begin{itemize}
+\tightlist
+\item
+  関数名
+\item
+  コメント
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{関数名の決め方}
+
+\begin{itemize}
+\tightlist
+\item
+  短く、しかし処理の内容を明確に表現したい
+
+  \begin{itemize}
+  \tightlist
+  \item
+    トレードオフになることも多い
+  \item
+    どちらか一方を選択するとすれば明確にする
+
+    \begin{itemize}
+    \tightlist
+    \item
+      RStudioのオートコンプリート機能
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{名詞}ではなく\textbf{動詞}で
+
+  \begin{itemize}
+  \tightlist
+  \item
+    引数は名詞
+  \item
+    動詞が``get''や``compute''ならその目的語（名詞）もあり
+  \end{itemize}
+\item
+  よりよい名前が見つかったら変更することをためらうな
+\item
+  関数群を作るときは前半部を統一する
+
+  \begin{itemize}
+  \tightlist
+  \item
+    オートコンプリート
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{関数名の例}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Too short}
+\KeywordTok{f}\NormalTok{()}
+
+\CommentTok{# Not a verb, or descriptive}
+\KeywordTok{my_awesome_function}\NormalTok{()}
+
+\CommentTok{# Long, but clear}
+\KeywordTok{impute_missing}\NormalTok{()}
+\KeywordTok{collapse_years}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}[fragile]{関数群の命名}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Good}
+\KeywordTok{input_select}\NormalTok{()}
+\KeywordTok{input_checkbox}\NormalTok{()}
+\KeywordTok{input_text}\NormalTok{()}
+
+\CommentTok{# Not so good}
+\KeywordTok{select_input}\NormalTok{()}
+\KeywordTok{checkbox_input}\NormalTok{()}
+\KeywordTok{text_input}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}[fragile]{命名規則}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{snake\_case}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Hadleyおすすめ
+  \end{itemize}
+\item
+  \texttt{camelCase}
+\end{itemize}
+
+どっちでもいいけど、どちらかに統一するべき
+
+\end{frame}
+
+\begin{frame}[fragile]{コメント}
+
+\texttt{\#}でその行の\texttt{\#}より右側はコメントアウト
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# this is comment}
+\NormalTok{a <-}\StringTok{ }\NormalTok{pi }\CommentTok{#this also comment}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  コメントは「なぜ」その処理をするのかを書くべし
+
+  \begin{itemize}
+  \tightlist
+  \item
+    「何を」「どのようにして」では\textbf{無い}
+  \end{itemize}
+\item
+  なぜ
+
+  \begin{itemize}
+  \tightlist
+  \item
+    中間変数を置いたのか？
+  \item
+    ２つの関数に分けたのか？
+  \item
+    他の方法は試したけどうまくいかなかったのか？
+  \end{itemize}
+\item
+  なぜこのようなコードになったのか？
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{コードセクション(Rstudio)}
+
+次のコードを使えばRStdudioでセクション区切りとみなされる
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Load data --------------------------------------}
+
+\CommentTok{# Plot data --------------------------------------}
+\end{Highlighting}
+\end{Shaded}
+
+\href{../img/rstudio-nav.png}{nav}
+
+\begin{block}{キーボード・ショートカット}
+
+Ctrl + Shift + R
 
 \end{block}
 
