@@ -97,6 +97,8 @@ df$d <- rescale01(df$d)
 ### まだコピペが残ってるやん 
 $\Rightarrow$ 次の次の章iterationを待て
 
+## 19.2.1 Practices
+
 ## 19.3 Functions are for humans and computers
 関数はコンピュータのためだけではなく人間のために書く
 
@@ -163,6 +165,9 @@ a <- pi #this also comment
     - 他の方法は試したけどうまくいかなかったのか？
 - なぜこのようなコードになったのか？
 
+## コメントを書かないと
+![Readable Code](../img/2018-1-2-9-readable-code.png)
+
 ## コードセクション(Rstudio)
 次のコードを使えばRStdudioでセクション区切りとみなされる<br>
 
@@ -172,8 +177,277 @@ a <- pi #this also comment
 # Plot data --------------------------------------
 ```
 
-[nav](../img/rstudio-nav.png)
+![Tstudio](../img/rstudio-nav.png){width=70}
 
 ### キーボード・ショートカット
 Ctrl + Shift + R
 
+## 19.3.1 Exercises
+
+
+## 19.4 Condition execution
+`if`関数を使った条件分岐
+
+```{r if, eval = FALSE}
+if (condition) {
+    # code executed when condition is TRUE
+} else {
+    # code executed when condition is FALSE
+}
+```
+
+## 19.4.1 Conditions 
+```{r if2, eval = FALSE}
+if (condition) {
+    # code executed when condition is TRUE
+} else {
+    # code executed when condition is FALSE
+}
+```
+
+conditionは`TRUE`か`FALSE`かのどちらか
+
+- ベクトルは基本NO!
+    - 入るとwarningを出して一番先頭の値だけ採用
+    - でも使うのは推奨しません
+- `NA`はエラー
+
+## Condition内での演算
+### `&&`や`||`はANDやORの役割 
+実際の働きは前から順に評価して`TRUE`や`FALSE`が出たら打ち切り 
+- 後ろにエラーがあっても問題なく走る
+
+### ベクトル化関数に注意
+- `&`や`|`は使うな 
+    - 関数`any`, `all`
+- `==`も使うな
+    - 関数`identical`, `near`
+
+## 19.4.2 Multiple Contitions
+```{r ifelse, eval = FALSE}
+if (this) {
+    # do that
+} else if (that) {
+    # do something else
+} else {
+    # 
+}
+```
+
+## 19.4.3 Code style
+インデントと改行の作法
+
+- `{`と`}`の間の行はインデントを入れる
+    - 半角スペース2個がおすすめ
+- `{`の直前は改行しない。直後は改行
+- `}`の直前に改行し、直後は`else`の場合を除いて改行
+
+## 19.4.4 Exercises
+
+## 19.5 Function arguments
+関数の引数
+
+## データと詳細
+関数の引数は**data**と**details**の二種に分類できる
+
+- 関数`log`は`x`がdataで`base`がdetail
+- 関数`mean`は`x`がdataで`trim`,`na.rm`がdetails
+- 関数`t.test`は`x`,`y`がdataで、`alternative`,`mu`,`paired`,`var.equal`,`conf.level`がdetials
+- 関数`str_c`は`...`がdata, `sep`,`collapse`がdetails
+
+普通はdataが先で、detailsにはデフォルト値が存在
+
+## デフォルト値
+```{r default, eval = FALSE}
+mean_ci <- function(x, conf = 0.95) {
+    se <- sd(x) / sqrt(length(x))
+  alpha <- 1 - conf
+    mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))
+}
+```
+
+- 一般的な値か安全サイドの値
+    - `na.rm=FALSE`
+
+## 引数名の指定方法 
+```{r arg_name, eval = FALSE}
+# Good
+mean(1:10, na.rm = TRUE)
+mean(na.rm = TRUE, 1:10)
+
+# Bad
+mean(x = 1:10, , FALSE)
+mean(, TRUE, x = c(1:10, NA))
+```
+
+- 関数をコールするとき引数名は省略可能 
+    - 前から順番に割り当てられる
+- 名前を指定すれば順番はめちゃくちゃでもいい
+
+## Coding style
+- 引数名を指定する`=`の前後にはスペース入れろ
+- 引数値の後ろの`,`の直前はスペース無し、直後はスペースあり
+
+```{r arg_name2, eval = FALSE}
+mean(1:10, na.rm = TRUE)
+```
+
+## 19.5.1 Choosing names
+一般的な引数名の割当
+
+- `x`,`y`,`z`はベクトル
+- `w`はベクトルの重み
+- `df`はデータフレーム
+- `i`,`j`は整数インデックス
+- `n`は長さや行数（自然数）
+- `p`は列数
+
+固執する必要は無いが参考にはなる
+
+## 19.5.2 Checking values
+引数の値が正確かチェック
+
+```{r check.value, eval = FALSE}
+wt_mean <- function(x, w) {
+    if (length(x) != length(w)) {
+          stop("`x` and `w` must be the same length", call. = FALSE)
+  }
+  sum(w * x) / sum(w)
+}
+```
+
+## 限度ってもんがある
+```{r check.value2, eval = FALSE}
+wt_mean <- function(x, w, na.rm = FALSE) {
+  if (!is.logical(na.rm)) {
+    stop("`na.rm` must be logical")
+  }
+  if (length(na.rm) != 1) {
+    stop("`na.rm` must be length 1")
+  }
+  if (length(x) != length(w)) {
+    stop("`x` and `w` must be the same length", call. = FALSE)
+  } 
+  if (na.rm) {
+    miss <- is.na(x) | is.na(w)
+    x <- x[!miss]
+    w <- w[!miss]
+  }
+  sum(w * x) / sum(w)
+}
+```
+
+## `stopifnot`
+```{r stopifnot, eval =FALSE}
+wt_mean <- function(x, w, na.rm = FALSE) {
+  stopifnot(is.logical(na.rm), length(na.rm) == 1)
+  stopifnot(length(x) == length(w)) 
+  if (na.rm) {
+    miss <- is.na(x) | is.na(w)
+    x <- x[!miss]
+    w <- w[!miss]
+  }
+  sum(w * x) / sum(w)
+}
+```
+
+- エラー条件ではなく、有るべき条件を指定できる
+
+## 19.5.3 Dot-dot-dot (...)
+任意の数の引数を受ける関数
+
+### 例
+```{r any.fun, eval = FALSE}
+sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+#> [1] 55
+stringr::str_c("a", "b", "c", "d", "e", "f")
+#> [1] "abcdef"
+```
+
+## `...`
+```{r dotdotdot}
+rule <- function(..., pad = "-") {
+  title <- paste0(...)
+  width <- getOption("width") - nchar(title) - 5
+  cat(title, " ", stringr::str_dup(pad, width), "\n", sep = "")
+}
+rule("Important output") 
+```
+
+関数がコールされたときに指定された引数で引数名が割当られなかったら`...`に入る
+
+## 19.4.5 Lazy evaluation
+遅延評価。引数の値は実際に必要とされるまでは評価されない
+
+```{r lazy}
+x <- FALSE
+f <- function(y = x <- TRUE, z){
+  if(z){
+    return(x)
+  }else if(y){
+    return(x)
+  }
+}
+f(z = TRUE)
+f(z = FALSE)
+```
+
+## 19.5.5 Exercises
+
+## 19.6 Return values
+戻り値
+
+関数をコールした結果得られるオブジェクト
+
+
+## 19.6.1 Explicit return statement
+デフォルトは関数内で最後に実行されたオブジェクトが戻り値になる
+
+関数`return`を使って、明示的にリターンを設定することでコードを読みやすくできる
+
+
+```{r ers, eval = FALSE}
+complicated_function <- function(x, y, z) {
+  if (length(x) == 0 || length(y) == 0) {
+    return(0)
+  } 
+  # Complicated code here
+}
+```
+
+## 19.6.2 Writing pipeable functions
+自作関数をパイプラインに繋げる
+
+## 二種類のパイプライン接続関数
+- 変換
+    - 関数の入力データと戻り値とが同一のデータ型だとつないでいける
+- 副作用
+    - プロットしたり文字列を表示したり
+    - 戻り値は入力データそのもの。しかしinvisibleであるべき
+
+###  副作用の例
+```{r side-effect, eval = FALSE}
+show_missings <- function(df) {
+  n <- sum(is.na(df))
+  cat("Missing values: ", n, "\n", sep = "") 
+  invisible(df)
+}
+```
+
+## 19.7 Environment
+Rの環境
+
+## レキシカルスコープ
+```{r lexical}
+f <- function(x) {
+  x + y
+} 
+y <- 100
+f(10) 
+y <- 1000
+f(10)
+```
+
+## 参考文献
+- https://rion778.hatenablog.com/entry/2015/05/31/175055
+- http://adv-r.had.co.nz/Functions.html#lazy-evaluation
