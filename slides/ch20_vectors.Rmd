@@ -1,0 +1,73 @@
+---
+title: "Vectors - r4ds"
+author: "Tomoya Fukumoto"
+date: "2019-08-23"
+output: 
+  beamer_presentation:
+    theme: default
+    latex_engine: xelatex
+mainfont: IPAPMincho
+header-includes: 
+  - \usepackage{zxjatype} 
+  - \usepackage[ipa]{zxjafont} 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
+```
+
+## ベクトル
+- あるデータの集まりをRではベクトルと呼ぶ 
+    - Rのデータはすべてベクトルである
+- R特有の概念 
+
+
+### 準備
+```{r prerequisites, message = FALSE}
+library(tidyverse)
+```
+
+## 二種類のベクトル
+### アトミック
+- 同じ**型**のデータの集まり 
+    - `1:10`
+    - `c("a", "b")`
+    - `TRUE`
+
+### リスト
+- リスト、アトミック、NULLの集まり
+    - `list()`
+    - `list(list())`
+    - `list(list(), 1:10, c("a","b"), TRUE)`
+
+## 概念図
+![Hierarchy of R's vector types](../img/data-structures-overview.png)
+
+## ベクトルのプロパティ 
+すべてのベクトルが持つプロパティ
+
+### 型
+```{r typeof}
+typeof(1:10)
+typeof(list(1,"a"))
+```
+
+### 長さ
+```{r length}
+length(1:10)
+```
+
+## 拡張されたベクトル
+一部のベクトルは**属性(attribute)**という付加情報を持つことで高度な働きをする。
+
+- factor：実体はintegerベクトル
+- date: 実体はdoubleベクトル
+- data.frame: 実体はリスト
+
+## 20.3 Important types of atomic vector
+- logical, integer, double, character
+    - complex, rawは扱わない
+
+
+## 参考文献 
+- http://adv-r.had.co.nz/Functions.html#lazy-evaluation
