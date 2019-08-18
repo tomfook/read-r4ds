@@ -44,8 +44,6 @@ library(tidyverse)
 ![Hierarchy of R's vector types](../img/data-structures-overview.png)
 
 ## ベクトルのプロパティ 
-すべてのベクトルが持つプロパティ
-
 ### 型
 ```{r typeof}
 typeof(1:10)
@@ -58,7 +56,7 @@ length(1:10)
 ```
 
 ## 拡張されたベクトル
-一部のベクトルは**属性(attribute)**という付加情報を持つことで高度な働きをする。
+一部のベクトルは**属性(attribute)**という付加情報を持たせて複雑な操作ができる。
 
 - factor：実体はintegerベクトル
 - date: 実体はdoubleベクトル
@@ -67,6 +65,291 @@ length(1:10)
 ## 20.3 Important types of atomic vector
 - logical, integer, double, character
     - complex, rawは扱わない
+
+## 20.3.1 Logical
+最も原子的
+
+### 値
+`TRUE`, `FALSE`, `NA`の三種類のみ
+
+### 生成
+```{r create_logical}
+1:10 %% 3 == 0
+c(TRUE, TRUE, FALSE, NA)
+```
+
+## 20.3.2 Numeric
+Logicalの次に原子的
+
+二種類に分類できる
+- integer
+- double(デフォルト)
+
+```{r numeric0}
+typeof(1)
+typeof(1L)
+```
+
+## doubleは近似
+```{r double.error}
+x <- sqrt(2) ^ 2
+x
+x - 2
+```
+
+### 教訓
+`==`じゃなくて`near`を使う
+
+## 特殊な値
+- `NA` 
+- `NaN` (doubleのみ)
+- `Inf`, `-Inf` (doubleのみ)
+
+### check
+`is.na`, `is.finite`, `is.nan`
+
+## 20.3.3 Character
+要素は任意の文字列
+
+データの大きさが一定でない
+
+## Global string pool
+文字列の実体は一箇所に保管されている
+
+$\Rightarrow$ データの実体はpoolへのリンク
+
+```{r global_string_pool}
+x <- "This is a reasonably long string."
+pryr::object_size(x)
+y <- rep(x, 1000)
+pryr::object_size(y)
+```
+
+## 20.3.4 Missing values
+実は`NA`にも型が存在する
+
+```{r na, results='hide'}
+NA            # logical
+NA_integer_   # integer
+NA_real_      # double
+NA_character_ # character
+```
+
+## 20.3.5 Exercises
+
+## 20.4 Using atomic vectors
+1. どうやって型を変換するか
+2. ベクトルの型の調べ方
+3. 異なる長さのベクトルがどのように作用するか
+4. ベクトルの要素に名前を付ける方法
+5. ベクトルの要素の抽出方法
+
+## 20.4.1 Coercion
+型の変換
+
+明示的(Explicit)な方法と暗黙的(Implicit)な方法
+
+## 明示的な方法
+関数
+
+- `as.logical`
+- `as.integer`
+- `as.double`
+- `as.character`
+
+logical > integer > double > character
+
+の順に変換すればとりあえず間違いない。
+
+逆も不可能ではないけど扱いに注意
+
+## 暗黙的な方法: 例１
+logicalを実数として処理する方法
+
+```{r logical.double}
+x <- sample(20, 100, replace = TRUE)
+sum(x > 10)  # how many are greater than 10?
+```
+
+`TRUE`は`1`に、`FALSE`は`0`になる
+
+## 暗黙的な方法: 例２
+異なる型の値（ベクトル）を`c`で結合
+
+```{r coercion_c}
+typeof(c(TRUE, 1L))
+typeof(c(1.5, "a"))
+```
+
+logical > integer > double > complex > character  
+の強さの順で統一される
+
+### はっきりと認識しておくこと
+ベクトルは複数種類の型の値を要素に持つことはできない
+
+## 20.4.2 Test functions
+どの型のアトミックなのかテストする関数
+
+|   |lgl|int|dbl|chr|list|
+|---|---|---|---|---|---|
+|`is_logical`|x|||||
+|`is_integer`||x||||
+|`is_double`|||x|||
+|`is_numeric`||x|x|||
+|`is_character`||||x||
+|`is_atomic`|x|x|x|x||
+|`is_list`|||||x|
+|`is_vector`|x|x|x|x|x|
+
+### scalar
+`is_scalar_logical`で長さ１のlglかどうかテスト
+
+## 20.4.3 Scalars and recycling rules
+アトミックベクトルどおしの演算
+
+## 基本ルール
+要素ごとに演算される
+
+```{r basic.arithemetic}
+c(1, 2, 3) * c(1, 10, 100)
+```
+
+長さが違う場合は？
+
+## リサイクル
+演算入力のベクトルの長さが異なる場合は短い方が繰り返される
+
+```{r recycling1}
+1:10 + 100
+1:10 + 1:2 * 100
+```
+
+## リサイクル２
+繰り返し回数が合わなければ途中までリサイクル
+
+```{r recycling2}
+1:10 + 1:3 * 100
+```
+
+## `tidyverse`
+`tidyverse`な世界ではベクトル-スカラー以外のリサイクルは禁止
+
+```{r recycling.tidy}
+tibble(x = 1:3, y = 1)
+```
+```{r recycling.tidy2, error=TRUE}
+tibble(x = 1:3, y = 1:2)
+```
+
+## 20.4.4 Naming vectors
+ベクトル要素に名前をつける
+
+## ベクトル要素の名前
+```{r vector.name}
+v <- c(x = 1, y = 2, z = 4)
+v
+names(v)
+```
+
+## 名前の変更
+```{r vector.naming}
+v %>% set_names(c("a", "b", "c"))
+```
+
+## 20.4.5 Subsetting
+ベクトルの一部の要素を抽出する
+
+### operator
+ベクトルの後ろに`[...]`を付ける
+
+`[...]`の中に入れる値は三種類
+
+- index
+- logical
+- name strings
+
+## index
+前から数えた位置で指定する
+```{r subset.index}
+x <- c("one", "two", "three", "four", "five")
+x[c(3, 2, 5)] 
+x[c(1, 1, 5, 5, 5, 2)] #繰り返し
+x[c(-1, -3, -5)] #マイナス指定
+```
+
+## logical
+元と同じ長さの論理ベクトルの`TRUE`の位置で指定
+
+```{r subset.logical}
+x <- c(10, 3, NA, 5, 8, 1, NA)
+x[!is.na(x)] #NAを除く
+x[x %% 2 == 0] #偶数とNA
+```
+
+## name strings
+ベクトル要素の名前で指定
+
+```{r subset.name}
+x <- c(abc = 1, def = 2, xyz = 5)
+x[c("xyz", "def")]
+```
+
+## nothing
+要素を指定せずに全体を得る
+
+```{r subset.nothing}
+iris[1,]
+iris[,1]
+```
+
+## subsetting function
+実は関数`"["`がコールされている
+
+```{r subsetting.function}
+"["(x, 1)
+x %>% "["(1)
+```
+
+## 20.4.6 Exercises
+
+## 20.5 Recursive vectors (lists)
+制約が無さ過ぎるベクトル
+
+## 型の制約なし
+アトミックのように要素の型が統一されている必要がない
+
+```{r lists.basic}
+y <- list("a", 1L, 1.5, TRUE)
+str(y)
+```
+
+## 繰り返し
+listはlistを要素に持てる
+
+```{r lists.recursive}
+z <- list(list(1, 2), list(3, 4, 5))
+str(z)
+```
+
+## 20.5.1 Visualising lists
+list構造の可視化方法
+
+この本のためのHadleyさんオリジナル
+
+## リストの可視化ルール
+```{r viz.ex1}
+x1 <- list(c(1, 2), c(3, 4))
+x2 <- list(list(1, 2), list(3, 4))
+x3 <- list(1, list(2, list(3)))
+```
+
+![](../img/lists-structure.png){width=65%}
+
+- リストは角が丸、アトミックは四角
+- 子は親の中に入れる。階層が深いとグレー
+- 向きや順序に意味はない
+
+## 20.5.2 Subsetting
 
 
 ## 参考文献 
