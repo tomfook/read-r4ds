@@ -343,14 +343,124 @@ x2 <- list(list(1, 2), list(3, 4))
 x3 <- list(1, list(2, list(3)))
 ```
 
-![](../img/lists-structure.png){width=65%}
+\begin{center}
+\includegraphics[width=80mm]{../img/lists-structure.png}
+\end{center}
 
 - リストは角が丸、アトミックは四角
 - 子は親の中に入れる。階層が深いとグレー
 - 向きや順序に意味はない
 
 ## 20.5.2 Subsetting
+リストには三種の要素抽出方法がある
 
+```{r list.subset}
+a <- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
+a[1]
+a[[1]]
+a$a
+```
+
+## 可視化
+![Subsetting a list, visually](../img/lists-subsetting.png){width=80%}
+
+## 20.5.3 Lists of condiments
+たとえ話
+
+|`a`|`a[1]`|`a[[1]]`|`a[[1]][[1]]`|
+|:-:|:-:|:-:|:-:|
+|![a](../img/pepper.jpg){width=20%}| ![a\[1\]](../img/pepper-1.jpg){width=20%}| ![a\[\[1\]\]](../img/pepper-2.jpg){width=20%}| ![a\[\[1\]\]\[\[1\]\]](../img/pepper-3.jpg){width=20%}|
+
+## 20.5.4 Exercises
+
+## 20.6 Attributes
+ベクトルの属性（付加的な情報）
+
+## 設定方法
+```{r give.attributes}
+x <- 1:10
+attr(x, "greeting")
+attr(x, "greeting") <- "Hi!"
+attr(x, "farewell") <- "Bye!"
+attributes(x)
+```
+
+## 重要な属性
+1. names: 要素の名前
+2. dimensions: 横や縦の次元を与えればベクトルを行列にできる
+3. class: S3オブジェクト指向プログラミングのために使う
+    - 汎用関数の作用を制御する
+
+## 汎用関数の例
+```{r generic.asdate, error=TRUE}
+as.Date("2019/8/20")
+as.Date(18128)
+```
+
+## もう一つの例
+```{r generic.plot, fig.height=3}
+par(mfrow = c(1,2))
+plot(cars)
+plot(lm(dist ~ speed, cars))
+```
+
+## 20.7 Augmented vectors
+attributesの実践的な活用例
+
+- factor
+- dates
+- datetimes
+- tibbles
+
+## 20.7.1 Factors
+```{r augumented.factors}
+x <- factor(c("ab", "cd", "ab"), levels = c("ab", "cd", "ef"))
+typeof(x)
+attributes(x)
+```
+
+## 20.7.2 Dates and datetimes
+### date
+```{r aug.date}
+x <- as.Date("1971-01-01")
+unclass(x)
+typeof(x)
+attributes(x)
+```
+
+## datetime
+```{r aug.datetime}
+x <- lubridate::ymd_hm("1970-01-01 01:00")
+typeof(x)
+attributes(x)
+```
+
+## update attribute
+```{r update.attr}
+attr(x, "tzone") <- "US/Pacific"
+x
+attr(x, "tzone") <- "US/Eastern"
+x
+```
+
+## 20.7.3 Tibbles
+```{r aug.tibble}
+tb <- tibble::tibble(x = 1:5, y = 5:1)
+typeof(tb)
+attributes(tb)
+```
+
+## dataframe
+```{r aug.df}
+df <- data.frame(x = 1:5, y = 5:1)
+typeof(df)
+attributes(df)
+```
+
+## 20.7.4 Exercises
 
 ## 参考文献 
 - http://adv-r.had.co.nz/Functions.html#lazy-evaluation
+- http://adv-r.had.co.nz/Subsetting.html#applications
+- http://adv-r.had.co.nz/OO-essentials.html#s3
+
