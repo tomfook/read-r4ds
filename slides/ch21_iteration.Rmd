@@ -1,0 +1,91 @@
+---
+title: "Iteration - r4ds"
+author: "Tomoya Fukumoto"
+date: "2019-09-06"
+output: 
+  beamer_presentation:
+    theme: default
+    latex_engine: xelatex
+mainfont: IPAPMincho
+header-includes: 
+  - \usepackage{zxjatype} 
+  - \usepackage[ipa]{zxjafont} 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
+```
+
+## Iteration
+繰り返し作業をどうやって自動化するための二つの手法
+
+1. ループ
+2. 関数型プログラミング(functional programming)
+
+
+## 準備
+```{r prerequisites, message = FALSE}
+library(tidyverse)
+```
+
+ループに関わるのは`base`ライブラリ
+
+FPに関わるのは`purrr`ライブラリ
+
+## 21.2 For loops
+最も標準的なループ
+
+## 例：各行のmedianを求める（ループなし）
+```{r noloop, results="hide"}
+df <- tibble(
+	     a = rnorm(10),
+	     b = rnorm(10),
+	     c = rnorm(10),
+	     d = rnorm(10)
+) 
+median(df$a)
+median(df$b)
+median(df$c)
+median(df$d)
+```
+
+## 例：各行のmedianを求める（ループ）
+```{r loop.median}
+output <- vector("double", ncol(df))  # 1. output
+for (i in seq_along(df)) {            # 2. sequence
+  output[[i]] <- median(df[[i]])      # 3. body
+}
+output
+```
+
+## ループの構成要素 output
+```{r loop.output, eval=FALSE}
+output <- vector("double", ncol(df))
+```
+
+- ループの出力の器
+- ループが始まる前に作る
+   - `vector`関数で型と長さを指定する
+   - 長さを指定せずとも処理が遅くなる 
+
+## ループの構成要素 sequence
+```{r loop.sequence, eval=FALSE}
+i in seq_along(df)
+```
+
+- どうループを回すか
+- 一周するたびに`i`がベクトル`seq_along(df)`の中で値を変化させる
+- (`seq_along(df)`は`1:length(df)`と**ほぼ**同じ)
+
+## ループの構成要素 body
+```{r loop.body, eval=FALSE}
+output[[i]] <- median(df[[i]])
+```
+
+- ループで実際に処理する内容
+   - 1回目は`output[[1]] <- median(df[[1]])`
+   - 2回目は`output[[2]] <- median(df[[2]])`
+
+
+## 参考文献 
+

@@ -1,0 +1,255 @@
+\documentclass[ignorenonframetext,]{beamer}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+    \setmainfont[]{IPAPMincho}
+\fi
+\usefonttheme{serif} % use mainfont rather than sansfont for slide text
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\newif\ifbibliography
+\hypersetup{
+            pdftitle={Iteration - r4ds},
+            pdfauthor={Tomoya Fukumoto},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+
+% Prevent slide breaks in the middle of a paragraph:
+\widowpenalties 1 10000
+\raggedbottom
+
+\AtBeginPart{
+  \let\insertpartnumber\relax
+  \let\partname\relax
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \let\insertsectionnumber\relax
+    \let\sectionname\relax
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \let\insertsubsectionnumber\relax
+  \let\subsectionname\relax
+  \frame{\subsectionpage}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+\usepackage{zxjatype}
+\usepackage[ipa]{zxjafont}
+
+\title{Iteration - r4ds}
+\author{Tomoya Fukumoto}
+\date{2019-09-06}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Iteration}
+
+繰り返し作業をどうやって自動化するための二つの手法
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  ループ
+\item
+  関数型プログラミング(functional programming)
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]{準備}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+ループに関わるのは\texttt{base}ライブラリ
+
+FPに関わるのは\texttt{purrr}ライブラリ
+
+\end{frame}
+
+\begin{frame}{21.2 For loops}
+
+最も標準的なループ
+
+\end{frame}
+
+\begin{frame}[fragile]{例：各行のmedianを求める（ループなし）}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
+         \DataTypeTok{a =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
+         \DataTypeTok{b =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
+         \DataTypeTok{c =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
+         \DataTypeTok{d =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{) }
+\KeywordTok{median}\NormalTok{(df}\OperatorTok{$}\NormalTok{a)}
+\KeywordTok{median}\NormalTok{(df}\OperatorTok{$}\NormalTok{b)}
+\KeywordTok{median}\NormalTok{(df}\OperatorTok{$}\NormalTok{c)}
+\KeywordTok{median}\NormalTok{(df}\OperatorTok{$}\NormalTok{d)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}[fragile]{例：各行のmedianを求める（ループ）}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{output <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\KeywordTok{ncol}\NormalTok{(df))  }\CommentTok{# 1. output}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)) \{            }\CommentTok{# 2. sequence}
+\NormalTok{  output[[i]] <-}\StringTok{ }\KeywordTok{median}\NormalTok{(df[[i]])      }\CommentTok{# 3. body}
+\NormalTok{\}}
+\NormalTok{output}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.23397728 -0.35668072  0.01067616 -0.31417659
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{ループの構成要素 output}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{output <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\KeywordTok{ncol}\NormalTok{(df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  ループの出力の器
+\item
+  ループが始まる前に作る
+\item
+  \texttt{vector}関数で型と長さを指定する
+\item
+  長さを指定せずとも処理が遅くなる
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{ループの構成要素 sequence}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  どうループを回すか
+\item
+  一周するたびに\texttt{i}がベクトル\texttt{seq\_along(df)}の中で値を変化させる
+\item
+  (\texttt{seq\_along(df)}は\texttt{1:length(df)}と\textbf{ほぼ}同じ)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{ループの構成要素 body}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{output[[i]] <-}\StringTok{ }\KeywordTok{median}\NormalTok{(df[[i]])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  ループで実際に処理する内容
+\item
+  1回目は\texttt{output{[}{[}1{]}{]}\ \textless{}-\ median(df{[}{[}1{]}{]})}
+\item
+  2回目は\texttt{output{[}{[}2{]}{]}\ \textless{}-\ median(df{[}{[}2{]}{]})}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{参考文献}
+
+\end{frame}
+
+\end{document}
