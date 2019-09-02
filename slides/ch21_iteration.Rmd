@@ -76,6 +76,7 @@ i in seq_along(df)
 - どうループを回すか
 - 一周するたびに`i`がベクトル`seq_along(df)`の中で値を変化させる
 - (`seq_along(df)`は`1:length(df)`と**ほぼ**同じ)
+    - `length(df)`が`0`のときだけ違う
 
 ## ループの構成要素 body
 ```{r loop.body, eval=FALSE}
@@ -85,6 +86,107 @@ output[[i]] <- median(df[[i]])
 - ループで実際に処理する内容
    - 1回目は`output[[1]] <- median(df[[1]])`
    - 2回目は`output[[2]] <- median(df[[2]])`
+
+## 21.2.1 Exercises
+1を見てみる
+
+## 21.3 For loop variations
+
+1. オブジェクトを修正するループ（作成するのではなく）
+2. 要素の名前や値で回すループ（インデックスではなく）
+3. 出力の長さが不明の場合
+4. ループ回数が不明の場合
+
+## 21.3.1 Modifying an existing object
+```{r modifying.loop}
+df <- tibble(a = rnorm(10), b = rnorm(10), c = rnorm(10), d = rnorm(10))
+rescale01 <- function(x) {
+    rng <- range(x, na.rm = TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+} 
+df$a <- rescale01(df$a)
+df$b <- rescale01(df$b)
+df$c <- rescale01(df$c)
+df$d <- rescale01(df$d)
+```
+
+### 等価
+```{r modifying.loop2}
+for (i in seq_along(df)) {
+    df[[i]] <- rescale01(df[[i]])
+}
+```
+
+## 21.3.2 Looping patterns
+ループを回すときのsequenceの作法
+
+1. `for (i in seq_along(xs))` インデックスとして1から順に数え上げる
+     - 最も一般的かつ汎用的
+2. `for (x in xs)` ベクトル`xs`の要素を一つずつとる
+     - 出力を保存しにくい
+          - オブジェクト操作でなく副作用(plot, writeなど)に使う
+3. `for (nm in names(xs))` 要素の名前を一つずつとる
+     - 要素の名前を使いたい場合
+          - plotのタイトルとか
+
+## インデックスを使った方法が最も汎用的
+インデックスを使った方法は他の２つをシミュレートできる
+
+```{r looping.sequence, eval=FALSE}
+for (i in seq_along(x)) {
+  name <- names(x)[[i]]
+  value <- x[[i]]
+}
+```
+
+## 21.3.3 Unknown output length
+ループする前に出力の長さがわからないとき
+
+
+## 乱数でベクトルの長さが変わる場合
+### ダメな例
+```{r unknown.output.length.ng}
+means <- c(0, 1, 2)
+output <- double()
+for (i in seq_along(means)) {
+  n <- sample(100, 1)
+  output <- c(output, rnorm(n, means[[i]]))
+}
+```
+
+## 良い例
+```{r unknown.output.length.ok}
+out <- vector("list", length(means))
+for (i in seq_along(means)) {
+  n <- sample(100, 1)
+  out[[i]] <- rnorm(n, means[[i]])
+}
+output <- unlist(out)
+```
+
+### 他の例
+- `paste(out, x)`と追加していくのではなく、`out`をまとめて作ったあと`paste(out, collapse=TRUE)`でくっつける
+- データフレームの行を追加していくのではなく、リストで作って`bind_rows(output)`でくっつける
+
+## 21.3.4 Unknown sequence length
+事前にループする回数がわからないとき
+
+## `while`
+```{r while.loop, eval=FALSE}
+while (condition){
+  #body
+}
+```
+
+シミュレーションでよく使う
+
+- 精度が出るまで反復する、とか
+
+## 21.3.5 Exercises
+
+## 21.4 For loops vs. functionals
+
+
 
 
 ## 参考文献 

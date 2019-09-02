@@ -181,7 +181,7 @@ FPに関わるのは\texttt{purrr}ライブラリ
 \end{Shaded}
 
 \begin{verbatim}
-## [1] -0.23397728 -0.35668072  0.01067616 -0.31417659
+## [1]  0.6716290 -0.0496664  0.3351858  0.3524706
 \end{verbatim}
 
 \end{frame}
@@ -224,6 +224,12 @@ FPに関わるのは\texttt{purrr}ライブラリ
   一周するたびに\texttt{i}がベクトル\texttt{seq\_along(df)}の中で値を変化させる
 \item
   (\texttt{seq\_along(df)}は\texttt{1:length(df)}と\textbf{ほぼ}同じ)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{length(df)}が\texttt{0}のときだけ違う
+  \end{itemize}
 \end{itemize}
 
 \end{frame}
@@ -245,6 +251,208 @@ FPに関わるのは\texttt{purrr}ライブラリ
 \item
   2回目は\texttt{output{[}{[}2{]}{]}\ \textless{}-\ median(df{[}{[}2{]}{]})}
 \end{itemize}
+
+\end{frame}
+
+\begin{frame}{21.2.1 Exercises}
+
+1を見てみる
+
+\end{frame}
+
+\begin{frame}{21.3 For loop variations}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  オブジェクトを修正するループ（作成するのではなく）
+\item
+  要素の名前や値で回すループ（インデックスではなく）
+\item
+  出力の長さが不明の場合
+\item
+  ループ回数が不明の場合
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]{21.3.1 Modifying an existing object}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{a =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{), }\DataTypeTok{b =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{), }\DataTypeTok{c =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{), }\DataTypeTok{d =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{))}
+\NormalTok{rescale01 <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{    rng <-}\StringTok{ }\KeywordTok{range}\NormalTok{(x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{  (x }\OperatorTok{-}\StringTok{ }\NormalTok{rng[}\DecValTok{1}\NormalTok{]) }\OperatorTok{/}\StringTok{ }\NormalTok{(rng[}\DecValTok{2}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{rng[}\DecValTok{1}\NormalTok{])}
+\NormalTok{\} }
+\NormalTok{df}\OperatorTok{$}\NormalTok{a <-}\StringTok{ }\KeywordTok{rescale01}\NormalTok{(df}\OperatorTok{$}\NormalTok{a)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{b <-}\StringTok{ }\KeywordTok{rescale01}\NormalTok{(df}\OperatorTok{$}\NormalTok{b)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{c <-}\StringTok{ }\KeywordTok{rescale01}\NormalTok{(df}\OperatorTok{$}\NormalTok{c)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{d <-}\StringTok{ }\KeywordTok{rescale01}\NormalTok{(df}\OperatorTok{$}\NormalTok{d)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{block}{等価}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)) \{}
+\NormalTok{    df[[i]] <-}\StringTok{ }\KeywordTok{rescale01}\NormalTok{(df[[i]])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{21.3.2 Looping patterns}
+
+ループを回すときのsequenceの作法
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{for\ (i\ in\ seq\_along(xs))}
+  インデックスとして1から順に数え上げる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    最も一般的かつ汎用的
+  \end{itemize}
+\item
+  \texttt{for\ (x\ in\ xs)} ベクトル\texttt{xs}の要素を一つずつとる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    出力を保存しにくい
+
+    \begin{itemize}
+    \tightlist
+    \item
+      オブジェクト操作でなく副作用(plot, writeなど)に使う
+    \end{itemize}
+  \end{itemize}
+\item
+  \texttt{for\ (nm\ in\ names(xs))} 要素の名前を一つずつとる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    要素の名前を使いたい場合
+
+    \begin{itemize}
+    \tightlist
+    \item
+      plotのタイトルとか
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]{インデックスを使った方法が最も汎用的}
+
+インデックスを使った方法は他の２つをシミュレートできる
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(x)) \{}
+\NormalTok{  name <-}\StringTok{ }\KeywordTok{names}\NormalTok{(x)[[i]]}
+\NormalTok{  value <-}\StringTok{ }\NormalTok{x[[i]]}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}{21.3.3 Unknown output length}
+
+ループする前に出力の長さがわからないとき
+
+\end{frame}
+
+\begin{frame}[fragile]{乱数でベクトルの長さが変わる場合}
+
+\begin{block}{ダメな例}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{means <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{output <-}\StringTok{ }\KeywordTok{double}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(means)) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{  output <-}\StringTok{ }\KeywordTok{c}\NormalTok{(output, }\KeywordTok{rnorm}\NormalTok{(n, means[[i]]))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{良い例}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{out <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"list"}\NormalTok{, }\KeywordTok{length}\NormalTok{(means))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(means)) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{  out[[i]] <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(n, means[[i]])}
+\NormalTok{\}}
+\NormalTok{output <-}\StringTok{ }\KeywordTok{unlist}\NormalTok{(out)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{block}{他の例}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{paste(out,\ x)}と追加していくのではなく、\texttt{out}をまとめて作ったあと\texttt{paste(out,\ collapse=TRUE)}でくっつける
+\item
+  データフレームの行を追加していくのではなく、リストで作って\texttt{bind\_rows(output)}でくっつける
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{21.3.4 Unknown sequence length}
+
+事前にループする回数がわからないとき
+
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{while}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{while}\NormalTok{ (condition)\{}
+  \CommentTok{#body}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+シミュレーションでよく使う
+
+\begin{itemize}
+\tightlist
+\item
+  精度が出るまで反復する、とか
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{21.3.5 Exercises}
+
+\end{frame}
+
+\begin{frame}{21.4 For loops vs.~functionals}
 
 \end{frame}
 
