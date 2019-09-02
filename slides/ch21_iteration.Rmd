@@ -154,6 +154,8 @@ for (i in seq_along(means)) {
 }
 ```
 
+毎回全データコピーするので$O(n^2)$の計算量がかかる
+
 ## 良い例
 ```{r unknown.output.length.ok}
 out <- vector("list", length(means))
