@@ -74,6 +74,12 @@
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+\usepackage{caption}
+% These lines are needed to make table captions work with longtable:
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
 
 % Prevent slide breaks in the middle of a paragraph:
 \widowpenalties 1 10000
@@ -181,7 +187,7 @@ FPに関わるのは\texttt{purrr}ライブラリ
 \end{Shaded}
 
 \begin{verbatim}
-## [1]  0.28066221 -0.56869343 -0.09636514 -0.56660792
+## [1]  0.14917465 -0.38815854  0.06872737 -0.04199707
 \end{verbatim}
 
 \end{frame}
@@ -455,6 +461,317 @@ FPに関わるのは\texttt{purrr}ライブラリ
 \end{frame}
 
 \begin{frame}{21.4 For loops vs.~functionals}
+
+関数型プログラミングとは
+
+\end{frame}
+
+\begin{frame}[fragile]{for loopを使った例}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{a =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
+         \DataTypeTok{b =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
+         \DataTypeTok{c =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
+         \DataTypeTok{d =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{))}
+
+\NormalTok{output <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\KeywordTok{length}\NormalTok{(df))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)) \{}
+\NormalTok{    output[[i]] <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(df[[i]])}
+\NormalTok{\}}
+\NormalTok{output}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.04656869  0.08153351  0.25980515  0.55837785
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{何回も使いそうだから関数にする}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{col_mean <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df) \{}
+\NormalTok{    output <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\KeywordTok{length}\NormalTok{(df))}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)) \{}
+\NormalTok{        output[i] <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(df[[i]])}
+\NormalTok{    \}}
+\NormalTok{    output}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}[fragile]{平均以外の集計でも使うだろう}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{col_median <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df) \{}
+\NormalTok{    output <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\KeywordTok{length}\NormalTok{(df))}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)) \{}
+\NormalTok{        output[i] <-}\StringTok{ }\KeywordTok{median}\NormalTok{(df[[i]])}
+\NormalTok{    \}}
+\NormalTok{    output}
+\NormalTok{\}}
+\NormalTok{col_sd <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df) \{}
+\NormalTok{    output <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\KeywordTok{length}\NormalTok{(df))}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)) \{}
+\NormalTok{        output[i] <-}\StringTok{ }\KeywordTok{sd}\NormalTok{(df[[i]])}
+\NormalTok{    \}}
+\NormalTok{    output}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+二回以上のコピペをしてしまった！
+
+\end{frame}
+
+\begin{frame}[fragile]{関数型プログラミング}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{col_summary <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df, fun) \{}
+\NormalTok{    out <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\KeywordTok{length}\NormalTok{(df))}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)) \{}
+\NormalTok{        out[i] <-}\StringTok{ }\KeywordTok{fun}\NormalTok{(df[[i]])}
+\NormalTok{    \}}
+\NormalTok{    out}
+\NormalTok{\}}
+\KeywordTok{col_summary}\NormalTok{(df, median)}
+\KeywordTok{col_summary}\NormalTok{(df, sd)}
+\end{Highlighting}
+\end{Shaded}
+
+Rでは関数の引数として関数を渡すことができる
+
+\(\Rightarrow\)関数型プログラミング
+
+\end{frame}
+
+\begin{frame}{21.4.1 Exercises}
+
+1,2
+
+\end{frame}
+
+\begin{frame}[fragile]{21.5 The map functions}
+
+for loopをfunctionalで置き換える関数\texttt{purrr::map}
+
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{map}}
+
+\begin{block}{Usage}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{map}\NormalTok{(.x, .f, ...)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{block}
+
+\begin{block}{Arguments}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\textbf{.x} & listかatomic vector\tabularnewline
+\textbf{.f} & 関数かformula\tabularnewline
+\textbf{\ldots{}} &
+関数に渡すパラメータ。たとえば\texttt{na.rm\ =\ TRUE}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\end{block}
+
+\begin{block}{return}
+
+ベクトル\texttt{.x}の要素をそれぞれ関数\texttt{.f}に適用し、その結果をリストで返す
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Example 1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sheets <-}\StringTok{ }\KeywordTok{c}\NormalTok{( }\StringTok{"（NAP）全国"}\NormalTok{,}
+        \StringTok{"（NAP）関西"}\NormalTok{,}
+        \StringTok{"（NAP）関西以外"}\NormalTok{)}
+
+\NormalTok{poo <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sheets,}
+\NormalTok{       read_excel,}
+       \DataTypeTok{path =} \StringTok{"input/★【weekly】POO_Flex_Histrical_Data.xlsx"}\NormalTok{,}
+       \DataTypeTok{trim_ws =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{map}一族}
+
+戻り値をリストではない形式に変換して返すこともできる
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{map} makes a list.
+\item
+  \texttt{map\_lgl} makes a logical vector.
+\item
+  \texttt{map\_int} makes an integer vector.
+\item
+  \texttt{map\_dbl} makes a double vector.
+\item
+  \texttt{map\_chr} makes a character vector.
+\item
+  \texttt{map\_df} makes a dataframe \textbf{特に重要}
+\end{itemize}
+
+これらが使えるかは\texttt{.f}の戻り値しだい
+
+\end{frame}
+
+\begin{frame}[fragile]{Example 2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{    data_all <-}\StringTok{ }\KeywordTok{left_join}\NormalTok{(data_used_mean,data_used_sgm,}\DataTypeTok{by=}\NormalTok{grp) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\KeywordTok{left_join}\NormalTok{(data_used_sgm2,}\DataTypeTok{by=}\NormalTok{grp) }\OperatorTok{%>%}\StringTok{       }
+\StringTok{      }\KeywordTok{left_join}\NormalTok{(data_used_max,}\DataTypeTok{by=}\NormalTok{grp) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\KeywordTok{right_join}\NormalTok{(data_used_att,}\DataTypeTok{by=}\NormalTok{grp) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\KeywordTok{map_df}\NormalTok{(prod_chkin) }\CommentTok{#xベクトル内の全ての要素に対して関数prod_chkinを適用するイメージ}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{prod\_chkin}はdataframeの各変数をベクトルからベクトルに変換する関数
+
+\end{frame}
+
+\begin{frame}{\texttt{map}でやると何がいいのか}
+
+\begin{itemize}
+\tightlist
+\item
+  読みやすい、書きやすい
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ループは本来処理したいことに対して余計なモノが多すぎる
+  \end{itemize}
+\item
+  処理が早い
+
+  \begin{itemize}
+  \tightlist
+  \item
+    と昔は言われていたが今はそうでもないらしい
+  \item
+    内部的にはCで処理しているから少し早い
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{21.5.1 Shortcuts}
+
+\texttt{map}を使う上でのテクニック
+
+\end{frame}
+
+\begin{frame}[fragile]{余裕のあるやり方}
+
+関数を定義する
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mylm <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df)\{}
+  \KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{wt, }\DataTypeTok{data =}\NormalTok{ df)}
+\NormalTok{\}}
+\NormalTok{models <-}\StringTok{ }\NormalTok{mtcars }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{cyl) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map}\NormalTok{(mylm)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}[fragile]{せっかちなやり方}
+
+\begin{block}{無名関数}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{models <-}\StringTok{ }\NormalTok{mtcars }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{cyl) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(df)}\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{wt, }\DataTypeTok{data =}\NormalTok{ df))}
+\end{Highlighting}
+\end{Shaded}
+
+\end{block}
+
+\begin{block}{formula}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{models <-}\StringTok{ }\NormalTok{mtcars }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{cyl) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{wt, }\DataTypeTok{data =}\NormalTok{ .))}
+\end{Highlighting}
+\end{Shaded}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{リストの各要素から情報を取り出す}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{models }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{map}\NormalTok{(summary) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{map_dbl}\NormalTok{(}\OperatorTok{~}\NormalTok{.}\OperatorTok{$}\NormalTok{r.squared)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         4         6         8 
+## 0.5086326 0.4645102 0.4229655
+\end{verbatim}
+
+\begin{block}{shortcut}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{models }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map}\NormalTok{(summary) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map_dbl}\NormalTok{(}\StringTok{"r.squared"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{21.5.2 BaseR}
+
+\texttt{lapply}, \texttt{sapply},
+\texttt{vapply}という関数がbaseにある。
+
+\texttt{map}を学べば不要
+
+\end{frame}
+
+\begin{frame}{21.5.3 Exercises}
+
+全部自分でやる
 
 \end{frame}
 

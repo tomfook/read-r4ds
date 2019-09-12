@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2019/dev/Debian) (preloaded format=xelatex 2019.7.20)  3 SEP 2019 00:07
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2019/dev/Debian) (preloaded format=xelatex 2019.7.20)  13 SEP 2019 01:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1002,26 +1002,84 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \fb@frh=\dimen280
 \FrameRule=\dimen281
 \FrameSep=\dimen282
-) (/usr/share/texlive/texmf-dist/tex/latex/zxjatype/zxjatype.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)+ FMi change
+\LTleft=\skip64
+\LTright=\skip65
+\LTpre=\skip66
+\LTpost=\skip67
+\LTchunksize=\count333
+\LTcapwidth=\dimen283
+\LT@head=\box74
+\LT@firsthead=\box75
+\LT@foot=\box76
+\LT@lastfoot=\box77
+\LT@cols=\count334
+\LT@rows=\count335
+\c@LT@tables=\count336
+\c@LT@chunks=\count337
+\LT@p@ftn=\toks46
+) (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2016/04/27 v1.618033 publication quality tables
+\heavyrulewidth=\dimen284
+\lightrulewidth=\dimen285
+\cmidrulewidth=\dimen286
+\belowrulesep=\dimen287
+\belowbottomsep=\dimen288
+\aboverulesep=\dimen289
+\abovetopsep=\dimen290
+\cmidrulesep=\dimen291
+\cmidrulekern=\dimen292
+\defaultaddspace=\dimen293
+\@cmidla=\count338
+\@cmidlb=\count339
+\@aboverulesep=\dimen294
+\@belowrulesep=\dimen295
+\@thisruleclass=\count340
+\@lastruleclass=\count341
+\@thisrulewidth=\dimen296
+) (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2018/10/06 v3.3-154 Customizing captions (AR)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2018/09/12 v1.8c caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 64.
+\captionmargin=\dimen297
+\captionmargin@=\dimen298
+\captionwidth=\dimen299
+\caption@tempdima=\dimen300
+\caption@indent=\dimen301
+\caption@parindent=\dimen302
+\caption@hangindent=\dimen303
+)
+\c@caption@flags=\count342
+\c@ContinuedFloat=\count343
+Package caption Info: beamer document class.
+Package caption Info: hyperref package is loaded.
+Package caption Info: Hyperref support is turned off
+(caption)             because hyperref has stopped early.
+Package caption Info: longtable package is loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2018/08/26 v1.4-95 longtable captions (AR)
+)) (/usr/share/texlive/texmf-dist/tex/latex/zxjatype/zxjatype.sty
 Package: zxjatype 2018/05/03 v0.6c ZX Japanese typeset
 (/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJK.sty
 Package: xeCJK 2018/04/30 v3.7.1 Typesetting CJK scripts with XeLaTeX
 (/usr/share/texlive/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty
 Package: xtemplate 2018-10-17 L3 Experimental prototype document functions
-\l__xtemplate_tmp_dim=\dimen283
-\l__xtemplate_tmp_int=\count333
+\l__xtemplate_tmp_dim=\dimen304
+\l__xtemplate_tmp_int=\count344
 \l__xtemplate_tmp_muskip=\muskip18
-\l__xtemplate_tmp_skip=\skip64
+\l__xtemplate_tmp_skip=\skip68
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
 Package: l3keys2e 2018-10-17 LaTeX2e option processing using LaTeX3 keys
 )
-\l__xeCJK_tmp_int=\count334
-\l__xeCJK_tmp_box=\box74
-\l__xeCJK_tmp_dim=\dimen284
-\l__xeCJK_tmp_skip=\skip65
-\g__xeCJK_space_factor_int=\count335
-\l__xeCJK_begin_int=\count336
-\l__xeCJK_end_int=\count337
+\l__xeCJK_tmp_int=\count345
+\l__xeCJK_tmp_box=\box78
+\l__xeCJK_tmp_dim=\dimen305
+\l__xeCJK_tmp_skip=\skip69
+\g__xeCJK_space_factor_int=\count346
+\l__xeCJK_begin_int=\count347
+\l__xeCJK_end_int=\count348
 \c__xeCJK_CJK_class_int=\XeTeXcharclass1
 \c__xeCJK_FullLeft_class_int=\XeTeXcharclass2
 \c__xeCJK_FullRight_class_int=\XeTeXcharclass3
@@ -1030,55 +1088,55 @@ Package: l3keys2e 2018-10-17 LaTeX2e option processing using LaTeX3 keys
 \c__xeCJK_NormalSpace_class_int=\XeTeXcharclass6
 \c__xeCJK_CM_class_int=\XeTeXcharclass7
 \c__xeCJK_HangulJamo_class_int=\XeTeXcharclass8
-\l__xeCJK_last_skip=\skip66
-\g__xeCJK_node_int=\count338
-\c__xeCJK_CJK_node_dim=\dimen285
-\c__xeCJK_CJK-space_node_dim=\dimen286
-\c__xeCJK_default_node_dim=\dimen287
-\c__xeCJK_default-space_node_dim=\dimen288
-\c__xeCJK_CJK-widow_node_dim=\dimen289
-\c__xeCJK_normalspace_node_dim=\dimen290
-\l__xeCJK_ccglue_skip=\skip67
-\l__xeCJK_ecglue_skip=\skip68
-\l__xeCJK_punct_kern_skip=\skip69
-\l__xeCJK_last_penalty_int=\count339
-\l__xeCJK_last_bound_dim=\dimen291
-\l__xeCJK_last_kern_dim=\dimen292
-\l__xeCJK_widow_penalty_int=\count340
+\l__xeCJK_last_skip=\skip70
+\g__xeCJK_node_int=\count349
+\c__xeCJK_CJK_node_dim=\dimen306
+\c__xeCJK_CJK-space_node_dim=\dimen307
+\c__xeCJK_default_node_dim=\dimen308
+\c__xeCJK_default-space_node_dim=\dimen309
+\c__xeCJK_CJK-widow_node_dim=\dimen310
+\c__xeCJK_normalspace_node_dim=\dimen311
+\l__xeCJK_ccglue_skip=\skip71
+\l__xeCJK_ecglue_skip=\skip72
+\l__xeCJK_punct_kern_skip=\skip73
+\l__xeCJK_last_penalty_int=\count350
+\l__xeCJK_last_bound_dim=\dimen312
+\l__xeCJK_last_kern_dim=\dimen313
+\l__xeCJK_widow_penalty_int=\count351
 
 Package xtemplate Info: Declaring object type 'xeCJK/punctuation' taking 0
 (xtemplate)             argument(s) on line 2362.
 
-\l__xeCJK_fixed_punct_width_dim=\dimen293
-\l__xeCJK_mixed_punct_width_dim=\dimen294
-\l__xeCJK_middle_punct_width_dim=\dimen295
-\l__xeCJK_fixed_margin_width_dim=\dimen296
-\l__xeCJK_mixed_margin_width_dim=\dimen297
-\l__xeCJK_middle_margin_width_dim=\dimen298
-\l__xeCJK_bound_punct_width_dim=\dimen299
-\l__xeCJK_bound_margin_width_dim=\dimen300
-\l__xeCJK_margin_minimum_dim=\dimen301
-\l__xeCJK_kerning_total_width_dim=\dimen302
-\l__xeCJK_same_align_margin_dim=\dimen303
-\l__xeCJK_different_align_margin_dim=\dimen304
-\l__xeCJK_kerning_margin_width_dim=\dimen305
-\l__xeCJK_kerning_margin_minimum_dim=\dimen306
-\l__xeCJK_bound_dim=\dimen307
-\l__xeCJK_reverse_bound_dim=\dimen308
-\l__xeCJK_minimum_bound_dim=\dimen309
-\l__xeCJK_kerning_margin_dim=\dimen310
-\l__xeCJK_original_margin_dim=\dimen311
-\g__xeCJK_family_int=\count341
-\l__xeCJK_fam_int=\count342
-\g__xeCJK_fam_allocation_int=\count343
-\l__xeCJK_verb_case_int=\count344
-\l__xeCJK_verb_exspace_skip=\skip70
+\l__xeCJK_fixed_punct_width_dim=\dimen314
+\l__xeCJK_mixed_punct_width_dim=\dimen315
+\l__xeCJK_middle_punct_width_dim=\dimen316
+\l__xeCJK_fixed_margin_width_dim=\dimen317
+\l__xeCJK_mixed_margin_width_dim=\dimen318
+\l__xeCJK_middle_margin_width_dim=\dimen319
+\l__xeCJK_bound_punct_width_dim=\dimen320
+\l__xeCJK_bound_margin_width_dim=\dimen321
+\l__xeCJK_margin_minimum_dim=\dimen322
+\l__xeCJK_kerning_total_width_dim=\dimen323
+\l__xeCJK_same_align_margin_dim=\dimen324
+\l__xeCJK_different_align_margin_dim=\dimen325
+\l__xeCJK_kerning_margin_width_dim=\dimen326
+\l__xeCJK_kerning_margin_minimum_dim=\dimen327
+\l__xeCJK_bound_dim=\dimen328
+\l__xeCJK_reverse_bound_dim=\dimen329
+\l__xeCJK_minimum_bound_dim=\dimen330
+\l__xeCJK_kerning_margin_dim=\dimen331
+\l__xeCJK_original_margin_dim=\dimen332
+\g__xeCJK_family_int=\count352
+\l__xeCJK_fam_int=\count353
+\g__xeCJK_fam_allocation_int=\count354
+\l__xeCJK_verb_case_int=\count355
+\l__xeCJK_verb_exspace_skip=\skip74
 (/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg
 File: xeCJK.cfg 2018/04/30 v3.7.1 Configuration file for xeCJK package
 ))
-\l__zxjt_tmpa_dim=\dimen312
-\g__zxjt_tmpa_box=\box75
-\l__zxjt_leftglue_skip=\skip71
+\l__zxjt_tmpa_dim=\dimen333
+\g__zxjt_tmpa_box=\box79
+\l__zxjt_leftglue_skip=\skip75
 ) (/usr/share/texlive/texmf-dist/tex/latex/zxjafont/zxjafont.sty
 Package: zxjafont 2018/05/03 v0.4-pre
 LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
@@ -1125,31 +1183,31 @@ ext;"
 ) (./ch21_iteration.aux)
 \openout1 = `ch21_iteration.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 114.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 114.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 120.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 120.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    ... okay on input line 120.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1185,18 +1243,18 @@ LaTeX Font Info:    ... okay on input line 114.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 ABD: EveryShipout initializing macros
-\AtBeginShipoutBox=\box76
-Package hyperref Info: Link coloring OFF on input line 114.
+\AtBeginShipoutBox=\box80
+Package hyperref Info: Link coloring OFF on input line 120.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count345
+\c@section@level=\count356
 )
-LaTeX Info: Redefining \ref on input line 114.
-LaTeX Info: Redefining \pageref on input line 114.
-LaTeX Info: Redefining \nameref on input line 114.
+LaTeX Info: Redefining \ref on input line 120.
+LaTeX Info: Redefining \pageref on input line 120.
+LaTeX Info: Redefining \nameref on input line 120.
 (./ch21_iteration.out) (./ch21_iteration.out)
 \@outlinefile=\write6
 \openout6 = `ch21_iteration.out'.
@@ -1226,7 +1284,7 @@ Dictionary: translator-numbers-dictionary, Language: English
 ry-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Info: Redefining \microtypecontext on input line 114.
+LaTeX Info: Redefining \microtypecontext on input line 120.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
@@ -1257,6 +1315,8 @@ Package microtype Info: Character `\guilsinglleft ' is missing
 Package microtype Info: Character `\guilsinglright ' is missing
 (microtype)             in font `\TU/IPAPMincho(0)/m/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
 
 Package fontspec Info: IPAGothic scale = 0.8195828618822889.
 
@@ -1294,13 +1354,13 @@ Package fontspec Info: IPAGothic scale = 0.8195828618822889.
 
 (./ch21_iteration.nav)
 LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
-(Font)              scaled to size 5.25412pt on input line 114.
+(Font)              scaled to size 5.25412pt on input line 120.
 LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
-(Font)              scaled to size 12.60988pt on input line 115.
+(Font)              scaled to size 12.60988pt on input line 121.
 LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
-(Font)              scaled to size 7.0055pt on input line 115.
+(Font)              scaled to size 7.0055pt on input line 121.
 LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
-(Font)              scaled to size 3.50275pt on input line 115.
+(Font)              scaled to size 3.50275pt on input line 121.
 [1
 
 ] [2
@@ -1325,7 +1385,7 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
 
 (./ch21_iteration.vrb
 Overfull \hbox (3.14256pt too wide) in paragraph at lines 15--15
-[]\TU/lmtt/m/n/10.95 ## [1]  0.28066221 -0.56869343 -0.09636514 -0.56660792[] 
+[]\TU/lmtt/m/n/10.95 ## [1]  0.14917465 -0.38815854  0.06872737 -0.04199707[] 
  []
 
 ) [6
@@ -1483,7 +1543,102 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 ] [21
 
-] [22
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb
+Overfull \hbox (3.14256pt too wide) in paragraph at lines 20--20
+[]\TU/lmtt/m/n/10.95 ## [1] -0.04656869  0.08153351  0.25980515  0.55837785[] 
+ []
+
+) [22
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [23
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [24
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [25
+
+] [26
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [27
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb
+LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/bx/n' will be
+(Font)              scaled to size 9.58876pt on input line 17.
+
+Underfull \vbox (badness 10000) detected at line 22
+ []
+
+) [28
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb
+Missing character: There is no ★ in font [lmmono10-regular]:!
+) [29
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [30
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb
+
+LaTeX Font Warning: Font shape `TU/IPAGothic(0)/m/it' undefined
+(Font)              using `TU/IPAGothic(0)/m/n' instead on input line 9.
+
+) [31
+
+] [32
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [33
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [34
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [35
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [36
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [37
+
+] [38
+
+] [39
 
 ]
 \tf@nav=\write7
@@ -1495,11 +1650,11 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 \tf@snm=\write9
 \openout9 = `ch21_iteration.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 465.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 465.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 782.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 782.
 (./ch21_iteration.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 465.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 465.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 782.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 782.
 Package rerunfilecheck Info: File `ch21_iteration.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E.
 
@@ -1507,12 +1662,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 35963 strings out of 493694
- 725080 string characters out of 6155817
- 840099 words of memory out of 5000000
- 39329 multiletter control sequences out of 15000+600000
+ 37353 strings out of 493694
+ 752003 string characters out of 6155817
+ 863363 words of memory out of 5000000
+ 40675 multiletter control sequences out of 15000+600000
  561255 words of font info for 93 fonts, out of 8000000 for 9000
  932 hyphenation exceptions out of 8191
- 61i,11n,131p,818b,583s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 61i,11n,131p,818b,588s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on ch21_iteration.pdf (22 pages).
+Output written on ch21_iteration.pdf (39 pages).

@@ -187,6 +187,186 @@ while (condition){
 ## 21.3.5 Exercises
 
 ## 21.4 For loops vs. functionals
+関数型プログラミングとは
+
+## for loopを使った例
+```{r example.forloop}
+df <- tibble(a = rnorm(10),
+	     b = rnorm(10),
+	     c = rnorm(10),
+	     d = rnorm(10))
+
+output <- vector("double", length(df))
+for (i in seq_along(df)) {
+    output[[i]] <- mean(df[[i]])
+}
+output
+```
+
+## 何回も使いそうだから関数にする
+```{r example.functionalize}
+col_mean <- function(df) {
+    output <- vector("double", length(df))
+  for (i in seq_along(df)) {
+        output[i] <- mean(df[[i]])
+    }
+    output
+}
+```
+
+## 平均以外の集計でも使うだろう
+```{r example.func.var}
+col_median <- function(df) {
+    output <- vector("double", length(df))
+  for (i in seq_along(df)) {
+        output[i] <- median(df[[i]])
+    }
+    output
+}
+col_sd <- function(df) {
+    output <- vector("double", length(df))
+  for (i in seq_along(df)) {
+        output[i] <- sd(df[[i]])
+    }
+    output
+}
+```
+
+二回以上のコピペをしてしまった！
+
+## 関数型プログラミング
+```{r example.functionals, eval = FALSE}
+col_summary <- function(df, fun) {
+    out <- vector("double", length(df))
+  for (i in seq_along(df)) {
+        out[i] <- fun(df[[i]])
+    }
+    out
+}
+col_summary(df, median)
+col_summary(df, sd)
+```
+
+Rでは関数の引数として関数を渡すことができる
+
+$\Rightarrow$関数型プログラミング
+
+## 21.4.1 Exercises
+1,2
+
+## 21.5 The map functions
+for loopをfunctionalで置き換える関数`purrr::map`
+
+
+## `map`
+### Usage
+```{r usage.map, eval=FALSE} 
+map(.x, .f, ...)
+```
+
+### Arguments 
+||
+|---|---|
+| **.x** | listかatomic vector |
+| **.f** | 関数かformula |
+| **...**| 関数に渡すパラメータ。たとえば`na.rm = TRUE`|
+
+### return
+ベクトル`.x`の要素をそれぞれ関数`.f`に適用し、その結果をリストで返す
+
+## Example 1
+```{r map.example1, eval=FALSE}
+sheets <- c( "（NAP）全国",
+	    "（NAP）関西",
+	    "（NAP）関西以外")
+
+poo <- map(sheets,
+	   read_excel,
+	   path = "input/★【weekly】POO_Flex_Histrical_Data.xlsx",
+	   trim_ws = F)
+```
+
+## `map`一族
+戻り値をリストではない形式に変換して返すこともできる
+
+- `map` makes a list.
+- `map_lgl` makes a logical vector.
+- `map_int` makes an integer vector.
+- `map_dbl` makes a double vector.
+- `map_chr` makes a character vector.
+- `map_df` makes a dataframe **特に重要**
+
+これらが使えるかは`.f`の戻り値しだい
+
+## Example 2
+```{r map.example2, eval=FALSE}
+    data_all <- left_join(data_used_mean,data_used_sgm,by=grp) %>% 
+      left_join(data_used_sgm2,by=grp) %>%       
+      left_join(data_used_max,by=grp) %>% 
+      right_join(data_used_att,by=grp) %>% 
+      map_df(prod_chkin) #xベクトル内の全ての要素に対して関数prod_chkinを適用するイメージ
+```
+
+`prod_chkin`はdataframeの各変数をベクトルからベクトルに変換する関数
+
+## `map`でやると何がいいのか
+- 読みやすい、書きやすい
+    - ループは本来処理したいことに対して余計なモノが多すぎる
+- 処理が早い
+    - と昔は言われていたが今はそうでもないらしい
+    - 内部的にはCで処理しているから少し早い
+
+## 21.5.1 Shortcuts
+`map`を使う上でのテクニック
+
+## 余裕のあるやり方
+関数を定義する
+
+```{r map.define.fun, eval=FALSE}
+mylm <- function(df){
+  lm(mpg ~ wt, data = df)
+}
+models <- mtcars %>%
+  split(.$cyl) %>%
+  map(mylm)
+```
+
+## せっかちなやり方
+### 無名関数
+```{r map.annonymous, eval=FALSE}
+models <- mtcars %>%
+  split(.$cyl) %>%
+  map(function(df)lm(mpg ~ wt, data = df))
+```
+
+### formula
+```{r map.formula}
+models <- mtcars %>%
+  split(.$cyl) %>%
+  map(~lm(mpg ~ wt, data = .))
+```
+
+## リストの各要素から情報を取り出す
+```{r extract.r2}
+models %>% 
+  map(summary) %>% 
+  map_dbl(~.$r.squared)
+```
+
+### shortcut
+```{r extract.r2.sc, eval=FALSE}
+models %>%
+  map(summary) %>%
+  map_dbl("r.squared")
+```
+
+## 21.5.2 BaseR
+`lapply`, `sapply`, `vapply`という関数がbaseにある。
+
+`map`を学べば不要
+
+## 21.5.3 Exercises
+全部自分でやる
 
 
 
