@@ -66,7 +66,7 @@ output <- vector("double", ncol(df))
 - ループの出力の器
 - ループが始まる前に作る
    - `vector`関数で型と長さを指定する
-   - 長さを指定せずとも処理が遅くなる 
+   - 長さを指定しないと処理が遅くなる 
 
 ## ループの構成要素 sequence
 ```{r loop.sequence, eval=FALSE}
@@ -75,8 +75,10 @@ i in seq_along(df)
 
 - どうループを回すか
 - 一周するたびに`i`がベクトル`seq_along(df)`の中で値を変化させる
-- (`seq_along(df)`は`1:length(df)`と**ほぼ**同じ)
+- `seq_along(df)`は`1:length(df)`と**ほぼ**同じ
+    - 今回は`c(1,2,3,4)`
     - `length(df)`が`0`のときだけ違う
+
 
 ## ループの構成要素 body
 ```{r loop.body, eval=FALSE}
@@ -84,9 +86,10 @@ output[[i]] <- median(df[[i]])
 ```
 
 - ループで実際に処理する内容
-   - 1回目は`output[[1]] <- median(df[[1]])`
-   - 2回目は`output[[2]] <- median(df[[2]])`
-
+    - 1回目は`output[[1]] <- median(df[[1]])`
+    - 2回目は`output[[2]] <- median(df[[2]])`
+    - ...
+ 
 ## 21.2.1 Exercises
 1を見てみる
 
