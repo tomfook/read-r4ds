@@ -261,7 +261,7 @@ $\Rightarrow$関数型プログラミング
 for loopをfunctionalで置き換える関数`purrr::map`
 
 
-## `map`
+## `purrr::map`
 ### Usage
 ```{r usage.map, eval=FALSE} 
 map(.x, .f, ...)
@@ -369,8 +369,143 @@ models %>%
 `map`を学べば不要
 
 ## 21.5.3 Exercises
-全部自分でやる
+全部自分でやらなければ身につかない
 
+## 21.6 Dealing with failure
+`map`関数を使ったプログラムのデバッグ技術
+
+`map`中に一つエラーがあると全部出力しなくてむかつく
+
+### for programmer
+例外処理
+
+## `purrr::safely`
+関数`safely`は関数`.f`を引数として、`.f`を修正した関数を返す。
+
+修正された関数は必ず長さ2のリストを返す関数で、その戻り値は下記の通り
+
+1. 要素`result`は元々の関数`.f`の結果。ただしその結果がエラーだった場合は`NULL`
+2. 要素`error`はエラーオブジェクト。`.f`の結果がエラーでなければ`NULL`
+
+## Example 1
+```{r example.safely}
+safe_log <- safely(log)
+safe_log(10)
+safe_log("a")
+```
+
+## Example 2
+```{r example.safely.map}
+x <- list(1, 10, "a")
+y <- x %>% map(safely(log))
+str(y)
+```
+
+## `purrr::transpose`
+関数`transpose`でもっと見易く
+
+```{r example.transpose}
+y <- y %>% transpose
+str(y)
+```
+
+## 一族 `purrr::possibly`
+関数`.f`がエラーのときに返す値を第二引数に指定できる。
+```{r possibly}
+possibly_log <- possibly(log, NA)
+possibly_log(10)
+possibly_log("a")
+```
+
+全くエラーを返さなくなる
+
+## 21.7 Mapping over multiple arguments
+複数入力の`map`
+
+## `purrr::map2`
+### Usage
+```{r usage.map2, eval=FALSE} 
+map2(.x, .y, .f, ...)
+```
+
+### Arguments 
+||
+|---|---|
+| **.x** | listかatomic vector |
+| **.y** | listかatomic vector。.xと.yとのそれぞれのベクトルの長さが同じでなければならない |
+| **.f** | 関数かformula |
+| **...**| 関数に渡すパラメータ。たとえば`na.rm = TRUE`|
+
+### return
+ベクトル`.x`,`.y`の要素をそれぞれ関数`.f`に適用し、その結果をリストで返す
+
+## Example
+```{r example.map2}
+mu <- list(5, 10, -3)
+sigma <- list(1, 5, 10)
+map2(mu, sigma, rnorm, n = 5)
+```
+
+## Visualization of map2
+![structure of map2](../img/lists-map2.png)
+
+## `purrr::pmap`
+入力が３つ以上の場合
+
+```{r example.pmap}
+n <- list(1, 3, 5)
+args2 <- list(mean = mu, sd = sigma, n = n)
+args2 %>% pmap(rnorm) %>% str()
+```
+
+## Visualization of pmap
+![structure of pmap](../img/lists-pmap-named.png)
+
+## これでもいいよ 
+```{r example.pmap2}
+params <- tribble(
+		  ~mean, ~sd, ~n,
+		  5,     1,   1,
+		  10,    5,   3,
+		  -3,    10,  5)
+params %>% pmap(rnorm)
+```
+
+## 21.7.1 Involing different functions
+入力変数だけでなく処理する関数すら変えたい場合
+
+### Notes!!
+現在`invoke_map`は非推奨になっている。`exec`で代用するべしとある
+
+## `invoke_map`
+関数名を文字列でわたす
+
+```{r example.invokemap}
+f <- c("runif", "rnorm", "rpois")
+param <- list(
+	      list(min = -1, max = 1), 
+	      list(sd = 5), 
+	      list(lambda = 10))
+invoke_map(f, param, n = 5)
+```
+
+## Visualization of `invoke_map`
+![structure of invoke](../img/lists-invoke.png)
+
+## `exec`で置き換え
+```{r replace.exec, eval=FALSE}
+# Before:
+invoke_map(fns, list(args))
+invoke_map(fns, list(args1, args2))
+
+# After:
+map(fns, exec, !!!args)
+map2(fns, list(args1, args2), function(fn, args) exec(fn, !!!args))
+```
+
+[https://github.com/tidyverse/purrr/blob/master/NEWS.md#retirement-of-invoke](https://github.com/tidyverse/purrr/blob/master/NEWS.md#retirement-of-invoke)
+
+## 21.8 Walk
 
 
 

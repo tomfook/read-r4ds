@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2019/dev/Debian) (preloaded format=xelatex 2019.7.20)  13 SEP 2019 01:15
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2019/dev/Debian) (preloaded format=xelatex 2019.7.20)  15 SEP 2019 00:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1060,7 +1060,13 @@ Package caption Info: Hyperref support is turned off
 Package caption Info: longtable package is loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
 Package: ltcaption 2018/08/26 v1.4-95 longtable captions (AR)
-)) (/usr/share/texlive/texmf-dist/tex/latex/zxjatype/zxjatype.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grffile.sty
+Package: grffile 2017/06/30 v1.18 Extended file name support for graphics (HO)
+Package grffile Info: Option `multidot' is set to `true'.
+Package grffile Info: Option `extendedchars' is set to `false'.
+Package grffile Info: Option `space' is set to `true'.
+Package grffile Info: \Gin@ii of package `graphicx' fixed on input line 494.
+) (/usr/share/texlive/texmf-dist/tex/latex/zxjatype/zxjatype.sty
 Package: zxjatype 2018/05/03 v0.6c ZX Japanese typeset
 (/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJK.sty
 Package: xeCJK 2018/04/30 v3.7.1 Typesetting CJK scripts with XeLaTeX
@@ -1183,31 +1189,31 @@ ext;"
 ) (./ch21_iteration.aux)
 \openout1 = `ch21_iteration.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 120.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 120.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 129.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 129.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    ... okay on input line 129.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1244,7 +1250,7 @@ LaTeX Font Info:    ... okay on input line 120.
 
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box80
-Package hyperref Info: Link coloring OFF on input line 120.
+Package hyperref Info: Link coloring OFF on input line 129.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -1252,9 +1258,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count356
 )
-LaTeX Info: Redefining \ref on input line 120.
-LaTeX Info: Redefining \pageref on input line 120.
-LaTeX Info: Redefining \nameref on input line 120.
+LaTeX Info: Redefining \ref on input line 129.
+LaTeX Info: Redefining \pageref on input line 129.
+LaTeX Info: Redefining \nameref on input line 129.
 (./ch21_iteration.out) (./ch21_iteration.out)
 \@outlinefile=\write6
 \openout6 = `ch21_iteration.out'.
@@ -1284,7 +1290,7 @@ Dictionary: translator-numbers-dictionary, Language: English
 ry-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Info: Redefining \microtypecontext on input line 120.
+LaTeX Info: Redefining \microtypecontext on input line 129.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
@@ -1354,13 +1360,13 @@ Package fontspec Info: IPAGothic scale = 0.8195828618822889.
 
 (./ch21_iteration.nav)
 LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
-(Font)              scaled to size 5.25412pt on input line 120.
+(Font)              scaled to size 5.25412pt on input line 129.
 LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
-(Font)              scaled to size 12.60988pt on input line 121.
+(Font)              scaled to size 12.60988pt on input line 130.
 LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
-(Font)              scaled to size 7.0055pt on input line 121.
+(Font)              scaled to size 7.0055pt on input line 130.
 LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
-(Font)              scaled to size 3.50275pt on input line 121.
+(Font)              scaled to size 3.50275pt on input line 130.
 [1
 
 ] [2
@@ -1385,7 +1391,7 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
 
 (./ch21_iteration.vrb
 Overfull \hbox (3.14256pt too wide) in paragraph at lines 15--15
-[]\TU/lmtt/m/n/10.95 ## [1]  0.14917465 -0.38815854  0.06872737 -0.04199707[] 
+[]\TU/lmtt/m/n/10.95 ## [1]  0.19419725 -0.71210321  0.37148990  0.01124849[] 
  []
 
 ) [6
@@ -1548,7 +1554,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 (./ch21_iteration.vrb
 Overfull \hbox (3.14256pt too wide) in paragraph at lines 20--20
-[]\TU/lmtt/m/n/10.95 ## [1] -0.04656869  0.08153351  0.25980515  0.55837785[] 
+[]\TU/lmtt/m/n/10.95 ## [1] -0.21573786  0.30704410 -0.06972064 -0.48603218[] 
  []
 
 ) [22
@@ -1638,7 +1644,175 @@ LaTeX Font Warning: Font shape `TU/IPAGothic(0)/m/it' undefined
 
 ] [38
 
-] [39
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [39
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [40
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb
+Overfull \hbox (227.34377pt too wide) in paragraph at lines 30--30
+[]\TU/lmtt/m/n/10.95 ## <simpleError in .Primitive("log")(x, base): non-numeric
+ argument to mathematical function>[] 
+ []
+
+) [41
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb
+Overfull \hbox (106.62004pt too wide) in paragraph at lines 25--25
+[]\TU/lmtt/m/n/10.95 ##   .. ..$ message: chr "non-numeric argument to mathemat
+ical function"[] 
+ []
+
+
+Overfull \hbox (14.64006pt too wide) in paragraph at lines 25--25
+[]\TU/lmtt/m/n/10.95 ##   .. ..$ call   : language .Primitive("log")(x, base)[]
+ 
+ []
+
+
+Overfull \hbox (112.36879pt too wide) in paragraph at lines 25--25
+[]\TU/lmtt/m/n/10.95 ##   .. ..- attr(*, "class")= chr [1:3] "simpleError" "err
+or" "condition"[] 
+ []
+
+) [42
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb
+Overfull \hbox (106.62004pt too wide) in paragraph at lines 25--25
+[]\TU/lmtt/m/n/10.95 ##   .. ..$ message: chr "non-numeric argument to mathemat
+ical function"[] 
+ []
+
+
+Overfull \hbox (14.64006pt too wide) in paragraph at lines 25--25
+[]\TU/lmtt/m/n/10.95 ##   .. ..$ call   : language .Primitive("log")(x, base)[]
+ 
+ []
+
+
+Overfull \hbox (112.36879pt too wide) in paragraph at lines 25--25
+[]\TU/lmtt/m/n/10.95 ##   .. ..- attr(*, "class")= chr [1:3] "simpleError" "err
+or" "condition"[] 
+ []
+
+) [43
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [44
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [45
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb
+Overfull \hbox (131.29008pt too wide) in alignment at lines 15--24
+ [] [] 
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 24
+ []
+
+) [46
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb
+Overfull \hbox (43.3838pt too wide) in paragraph at lines 20--20
+[]\TU/lmtt/m/n/10.95 ## [1] 18.0442898  0.8356696  3.9007577  7.3633769 10.2434
+180[] 
+ []
+
+
+Overfull \hbox (14.64006pt too wide) in paragraph at lines 20--20
+[]\TU/lmtt/m/n/10.95 ## [1]  3.417120 -8.560238 -5.459072 -2.462735 -7.950205[]
+ 
+ []
+
+) [47
+
+]
+File: ../img/lists-map2.png Graphic file (type bmp)
+<../img/lists-map2.png>
+[48
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [49
+
+]
+File: ../img/lists-pmap-named.png Graphic file (type bmp)
+<../img/lists-pmap-named.png>
+[50
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb
+Overfull \hbox (43.3838pt too wide) in paragraph at lines 23--23
+[]\TU/lmtt/m/n/10.95 ## [1]  -1.881164 -10.762302  -4.332383  -8.690958  -5.288
+871[] 
+ []
+
+) [51
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [52
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb
+Overfull \hbox (72.12755pt too wide) in paragraph at lines 25--25
+[]\TU/lmtt/m/n/10.95 ## [1]  0.09586721 -0.63083696  0.87940154 -0.80797561  0.
+20749694[] 
+ []
+
+
+Overfull \hbox (43.3838pt too wide) in paragraph at lines 25--25
+[]\TU/lmtt/m/n/10.95 ## [1] -3.9260627 -4.3022795  0.8664735  1.1220275 -6.5819
+050[] 
+ []
+
+) [53
+
+]
+File: ../img/lists-invoke.png Graphic file (type bmp)
+<../img/lists-invoke.png>
+[54
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [55
+
+] [56
+
+] [57
 
 ]
 \tf@nav=\write7
@@ -1650,11 +1824,12 @@ LaTeX Font Warning: Font shape `TU/IPAGothic(0)/m/it' undefined
 \tf@snm=\write9
 \openout9 = `ch21_iteration.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 782.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 782.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1151.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1151.
 (./ch21_iteration.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 782.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 782.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1151.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1151.
+
 Package rerunfilecheck Info: File `ch21_iteration.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E.
 
@@ -1662,12 +1837,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 37353 strings out of 493694
- 752003 string characters out of 6155817
- 863363 words of memory out of 5000000
- 40675 multiletter control sequences out of 15000+600000
+ 37529 strings out of 493694
+ 755131 string characters out of 6155817
+ 865581 words of memory out of 5000000
+ 40814 multiletter control sequences out of 15000+600000
  561255 words of font info for 93 fonts, out of 8000000 for 9000
  932 hyphenation exceptions out of 8191
  61i,11n,131p,818b,588s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on ch21_iteration.pdf (39 pages).
+Output written on ch21_iteration.pdf (57 pages).

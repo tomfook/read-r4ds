@@ -80,6 +80,15 @@
 \makeatletter
 \def\fnum@table{\tablename~\thetable}
 \makeatother
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight0.8\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 
 % Prevent slide breaks in the middle of a paragraph:
 \widowpenalties 1 10000
@@ -187,7 +196,7 @@ FPに関わるのは\texttt{purrr}ライブラリ
 \end{Shaded}
 
 \begin{verbatim}
-## [1]  0.14917465 -0.38815854  0.06872737 -0.04199707
+## [1]  0.19419725 -0.71210321  0.37148990  0.01124849
 \end{verbatim}
 
 \end{frame}
@@ -209,7 +218,7 @@ FPに関わるのは\texttt{purrr}ライブラリ
 \item
   \texttt{vector}関数で型と長さを指定する
 \item
-  長さを指定せずとも処理が遅くなる
+  長さを指定しないと処理が遅くなる
 \end{itemize}
 
 \end{frame}
@@ -229,10 +238,12 @@ FPに関わるのは\texttt{purrr}ライブラリ
 \item
   一周するたびに\texttt{i}がベクトル\texttt{seq\_along(df)}の中で値を変化させる
 \item
-  (\texttt{seq\_along(df)}は\texttt{1:length(df)}と\textbf{ほぼ}同じ)
+  \texttt{seq\_along(df)}は\texttt{1:length(df)}と\textbf{ほぼ}同じ
 
   \begin{itemize}
   \tightlist
+  \item
+    今回は\texttt{c(1,2,3,4)}
   \item
     \texttt{length(df)}が\texttt{0}のときだけ違う
   \end{itemize}
@@ -252,10 +263,16 @@ FPに関わるのは\texttt{purrr}ライブラリ
 \tightlist
 \item
   ループで実際に処理する内容
-\item
-  1回目は\texttt{output{[}{[}1{]}{]}\ \textless{}-\ median(df{[}{[}1{]}{]})}
-\item
-  2回目は\texttt{output{[}{[}2{]}{]}\ \textless{}-\ median(df{[}{[}2{]}{]})}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    1回目は\texttt{output{[}{[}1{]}{]}\ \textless{}-\ median(df{[}{[}1{]}{]})}
+  \item
+    2回目は\texttt{output{[}{[}2{]}{]}\ \textless{}-\ median(df{[}{[}2{]}{]})}
+  \item
+    \ldots{}
+  \end{itemize}
 \end{itemize}
 
 \end{frame}
@@ -484,7 +501,7 @@ FPに関わるのは\texttt{purrr}ライブラリ
 \end{Shaded}
 
 \begin{verbatim}
-## [1] -0.04656869  0.08153351  0.25980515  0.55837785
+## [1] -0.21573786  0.30704410 -0.06972064 -0.48603218
 \end{verbatim}
 
 \end{frame}
@@ -564,7 +581,7 @@ for loopをfunctionalで置き換える関数\texttt{purrr::map}
 
 \end{frame}
 
-\begin{frame}[fragile]{\texttt{map}}
+\begin{frame}[fragile]{\texttt{purrr::map}}
 
 \begin{block}{Usage}
 
@@ -771,7 +788,359 @@ for loopをfunctionalで置き換える関数\texttt{purrr::map}
 
 \begin{frame}{21.5.3 Exercises}
 
-全部自分でやる
+全部自分でやらなければ身につかない
+
+\end{frame}
+
+\begin{frame}[fragile]{21.6 Dealing with failure}
+
+\texttt{map}関数を使ったプログラムのデバッグ技術
+
+\texttt{map}中に一つエラーがあると全部出力しなくてむかつく
+
+\begin{block}{for programmer}
+
+例外処理
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{purrr::safely}}
+
+関数\texttt{safely}は関数\texttt{.f}を引数として、\texttt{.f}を修正した関数を返す。
+
+修正された関数は必ず長さ2のリストを返す関数で、その戻り値は下記の通り
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  要素\texttt{result}は元々の関数\texttt{.f}の結果。ただしその結果がエラーだった場合は\texttt{NULL}
+\item
+  要素\texttt{error}はエラーオブジェクト。\texttt{.f}の結果がエラーでなければ\texttt{NULL}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]{Example 1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{safe_log <-}\StringTok{ }\KeywordTok{safely}\NormalTok{(log)}
+\KeywordTok{safe_log}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $result
+## [1] 2.302585
+## 
+## $error
+## NULL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{safe_log}\NormalTok{(}\StringTok{"a"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $result
+## NULL
+## 
+## $error
+## <simpleError in .Primitive("log")(x, base): non-numeric argument to mathematical function>
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{Example 2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{, }\StringTok{"a"}\NormalTok{)}
+\NormalTok{y <-}\StringTok{ }\NormalTok{x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{map}\NormalTok{(}\KeywordTok{safely}\NormalTok{(log))}
+\KeywordTok{str}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 3
+##  $ :List of 2
+##   ..$ result: num 0
+##   ..$ error : NULL
+##  $ :List of 2
+##   ..$ result: num 2.3
+##   ..$ error : NULL
+##  $ :List of 2
+##   ..$ result: NULL
+##   ..$ error :List of 2
+##   .. ..$ message: chr "non-numeric argument to mathematical function"
+##   .. ..$ call   : language .Primitive("log")(x, base)
+##   .. ..- attr(*, "class")= chr [1:3] "simpleError" "error" "condition"
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{purrr::transpose}}
+
+関数\texttt{transpose}でもっと見易く
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y <-}\StringTok{ }\NormalTok{y }\OperatorTok{%>%}\StringTok{ }\NormalTok{transpose}
+\KeywordTok{str}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 2
+##  $ result:List of 3
+##   ..$ : num 0
+##   ..$ : num 2.3
+##   ..$ : NULL
+##  $ error :List of 3
+##   ..$ : NULL
+##   ..$ : NULL
+##   ..$ :List of 2
+##   .. ..$ message: chr "non-numeric argument to mathematical function"
+##   .. ..$ call   : language .Primitive("log")(x, base)
+##   .. ..- attr(*, "class")= chr [1:3] "simpleError" "error" "condition"
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{一族 \texttt{purrr::possibly}}
+
+関数\texttt{.f}がエラーのときに返す値を第二引数に指定できる。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{possibly_log <-}\StringTok{ }\KeywordTok{possibly}\NormalTok{(log, }\OtherTok{NA}\NormalTok{)}
+\KeywordTok{possibly_log}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.302585
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{possibly_log}\NormalTok{(}\StringTok{"a"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+全くエラーを返さなくなる
+
+\end{frame}
+
+\begin{frame}[fragile]{21.7 Mapping over multiple arguments}
+
+複数入力の\texttt{map}
+
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{purrr::map2}}
+
+\begin{block}{Usage}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{map2}\NormalTok{(.x, .y, .f, ...)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{block}
+
+\begin{block}{Arguments}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\textbf{.x} & listかatomic vector\tabularnewline
+\textbf{.y} & listかatomic
+vector。.xと.yとのそれぞれのベクトルの長さが同じでなければならない\tabularnewline
+\textbf{.f} & 関数かformula\tabularnewline
+\textbf{\ldots{}} &
+関数に渡すパラメータ。たとえば\texttt{na.rm\ =\ TRUE}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\end{block}
+
+\begin{block}{return}
+
+ベクトル\texttt{.x},\texttt{.y}の要素をそれぞれ関数\texttt{.f}に適用し、その結果をリストで返す
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Example}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{, }\OperatorTok{-}\DecValTok{3}\NormalTok{)}
+\NormalTok{sigma <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\KeywordTok{map2}\NormalTok{(mu, sigma, rnorm, }\DataTypeTok{n =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## [1] 4.596182 5.346442 5.960886 7.264151 4.568440
+## 
+## [[2]]
+## [1] 18.0442898  0.8356696  3.9007577  7.3633769 10.2434180
+## 
+## [[3]]
+## [1]  3.417120 -8.560238 -5.459072 -2.462735 -7.950205
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}{Visualization of map2}
+
+\begin{figure}
+\centering
+\includegraphics{../img/lists-map2.png}
+\caption{structure of map2}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{purrr::pmap}}
+
+入力が３つ以上の場合
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{args2 <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{mean =}\NormalTok{ mu, }\DataTypeTok{sd =}\NormalTok{ sigma, }\DataTypeTok{n =}\NormalTok{ n)}
+\NormalTok{args2 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{pmap}\NormalTok{(rnorm) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{str}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 3
+##  $ : num 4.57
+##  $ : num [1:3] 6.15 5.97 1.85
+##  $ : num [1:5] 5.001 -3.373 18.338 -15.403 0.442
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}{Visualization of pmap}
+
+\begin{figure}
+\centering
+\includegraphics{../img/lists-pmap-named.png}
+\caption{structure of pmap}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]{これでもいいよ}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{params <-}\StringTok{ }\KeywordTok{tribble}\NormalTok{(}
+          \OperatorTok{~}\NormalTok{mean, }\OperatorTok{~}\NormalTok{sd, }\OperatorTok{~}\NormalTok{n,}
+          \DecValTok{5}\NormalTok{,     }\DecValTok{1}\NormalTok{,   }\DecValTok{1}\NormalTok{,}
+          \DecValTok{10}\NormalTok{,    }\DecValTok{5}\NormalTok{,   }\DecValTok{3}\NormalTok{,}
+          \OperatorTok{-}\DecValTok{3}\NormalTok{,    }\DecValTok{10}\NormalTok{,  }\DecValTok{5}\NormalTok{)}
+\NormalTok{params }\OperatorTok{%>%}\StringTok{ }\KeywordTok{pmap}\NormalTok{(rnorm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## [1] 4.026574
+## 
+## [[2]]
+## [1]  9.026045 17.926272 17.141819
+## 
+## [[3]]
+## [1]  -1.881164 -10.762302  -4.332383  -8.690958  -5.288871
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{21.7.1 Involing different functions}
+
+入力変数だけでなく処理する関数すら変えたい場合
+
+\begin{block}{Notes!!}
+
+現在\texttt{invoke\_map}は非推奨になっている。\texttt{exec}で代用するべしとある
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{invoke\_map}}
+
+関数名を文字列でわたす
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"runif"}\NormalTok{, }\StringTok{"rnorm"}\NormalTok{, }\StringTok{"rpois"}\NormalTok{)}
+\NormalTok{param <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
+          \KeywordTok{list}\NormalTok{(}\DataTypeTok{min =} \OperatorTok{-}\DecValTok{1}\NormalTok{, }\DataTypeTok{max =} \DecValTok{1}\NormalTok{), }
+          \KeywordTok{list}\NormalTok{(}\DataTypeTok{sd =} \DecValTok{5}\NormalTok{), }
+          \KeywordTok{list}\NormalTok{(}\DataTypeTok{lambda =} \DecValTok{10}\NormalTok{))}
+\KeywordTok{invoke_map}\NormalTok{(f, param, }\DataTypeTok{n =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## [1]  0.09586721 -0.63083696  0.87940154 -0.80797561  0.20749694
+## 
+## [[2]]
+## [1] -3.9260627 -4.3022795  0.8664735  1.1220275 -6.5819050
+## 
+## [[3]]
+## [1] 13  7  7  5 14
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}{Visualization of \texttt{invoke\_map}}
+
+\begin{figure}
+\centering
+\includegraphics{../img/lists-invoke.png}
+\caption{structure of invoke}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{exec}で置き換え}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Before:}
+\KeywordTok{invoke_map}\NormalTok{(fns, }\KeywordTok{list}\NormalTok{(args))}
+\KeywordTok{invoke_map}\NormalTok{(fns, }\KeywordTok{list}\NormalTok{(args1, args2))}
+
+\CommentTok{# After:}
+\KeywordTok{map}\NormalTok{(fns, exec, }\OperatorTok{!!!}\NormalTok{args)}
+\KeywordTok{map2}\NormalTok{(fns, }\KeywordTok{list}\NormalTok{(args1, args2), }\ControlFlowTok{function}\NormalTok{(fn, args) }\KeywordTok{exec}\NormalTok{(fn, }\OperatorTok{!!!}\NormalTok{args))}
+\end{Highlighting}
+\end{Shaded}
+
+\url{https://github.com/tidyverse/purrr/blob/master/NEWS.md\#retirement-of-invoke}
+
+\end{frame}
+
+\begin{frame}{21.8 Walk}
 
 \end{frame}
 
