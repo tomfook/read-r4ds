@@ -506,8 +506,94 @@ map2(fns, list(args1, args2), function(fn, args) exec(fn, !!!args))
 [https://github.com/tidyverse/purrr/blob/master/NEWS.md#retirement-of-invoke](https://github.com/tidyverse/purrr/blob/master/NEWS.md#retirement-of-invoke)
 
 ## 21.8 Walk
+副作用を目的にFPを
+
+## `purrr::walk`
+```{r example.walk}
+x <- list(1, "a", 3) 
+
+x %>% walk(print)
+```
+
+## `purrr::pwalk`
+```{r example.pwalk, eval=FALSE}
+plots <- mtcars %>% 
+  split(.$cyl) %>% 
+  map(~ggplot(., aes(mpg, wt)) + geom_point())
+paths <- stringr::str_c(names(plots), ".pdf") 
+pwalk(list(paths, plots), ggsave, path = tempdir())
+```
+
+## 21.9 Other patterns of for loops
+FPのバリエーション
+
+`map`ほどは使わないが頭のどこかに置いておくといいことがあるかもしれない
+
+## 21.9.1 Predicate functions
+入力関数として出力が論理値の関数を受け付けて特殊な動作をする
+
+## `purrr::keep`と`purrr::discard`
+入力ベクトルの要素のうち、関数の判定が`TRUE`の要素のみを残す（捨てる）
+
+入力がデータフレームなら`dplyr::select_if`と同じ
+
+```{r keep.discard}
+iris %>% keep(is.factor) %>% str
+iris %>% discard(is.factor) %>% str
+```
+
+## `purrr::some`と`purrr::every`
+入力ベクトルの要素のうち、関数の判定がどれか（すべて）が`TRUE`なら`TRUE`
+
+```{r some.every}
+x <- list(1:5, letters, list(10))
+
+x %>% some(is_character)
+x %>% every(is_vector)
+```
+
+## `purrr::detect`
+条件が成立する最初の要素の値を返す。
+
+```{r detect}
+x <- sample(10)
+x
+x %>% detect(~ . > 5)
+x %>% detect_index(~ . > 5)
+```
+
+## `purrr::head_while`と`purrr::tail_while`
+条件が成り立つまでの要素をすべて返す。
+
+前から調べるか、後ろから調べるか
+
+```{r head_while.tail_while}
+x %>% head_while(~ . > 5)
+x %>% tail_while(~ . > 5)
+```
+
+## 21.9.2 Reduce and accumulate
+２入力１出力関数のみを受け付ける特殊な関数
+
+２つの入力の順序を入れ替えても出力の値が変わらない場合が望ましい
 
 
+## `purrr::reduce`
+```{r reduce}
+dfs <- list( age = tibble(name = "John", age = 30),
+	    sex = tibble(name = c("John", "Mary"), sex = c("M", "F")),
+	    trt = tibble(name = "Mary", treatment = "A"))
+dfs %>% reduce(full_join)
+```
 
-## 参考文献 
+## `purrr::accumulate`
+```{r accumulate}
+x <- sample(10)
+x
+x %>% accumulate(`+`)
+```
+
+## 21.9.3 Exercises
+頭の訓練に
+
 
