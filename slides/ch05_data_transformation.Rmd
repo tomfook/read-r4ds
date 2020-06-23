@@ -66,23 +66,23 @@ Rstudioの右上ペインのenvironmentからデータフレームをクリッ�
 <img src="../img/rstudio-env-flights.png", width = 700>
 
 ## データ変換の基本操作と`dplyr`の関数
-- 行の絞り込み(`filter()`)
-- ソート(`arrange()`)
-- 列の選択(`select()`)
-- 既存の変数から新たな変数を作る(`mutate()`)
-- 集計する(`summarise()`)
+- 行の絞り込み `filter()`
+- ソート `arrange()`
+- 列の選択 `select()`
+- 既存の変数から新たな変数を作る `mutate()`
+- 集計する `summarise()`
 
 またこれらの関数の働き方をコントロールする`group_by()`
 
 ## `dplyr`関数の共通点(超重要)
 `dplyr`の関数はすべて以下の共通点を持ちます。
-この性質こそが`dplyr`が類を見ない強力な道具になる源泉です。
+この性質こそが`dplyr`が類を見ない強力な道具にする源泉です。
 
 1. 一つ目の引数はデータフレームである
-2. それ以降の引数はデータフレームに何をするかを表現する。データフレームが持つ既存の変数を使うときは引用符なしで指定できる
+2. それ以降の引数はデータフレームする操作を表現する。データフレームが持つ変数を変数名そのまま表現できる
 3. 関数の戻り値はデータフレームである
 
-## 行の絞り込み(`filter()`)
+## 行の絞り込み `filter()`
 ```{r filtermonthday}
 filter(flights, month == 1, day == 1)
 ```
@@ -92,7 +92,7 @@ filter(flights, month == 1, day == 1)
 ```
 >, >=, <, <=, !=, ==
 ``` 
-#### 注意
+#### (注意)
 浮動小数点の等号には関数`near`を使ってね
 
 ### 論理演算子
@@ -120,6 +120,19 @@ NA == NA
 is.na(NA)
 ```
 
+## `NA`のたとえ話
+```{r na2}
+# xを花子の年齢とする。彼女が何歳かは分からない。
+x <- NA
+
+# yを太郎の年齢とする。彼が何歳かは分からない。
+y <- NA
+
+# Q. 花子と太郎の年齢は同じだろうか？
+x == y
+```
+分からない
+
 ## `NA`と`filter`
 ### `filter()`の性質
 `filter()`は`TRUE`だけを残し、`FALSE`と`NA`は除く
@@ -132,7 +145,7 @@ filter(df, !is.na(val))
 ## 練習問題
 1~4
 
-## 行のソート`arrange()`
+## 行のソート `arrange()`
 関数`arrange()`は行を昇順にソートします。
 ```{r arrange}
 arrange(flights, year, month, day)
@@ -150,7 +163,7 @@ arrange(flights, desc(dep_delay))
 ## 練習問題
 1~4
 
-## 列の選択`select()`
+## 列の選択 `select()`
 関数`select()`は列(変数)を選択します。
 ```{r select}
 select(flights, year, month, day)
@@ -181,7 +194,7 @@ select(flights, time_hour, air_time, everything())
 ```
 
 
-## 名前の変更`rename()`
+## 名前の変更 `rename()`
 おおよそ一緒（並び順が違うけど）
 ```{r rename, eval=FALSE}
 rename(flights, tail_num = tailnum)
@@ -190,7 +203,7 @@ select(flights, tail_num = tailnum, everything())
 
 
 ## メモ
-`select()`以外でも変数を選択する必要があるときは使える
+`select()`以外でもヘルパー関数が使える場合あり
 
 - `group_by`
 - `tidyr::gather`
@@ -200,7 +213,7 @@ select(flights, tail_num = tailnum, everything())
 ## 練習問題
 1~4
 
-## 列の追加`mutate()`
+## 列の追加 `mutate()`
 既存の変数を使って新たな変数を作る
 ```{r mutate, eval = FALSE}
 mutate(flights,
@@ -214,7 +227,7 @@ mutate(flights,
 - 上書きもできる
 - 遅延評価
 
-## 変形`transmute()`
+## 変形 `transmute()`
 `mutate()`してその変数のみ`select`するの省略版
 ```{r transmute}
 transmute(flights, 
@@ -227,8 +240,8 @@ transmute(flights,
 ## ベクトル演算
 - Rの演算の多くがベクトル化されている
     - ベクトルin/ベクトルout 
-- `mutate`の中ではベクトル化された演算をしましょう
-- ループよりも分かりやすいでしょう？
+- `mutate`の中でベクトル化された演算をしましょう
+- ループよりも分かりやすい
 
 ## 基本のベクトル演算たち
 - 四則演算 `+`, `-`, `*`, `/`, `^`
@@ -271,7 +284,7 @@ mutate(flights, row_number()) %>%
 ## 練習問題
 1~6
 
-## 集計`summarise()`
+## 集計 `summarise()`
 縦方向に集計する
 ```{r summarise}
 summarise(flights, delay = mean(dep_delay, na.rm = TRUE))
@@ -297,7 +310,7 @@ delay <- summarise(by_dest,
 delay <- filter(delay, count > 20, dest != "HNL") #データ数が少ないのは除外
 ```
 
-### パイプを使った表現
+## パイプを使った表現
 ```{r calc.ave.pipe}
 delays <- flights %>% 
   group_by(dest) %>% 
@@ -313,10 +326,10 @@ delays <- flights %>%
 ### からくり
 - `x %>% f(y)`は`f(x, y)`に自動変換される 
 - `dplyr`関数の一つ目の引数と出力とが両方データフレームだから成立
-    - あとで学ぶ他の`tidyverse`の関数群も同様
+    - 他の`tidyverse`の関数群も同様
 
 ### **絶対の絶対に身につける**
-    - ソースコードの可読性が劇的に向上するから
+    - ソースコードの可読性が劇的に向上
 
 ### キーボードショートカット
 - Ctrl + Shift + m (Rstudio)
@@ -343,12 +356,6 @@ delays <- flights %>%
   filter(count > 20, dest != "HNL")
 ```
 
-## `NA`
-```{r na.rm}
-x = c(1, 2, 3, NA, 5)
-sum(x)
-sum(x, na.rm = TRUE)
-```
 
 ### とてもよくやる処理
 ```{r flights.narm, echo=FALSE}
@@ -368,7 +375,7 @@ not_cancelled %>%
     geom_freqpoly(binwidth = 10)
 ```
 
-平均300分遅れている機体がある？
+平均300分遅れている機体が存在？
 
 ## データ数を見てみる
 ```{r flights.n, fig.height=3}
@@ -470,10 +477,14 @@ not_cancelled %>%
 ## 論理変数の集計
 論理変数を数値として扱う時、`TRUE`は1, `FALSE`は0になる。
 
-- `sum(x > 10)`
-    - `x`の要素のうち10を上回った値の**数**
-- `mean(y == 0)`
-    - `y`の要素のうち0と等しい**割合**
+```{r count.logic}
+x <- 1:10
+# xの要素で5より大きいものは？
+x > 5
+sum(x > 5) #xの要素で5を上回った個数
+mean(x > 5) #xの要素で5を上回った割合
+```
+
 
 ## 複数変数のグルーピング
 複数変数でグルーピングし、集計するとグループ変数は一つずつ消えていく。
@@ -482,7 +493,7 @@ not_cancelled %>%
 
 合計やカウントはいいけど、平均は・・・
 
-### 個人的な意見
+### [個人的な意見]
 危険だし怖いからやらない
 
 ## `ungroup`
