@@ -220,7 +220,7 @@ mutate(flights,
        year = year - 2000,
        gain = dep_delay - arr_delay,
        speed = distance / air_time * 60,
-       gain_per_hour = gain / hour
+       gain_per_hour = gain / hours
 )
 ```
 
@@ -232,8 +232,8 @@ mutate(flights,
 ```{r transmute}
 transmute(flights, 
           gain = dep_delay - arr_delay,
-          hour = air_time / 60,
-          gain_per_hour = gain / hour
+          hours = air_time / 60,
+          gain_per_hour = gain / hours
 )
 ```
 
@@ -277,8 +277,8 @@ percent_rank(y)
 
 ## よくやるパターン
 ```{r rownum}
-mutate(flights, rn = row_number()) %>%
-  select(rn, everything())
+mutate(flights, row_number()) %>%
+  select(`row_number()`, everything())
 ```
 
 ## 練習問題
