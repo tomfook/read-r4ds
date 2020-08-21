@@ -9,7 +9,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 7)
 ```
 
 <style>
@@ -63,7 +63,7 @@ View(flights)
 
 Rstudioの右上ペインのenvironmentからデータフレームをクリックしても起動
 
-<img src="../img/rstudio-env-flights.png", width = 700>
+<img src="../img/rstudio-env-flights.png", width = 700 />
 
 ## データ変換の基本操作と`dplyr`の関数
 - 行の絞り込み `filter()`
@@ -310,7 +310,8 @@ delay <- summarise(by_dest,
 delay <- filter(delay, count > 20, dest != "HNL") #データ数が少ないのは除外
 ```
 
-## パイプを使った表現
+<!--
+## 同じことをパイプを使って表現
 ```{r calc.ave.pipe}
 delays <- flights %>% 
   group_by(dest) %>% 
@@ -321,6 +322,7 @@ delays <- flights %>%
   ) %>% 
   filter(count > 20, dest != "HNL")
 ```
+-->
 
 ## パイプ
 ### からくり
@@ -334,7 +336,7 @@ delays <- flights %>%
 ### キーボードショートカット
 - Ctrl + Shift + m (Rstudio)
 
-## もう一度
+## パイプを使って表現しなおす
 ```{r calc.ave2}
 by_dest <- group_by(flights, dest) 
 delay <- summarise(by_dest, 
@@ -357,14 +359,19 @@ delays <- flights %>%
 ```
 
 
+<!--
 ### とてもよくやる処理
 ```{r flights.narm, echo=FALSE}
 not_cancelled <- flights %>%
   filter(!is.na(dep_delay), !is.na(arr_delay))
 ```
+-->
 
-## Hadley神からのアドバイス
+<!--
+## 平均を使って分析するときの注意
 > 集計するときはカウントも残すことを習慣づけろ
+
+Hadley神
 
 ## 機体ごとの平均遅れ時間の分布
 ```{r flights.freqpoly, fig.height=3}
@@ -397,15 +404,16 @@ not_cancelled %>%
   ggplot(mapping = aes(x = n, y = delay)) +
     geom_point(alpha = 1/10)
 ```
+-->
 
-## 集計関数
+## 集計関数とは
 `summarise`の中ではベクトルin/スカラーoutの集計関数を使う
 
 ↕
 
 `mutate`ではベクトルin/ベクトルouのベクトル化関数を使う
 
-## 集計関数たち`mean`
+## 集計関数`mean`
 ```{r mean.agg}
 not_cancelled %>%
   group_by(year, month, day) %>%
@@ -415,7 +423,7 @@ not_cancelled %>%
   )
 ```
 
-## 集計関数たち(バラツキ)
+## 集計関数`sd`
 ```{r sd}
 not_cancelled %>%
   group_by(dest) %>%
@@ -423,17 +431,17 @@ not_cancelled %>%
   arrange(desc(distance_sd))
 ```
 
-## 集計関数たち(ランク)
+## 集計関数`min`,`max`
 ```{r minmax}
 not_cancelled %>%
   group_by(year, month, day) %>%
   summarise(
-    first = min(dep_time),
-    last = max(dep_time)
+    min_dep = min(dep_time),
+    max_dep = max(dep_time)
   )
 ```
 
-## 集計関数たち(位置)
+## 集計関数`first`,`last`
 ```{r firstlast}
 not_cancelled %>%
   group_by(year, month, day) %>%
@@ -443,7 +451,7 @@ not_cancelled %>%
   )
 ```
 
-## 重複除いたカウント
+## 集計関数`n_distinct`
 ```{r ndistinct}
 not_cancelled %>%
   group_by(dest) %>%
@@ -451,7 +459,7 @@ not_cancelled %>%
   arrange(desc(carriers))
 ```
 
-## 単純カウント`count()`
+## 行のカウント関数`count`
 ```{r count, eval=FALSE}
 not_cancelled %>%
   count(dest)
@@ -461,7 +469,7 @@ not_cancelled %>%
 not_cancelled %>%
   group_by(dest) %>%
   summarise(n = n())
-```
+``` 
 
 ## `count()`で集計
 ```{r countwt, eval=FALSE}
@@ -486,6 +494,7 @@ mean(x > 5) #xの要素で5を上回った割合
 ```
 
 
+<!--
 ## 複数変数のグルーピング
 複数変数でグルーピングし、集計するとグループ変数は一つずつ消えていく。
 
@@ -495,6 +504,7 @@ mean(x > 5) #xの要素で5を上回った割合
 
 ### [個人的な意見]
 危険だし怖いからやらない
+-->
 
 ## `ungroup`
 グループ変数を解除する関数`ungroup()`
