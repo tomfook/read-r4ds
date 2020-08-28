@@ -3996,7 +3996,9 @@ x &gt; 5</pre>
 
 <p>1~6</p>
 
-</article></slide><slide class=""><hgroup><h2>グルーピングしてfilter</h2></hgroup><article  id="グルーピングしてfilter">
+</article></slide><slide class=""><hgroup><h2>グルーピングしてfilter (1)</h2></hgroup><article  id="グルーピングしてfilter-1">
+
+<p>グループ内で上位ランクのみを抽出</p>
 
 <pre class = 'prettyprint lang-r'>flights_sml %&gt;%
   group_by(year, month, day) %&gt;%
@@ -4018,29 +4020,54 @@ x &gt; 5</pre>
 ## 10  2013     1     5       327       308     1010      158
 ## # ... with 712 more rows</pre>
 
+</article></slide><slide class=""><hgroup><h2>グルーピングしてfilter (2)</h2></hgroup><article  id="グルーピングしてfilter-2">
+
+<p>条件を満たすグループのみを抽出</p>
+
+<pre class = 'prettyprint lang-r'>popular_dests &lt;- flights %&gt;%
+  group_by(dest) %&gt;% filter(n() &gt; 365)
+popular_dests</pre>
+
+<pre >## # A tibble: 332,577 x 19
+## # Groups:   dest [77]
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # ... with 332,567 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</pre>
+
 </article></slide><slide class=""><hgroup><h2>グルーピングしてmutate</h2></hgroup><article  id="グルーピングしてmutate">
 
-<pre class = 'prettyprint lang-r'>flights %&gt;%
-  group_by(dest) %&gt;%
-  filter(n() &gt; 365) %&gt;%
+<pre class = 'prettyprint lang-r'>popular_dests %&gt;% 
+  filter(arr_delay &gt; 0) %&gt;% 
   mutate(prop_delay = arr_delay / sum(arr_delay, na.rm = TRUE)) %&gt;%
   select(year:day, dest, arr_delay, prop_delay)</pre>
 
-<pre >## # A tibble: 332,577 x 6
+<pre >## # A tibble: 131,106 x 6
 ## # Groups:   dest [77]
 ##     year month   day dest  arr_delay prop_delay
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;
-##  1  2013     1     1 IAH          11  0.000366 
-##  2  2013     1     1 IAH          20  0.000666 
-##  3  2013     1     1 MIA          33  0.00952  
-##  4  2013     1     1 BQN         -18 -0.00246  
-##  5  2013     1     1 ATL         -25 -0.000131 
-##  6  2013     1     1 ORD          12  0.000123 
-##  7  2013     1     1 FLL          19  0.000198 
-##  8  2013     1     1 IAD         -14 -0.000188 
-##  9  2013     1     1 MCO          -8 -0.000105 
-## 10  2013     1     1 ORD           8  0.0000822
-## # ... with 332,567 more rows</pre>
+##  1  2013     1     1 IAH          11  0.000111 
+##  2  2013     1     1 IAH          20  0.000201 
+##  3  2013     1     1 MIA          33  0.000235 
+##  4  2013     1     1 ORD          12  0.0000424
+##  5  2013     1     1 FLL          19  0.0000938
+##  6  2013     1     1 ORD           8  0.0000283
+##  7  2013     1     1 LAX           7  0.0000344
+##  8  2013     1     1 DFW          31  0.000282 
+##  9  2013     1     1 ATL          12  0.0000400
+## 10  2013     1     1 DTW          16  0.000116 
+## # ... with 131,096 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="練習問題-5">
 
