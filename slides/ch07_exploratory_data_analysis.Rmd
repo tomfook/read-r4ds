@@ -1,5 +1,5 @@
 ---
-title: "Explatory Data Analysis - r4ds"
+title: "Exploratory Data Analysis - r4ds"
 author: 
   name: "Tomoya Fukumoto"
   affiliation: "Operation Planning"
