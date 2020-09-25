@@ -3526,43 +3526,51 @@ ggplot(data = smaller, mapping = aes(x = carat)) +
 
 </article></slide><slide class=""><hgroup><h2>パターン</h2></hgroup><article  id="パターン">
 
-<p>データの中にパターンを見つけることができたとき次のことを考える。</p>
+<p>変数の間に関係があればパターンが存在するはず</p>
+
+<h3>パターンを見つけたら考えること</h3>
 
 <ul>
 <li>このパターンは偶然ではないか？</li>
 <li>パターンの意味を説明できるか？</li>
-<li>パターンの強さはどのくらいか？</li>
+<li>パターンが示唆する変数の関係の強さはどのくらいか？</li>
 <li>その関係には他の変数が影響していないか？</li>
-<li>データを部分集合にしたときにもそのパターンは残るか？</li>
+<li>データの部分を見るとその関係は変化するか？</li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>パターンとモデル</h2></hgroup><article  id="パターンとモデル">
 
 <h3>なぜパターンはありがたいのか</h3>
 
-<p>パターンは共変動をあらわにするから</p>
+<ol>
+<li>パターンは共変動を示す</li>
+<li>共変動する変数の一方を使ってもう一方を予測できる</li>
+</ol>
 
 <h3>ワークフロー</h3>
 
 <ol>
 <li>EDAでパターンを見つける</li>
-<li>パターンをモデル化する</li>
+<li>パターンから共変動を見出す</li>
+<li>共変動をモデル化する</li>
 <li>モデルを使って変動を減らす</li>
 </ol>
 
-</article></slide><slide class=""><hgroup><h2>例</h2></hgroup><article  id="例">
+</article></slide><slide class=""><hgroup><h2>例 <code>diamonds</code></h2></hgroup><article  id="例-diamonds">
 
-<h3>疑問</h3>
+<h3>見つかったパターン</h3>
 
-<p><code>diamonds</code>でcutが良いほうがpriceが高い傾向が観察された。なぜ？</p>
+<ul>
+<li><code>cut</code> が良いほうが <code>price</code> が低い傾向が観察された。なぜ？</li>
+<li><code>cut</code>と<code>carat</code>, <code>carat</code>と<code>price</code>の間にも強いパターンがある</li>
+</ul>
 
-<h3>パターン</h3>
+<h3>モデル化の方針</h3>
 
-<p><code>carat</code>という中間変数が作用している。 すなわち<code>carat</code>が大きい方が<code>price</code>が高くなる(パターン)、かつ<code>cut</code>が悪い方が<code>carat</code>が大きいためでは？</p>
-
-<h3>方針</h3>
-
-<p>このパターンを使って<code>cut</code>と<code>price</code>の間の共変動を減らす。 これにより<code>cut</code>と<code>price</code>との真の関係をあらわにする。</p>
+<ul>
+<li><code>carat</code>と<code>price</code>の関係をモデル化する</li>
+<li><code>carat</code>の影響を取り除いた後の <code>cut</code>と<code>price</code>の共変動を調べる</li>
+</ul>
 
 </article></slide><slide class=""><hgroup><h2>モデル化</h2></hgroup><article  id="モデル化">
 
