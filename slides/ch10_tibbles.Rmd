@@ -26,18 +26,16 @@ knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
 </style>
 
 
-## Tibbleとは
+## tibbleとは
 Rで長方形データを格納するためのフォーマット
-
-- Hadley神により創造された
-
-```{r prereq, eval = FALSE}
-library(tibble)
-```
-
+ 
 Rで伝統的なのは**データフレーム**
 
 だけどデータフレームよりもtibbleの方が優れているよ
+
+```{r prereq}
+library(tibble)
+```
 
 ## tibbleの作り方
 - `as_tibble`
@@ -77,10 +75,12 @@ tribble(
 - デフォルトは10行だけ
     - それ以上出力したければ`print(n = 20)`とか
 
+<!--
 ### 部分抽出
 - \$と\[\[
     - `df$x`, `df[["x"]]`
     - `df %>% .$x`とか`df %>% .[["x"]]`とかもできる
+-->
 
 ## データフレームに戻す
 一部のtidyverseでない関数ではtibbleがうまく走らないケースあり
