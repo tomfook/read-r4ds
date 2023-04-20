@@ -63,7 +63,7 @@ View(flights)
 
 Rstudioの右上ペインのenvironmentからデータフレームをクリックしても起動
 
-<img src="../img/rstudio-env-flights.png", width = 700 />
+<img src="../img/rstudio-env-flights.png", width = 700 >
 
 ## データ変換の基本操作と`dplyr`の関数
 - 行の絞り込み `filter()`
@@ -181,7 +181,7 @@ select(flights, -(year:day))
 ```
 
 ## 変数選択のヘルパー関数
-- `start_with("abc")`
+- `starts_with("abc")`
 - `ends_with("xyz")`
 - `contains("ijk")`
 - `matches("(.)\\1")`: 正規表現
@@ -411,7 +411,7 @@ not_cancelled %>%
 
 ↕
 
-`mutate`ではベクトルin/ベクトルouのベクトル化関数を使う
+`mutate`ではベクトルin/ベクトルoutのベクトル化関数を使う
 
 ## 集計関数`mean`
 ```{r mean.agg}
