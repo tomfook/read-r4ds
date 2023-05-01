@@ -302,7 +302,7 @@ summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))
 ## 目的地ごとの距離と平均遅延時間
 ```{r calc.ave}
 by_dest <- group_by(flights, dest) # 目的地でグルーピング
-delay <- summarise(by_dest, 
+delay <- summarise(by_dest,  #集計する
                  count = n(), #行数を数える
                  dist = mean(distance, na.rm = TRUE), #平均距離
                  delay = mean(arr_delay, na.rm = TRUE) #平均遅延時間
@@ -310,19 +310,21 @@ delay <- summarise(by_dest,
 delay <- filter(delay, count > 20, dest != "HNL") #データ数が少ないのは除外
 ```
 
-<!--
-## 同じことをパイプを使って表現
+変換されたオブジェクトを順番に作っていく
+
+## パイプを使って書き直す 
 ```{r calc.ave.pipe}
 delays <- flights %>% 
-  group_by(dest) %>% 
-  summarise(
-    count = n(),
-    dist = mean(distance, na.rm = TRUE),
-    delay = mean(arr_delay, na.rm = TRUE)
+  group_by(dest) %>% #目的地でグルーピング
+  summarise( #集計する
+    count = n(), #行数を数える
+    dist = mean(distance, na.rm = TRUE), #平均距離
+    delay = mean(arr_delay, na.rm = TRUE) #平均遅延時間
   ) %>% 
-  filter(count > 20, dest != "HNL")
+  filter(count > 20, dest != "HNL") #データ数が少ないのは除外
 ```
--->
+
+*変換*にフォーカス！
 
 ## パイプ
 ### からくり
@@ -336,7 +338,7 @@ delays <- flights %>%
 ### キーボードショートカット
 - Ctrl + Shift + m (Rstudio)
 
-## パイプを使って表現しなおす
+## パイプを使って表現しなおす(再掲)
 ```{r calc.ave2}
 by_dest <- group_by(flights, dest) 
 delay <- summarise(by_dest, 
@@ -359,13 +361,10 @@ delays <- flights %>%
 ```
 
 
-<!--
-### とてもよくやる処理
 ```{r flights.narm, echo=FALSE}
 not_cancelled <- flights %>%
   filter(!is.na(dep_delay), !is.na(arr_delay))
 ```
--->
 
 <!--
 ## 平均を使って分析するときの注意
@@ -493,19 +492,7 @@ sum(x > 5) #xの要素で5を上回った個数
 mean(x > 5) #xの要素で5を上回った割合
 ```
 
-
-<!--
-## 複数変数のグルーピング
-複数変数でグルーピングし、集計するとグループ変数は一つずつ消えていく。
-
-集計を一段階ずつ進めていける
-
-合計やカウントはいいけど、平均は・・・
-
-### [個人的な意見]
-危険だし怖いからやらない
--->
-
+ 
 ## `ungroup`
 グループ変数を解除する関数`ungroup()`
 

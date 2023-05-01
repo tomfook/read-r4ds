@@ -3737,27 +3737,27 @@ summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))</pre>
 </article></slide><slide class=""><hgroup><h2>目的地ごとの距離と平均遅延時間</h2></hgroup><article  id="目的地ごとの距離と平均遅延時間">
 
 <pre class = 'prettyprint lang-r'>by_dest &lt;- group_by(flights, dest) # 目的地でグルーピング
-delay &lt;- summarise(by_dest, 
+delay &lt;- summarise(by_dest,  #集計する
                  count = n(), #行数を数える
                  dist = mean(distance, na.rm = TRUE), #平均距離
                  delay = mean(arr_delay, na.rm = TRUE) #平均遅延時間
 )
 delay &lt;- filter(delay, count &gt; 20, dest != &quot;HNL&quot;) #データ数が少ないのは除外</pre>
 
-<!--
-## 同じことをパイプを使って表現
+<p>変換されたオブジェクトを順番に作っていく</p>
 
-```r
-delays <- flights %>% 
-  group_by(dest) %>% 
-  summarise(
-    count = n(),
-    dist = mean(distance, na.rm = TRUE),
-    delay = mean(arr_delay, na.rm = TRUE)
-  ) %>% 
-  filter(count > 20, dest != "HNL")
-```
--->
+</article></slide><slide class=""><hgroup><h2>パイプを使って書き直す</h2></hgroup><article  id="パイプを使って書き直す">
+
+<pre class = 'prettyprint lang-r'>delays &lt;- flights %&gt;% 
+  group_by(dest) %&gt;% #目的地でグルーピング
+  summarise( #集計する
+    count = n(), #行数を数える
+    dist = mean(distance, na.rm = TRUE), #平均距離
+    delay = mean(arr_delay, na.rm = TRUE) #平均遅延時間
+  ) %&gt;% 
+  filter(count &gt; 20, dest != &quot;HNL&quot;) #データ数が少ないのは除外</pre>
+
+<p><em>変換</em>にフォーカス！</p>
 
 </article></slide><slide class=""><hgroup><h2>パイプ</h2></hgroup><article  id="パイプ">
 
@@ -3782,7 +3782,7 @@ delays <- flights %>%
 <li>Ctrl + Shift + m (Rstudio)</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>パイプを使って表現しなおす</h2></hgroup><article  id="パイプを使って表現しなおす">
+</article></slide><slide class=""><hgroup><h2>パイプを使って表現しなおす(再掲)</h2></hgroup><article  id="パイプを使って表現しなおす再掲">
 
 <pre class = 'prettyprint lang-r'>by_dest &lt;- group_by(flights, dest) 
 delay &lt;- summarise(by_dest, 
@@ -3800,11 +3800,6 @@ delay &lt;- filter(delay, count &gt; 20, dest != &quot;HNL&quot;) </pre>
     delay = mean(arr_delay, na.rm = TRUE)
   ) %&gt;% 
   filter(count &gt; 20, dest != &quot;HNL&quot;)</pre>
-
-<!--
-### とてもよくやる処理
-
--->
 
 <!--
 ## 平均を使って分析するときの注意
@@ -4046,18 +4041,6 @@ x &gt; 5</pre>
 <pre class = 'prettyprint lang-r'>mean(x &gt; 5) #xの要素で5を上回った割合</pre>
 
 <pre >## [1] 0.5</pre>
-
-<!--
-## 複数変数のグルーピング
-複数変数でグルーピングし、集計するとグループ変数は一つずつ消えていく。
-
-集計を一段階ずつ進めていける
-
-合計やカウントはいいけど、平均は・・・
-
-### [個人的な意見]
-危険だし怖いからやらない
--->
 
 </article></slide><slide class=""><hgroup><h2><code>ungroup</code></h2></hgroup><article  id="ungroup">
 
