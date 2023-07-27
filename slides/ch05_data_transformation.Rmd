@@ -280,7 +280,7 @@ percent_rank(y)
 mutate(flights, rn = row_number()) %>%
   select(rn, everything())
 ```
-
+ 
 ## 練習問題
 1~6
 
