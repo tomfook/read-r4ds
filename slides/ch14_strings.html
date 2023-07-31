@@ -4159,7 +4159,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }
 <pre class = 'prettyprint lang-r'>library(tidyverse)
 library(stringr)</pre>
 
-<p>神世界の一部だが、<s> 一括でロードはされない </s></p>
+<p>神世界の一部だが、<s> 一括でロードはされない </s>　いまはロードされる</p>
 
 <p>関数はすべて<code>str_</code>で始まる</p>
 
@@ -4269,8 +4269,8 @@ str_sub(x, 1, 3)</pre>
 <pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
 str_view(x, &quot;an&quot;)</pre>
 
-<div class="str_view html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d876bfb914c4b14d6e87" style="width:960px;height:100%;"></div>
-<script type="application/json" data-for="htmlwidget-d876bfb914c4b14d6e87">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>b<span class='match'>an<\/span>ana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="str_view html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-fbad53dfee2ebbf71bf3" style="width:960px;height:100%;"></div>
+<script type="application/json" data-for="htmlwidget-fbad53dfee2ebbf71bf3">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>b<span class='match'>an<\/span>ana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=""><hgroup><h2>ピリオド</h2></hgroup><article  id="ピリオド">
 
@@ -4278,8 +4278,8 @@ str_view(x, &quot;an&quot;)</pre>
 
 <pre class = 'prettyprint lang-r'>str_view(x, &quot;.a.&quot;)</pre>
 
-<div class="str_view html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d543095ab8bf825646be" style="width:960px;height:100%;"></div>
-<script type="application/json" data-for="htmlwidget-d543095ab8bf825646be">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li><span class='match'>ban<\/span>ana<\/li>\n  <li>p<span class='match'>ear<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="str_view html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5ff9f82c20180222b135" style="width:960px;height:100%;"></div>
+<script type="application/json" data-for="htmlwidget-5ff9f82c20180222b135">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li><span class='match'>ban<\/span>ana<\/li>\n  <li>p<span class='match'>ear<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <p>先頭や改行にはマッチしない</p>
 
@@ -4306,13 +4306,13 @@ str_view(x, &quot;an&quot;)</pre>
 <pre class = 'prettyprint lang-r'>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
 str_view(x, &quot;^a&quot;)</pre>
 
-<div class="str_view html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-34e20db9a3cbf2e30c60" style="width:960px;height:100%;"></div>
-<script type="application/json" data-for="htmlwidget-34e20db9a3cbf2e30c60">{"x":{"html":"<ul>\n  <li><span class='match'>a<\/span>pple<\/li>\n  <li>banana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="str_view html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-2f99a0c9b666166b2534" style="width:960px;height:100%;"></div>
+<script type="application/json" data-for="htmlwidget-2f99a0c9b666166b2534">{"x":{"html":"<ul>\n  <li><span class='match'>a<\/span>pple<\/li>\n  <li>banana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <pre class = 'prettyprint lang-r'>str_view(x, &quot;a$&quot;)</pre>
 
-<div class="str_view html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-84c58f9a3babee1e276b" style="width:960px;height:100%;"></div>
-<script type="application/json" data-for="htmlwidget-84c58f9a3babee1e276b">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>banan<span class='match'>a<\/span><\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="str_view html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-73a369c53e67be1570e6" style="width:960px;height:100%;"></div>
+<script type="application/json" data-for="htmlwidget-73a369c53e67be1570e6">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>banan<span class='match'>a<\/span><\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="練習問題-1">
 
@@ -4358,13 +4358,13 @@ bana(na)+</pre>
 
 <pre class = 'prettyprint lang-r'>str_view(&quot;MDCCCLXXXVIII&quot;, &quot;C{2,3}&quot;)</pre>
 
-<div class="str_view html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-6711791847678eb6bc90" style="width:960px;height:100%;"></div>
-<script type="application/json" data-for="htmlwidget-6711791847678eb6bc90">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CCC<\/span>LXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="str_view html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a0eca2d255f44408e4ed" style="width:960px;height:100%;"></div>
+<script type="application/json" data-for="htmlwidget-a0eca2d255f44408e4ed">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CCC<\/span>LXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <pre class = 'prettyprint lang-r'>str_view(&quot;MDCCCLXXXVIII&quot;, &quot;C{2,3}?&quot;)</pre>
 
-<div class="str_view html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d9ec041d6192b2ea5595" style="width:960px;height:100%;"></div>
-<script type="application/json" data-for="htmlwidget-d9ec041d6192b2ea5595">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CC<\/span>CLXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="str_view html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-69b1bd720e1159df764c" style="width:960px;height:100%;"></div>
+<script type="application/json" data-for="htmlwidget-69b1bd720e1159df764c">{"x":{"html":"<ul>\n  <li>MD<span class='match'>CC<\/span>CLXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=""><hgroup><h2>練習問題</h2></hgroup><article  id="練習問題-3">
 
@@ -4378,8 +4378,8 @@ bana(na)+</pre>
 
 <pre class = 'prettyprint lang-r'>str_view(fruit, &quot;(..)\\1&quot;, match = TRUE)</pre>
 
-<div class="str_view html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-bb3ac4642406a6b76580" style="width:960px;height:100%;"></div>
-<script type="application/json" data-for="htmlwidget-bb3ac4642406a6b76580">{"x":{"html":"<ul>\n  <li>b<span class='match'>anan<\/span>a<\/li>\n  <li><span class='match'>coco<\/span>nut<\/li>\n  <li><span class='match'>cucu<\/span>mber<\/li>\n  <li><span class='match'>juju<\/span>be<\/li>\n  <li><span class='match'>papa<\/span>ya<\/li>\n  <li>s<span class='match'>alal<\/span> berry<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="str_view html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-467e21c1aa4467966361" style="width:960px;height:100%;"></div>
+<script type="application/json" data-for="htmlwidget-467e21c1aa4467966361">{"x":{"html":"<ul>\n  <li>b<span class='match'>anan<\/span>a<\/li>\n  <li><span class='match'>coco<\/span>nut<\/li>\n  <li><span class='match'>cucu<\/span>mber<\/li>\n  <li><span class='match'>juju<\/span>be<\/li>\n  <li><span class='match'>papa<\/span>ya<\/li>\n  <li>s<span class='match'>alal<\/span> berry<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 <h3>マニアックな独り言</h3>
 
