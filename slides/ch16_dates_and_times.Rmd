@@ -262,7 +262,7 @@ years(1)
 ```
 
 - 単位ごとに数字を持っていることに注目
-- 自然数しか持てない
+- 整数しか持てない
 
 ## periodsの計算
 ```{r calc_periods, warnings = FALSE}
