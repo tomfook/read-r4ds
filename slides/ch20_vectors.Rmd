@@ -82,6 +82,7 @@ c(TRUE, TRUE, FALSE, NA)
 Logicalの次に原子的
 
 二種類に分類できる
+
 - integer
 - double(デフォルト)
 
@@ -109,9 +110,6 @@ x - 2
 `is.na`, `is.finite`, `is.nan`
 
 ## 20.3.3 Character
-要素は任意の文字列
-
-データの大きさが一定でない
 
 ## Global string pool
 文字列の実体は一箇所に保管されている
@@ -181,7 +179,7 @@ typeof(c(TRUE, 1L))
 typeof(c(1.5, "a"))
 ```
 
-logical > integer > double > complex > character  
+logical < integer < double < complex < character  
 の強さの順で統一される
 
 ### はっきりと認識しておくこと
@@ -205,7 +203,7 @@ logical > integer > double > complex > character
 `is_scalar_logical`で長さ１のlglかどうかテスト
 
 ## 20.4.3 Scalars and recycling rules
-アトミックベクトルどおしの演算
+アトミックベクトルどうしの演算
 
 ## 基本ルール
 要素ごとに演算される
