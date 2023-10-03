@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/Debian) (preloaded format=xelatex 2023.5.24)  3 OCT 2023 11:57
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/Debian) (preloaded format=xelatex 2023.5.24)  3 OCT 2023 11:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**ch19_functions.tex
-(./ch19_functions.tex
+**ch20_vectors.tex
+(./ch20_vectors.tex
 LaTeX2e <2020-10-01> patch level 4
 L3 programming layer <2021-01-09> xparse <2020-03-03> (/usr/share/texlive/texmf
 -dist/tex/latex/beamer/beamer.cls
@@ -798,73 +798,74 @@ LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
 \g__um_primekern_muskip=\muskip18
 (/usr/share/texlive/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex)))
 
-Package fontspec Info: IPAMincho scale = 0.8474466726953562.
+Package fontspec Info: IPAPMincho scale = 0.9020934077756765.
 
 
-Package fontspec Info: Could not resolve font "IPAMincho/BI" (it probably
+Package fontspec Info: Could not resolve font "IPAPMincho/BI" (it probably
 (fontspec)             doesn't exist).
 
 
-Package fontspec Info: Could not resolve font "IPAMincho/B" (it probably
+Package fontspec Info: Could not resolve font "IPAPMincho/B" (it probably
 (fontspec)             doesn't exist).
 
 
-Package fontspec Info: Could not resolve font "IPAMincho/I" (it probably
+Package fontspec Info: Could not resolve font "IPAPMincho/I" (it probably
 (fontspec)             doesn't exist).
 
 
-Package fontspec Info: IPAMincho scale = 0.8474466726953562.
+Package fontspec Info: IPAPMincho scale = 0.9020934077756765.
 
 
-Package fontspec Info: Font family 'IPAMincho(0)' created for font 'IPAMincho'
-(fontspec)             with options
+Package fontspec Info: Font family 'IPAPMincho(0)' created for font
+(fontspec)             'IPAPMincho' with options
 (fontspec)             [Scale=MatchLowercase,Ligatures=TeX,Scale=1].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"IPAMincho/OT:script=latn;language=dflt;mapping=
-tex-text;"
+(fontspec)             <->s*[1]"IPAPMincho/OT:script=latn;language=dflt;mapping
+=tex-text;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
 
-Package fontspec Info: IPAMincho scale = 0.8474466726953562.
+Package fontspec Info: IPAPMincho scale = 0.9020934077756765.
 
 
-Package fontspec Info: Could not resolve font "IPAMincho/BI" (it probably
+Package fontspec Info: Could not resolve font "IPAPMincho/BI" (it probably
 (fontspec)             doesn't exist).
 
 
-Package fontspec Info: Could not resolve font "IPAMincho/B" (it probably
+Package fontspec Info: Could not resolve font "IPAPMincho/B" (it probably
 (fontspec)             doesn't exist).
 
 
-Package fontspec Info: Could not resolve font "IPAMincho/I" (it probably
+Package fontspec Info: Could not resolve font "IPAPMincho/I" (it probably
 (fontspec)             doesn't exist).
 
 
-Package fontspec Info: IPAMincho scale = 0.8474466726953562.
+Package fontspec Info: IPAPMincho scale = 0.9020934077756765.
 
 
-Package fontspec Info: Font family 'IPAMincho(1)' created for font 'IPAMincho'
-(fontspec)             with options [Scale=MatchLowercase].
+Package fontspec Info: Font family 'IPAPMincho(1)' created for font
+(fontspec)             'IPAPMincho' with options [Scale=MatchLowercase].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[0.8474466726953562]"IPAMincho/OT:script=latn;langu
-age=dflt;"
+(fontspec)             <->s*[0.9020934077756765]"IPAPMincho/OT:script=latn;lang
+uage=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/IPAMincho(1)/m/n on input line 58.
+(Font)                  OT1/lmr/m/n --> TU/IPAPMincho(1)/m/n on input line 58.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> TU/IPAMincho(1)/m/it on input line 58.
-
+(Font)                  OT1/lmr/m/it --> TU/IPAPMincho(1)/m/it on input line 58
+.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> TU/IPAMincho(1)/b/n on input line 58.
+(Font)                  OT1/lmr/bx/n --> TU/IPAPMincho(1)/b/n on input line 58.
+
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerfontthemeserif.sty) (/usr
 /share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
@@ -910,27 +911,87 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \fb@frh=\dimen293
 \FrameRule=\dimen294
 \FrameSep=\dimen295
-) (/usr/share/texlive/texmf-dist/tex/latex/zxjatype/zxjatype.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
+\LTleft=\skip67
+\LTright=\skip68
+\LTpre=\skip69
+\LTpost=\skip70
+\LTchunksize=\count354
+\LTcapwidth=\dimen296
+\LT@head=\box76
+\LT@firsthead=\box77
+\LT@foot=\box78
+\LT@lastfoot=\box79
+\LT@cols=\count355
+\LT@rows=\count356
+\c@LT@tables=\count357
+\c@LT@chunks=\count358
+\LT@p@ftn=\toks45
+) (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen297
+\lightrulewidth=\dimen298
+\cmidrulewidth=\dimen299
+\belowrulesep=\dimen300
+\belowbottomsep=\dimen301
+\aboverulesep=\dimen302
+\abovetopsep=\dimen303
+\cmidrulesep=\dimen304
+\cmidrulekern=\dimen305
+\defaultaddspace=\dimen306
+\@cmidla=\count359
+\@cmidlb=\count360
+\@aboverulesep=\dimen307
+\@belowrulesep=\dimen308
+\@thisruleclass=\count361
+\@lastruleclass=\count362
+\@thisrulewidth=\dimen309
+) (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/10/26 v3.5g Customizing captions (AR)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
+\captionmargin=\dimen310
+\captionmargin@=\dimen311
+\captionwidth=\dimen312
+\caption@tempdima=\dimen313
+\caption@indent=\dimen314
+\caption@parindent=\dimen315
+\caption@hangindent=\dimen316
+Package caption Info: beamer document class detected.
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption-beamer.sto
+File: caption-beamer.sto 2020/08/22 v2.0 Adaption of the caption package to the
+ beamer document classes (AR)
+))
+\c@caption@flags=\count363
+\c@continuedfloat=\count364
+Package caption Info: hyperref package is loaded.
+Package caption Info: Hyperref support is turned off
+(caption)             because hyperref has stopped early.
+Package caption Info: longtable package is loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
+)) (/usr/share/texlive/texmf-dist/tex/latex/zxjatype/zxjatype.sty
 Package: zxjatype 2020/01/22 v0.7 ZX Japanese typeset
 (/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJK.sty
 Package: xeCJK 2020/10/19 v3.8.6 Typesetting CJK scripts with XeLaTeX
 (/usr/share/texlive/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty
 Package: xtemplate 2020-10-27 L3 Experimental prototype document functions
-\l__xtemplate_tmp_dim=\dimen296
-\l__xtemplate_tmp_int=\count354
+\l__xtemplate_tmp_dim=\dimen317
+\l__xtemplate_tmp_int=\count365
 \l__xtemplate_tmp_muskip=\muskip19
-\l__xtemplate_tmp_skip=\skip67
+\l__xtemplate_tmp_skip=\skip71
 )
-\l__xeCJK_tmp_int=\count355
-\l__xeCJK_tmp_box=\box76
-\l__xeCJK_tmp_dim=\dimen297
-\l__xeCJK_tmp_skip=\skip68
+\l__xeCJK_tmp_int=\count366
+\l__xeCJK_tmp_box=\box80
+\l__xeCJK_tmp_dim=\dimen318
+\l__xeCJK_tmp_skip=\skip72
 (/usr/share/texlive/texmf-dist/tex/latex/ctex/ctexhook.sty
 Package: ctexhook 2020/10/19 v2.5.5 Document and package hooks (CTEX)
 )
-\g__xeCJK_space_factor_int=\count356
-\l__xeCJK_begin_int=\count357
-\l__xeCJK_end_int=\count358
+\g__xeCJK_space_factor_int=\count367
+\l__xeCJK_begin_int=\count368
+\l__xeCJK_end_int=\count369
 \c__xeCJK_CJK_class_int=\XeTeXcharclass1
 \c__xeCJK_FullLeft_class_int=\XeTeXcharclass2
 \c__xeCJK_FullRight_class_int=\XeTeXcharclass3
@@ -939,61 +1000,61 @@ Package: ctexhook 2020/10/19 v2.5.5 Document and package hooks (CTEX)
 \c__xeCJK_NormalSpace_class_int=\XeTeXcharclass6
 \c__xeCJK_CM_class_int=\XeTeXcharclass7
 \c__xeCJK_HangulJamo_class_int=\XeTeXcharclass8
-\l__xeCJK_last_skip=\skip69
-\g__xeCJK_node_int=\count359
-\c__xeCJK_CJK_node_dim=\dimen298
-\c__xeCJK_CJK-space_node_dim=\dimen299
-\c__xeCJK_default_node_dim=\dimen300
-\c__xeCJK_default-space_node_dim=\dimen301
-\c__xeCJK_CJK-widow_node_dim=\dimen302
-\c__xeCJK_normalspace_node_dim=\dimen303
-\l__xeCJK_ccglue_skip=\skip70
-\l__xeCJK_ecglue_skip=\skip71
-\l__xeCJK_punct_kern_skip=\skip72
-\l__xeCJK_last_penalty_int=\count360
-\l__xeCJK_last_bound_dim=\dimen304
-\l__xeCJK_last_kern_dim=\dimen305
-\l__xeCJK_widow_penalty_int=\count361
+\l__xeCJK_last_skip=\skip73
+\g__xeCJK_node_int=\count370
+\c__xeCJK_CJK_node_dim=\dimen319
+\c__xeCJK_CJK-space_node_dim=\dimen320
+\c__xeCJK_default_node_dim=\dimen321
+\c__xeCJK_default-space_node_dim=\dimen322
+\c__xeCJK_CJK-widow_node_dim=\dimen323
+\c__xeCJK_normalspace_node_dim=\dimen324
+\l__xeCJK_ccglue_skip=\skip74
+\l__xeCJK_ecglue_skip=\skip75
+\l__xeCJK_punct_kern_skip=\skip76
+\l__xeCJK_last_penalty_int=\count371
+\l__xeCJK_last_bound_dim=\dimen325
+\l__xeCJK_last_kern_dim=\dimen326
+\l__xeCJK_widow_penalty_int=\count372
 
 Package xtemplate Info: Declaring object type 'xeCJK/punctuation' taking 0
 (xtemplate)             argument(s) on line 2341.
 
-\l__xeCJK_fixed_punct_width_dim=\dimen306
-\l__xeCJK_mixed_punct_width_dim=\dimen307
-\l__xeCJK_middle_punct_width_dim=\dimen308
-\l__xeCJK_fixed_margin_width_dim=\dimen309
-\l__xeCJK_mixed_margin_width_dim=\dimen310
-\l__xeCJK_middle_margin_width_dim=\dimen311
-\l__xeCJK_bound_punct_width_dim=\dimen312
-\l__xeCJK_bound_margin_width_dim=\dimen313
-\l__xeCJK_margin_minimum_dim=\dimen314
-\l__xeCJK_kerning_total_width_dim=\dimen315
-\l__xeCJK_same_align_margin_dim=\dimen316
-\l__xeCJK_different_align_margin_dim=\dimen317
-\l__xeCJK_kerning_margin_width_dim=\dimen318
-\l__xeCJK_kerning_margin_minimum_dim=\dimen319
-\l__xeCJK_bound_dim=\dimen320
-\l__xeCJK_reverse_bound_dim=\dimen321
-\l__xeCJK_margin_dim=\dimen322
-\l__xeCJK_minimum_bound_dim=\dimen323
-\l__xeCJK_kerning_margin_dim=\dimen324
-\g__xeCJK_family_int=\count362
-\l__xeCJK_fam_int=\count363
-\g__xeCJK_fam_allocation_int=\count364
-\l__xeCJK_verb_case_int=\count365
-\l__xeCJK_verb_exspace_skip=\skip73
+\l__xeCJK_fixed_punct_width_dim=\dimen327
+\l__xeCJK_mixed_punct_width_dim=\dimen328
+\l__xeCJK_middle_punct_width_dim=\dimen329
+\l__xeCJK_fixed_margin_width_dim=\dimen330
+\l__xeCJK_mixed_margin_width_dim=\dimen331
+\l__xeCJK_middle_margin_width_dim=\dimen332
+\l__xeCJK_bound_punct_width_dim=\dimen333
+\l__xeCJK_bound_margin_width_dim=\dimen334
+\l__xeCJK_margin_minimum_dim=\dimen335
+\l__xeCJK_kerning_total_width_dim=\dimen336
+\l__xeCJK_same_align_margin_dim=\dimen337
+\l__xeCJK_different_align_margin_dim=\dimen338
+\l__xeCJK_kerning_margin_width_dim=\dimen339
+\l__xeCJK_kerning_margin_minimum_dim=\dimen340
+\l__xeCJK_bound_dim=\dimen341
+\l__xeCJK_reverse_bound_dim=\dimen342
+\l__xeCJK_margin_dim=\dimen343
+\l__xeCJK_minimum_bound_dim=\dimen344
+\l__xeCJK_kerning_margin_dim=\dimen345
+\g__xeCJK_family_int=\count373
+\l__xeCJK_fam_int=\count374
+\g__xeCJK_fam_allocation_int=\count375
+\l__xeCJK_verb_case_int=\count376
+\l__xeCJK_verb_exspace_skip=\skip77
 (/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg
 File: xeCJK.cfg 2020/10/19 v3.8.6 Configuration file for xeCJK package
 ))
-\l__zxjt_tmpa_dim=\dimen325
-\g__zxjt_tmpa_box=\box77
-\l__zxjt_leftglue_skip=\skip74
+\l__zxjt_tmpa_dim=\dimen346
+\g__zxjt_tmpa_box=\box81
+\l__zxjt_leftglue_skip=\skip78
 ) (/usr/share/texlive/texmf-dist/tex/latex/zxjafont/zxjafont.sty
 Package: zxjafont 2020/02/24 v1.2
-LaTeX Font Info:    Font shape `TU/IPAMincho(0)/m/n' will be
+LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
 (Font)              scaled to size 10.95pt on input line 547.
 
-Package fontspec Info: IPAMincho scale = 0.9999973402840577.
+Package fontspec Info: IPAMincho scale = 0.9394196499813821.
 
 
 Package fontspec Info: Could not resolve font "IPAGothic/I" (it probably
@@ -1008,16 +1069,16 @@ Package fontspec Info: Could not resolve font "IPAMincho/I" (it probably
 (fontspec)             doesn't exist).
 
 
-Package fontspec Info: IPAGothic scale = 0.9962822816138555.
+Package fontspec Info: IPAGothic scale = 0.9359296415833294.
 
 
-Package fontspec Info: IPAMincho scale = 0.9999973402840577.
+Package fontspec Info: IPAMincho scale = 0.9394196499813821.
 
 
-Package fontspec Info: IPAGothic scale = 0.9962822816138555.
+Package fontspec Info: IPAGothic scale = 0.9359296415833294.
 
 
-Package fontspec Info: Font family 'IPAMincho(2)' created for font 'IPAMincho'
+Package fontspec Info: Font family 'IPAMincho(0)' created for font 'IPAMincho'
 (fontspec)             with options
 (fontspec)             [Scale=MatchLowercase,Script={CJK},Scale={},FontFace={{b
 x}{n}{IPAGothic}},BoldFont={IPAGothic}].
@@ -1035,29 +1096,29 @@ x}{n}{IPAGothic}},BoldFont={IPAGothic}].
 (fontspec)             <->"IPAGothic/OT:script=hani;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
-) (./ch19_functions.aux)
-\openout1 = `ch19_functions.aux'.
+) (./ch20_vectors.aux)
+\openout1 = `ch20_vectors.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1092,7 +1153,7 @@ LaTeX Font Info:    ... okay on input line 150.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 150.
+Package hyperref Info: Link coloring OFF on input line 156.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1100,11 +1161,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count366
+\c@section@level=\count377
 )
-LaTeX Info: Redefining \ref on input line 150.
-LaTeX Info: Redefining \pageref on input line 150.
-LaTeX Info: Redefining \nameref on input line 150.
+LaTeX Info: Redefining \ref on input line 156.
+LaTeX Info: Redefining \pageref on input line 156.
+LaTeX Info: Redefining \nameref on input line 156.
 
 (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary
 -English.dict
@@ -1131,21 +1192,21 @@ ry-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 150.
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 156.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 150.
+(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 156.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 150.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 156.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 150.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 156.
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
-
-
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
+
+
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
 
 
 Package fontspec Info: Font family 'latinmodern-math.otf(0)' created for font
@@ -1157,30 +1218,30 @@ allCapsFont={},Script=Math,BoldFont={latinmodern-math.otf}].
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1.215599993533681]"[latinmodern-math.otf]/OT:scrip
+(fontspec)             <->s*[1.141961557736142]"[latinmodern-math.otf]/OT:scrip
 t=math;language=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 (fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1.215599993533681]"[latinmodern-math.otf]/OT:scrip
+(fontspec)             <->s*[1.141961557736142]"[latinmodern-math.otf]/OT:scrip
 t=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
-(Font)              scaled to size 13.31088pt on input line 150.
+(Font)              scaled to size 12.50453pt on input line 156.
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
-
-
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
+
+
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
 
 
 Package fontspec Info: Font family 'latinmodern-math.otf(1)' created for font
@@ -1194,58 +1255,58 @@ yle=MathScriptScript}},BoldFont={latinmodern-math.otf}].
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <9.3075->s*[1.215599993533681]"[latinmodern-math.otf]/OT
-:script=math;language=dflt;"<6.57-9.3075>s*[1.215599993533681]"[latinmodern-mat
-h.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[1.215599993533681]"[lati
+(fontspec)             <9.3075->s*[1.141961557736142]"[latinmodern-math.otf]/OT
+:script=math;language=dflt;"<6.57-9.3075>s*[1.141961557736142]"[latinmodern-mat
+h.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[1.141961557736142]"[lati
 nmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 (fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1.215599993533681]"[latinmodern-math.otf]/OT:scrip
+(fontspec)             <->s*[1.141961557736142]"[latinmodern-math.otf]/OT:scrip
 t=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 13.31088pt on input line 150.
+(Font)              scaled to size 12.50453pt on input line 156.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 150.
+(Font)              `operators' in the math version `normal' on input line 156.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input
- line 150.
+ line 156.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 150.
+(Font)              `operators' in the math version `bold' on input line 156.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on inpu
-t line 150.
+t line 156.
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
-
-
-Package fontspec Info: latinmodern-math scale = 1.215721553533034.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
+Package fontspec Info: latinmodern-math scale = 1.142075753891916.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215721553533034.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
+Package fontspec Info: latinmodern-math scale = 1.142075753891916.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215721553533034.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
+Package fontspec Info: latinmodern-math scale = 1.142075753891916.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215721553533034.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
+Package fontspec Info: latinmodern-math scale = 1.142075753891916.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215721553533034.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
+
+
+Package fontspec Info: latinmodern-math scale = 1.142075753891916.
 
 
 Package fontspec Info: Font family 'latinmodern-math.otf(2)' created for font
@@ -1255,92 +1316,92 @@ allCapsFont={},Script=Math,SizeFeatures={{Size=9.3075-},{Size=6.57-9.3075,Font=
 latinmodern-math.otf,Style=MathScript},{Size=-6.57,Font=latinmodern-math.otf,St
 yle=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain=1.0001,FontAd
 justment={\fontdimen
-(fontspec)             8\font =9.01147pt\relax \fontdimen 9\font
-(fontspec)             =5.24449pt\relax \fontdimen 10\font =5.91003pt\relax
-(fontspec)             \fontdimen 11\font =9.13127pt\relax \fontdimen 12\font
-(fontspec)             =4.59225pt\relax \fontdimen 13\font =4.83185pt\relax
-(fontspec)             \fontdimen 14\font =4.83185pt\relax \fontdimen 15\font
-(fontspec)             =3.84685pt\relax \fontdimen 16\font =3.28778pt\relax
-(fontspec)             \fontdimen 17\font =3.28778pt\relax \fontdimen 18\font
-(fontspec)             =3.32773pt\relax \fontdimen 19\font =2.66217pt\relax
-(fontspec)             \fontdimen 22\font =3.32773pt\relax \fontdimen 20\font
+(fontspec)             8\font =8.46558pt\relax \fontdimen 9\font
+(fontspec)             =4.92679pt\relax \fontdimen 10\font =5.55202pt\relax
+(fontspec)             \fontdimen 11\font =8.57811pt\relax \fontdimen 12\font
+(fontspec)             =4.31406pt\relax \fontdimen 13\font =4.53914pt\relax
+(fontspec)             \fontdimen 14\font =4.53914pt\relax \fontdimen 15\font
+(fontspec)             =3.61382pt\relax \fontdimen 16\font =3.08862pt\relax
+(fontspec)             \fontdimen 17\font =3.08862pt\relax \fontdimen 18\font
+(fontspec)             =3.12613pt\relax \fontdimen 19\font =2.5009pt\relax
+(fontspec)             \fontdimen 22\font =3.12613pt\relax \fontdimen 20\font
 (fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax }].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <9.3075->s*[1.215721553533034]"[latinmodern-math.otf]/OT
-:script=math;language=dflt;"<6.57-9.3075>s*[1.215721553533034]"[latinmodern-mat
-h.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[1.215721553533034]"[lati
+(fontspec)             <9.3075->s*[1.142075753891916]"[latinmodern-math.otf]/OT
+:script=math;language=dflt;"<6.57-9.3075>s*[1.142075753891916]"[latinmodern-mat
+h.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[1.142075753891916]"[lati
 nmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 (fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 8\font =9.01147pt\relax \fontdimen 9\font
-(fontspec)             =5.24449pt\relax \fontdimen 10\font =5.91003pt\relax
-(fontspec)             \fontdimen 11\font =9.13127pt\relax \fontdimen 12\font
-(fontspec)             =4.59225pt\relax \fontdimen 13\font =4.83185pt\relax
-(fontspec)             \fontdimen 14\font =4.83185pt\relax \fontdimen 15\font
-(fontspec)             =3.84685pt\relax \fontdimen 16\font =3.28778pt\relax
-(fontspec)             \fontdimen 17\font =3.28778pt\relax \fontdimen 18\font
-(fontspec)             =3.32773pt\relax \fontdimen 19\font =2.66217pt\relax
-(fontspec)             \fontdimen 22\font =3.32773pt\relax \fontdimen 20\font
+(fontspec)             \fontdimen 8\font =8.46558pt\relax \fontdimen 9\font
+(fontspec)             =4.92679pt\relax \fontdimen 10\font =5.55202pt\relax
+(fontspec)             \fontdimen 11\font =8.57811pt\relax \fontdimen 12\font
+(fontspec)             =4.31406pt\relax \fontdimen 13\font =4.53914pt\relax
+(fontspec)             \fontdimen 14\font =4.53914pt\relax \fontdimen 15\font
+(fontspec)             =3.61382pt\relax \fontdimen 16\font =3.08862pt\relax
+(fontspec)             \fontdimen 17\font =3.08862pt\relax \fontdimen 18\font
+(fontspec)             =3.12613pt\relax \fontdimen 19\font =2.5009pt\relax
+(fontspec)             \fontdimen 22\font =3.12613pt\relax \fontdimen 20\font
 (fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax 
 (fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1.215721553533034]"[latinmodern-math.otf]/OT:scrip
+(fontspec)             <->s*[1.142075753891916]"[latinmodern-math.otf]/OT:scrip
 t=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 (fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 8\font =9.01147pt\relax \fontdimen 9\font
-(fontspec)             =5.24449pt\relax \fontdimen 10\font =5.91003pt\relax
-(fontspec)             \fontdimen 11\font =9.13127pt\relax \fontdimen 12\font
-(fontspec)             =4.59225pt\relax \fontdimen 13\font =4.83185pt\relax
-(fontspec)             \fontdimen 14\font =4.83185pt\relax \fontdimen 15\font
-(fontspec)             =3.84685pt\relax \fontdimen 16\font =3.28778pt\relax
-(fontspec)             \fontdimen 17\font =3.28778pt\relax \fontdimen 18\font
-(fontspec)             =3.32773pt\relax \fontdimen 19\font =2.66217pt\relax
-(fontspec)             \fontdimen 22\font =3.32773pt\relax \fontdimen 20\font
+(fontspec)             \fontdimen 8\font =8.46558pt\relax \fontdimen 9\font
+(fontspec)             =4.92679pt\relax \fontdimen 10\font =5.55202pt\relax
+(fontspec)             \fontdimen 11\font =8.57811pt\relax \fontdimen 12\font
+(fontspec)             =4.31406pt\relax \fontdimen 13\font =4.53914pt\relax
+(fontspec)             \fontdimen 14\font =4.53914pt\relax \fontdimen 15\font
+(fontspec)             =3.61382pt\relax \fontdimen 16\font =3.08862pt\relax
+(fontspec)             \fontdimen 17\font =3.08862pt\relax \fontdimen 18\font
+(fontspec)             =3.12613pt\relax \fontdimen 19\font =2.5009pt\relax
+(fontspec)             \fontdimen 22\font =3.12613pt\relax \fontdimen 20\font
 (fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax 
 
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 150.
+(Font)              `symbols' in the math version `normal' on input line 156.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
 (Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on inpu
-t line 150.
+t line 156.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 150.
+(Font)              `symbols' in the math version `bold' on input line 156.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
 (Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on inpu
-t line 150.
+t line 156.
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
-
-
-Package fontspec Info: latinmodern-math scale = 1.215478433534328.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
+Package fontspec Info: latinmodern-math scale = 1.141847361580368.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215478433534328.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
+Package fontspec Info: latinmodern-math scale = 1.141847361580368.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215478433534328.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
+Package fontspec Info: latinmodern-math scale = 1.141847361580368.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215478433534328.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215599993533681.
+Package fontspec Info: latinmodern-math scale = 1.141847361580368.
 
 
-Package fontspec Info: latinmodern-math scale = 1.215478433534328.
+Package fontspec Info: latinmodern-math scale = 1.141961557736142.
+
+
+Package fontspec Info: latinmodern-math scale = 1.141847361580368.
 
 
 Package fontspec Info: Font family 'latinmodern-math.otf(3)' created for font
@@ -1350,55 +1411,55 @@ allCapsFont={},Script=Math,SizeFeatures={{Size=9.3075-},{Size=6.57-9.3075,Font=
 latinmodern-math.otf,Style=MathScript},{Size=-6.57,Font=latinmodern-math.otf,St
 yle=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain=0.9999,FontAd
 justment={\fontdimen
-(fontspec)             8\font =0.53244pt\relax \fontdimen 9\font
-(fontspec)             =2.66217pt\relax \fontdimen 10\font =2.22292pt\relax
-(fontspec)             \fontdimen 11\font =1.47751pt\relax \fontdimen 12\font
-(fontspec)             =7.98653pt\relax \fontdimen 13\font =0pt\relax }].
+(fontspec)             8\font =0.50018pt\relax \fontdimen 9\font
+(fontspec)             =2.5009pt\relax \fontdimen 10\font =2.08826pt\relax
+(fontspec)             \fontdimen 11\font =1.388pt\relax \fontdimen 12\font
+(fontspec)             =7.50272pt\relax \fontdimen 13\font =0pt\relax }].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <9.3075->s*[1.215478433534328]"[latinmodern-math.otf]/OT
-:script=math;language=dflt;"<6.57-9.3075>s*[1.215478433534328]"[latinmodern-mat
-h.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[1.215478433534328]"[lati
+(fontspec)             <9.3075->s*[1.141847361580368]"[latinmodern-math.otf]/OT
+:script=math;language=dflt;"<6.57-9.3075>s*[1.141847361580368]"[latinmodern-mat
+h.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[1.141847361580368]"[lati
 nmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 (fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 8\font =0.53244pt\relax \fontdimen 9\font
-(fontspec)             =2.66217pt\relax \fontdimen 10\font =2.22292pt\relax
-(fontspec)             \fontdimen 11\font =1.47751pt\relax \fontdimen 12\font
-(fontspec)             =7.98653pt\relax \fontdimen 13\font =0pt\relax 
+(fontspec)             \fontdimen 8\font =0.50018pt\relax \fontdimen 9\font
+(fontspec)             =2.5009pt\relax \fontdimen 10\font =2.08826pt\relax
+(fontspec)             \fontdimen 11\font =1.388pt\relax \fontdimen 12\font
+(fontspec)             =7.50272pt\relax \fontdimen 13\font =0pt\relax 
 (fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1.215478433534328]"[latinmodern-math.otf]/OT:scrip
+(fontspec)             <->s*[1.141847361580368]"[latinmodern-math.otf]/OT:scrip
 t=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 (fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 8\font =0.53244pt\relax \fontdimen 9\font
-(fontspec)             =2.66217pt\relax \fontdimen 10\font =2.22292pt\relax
-(fontspec)             \fontdimen 11\font =1.47751pt\relax \fontdimen 12\font
-(fontspec)             =7.98653pt\relax \fontdimen 13\font =0pt\relax 
+(fontspec)             \fontdimen 8\font =0.50018pt\relax \fontdimen 9\font
+(fontspec)             =2.5009pt\relax \fontdimen 10\font =2.08826pt\relax
+(fontspec)             \fontdimen 11\font =1.388pt\relax \fontdimen 12\font
+(fontspec)             =7.50272pt\relax \fontdimen 13\font =0pt\relax 
 
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
 (Font)              `largesymbols' in the math version `normal' on input line 1
-50.
+56.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on inpu
-t line 150.
+t line 156.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 150
+(Font)              `largesymbols' in the math version `bold' on input line 156
 .
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on inpu
-t line 150.
-LaTeX Info: Redefining \microtypecontext on input line 150.
+t line 156.
+LaTeX Info: Redefining \microtypecontext on input line 156.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of spacing.
 Package microtype Info: No adjustment of kerning.
 Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `IPAMincho' (encoding: TU).
+(microtype)             `IPAPMincho' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
@@ -1420,7 +1481,7 @@ Package microtype Warning: Unknown slot number of character
 (microtype)                `microtype.cfg/390(protrusion)'.
 
 Package microtype Info: Character `\i ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/10.95'.
+(microtype)             in font `\TU/IPAPMincho(0)/m/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
 
 Package microtype Warning: Unknown slot number of character
@@ -1429,37 +1490,39 @@ Package microtype Warning: Unknown slot number of character
 (microtype)                `microtype.cfg/390(protrusion)'.
 
 Package microtype Info: Character `textendash ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/10.95'.
+(microtype)             in font `TU/IPAPMincho(0)/m/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `textemdash ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/10.95'.
+(microtype)             in font `TU/IPAPMincho(0)/m/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `textquoteleft ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/10.95'.
+(microtype)             in font `TU/IPAPMincho(0)/m/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `textquoteright ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/10.95'.
+(microtype)             in font `TU/IPAPMincho(0)/m/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `textquotedblleft ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/10.95'.
+(microtype)             in font `TU/IPAPMincho(0)/m/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `textquotedblright ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/10.95'.
+(microtype)             in font `TU/IPAPMincho(0)/m/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `\quotesinglbase ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/10.95'.
+(microtype)             in font `\TU/IPAPMincho(0)/m/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `\quotedblbase ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/10.95'.
+(microtype)             in font `\TU/IPAPMincho(0)/m/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `\guilsinglleft ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/10.95'.
+(microtype)             in font `\TU/IPAPMincho(0)/m/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `\guilsinglright ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/10.95'.
+(microtype)             in font `\TU/IPAPMincho(0)/m/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
 
-Package fontspec Info: IPAGothic scale = 0.9962822816138555.
+Package fontspec Info: IPAGothic scale = 0.9359296415833294.
 
 
 Package fontspec Info: Could not resolve font "IPAGothic/I" (it probably
@@ -1474,13 +1537,13 @@ Package fontspec Info: Could not resolve font "IPAGothic/I" (it probably
 (fontspec)             doesn't exist).
 
 
-Package fontspec Info: IPAGothic scale = 0.9962822816138555.
+Package fontspec Info: IPAGothic scale = 0.9359296415833294.
 
 
-Package fontspec Info: IPAGothic scale = 0.9962822816138555.
+Package fontspec Info: IPAGothic scale = 0.9359296415833294.
 
 
-Package fontspec Info: IPAGothic scale = 0.9962822816138555.
+Package fontspec Info: IPAGothic scale = 0.9359296415833294.
 
 
 Package fontspec Info: Font family 'IPAGothic(0)' created for font 'IPAGothic'
@@ -1502,441 +1565,499 @@ x}{n}{IPAGothic}},BoldFont={IPAGothic}].
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 
-Package fontspec Info: IPAGothic scale = 0.9962822816138555.
+Package fontspec Info: IPAGothic scale = 0.9359296415833294.
 
-(./ch19_functions.nav)
-LaTeX Font Info:    Font shape `TU/IPAMincho(0)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 150.
-LaTeX Font Info:    Font shape `TU/IPAMincho(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 151.
-LaTeX Font Info:    Font shape `TU/IPAMincho(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 151.
-LaTeX Font Info:    Font shape `TU/IPAMincho(0)/m/n' will be
-(Font)              scaled to size 4.0pt on input line 151.
+(./ch20_vectors.nav)
+LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
+(Font)              scaled to size 6.0pt on input line 156.
+LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
+(Font)              scaled to size 14.4pt on input line 157.
+LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
+(Font)              scaled to size 8.0pt on input line 157.
+LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
+(Font)              scaled to size 4.0pt on input line 157.
 [1
 
 ]
-LaTeX Font Info:    Font shape `TU/IPAMincho(0)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 192.
-Package microtype Info: Character `textendash ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/12'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textemdash ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/12'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textquoteleft ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/12'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textquoteright ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/12'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textquotedblleft ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/12'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textquotedblright ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/12'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `\quotesinglbase ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/12'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `\quotedblbase ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/12'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `\guilsinglleft ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/12'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `\guilsinglright ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/12'.
-(microtype)             Ignoring protrusion settings for this character.
+\openout4 = `ch20_vectors.vrb'.
 
-LaTeX Font Warning: Font shape `TU/IPAMincho(0)/m/it' undefined
-(Font)              using `TU/IPAMincho(0)/m/n' instead on input line 192.
-
-LaTeX Font Info:    Font shape `TU/IPAMincho(0)/m/it' will be
-(Font)              scaled to size 10.95pt on input line 192.
-Package microtype Info: Character `textendash ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/it/10.95'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textemdash ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/it/10.95'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textquoteleft ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/it/10.95'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textquoteright ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/it/10.95'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textquotedblleft ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/it/10.95'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textquotedblright ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/it/10.95'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `\quotesinglbase ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/it/10.95'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `\quotedblbase ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/it/10.95'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `\guilsinglleft ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/it/10.95'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `\guilsinglright ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/it/10.95'.
-(microtype)             Ignoring protrusion settings for this character.
-
-LaTeX Font Warning: Font shape `TU/IPAMincho(2)/m/it' undefined
-(Font)              using `TU/IPAMincho(2)/m/n' instead on input line 192.
-
-LaTeX Font Info:    Font shape `TU/IPAMincho(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 192.
-Package microtype Info: Character `textendash ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/10'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textemdash ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/10'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textquoteleft ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/10'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textquoteright ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/10'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textquotedblleft ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/10'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `textquotedblright ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/10'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `\quotesinglbase ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/10'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `\quotedblbase ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/10'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `\guilsinglleft ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/10'.
-(microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Character `\guilsinglright ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/10'.
-(microtype)             Ignoring protrusion settings for this character.
+(./ch20_vectors.vrb
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 12.15607pt on input line 192.
+(Font)              scaled to size 8.75317pt on input line 6.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.50925pt on input line 192.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.07803pt on input line 192.
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-92.
+(Font)              scaled to size 6.25227pt on input line 6.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 6
+.
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 12.15729pt on input line 192.
+(Font)              scaled to size 12.5057pt on input line 6.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.5101pt on input line 192.
+(Font)              scaled to size 8.75398pt on input line 6.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.07864pt on input line 192.
+(Font)              scaled to size 6.25285pt on input line 6.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 12.15485pt on input line 192.
+(Font)              scaled to size 12.5032pt on input line 6.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.50839pt on input line 192.
+(Font)              scaled to size 8.75223pt on input line 6.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.07742pt on input line 192.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 192
-.
+(Font)              scaled to size 6.2516pt on input line 6.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 6.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 192
-.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 6.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-) [2
-
-] [3
-
-]
-\openout4 = `ch19_functions.vrb'.
-
-(./ch19_functions.vrb
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 5.
-) [4
-
-]
-\openout4 = `ch19_functions.vrb'.
-
-(./ch19_functions.vrb) [5
-
-]
-\openout4 = `ch19_functions.vrb'.
-
-(./ch19_functions.vrb) [6
-
-]
-\openout4 = `ch19_functions.vrb'.
-
-(./ch19_functions.vrb
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 9.31761pt on input line 16.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.65544pt on input line 16.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 13.31223pt on input line 16.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.31854pt on input line 16.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.65611pt on input line 16.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 13.30954pt on input line 16.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 9.31668pt on input line 16.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.65479pt on input line 16.
-) [7
-
-] [8
-
-] [9
-
-]
-LaTeX Font Info:    Font shape `TU/IPAMincho(0)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 356.
+)
+LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 9.
 Package microtype Info: Character `textendash ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/9'.
+(microtype)             in font `TU/IPAPMincho(0)/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `textemdash ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/9'.
+(microtype)             in font `TU/IPAPMincho(0)/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `textquoteleft ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/9'.
+(microtype)             in font `TU/IPAPMincho(0)/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `textquoteright ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/9'.
+(microtype)             in font `TU/IPAPMincho(0)/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `textquotedblleft ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/9'.
+(microtype)             in font `TU/IPAPMincho(0)/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `textquotedblright ' is missing
-(microtype)             in font `TU/IPAMincho(0)/m/n/9'.
+(microtype)             in font `TU/IPAPMincho(0)/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `\quotesinglbase ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/9'.
+(microtype)             in font `\TU/IPAPMincho(0)/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `\quotedblbase ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/9'.
+(microtype)             in font `\TU/IPAPMincho(0)/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `\guilsinglleft ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/9'.
+(microtype)             in font `\TU/IPAPMincho(0)/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `\guilsinglright ' is missing
-(microtype)             in font `\TU/IPAMincho(0)/m/n/9'.
+(microtype)             in font `\TU/IPAPMincho(0)/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.94046pt on input line 356.
+(Font)              scaled to size 11.41968pt on input line 11.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.29364pt on input line 356.
+(Font)              scaled to size 7.99377pt on input line 11.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.70984pt on input line 11.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.94156pt on input line 356.
+(Font)              scaled to size 11.42075pt on input line 11.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.29437pt on input line 356.
+(Font)              scaled to size 7.99452pt on input line 11.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.71037pt on input line 11.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 10.93936pt on input line 356.
+(Font)              scaled to size 11.41846pt on input line 11.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.29291pt on input line 356.
-
-LaTeX Font Warning: Font shape `TU/IPAMincho(0)/b/n' undefined
-(Font)              using `TU/IPAMincho(0)/m/n' instead on input line 356.
-
-LaTeX Font Info:    Font shape `TU/IPAMincho(0)/b/n' will be
-(Font)              scaled to size 10.95pt on input line 356.
-[10
+(Font)              scaled to size 7.99292pt on input line 11.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.70923pt on input line 11.
+LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/m/n' will be
+(Font)              scaled to size 12.0pt on input line 17.
+Package microtype Info: Character `textendash ' is missing
+(microtype)             in font `TU/IPAPMincho(0)/m/n/12'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textemdash ' is missing
+(microtype)             in font `TU/IPAPMincho(0)/m/n/12'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquoteleft ' is missing
+(microtype)             in font `TU/IPAPMincho(0)/m/n/12'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquoteright ' is missing
+(microtype)             in font `TU/IPAPMincho(0)/m/n/12'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquotedblleft ' is missing
+(microtype)             in font `TU/IPAPMincho(0)/m/n/12'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquotedblright ' is missing
+(microtype)             in font `TU/IPAPMincho(0)/m/n/12'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `\quotesinglbase ' is missing
+(microtype)             in font `\TU/IPAPMincho(0)/m/n/12'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `\quotedblbase ' is missing
+(microtype)             in font `\TU/IPAPMincho(0)/m/n/12'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `\guilsinglleft ' is missing
+(microtype)             in font `\TU/IPAPMincho(0)/m/n/12'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `\guilsinglright ' is missing
+(microtype)             in font `\TU/IPAPMincho(0)/m/n/12'.
+(microtype)             Ignoring protrusion settings for this character.
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 21.
+) [2
 
 ]
-\openout4 = `ch19_functions.vrb'.
+\openout4 = `ch20_vectors.vrb'.
 
-(./ch19_functions.vrb) [11
+(./ch20_vectors.vrb
 
-]
-\openout4 = `ch19_functions.vrb'.
+LaTeX Font Warning: Font shape `TU/IPAPMincho(0)/b/n' undefined
+(Font)              using `TU/IPAPMincho(0)/m/n' instead on input line 8.
 
-(./ch19_functions.vrb) [12
-
-]
-\openout4 = `ch19_functions.vrb'.
-
-(./ch19_functions.vrb) [13
+) [3
 
 ]
-\openout4 = `ch19_functions.vrb'.
+File: ../img/data-structures-overview.png Graphic file (type bmp)
+<../img/data-structures-overview.png>
 
-(./ch19_functions.vrb
-LaTeX Font Info:    Font shape `TU/IPAMincho(0)/b/n' will be
-(Font)              scaled to size 10.0pt on input line 20.
-) [14
-
-]
-File: ../img/2018-1-2-9-readable-code.png Graphic file (type bmp)
-<../img/2018-1-2-9-readable-code.png>
-
-Overfull \vbox (50.3111pt too high) detected at line 456
+Overfull \vbox (52.06554pt too high) detected at line 233
  []
 
-[15
+[4
 
 ]
-\openout4 = `ch19_functions.vrb'.
+\openout4 = `ch20_vectors.vrb'.
 
-(./ch19_functions.vrb
-File: ../img/rstudio-nav.png Graphic file (type bmp)
-<../img/rstudio-nav.png>
-) [16
+(./ch20_vectors.vrb) [5
+
+]
+LaTeX Font Info:    Font shape `TU/IPAPMincho(0)/b/n' will be
+(Font)              scaled to size 10.95pt on input line 287.
+[6
+
+] [7
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb
+Overfull \hbox (77.8763pt too wide) in paragraph at lines 20--20
+[]\TU/lmtt/m/n/10.95 ##  [1] FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE  T
+RUE FALSE[] 
+ []
+
+) [8
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [9
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [10
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [11
+
+] [12
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [13
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [14
+
+] [15
+
+] [16
 
 ] [17
 
 ]
-\openout4 = `ch19_functions.vrb'.
+\openout4 = `ch20_vectors.vrb'.
 
-(./ch19_functions.vrb) [18
-
-]
-\openout4 = `ch19_functions.vrb'.
-
-(./ch19_functions.vrb) [19
+(./ch20_vectors.vrb) [18
 
 ]
-\openout4 = `ch19_functions.vrb'.
+\openout4 = `ch20_vectors.vrb'.
 
-(./ch19_functions.vrb) [20
-
-]
-\openout4 = `ch19_functions.vrb'.
-
-(./ch19_functions.vrb) [21
+(./ch20_vectors.vrb) [19
 
 ]
-\openout4 = `ch19_functions.vrb'.
+\openout4 = `ch20_vectors.vrb'.
 
-(./ch19_functions.vrb) [22
-
-] [23
-
-] [24
+(./ch20_vectors.vrb) [20
 
 ]
-\openout4 = `ch19_functions.vrb'.
+\openout4 = `ch20_vectors.vrb'.
 
-(./ch19_functions.vrb) [25
+(./ch20_vectors.vrb) [21
 
-]
-\openout4 = `ch19_functions.vrb'.
-
-(./ch19_functions.vrb) [26
+] [22
 
 ]
-\openout4 = `ch19_functions.vrb'.
+\openout4 = `ch20_vectors.vrb'.
 
-(./ch19_functions.vrb) [27
-
-]
-\openout4 = `ch19_functions.vrb'.
-
-(./ch19_functions.vrb) [28
+(./ch20_vectors.vrb) [23
 
 ]
-\openout4 = `ch19_functions.vrb'.
+\openout4 = `ch20_vectors.vrb'.
 
-(./ch19_functions.vrb) [29
-
-]
-\openout4 = `ch19_functions.vrb'.
-
-(./ch19_functions.vrb) [30
+(./ch20_vectors.vrb) [24
 
 ]
-\openout4 = `ch19_functions.vrb'.
+\openout4 = `ch20_vectors.vrb'.
 
-(./ch19_functions.vrb) [31
+(./ch20_vectors.vrb
+Overfull \hbox (238.84126pt too wide) in paragraph at lines 13--13
+[]\TU/lmtt/m/n/10.95 ## Warning in 1:10 + 1:3 * 100: longer object length is no
+t a multiple of shorter object length[] 
+ []
 
-]
-\openout4 = `ch19_functions.vrb'.
-
-(./ch19_functions.vrb) [32
-
-]
-\openout4 = `ch19_functions.vrb'.
-
-(./ch19_functions.vrb) [33
+) [25
 
 ]
-\openout4 = `ch19_functions.vrb'.
+\openout4 = `ch20_vectors.vrb'.
 
-(./ch19_functions.vrb
-Overfull \hbox (491.78621pt too wide) in paragraph at lines 16--16
-[]\TU/lmtt/m/n/10.95 ## Important output --------------------------------------
--------------------------------------------------------------------------------
---[] 
+(./ch20_vectors.vrb) [26
+
+] [27
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [28
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [29
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [30
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb
+
+LaTeX Font Warning: Font shape `TU/IPAGothic(0)/m/it' undefined
+(Font)              using `TU/IPAGothic(0)/m/n' instead on input line 18.
+
+) [31
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [32
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [33
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb
+Overfull \hbox (49.13255pt too wide) in paragraph at lines 14--14
+[]\TU/lmtt/m/n/10.95 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Spe
+cies[] 
+ []
+
+
+Overfull \hbox (49.13255pt too wide) in paragraph at lines 14--14
+[]\TU/lmtt/m/n/10.95 ## 1          5.1         3.5          1.4         0.2  se
+tosa[] 
+ []
+
+
+Overfull \hbox (497.53496pt too wide) in paragraph at lines 28--28
+[]\TU/lmtt/m/n/10.95 ##   [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4
+.8 4.3 5.8 5.7 5.4 5.1 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 
+5.2[] 
+ []
+
+
+Overfull \hbox (497.53496pt too wide) in paragraph at lines 28--28
+[]\TU/lmtt/m/n/10.95 ##  [34] 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4
+.8 5.1 4.6 5.3 5.0 7.0 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0 6.1 5.6 
+6.7[] 
+ []
+
+
+Overfull \hbox (497.53496pt too wide) in paragraph at lines 28--28
+[]\TU/lmtt/m/n/10.95 ##  [67] 5.6 5.8 6.2 5.6 5.9 6.1 6.3 6.1 6.4 6.6 6.8 6.7 6
+.0 5.7 5.5 5.5 5.8 6.0 5.4 6.0 6.7 6.3 5.6 5.5 5.5 6.1 5.8 5.0 5.6 5.7 5.7 6.2 
+5.1[] 
+ []
+
+
+Overfull \hbox (497.53496pt too wide) in paragraph at lines 28--28
+[]\TU/lmtt/m/n/10.95 ## [100] 5.7 6.3 5.8 7.1 6.3 6.5 7.6 4.9 7.3 6.7 7.2 6.5 6
+.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0 6.9 5.6 7.7 6.3 6.7 7.2 6.2 6.1 6.4 7.2 7.4 
+7.9[] 
+ []
+
+
+Overfull \hbox (152.61003pt too wide) in paragraph at lines 28--28
+[]\TU/lmtt/m/n/10.95 ## [133] 6.4 6.3 6.1 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8 6
+.7 6.7 6.3 6.5 6.2 5.9[] 
  []
 
 ) [34
 
 ]
-\openout4 = `ch19_functions.vrb'.
+\openout4 = `ch20_vectors.vrb'.
 
-(./ch19_functions.vrb) [35
+(./ch20_vectors.vrb) [35
 
 ] [36
 
 ] [37
 
 ]
-\openout4 = `ch19_functions.vrb'.
+\openout4 = `ch20_vectors.vrb'.
 
-(./ch19_functions.vrb) [38
-
-] [39
+(./ch20_vectors.vrb) [38
 
 ]
-\openout4 = `ch19_functions.vrb'.
+\openout4 = `ch20_vectors.vrb'.
 
-(./ch19_functions.vrb) [40
+(./ch20_vectors.vrb) [39
 
-] [41
+] [40
 
 ]
-\openout4 = `ch19_functions.vrb'.
+\openout4 = `ch20_vectors.vrb'.
 
-(./ch19_functions.vrb) [42
+(./ch20_vectors.vrb
+File: ../img/lists-structure.png Graphic file (type bmp)
+<../img/lists-structure.png>
+) [41
 
-] [43
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [42
+
+]
+File: ../img/lists-subsetting.png Graphic file (type bmp)
+<../img/lists-subsetting.png>
+[43
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb
+File: ../img/pepper.jpg Graphic file (type bmp)
+<../img/pepper.jpg>
+File: ../img/pepper-1.jpg Graphic file (type bmp)
+<../img/pepper-1.jpg>
+File: ../img/pepper-2.jpg Graphic file (type bmp)
+<../img/pepper-2.jpg>
+File: ../img/pepper-3.jpg Graphic file (type bmp)
+<../img/pepper-3.jpg>
+) [44
+
+] [45
+
+] [46
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [47
+
+] [48
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [49
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb
+File: ch20_vectors_files/figure-beamer/generic.plot-1.pdf Graphic file (type pd
+f)
+<use ch20_vectors_files/figure-beamer/generic.plot-1.pdf>
+File: ch20_vectors_files/figure-beamer/generic.plot-2.pdf Graphic file (type pd
+f)
+<use ch20_vectors_files/figure-beamer/generic.plot-2.pdf>
+File: ch20_vectors_files/figure-beamer/generic.plot-3.pdf Graphic file (type pd
+f)
+<use ch20_vectors_files/figure-beamer/generic.plot-3.pdf>
+)
+Overfull \vbox (176.50021pt too high) detected at line 1163
+ []
+
+[50
+
+] [51
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [52
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [53
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [54
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [55
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [56
+
+]
+\openout4 = `ch20_vectors.vrb'.
+
+(./ch20_vectors.vrb) [57
+
+] [58
+
+] [59
 
 ]
 \tf@nav=\write6
-\openout6 = `ch19_functions.nav'.
+\openout6 = `ch20_vectors.nav'.
 
 \tf@toc=\write7
-\openout7 = `ch19_functions.toc'.
+\openout7 = `ch20_vectors.toc'.
 
 \tf@snm=\write8
-\openout8 = `ch19_functions.snm'.
+\openout8 = `ch20_vectors.snm'.
 
-(./ch19_functions.aux)
+(./ch20_vectors.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 31405 strings out of 478009
- 630396 string characters out of 5853980
- 1107273 words of memory out of 5000000
- 50344 multiletter control sequences out of 15000+600000
- 411997 words of font info for 114 fonts, out of 8000000 for 9000
+ 32748 strings out of 478009
+ 650011 string characters out of 5853980
+ 1135340 words of memory out of 5000000
+ 51643 multiletter control sequences out of 15000+600000
+ 410043 words of font info for 99 fonts, out of 8000000 for 9000
  932 hyphenation exceptions out of 8191
- 131i,11n,141p,519b,789s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 131i,11n,141p,517b,768s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on ch19_functions.pdf (43 pages).
+Output written on ch20_vectors.pdf (59 pages).
