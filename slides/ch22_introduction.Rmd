@@ -1,0 +1,11 @@
+---
+title: "Intro Model - r4ds"
+author: "Tomoya Fukumoto"
+date: "2023-10-01"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
