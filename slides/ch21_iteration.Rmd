@@ -10,6 +10,7 @@ mainfont: IPAPMincho
 header-includes: 
   - \usepackage{zxjatype} 
   - \usepackage[ipa]{zxjafont} 
+classoption: "aspectratio=169"
 ---
 
 ```{r setup, include=FALSE}
