@@ -300,6 +300,18 @@ poo <- map(sheets,
 - `map_df` makes a dataframe **特に重要**
 
 これらが使えるかは`.f`の戻り値しだい
+
+## Example 2
+```{r map.example2, eval=FALSE}
+sheets <- c( "（NAP）全国",
+	    "（NAP）関西",
+	    "（NAP）関西以外")
+
+poo <- map_df(sheets,
+	   read_excel,
+	   path = "input/★【weekly】POO_Flex_Histrical_Data.xlsx",
+	   trim_ws = F)
+```
  
 ## `map`でやると何がいいのか
 - 読みやすい、書きやすい
@@ -336,6 +348,22 @@ models <- mtcars %>%
 models <- mtcars %>%
   split(.$cyl) %>%
   map(~lm(mpg ~ wt, data = .))
+```
+
+## Example 3
+```{r map.example2, eval=FALSE}
+sheets <- c( "（NAP）全国",
+	    "（NAP）関西",
+	    "（NAP）関西以外")
+
+poo <- map_df(sheets,
+	   ~read_excel(
+	     sheet = .,
+	     path = "input/★【weekly】POO_Flex_Histrical_Data.xlsx",
+	     trim_ws = FALSE
+	   ) %>% 
+	     mutate(sheet_name = .)
+	 ) 
 ```
 
 ## リストの各要素から情報を取り出す
