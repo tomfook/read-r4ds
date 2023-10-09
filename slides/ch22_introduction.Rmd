@@ -2,7 +2,9 @@
 title: "Intro Model - r4ds"
 author: "Tomoya Fukumoto"
 date: "2023-10-01"
-output: ioslides_presentation
+output:
+  ioslides_presentation:
+    widescreen: true 
 ---
 
 ```{r setup, include=FALSE}
@@ -15,9 +17,9 @@ knitr::opts_chunk$set(echo = TRUE)
 データ理解のための三本柱の最後の一本
 
 ### 目次
-- model basics: モデルを作るために何をするのか？
-- model building: Rでモデルを作る方法
-- many models: 複雑なデータをモデルを沢山作って理解する
+- model basics: モデルを作るための基礎知識
+- model building: Rでモデルを作る技術
+- many models: 複雑なデータをモデルを量産して理解する
 
 ## 目的 
 データをシグナルとノイズに分割する 
@@ -40,20 +42,39 @@ knitr::opts_chunk$set(echo = TRUE)
 library(DiagrammeR)
 grViz('
 digraph{
- graph [rankdir=LR, layout = dot]
+ subgraph tri{
+   node[shape = box, style=rounded, fontname=Helvetica]
+   rec1[label = "集計"]
+   rec2[label = "可視化"]
+   rec3[label = "仮説作る"] 
+   rec1 -> rec2 [dir = both]
+   rec1 -> rec3 [dir = forward]
+   rec2 -> rec3 [dir = forward]
+   {rank = same; rec1; rec2}
+ }
+ graph [rankdir=TB, layout = dot]
  node[shape = box, style=rounded, fontname=Helvetica]
- edge[dir = both]
- rec1[label = "集計"]
- rec2[label = "可視化"]
- rec3[label = "仮説作る"]
  rec4[label = "仮説検証"]
- rec5[label = "Goal!"]
- rec1 -> rec2 -> rec3
- rec1 -> rec3
+ rec5[label = "理解！"]
  
- rec3 -> rec4 [dir = forward]
- rec4 -> rec1 [label = "ダメだった", dir = forward]
- rec4 -> rec2 [label = "ダメだった", dir = forward]
- rec4 -> rec5 [label = "よかった！", dir = forward]
+ rec3 -> rec4 
+ rec4 -> rec1 [xlabel = "ダメだった　"]
+ rec4 -> rec2 [xlabel = "　ダメだった"]
+ rec4 -> rec5 [label = "よかった！"]
 }')
 ```
+
+## 参考：高度なワークフロー
+<center><img src="../img/modeling-process.svg"></center>
+
+## モデル検証のためのデータの使い方
+### データ三分の計
+
+- 訓練データ (training) 
+- 検証データ (query/validation) 
+- テストデータ (test) 
+
+硬派な立場ではある
+
+## 参考
+[Tidy Modeling with R](https://www.tmwr.org/)
