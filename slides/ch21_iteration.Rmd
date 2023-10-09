@@ -300,18 +300,7 @@ poo <- map(sheets,
 - `map_df` makes a dataframe **特に重要**
 
 これらが使えるかは`.f`の戻り値しだい
-
-## Example 2
-```{r map.example2, eval=FALSE}
-    data_all <- left_join(data_used_mean,data_used_sgm,by=grp) %>% 
-      left_join(data_used_sgm2,by=grp) %>%       
-      left_join(data_used_max,by=grp) %>% 
-      right_join(data_used_att,by=grp) %>% 
-      map_df(prod_chkin) #xベクトル内の全ての要素に対して関数prod_chkinを適用するイメージ
-```
-
-`prod_chkin`はdataframeの各変数をベクトルからベクトルに変換する関数
-
+ 
 ## `map`でやると何がいいのか
 - 読みやすい、書きやすい
     - ループは本来処理したいことに対して余計なモノが多すぎる
