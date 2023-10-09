@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.width = 7)
 ```
 
 ## Iteration
-繰り返し作業をどうやって自動化するための二つの手法
+繰り返し作業を自動化するための二つの手法
 
 1. ループ
 2. 関数型プログラミング(functional programming)
@@ -35,7 +35,7 @@ FPに関わるのは`purrr`ライブラリ
 ## 21.2 For loops
 最も標準的なループ
 
-## 例：各行のmedianを求める（ループなし）
+## 例：各列のmedianを求める（ループなし）
 ```{r noloop, results="hide"}
 df <- tibble(
 	     a = rnorm(10),
@@ -147,7 +147,7 @@ for (i in seq_along(x)) {
 
 
 ## 乱数でベクトルの長さが変わる場合
-### ダメな例
+### 下手な例
 ```{r unknown.output.length.ng}
 means <- c(0, 1, 2)
 output <- double()
