@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/Debian) (preloaded format=xelatex 2023.5.24)  9 OCT 2023 16:43
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/Debian) (preloaded format=xelatex 2023.5.24)  9 OCT 2023 16:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1598,7 +1598,12 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
 ]
 \openout4 = `ch21_iteration.vrb'.
 
-(./ch21_iteration.vrb) [6
+(./ch21_iteration.vrb
+Overfull \hbox (3.14256pt too wide) in paragraph at lines 15--15
+[]\TU/lmtt/m/n/10.95 ## [1] -0.04808946  0.45048212  0.29524767 -0.51152087[] 
+ []
+
+) [6
 
 ]
 \openout4 = `ch21_iteration.vrb'.
@@ -1829,12 +1834,7 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 ]
 \openout4 = `ch21_iteration.vrb'.
 
-(./ch21_iteration.vrb
-Overfull \hbox (3.14256pt too wide) in paragraph at lines 20--20
-[]\TU/lmtt/m/n/10.95 ## [1]  0.91356144 -0.41951771 -0.07030193  0.19662914[] 
- []
-
-) [22
+(./ch21_iteration.vrb) [22
 
 ]
 \openout4 = `ch21_iteration.vrb'.
@@ -1878,17 +1878,12 @@ Missing character: There is no ★ in font [lmmono10-regular]:!
 
 (./ch21_iteration.vrb) [30
 
+] [31
+
 ]
 \openout4 = `ch21_iteration.vrb'.
 
-(./ch21_iteration.vrb
-
-LaTeX Font Warning: Font shape `TU/IPAGothic(0)/m/it' undefined
-(Font)              using `TU/IPAGothic(0)/m/n' instead on input line 9.
-
-) [31
-
-] [32
+(./ch21_iteration.vrb) [32
 
 ]
 \openout4 = `ch21_iteration.vrb'.
@@ -1910,12 +1905,12 @@ LaTeX Font Warning: Font shape `TU/IPAGothic(0)/m/it' undefined
 
 (./ch21_iteration.vrb) [36
 
+] [37
+
 ]
 \openout4 = `ch21_iteration.vrb'.
 
-(./ch21_iteration.vrb) [37
-
-] [38
+(./ch21_iteration.vrb) [38
 
 ]
 \openout4 = `ch21_iteration.vrb'.
@@ -1925,15 +1920,33 @@ LaTeX Font Warning: Font shape `TU/IPAGothic(0)/m/it' undefined
 ]
 \openout4 = `ch21_iteration.vrb'.
 
-(./ch21_iteration.vrb) [40
+(./ch21_iteration.vrb
+Overfull \hbox (227.34377pt too wide) in paragraph at lines 30--30
+[]\TU/lmtt/m/n/10.95 ## <simpleError in .Primitive("log")(x, base): non-numeric
+ argument to mathematical function>[] 
+ []
+
+) [40
 
 ]
 \openout4 = `ch21_iteration.vrb'.
 
 (./ch21_iteration.vrb
-Overfull \hbox (227.34377pt too wide) in paragraph at lines 30--30
-[]\TU/lmtt/m/n/10.95 ## <simpleError in .Primitive("log")(x, base): non-numeric
- argument to mathematical function>[] 
+Overfull \hbox (106.62004pt too wide) in paragraph at lines 25--25
+[]\TU/lmtt/m/n/10.95 ##   .. ..$ message: chr "non-numeric argument to mathemat
+ical function"[] 
+ []
+
+
+Overfull \hbox (14.64006pt too wide) in paragraph at lines 25--25
+[]\TU/lmtt/m/n/10.95 ##   .. ..$ call   : language .Primitive("log")(x, base)[]
+ 
+ []
+
+
+Overfull \hbox (112.36879pt too wide) in paragraph at lines 25--25
+[]\TU/lmtt/m/n/10.95 ##   .. ..- attr(*, "class")= chr [1:3] "simpleError" "err
+or" "condition"[] 
  []
 
 ) [41
@@ -1964,35 +1977,12 @@ or" "condition"[]
 ]
 \openout4 = `ch21_iteration.vrb'.
 
-(./ch21_iteration.vrb
-Overfull \hbox (106.62004pt too wide) in paragraph at lines 25--25
-[]\TU/lmtt/m/n/10.95 ##   .. ..$ message: chr "non-numeric argument to mathemat
-ical function"[] 
- []
-
-
-Overfull \hbox (14.64006pt too wide) in paragraph at lines 25--25
-[]\TU/lmtt/m/n/10.95 ##   .. ..$ call   : language .Primitive("log")(x, base)[]
- 
- []
-
-
-Overfull \hbox (112.36879pt too wide) in paragraph at lines 25--25
-[]\TU/lmtt/m/n/10.95 ##   .. ..- attr(*, "class")= chr [1:3] "simpleError" "err
-or" "condition"[] 
- []
-
-) [43
+(./ch21_iteration.vrb) [43
 
 ]
 \openout4 = `ch21_iteration.vrb'.
 
 (./ch21_iteration.vrb) [44
-
-]
-\openout4 = `ch21_iteration.vrb'.
-
-(./ch21_iteration.vrb) [45
 
 ]
 \openout4 = `ch21_iteration.vrb'.
@@ -2007,61 +1997,55 @@ Overfull \hbox (146.76813pt too wide) in alignment at lines 16--24
  [] [] 
  []
 
-) [46
+) [45
 
 ]
 \openout4 = `ch21_iteration.vrb'.
 
 (./ch21_iteration.vrb
 Overfull \hbox (14.64006pt too wide) in paragraph at lines 20--20
-[]\TU/lmtt/m/n/10.95 ## [1] 13.879670 17.828715  7.516126 16.562232  9.744505[]
+[]\TU/lmtt/m/n/10.95 ## [1]  5.674121  7.911511 17.060182  8.018698  1.477751[]
  
  []
 
 
-Overfull \hbox (72.12755pt too wide) in paragraph at lines 20--20
-[]\TU/lmtt/m/n/10.95 ## [1] -13.6818404   8.7579394   0.2351202  -2.1737771   9
-.6031878[] 
+Overfull \hbox (43.3838pt too wide) in paragraph at lines 20--20
+[]\TU/lmtt/m/n/10.95 ## [1]  0.2619013 -3.5545384 18.4864899  3.0925552  9.2886
+658[] 
  []
 
-) [47
+) [46
 
 ]
 File: ../img/lists-map2.png Graphic file (type bmp)
 <../img/lists-map2.png>
-[48
+[47
 
 ]
 \openout4 = `ch21_iteration.vrb'.
 
-(./ch21_iteration.vrb
-Overfull \hbox (14.64006pt too wide) in paragraph at lines 18--18
-[]\TU/lmtt/m/n/10.95 ##  $ : num [1:5] -1.7372 4.0457 0.0745 -32.8817 -8.7543[]
- 
- []
-
-) [49
+(./ch21_iteration.vrb) [48
 
 ]
 File: ../img/lists-pmap-named.png Graphic file (type bmp)
 <../img/lists-pmap-named.png>
-[50
+[49
 
 ]
 \openout4 = `ch21_iteration.vrb'.
 
 (./ch21_iteration.vrb
-Overfull \hbox (14.64006pt too wide) in paragraph at lines 23--23
-[]\TU/lmtt/m/n/10.95 ## [1] -15.19582  10.69863  21.80412  -1.25151  -5.25050[]
- 
+Overfull \hbox (72.12755pt too wide) in paragraph at lines 23--23
+[]\TU/lmtt/m/n/10.95 ## [1]   0.8318212   0.7435602 -20.5603416   1.9586712  -7
+.0728924[] 
  []
 
-) [51
+) [50
 
 ]
 \openout4 = `ch21_iteration.vrb'.
 
-(./ch21_iteration.vrb) [52
+(./ch21_iteration.vrb) [51
 
 ]
 \openout4 = `ch21_iteration.vrb'.
@@ -2074,33 +2058,38 @@ Overfull \hbox (20.38881pt too wide) in paragraph at lines 19--19
 
 
 Overfull \hbox (43.3838pt too wide) in paragraph at lines 30--30
-[]\TU/lmtt/m/n/10.95 ## [1]  0.4265981 -0.9319149 -0.5342296  0.8034100 -0.8272
-471[] 
+[]\TU/lmtt/m/n/10.95 ## [1]  0.4701640  0.9124473 -0.3405939  0.9514618 -0.1490
+606[] 
  []
 
 
-Overfull \hbox (43.3838pt too wide) in paragraph at lines 30--30
-[]\TU/lmtt/m/n/10.95 ## [1]  -3.282319 -11.863120   4.699915  -6.171876   8.338
-355[] 
+Overfull \hbox (14.64006pt too wide) in paragraph at lines 30--30
+[]\TU/lmtt/m/n/10.95 ## [1]  4.973610 -6.271446  2.929046  5.067113 -4.195486[]
+ 
  []
 
 )
-Overfull \vbox (7.32999pt too high) detected at line 1082
+Overfull \vbox (7.32999pt too high) detected at line 1067
  []
 
-[53
+[52
 
 ]
 File: ../img/lists-invoke.png Graphic file (type bmp)
 <../img/lists-invoke.png>
-[54
+[53
 
 ]
 \openout4 = `ch21_iteration.vrb'.
 
-(./ch21_iteration.vrb) [55
+(./ch21_iteration.vrb) [54
 
-] [56
+] [55
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [56
 
 ]
 \openout4 = `ch21_iteration.vrb'.
@@ -2112,12 +2101,7 @@ File: ../img/lists-invoke.png Graphic file (type bmp)
 
 (./ch21_iteration.vrb) [58
 
-]
-\openout4 = `ch21_iteration.vrb'.
-
-(./ch21_iteration.vrb) [59
-
-] [60
+] [59
 
 ]
 \openout4 = `ch21_iteration.vrb'.
@@ -2152,7 +2136,12 @@ Overfull \hbox (83.62505pt too wide) in paragraph at lines 30--30
 .2 0.1 ...[] 
  []
 
-) [61
+) [60
+
+]
+\openout4 = `ch21_iteration.vrb'.
+
+(./ch21_iteration.vrb) [61
 
 ]
 \openout4 = `ch21_iteration.vrb'.
@@ -2164,24 +2153,19 @@ Overfull \hbox (83.62505pt too wide) in paragraph at lines 30--30
 
 (./ch21_iteration.vrb) [63
 
+] [64
+
 ]
 \openout4 = `ch21_iteration.vrb'.
 
-(./ch21_iteration.vrb) [64
-
-] [65
+(./ch21_iteration.vrb) [65
 
 ]
 \openout4 = `ch21_iteration.vrb'.
 
 (./ch21_iteration.vrb) [66
 
-]
-\openout4 = `ch21_iteration.vrb'.
-
-(./ch21_iteration.vrb) [67
-
-] [68
+] [67
 
 ]
 \tf@nav=\write6
@@ -2199,12 +2183,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 32873 strings out of 478009
- 655706 string characters out of 5853980
- 1133782 words of memory out of 5000000
- 51747 multiletter control sequences out of 15000+600000
+ 32866 strings out of 478009
+ 655575 string characters out of 5853980
+ 1132726 words of memory out of 5000000
+ 51742 multiletter control sequences out of 15000+600000
  411989 words of font info for 113 fonts, out of 8000000 for 9000
  932 hyphenation exceptions out of 8191
  131i,11n,141p,519b,623s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on ch21_iteration.pdf (68 pages).
+Output written on ch21_iteration.pdf (67 pages).
