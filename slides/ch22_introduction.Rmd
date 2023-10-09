@@ -9,3 +9,51 @@ output: ioslides_presentation
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Model  
+<center><img src="../img/data-science-model.png"></center>
+
+データ理解のための三本柱の最後の一本
+
+### 目次
+- model basics: モデルを作るために何をするのか？
+- model building: Rでモデルを作る方法
+- many models: 複雑なデータをモデルを沢山作って理解する
+
+## 目的 
+データをシグナルとノイズに分割する 
+
+- シグナル：我々が興味のある対象のパターン
+- ノイズ：我々には興味のない対象の確率的変動
+
+### やらないこと
+モデルの良し悪しを定量的に評価する
+
+## モデルの分類
+|Hadley表現|一般的な表現|機能概要|具体的な例|扱う？|
+|---|---|---|---|---|
+|予測的モデル|教師あり学習|予測を出力する|回帰、分類|扱う|
+|発見的モデル|教師なし学習|データ間の関係を調べる|クラスタリング|扱わない|
+
+## 仮説生成vs仮説検証
+データ理解のための正統なワークフロー
+```{r echo=FALSE, warning=FALSE}
+library(DiagrammeR)
+grViz('
+digraph{
+ graph [rankdir=LR, layout = dot]
+ node[shape = box, style=rounded, fontname=Helvetica]
+ edge[dir = both]
+ rec1[label = "集計"]
+ rec2[label = "可視化"]
+ rec3[label = "仮説作る"]
+ rec4[label = "仮説検証"]
+ rec5[label = "Goal!"]
+ rec1 -> rec2 -> rec3
+ rec1 -> rec3
+ 
+ rec3 -> rec4 [dir = forward]
+ rec4 -> rec1 [label = "ダメだった", dir = forward]
+ rec4 -> rec2 [label = "ダメだった", dir = forward]
+ rec4 -> rec5 [label = "よかった！", dir = forward]
+}')
+```
