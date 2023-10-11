@@ -1,0 +1,161 @@
+---
+title: "Model basics"
+author: "Tomoya Fukumoto"
+date: "2023-10-10"
+output:
+  ioslides_presentation:
+    widescreen: true 
+    css: style/style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Model basics
+モデルを作る基本
+ 
+### 準備
+```{r prep, message=FALSE}
+library(tidyverse)
+library(modelr)
+options(na.action = na.warn)
+```
+
+> モデルの目的は真実を明らかにすることではない
+> 役に立つシンプルな近似を見つけることだ
+
+## 23.1 Introduction
+
+## モデルを作る手順
+### Step1 使うモデル群を決める
+- 直線 or 二次曲線 or etc.
+- 説明変数
+- データが持つ何かしらのパターンを捕らえられるもの
+### Step2 モデルを当てはめる (fit)
+- モデル群のうち最も良いモデルを採用する
+- 良さ：訓練データを使った予測結果と実際が一番近い
+- 近さ：様々な基準がある(e.g. 二乗誤差)
+- trainingともいう
+
+## 23.2 A simple model
+単純なモデルを使って直線モデル当てはめの基本
+
+## テストデータ
+```{r sim1, fig.height=3.5}
+ggplot(sim1, aes(x, y)) + geom_point()
+```
+
+直線的な関係がありそうだ
+$$
+y=a_0+a_1x
+$$
+
+## 250個のテキトーな直線
+```{r sim1_random_model, fig.height=3.3}
+models <- tibble(a1 = runif(250, -20, 40), a2 = runif(250, -5, 5))
+ggplot(sim1, aes(x, y)) +
+  geom_abline(aes(intercept = a1, slope = a2), data = models, alpha = 1/4) +
+  geom_point()
+```
+
+このうちどれが良いモデルだろうか？
+
+## モデルによる予測
+```{r sim1_pred}
+model1 <- function(a, data) {
+  a[1] + data$x * a[2]
+}
+model1(c(7, 1.5), sim1)
+```
+- `a[1]`: 切片
+- `a[2]`: 傾き
+- `data`: 実際のデータ（data.frameでx列に説明変数
+ 
+## モデル予測の誤差
+```{r sim1_error}
+## RMSE
+measure_distance <- function(mod, data) {
+  diff <- data$y - model1(mod, data)
+  sqrt(mean(diff ^2))
+}
+measure_distance(c(7, 1.5), sim1) 
+```
+$$
+\mathrm{RMSE} = \sqrt{\frac{1}{N}\sum_{i=1}^N \left(y_i - (a_0 + a_1 x)\right)^2}
+$$
+
+## 全モデルの予測誤差
+```{r sim1_allerror}
+sim1_dist <- function(a1, a2) {
+  measure_distance(c(a1, a2), sim1)
+}
+models <- models %>% mutate(dist = purrr::map2_dbl(a1, a2, sim1_dist))
+models
+```
+
+## top10モデル
+```{r sim1_10bestmodel, fig.height=3.8}
+ggplot(sim1, aes(x, y)) + geom_point(size = 2, color = "grey30") +
+  geom_abline(
+    data = filter(models, rank(dist) <= 10),
+    aes(intercept = a1, slope = a2, color = -dist)
+  )
+```
+
+## 良いパラメータはどれ？
+```{r sim1_modelparam}
+ggplot(models, aes(a1, a2)) +
+  geom_point(data = filter(models, rank(dist) <= 10), size = 4, color = "red") +
+  geom_point(aes(color = -dist))
+```
+
+## ベストなモデル(理解しなくてもよい)
+```{r sim1_bestmodel, fig.height=3}
+best <- optim(c(0, 0), measure_distance, data = sim1)
+best$par
+ggplot(sim1, aes(x, y)) +
+  geom_point(size = 2, color = "gray30") +
+  geom_abline(intercept = best$par[1], slope = best$par[2])
+```
+
+## 線形モデルを使った方法
+```{r sim1_lm}
+sim1_mod <- lm(y ~ x, data = sim1)
+coef(sim1_mod)
+```
+
+### 実は線形モデルは解析的に解ける
+$$\begin{eqnarray}
+\hat a_0 &=& \bar{y} - \hat a_1\bar{x}\\
+\hat a_1 &=& \frac{\sum_{i=1}^N(x_i-\bar x)(y_i-\bar y)}{\sum_{i=1}^N(x_i-\bar x)^2}
+\end{eqnarray}$$
+
+## 23.2.1 Exercises
+
+## 23.3 Visualising models
+作ったモデルを理解したい
+  
+- 予測値: モデルが捉えたもの
+- 残差: モデルが捉えなかったもの
+
+線形モデルに限らずすべての予測モデルで使える考え方
+
+## 23.3.1 Prediction
+モデルが捉えたもの
+
+## `modelr::data_grid()`
+### Usage
+```{r usage.datagrid, eval=FALSE}
+data_grid(data, ..., .model = NULL)
+```
+
+### Arguments
+||
+|---|---|
+| **data** | data.frame |
+| **...** | `tidyr::expand()` に渡すパラメータ|
+| **.model** | もし設定された場合、モデルに使われている変数も出力する
+
+### return
+データフレームの指定された変数について（変数が複数指定された場合は変数のすべての組み合わせについて）実データのレンジに基づいてグリッドを作る
