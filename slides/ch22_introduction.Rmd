@@ -12,7 +12,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Model  
-<center><img src="../img/data-science-model.png"></center>
+```{r echo=FALSE, out.width="600px", fig.align='center'}
+knitr::include_graphics("../img/data-science-model.png")
+```
 
 データ理解のための三本柱の最後の一本
 
@@ -65,7 +67,9 @@ digraph{
 ```
 
 ## 参考：高度なワークフロー
-<center><img src="../img/modeling-process.svg"></center>
+```{r echo=FALSE, fig.align='center'}
+knitr::include_graphics("../img/modeling-process.svg")
+```
 
 ## モデル検証のためのデータの使い方
 ### データ三分の計
