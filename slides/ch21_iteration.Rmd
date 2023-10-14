@@ -462,6 +462,12 @@ map2(.x, .y, .f, ...)
 ### return
 ベクトル`.x`,`.y`の要素をそれぞれ関数`.f`に適用し、その結果をリストで返す
 
+## イメージ図
+```{r echo=FALSE, fig.align='center'}
+knitr::include_graphics("../img/advr_map2.png")
+```
+
+
 ## Example
 ```{r example.map2}
 mu <- list(5, 10, -3)
@@ -550,10 +556,10 @@ pwalk(list(paths, plots), ggsave, path = tempdir())
 ## 21.9 Other patterns of for loops
 FPのバリエーション
 
-`map`ほどは使わないが頭のどこかに置いておくといいことがあるかもしれない
+`map`ほどは使わないが頭のどこかに置いておくと良い
 
 ## 21.9.1 Predicate functions
-入力関数として出力が論理値の関数を受け付けて特殊な動作をする
+入力関数として論理値を取る関数を受け付けて動作をする
 
 ## `purrr::keep`と`purrr::discard`
 入力ベクトルの要素のうち、関数の判定が`TRUE`の要素のみを残す（捨てる）
@@ -598,16 +604,38 @@ x %>% tail_while(~ . > 5)
 ## 21.9.2 Reduce and accumulate
 ２入力１出力関数のみを受け付ける特殊な関数
 
-２つの入力の順序を入れ替えても出力の値が変わらない場合が望ましい
-
+`map` と合わせてFPを代表する選手
 
 ## `purrr::reduce`
+### Usage
+```{r reduce_def, eval=FALSE}
+reduce(.x, .f, ..., .init, .dir = c("forward", "backward"))
+```
+
+### Arguments
+|||
+|---|---|
+| ** .x ** |入力ベクトル|
+| ** .f ** |２つの引数を持つ関数 |
+
+### Value
+`.f` で `.x` の要素をすべて繋いだ値。
+
+たとえば`.x` の長さが4のときは `.f(.f(.f(.x[1],.x[2]),.x[3]),.x[4])` 
+
+## イメージ図
+```{r echo=FALSE, fig.align='center'}
+knitr::include_graphics("../img/advr_reduce.png")
+```
+
+## `reduce` 例
 ```{r reduce}
 dfs <- list( age = tibble(name = "John", age = 30),
 	    sex = tibble(name = c("John", "Mary"), sex = c("M", "F")),
 	    trt = tibble(name = "Mary", treatment = "A"))
 dfs %>% reduce(full_join)
 ```
+
 
 ## `purrr::accumulate`
 ```{r accumulate}
