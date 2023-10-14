@@ -278,6 +278,11 @@ map(.x, .f, ...)
 ### return
 ベクトル`.x`の要素をそれぞれ関数`.f`に適用し、その結果をリストで返す
 
+## イメージ図
+```{r echo=FALSE, fig.align='center'}
+knitr::include_graphics("../img/map_advr.png")
+```
+
 ## Example 1
 ```{r map.example1, eval=FALSE}
 sheets <- c( "（NAP）全国",

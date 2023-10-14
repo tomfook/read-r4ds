@@ -1,39 +1,80 @@
-\documentclass[ignorenonframetext,]{beamer}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+  aspectratio=169]{beamer}
+\usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
-    \setmainfont[]{IPAPMincho}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{IPAPMincho}
 \fi
 \usefonttheme{serif} % use mainfont rather than sansfont for slide text
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
 \newif\ifbibliography
-\hypersetup{
-            pdftitle={Iteration - r4ds},
-            pdfauthor={Tomoya Fukumoto},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -43,84 +84,74 @@
 \usepackage{framed}
 \definecolor{shadecolor}{RGB}{248,248,248}
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{#1}
-\usepackage{longtable,booktabs}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
 \usepackage{caption}
-% These lines are needed to make table captions work with longtable:
+% Make caption package work with longtable
 \makeatletter
 \def\fnum@table{\tablename~\thetable}
 \makeatother
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight0.8\textheight\else\Gin@nat@height\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
 \makeatother
 % Scale images if necessary, so that they will not overflow the page
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-
-% Prevent slide breaks in the middle of a paragraph:
-\widowpenalties 1 10000
-\raggedbottom
-
-\AtBeginPart{
-  \let\insertpartnumber\relax
-  \let\partname\relax
-  \frame{\partpage}
-}
-\AtBeginSection{
-  \ifbibliography
-  \else
-    \let\insertsectionnumber\relax
-    \let\sectionname\relax
-    \frame{\sectionpage}
-  \fi
-}
-\AtBeginSubsection{
-  \let\insertsubsectionnumber\relax
-  \let\subsectionname\relax
-  \frame{\subsectionpage}
-}
-
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{0}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{zxjatype}
 \usepackage[ipa]{zxjafont}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Iteration - r4ds},
+  pdfauthor={Tomoya Fukumoto},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{Iteration - r4ds}
 \author{Tomoya Fukumoto}
@@ -130,82 +161,76 @@
 \frame{\titlepage}
 
 \begin{frame}{Iteration}
-
-繰り返し作業をどうやって自動化するための二つの手法
+\protect\hypertarget{iteration}{}
+繰り返し作業を自動化するための二つの手法
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
   ループ
 \item
   関数型プログラミング(functional programming)
 \end{enumerate}
-
 \end{frame}
 
 \begin{frame}[fragile]{準備}
-
+\protect\hypertarget{ux6e96ux5099}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
 \end{Highlighting}
 \end{Shaded}
 
 ループに関わるのは\texttt{base}ライブラリ
 
 FPに関わるのは\texttt{purrr}ライブラリ
-
 \end{frame}
 
 \begin{frame}{21.2 For loops}
-
+\protect\hypertarget{for-loops}{}
 最も標準的なループ
-
 \end{frame}
 
-\begin{frame}[fragile]{例：各行のmedianを求める（ループなし）}
-
+\begin{frame}[fragile]{例：各列のmedianを求める（ループなし）}
+\protect\hypertarget{ux4f8bux5404ux5217ux306emedianux3092ux6c42ux3081ux308bux30ebux30fcux30d7ux306aux3057}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
-         \DataTypeTok{a =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
-         \DataTypeTok{b =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
-         \DataTypeTok{c =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
-         \DataTypeTok{d =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+         \AttributeTok{a =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
+         \AttributeTok{b =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
+         \AttributeTok{c =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
+         \AttributeTok{d =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{)}
 \NormalTok{) }
-\KeywordTok{median}\NormalTok{(df}\OperatorTok{$}\NormalTok{a)}
-\KeywordTok{median}\NormalTok{(df}\OperatorTok{$}\NormalTok{b)}
-\KeywordTok{median}\NormalTok{(df}\OperatorTok{$}\NormalTok{c)}
-\KeywordTok{median}\NormalTok{(df}\OperatorTok{$}\NormalTok{d)}
+\FunctionTok{median}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{a)}
+\FunctionTok{median}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{b)}
+\FunctionTok{median}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{c)}
+\FunctionTok{median}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{d)}
 \end{Highlighting}
 \end{Shaded}
-
 \end{frame}
 
 \begin{frame}[fragile]{例：各行のmedianを求める（ループ）}
-
+\protect\hypertarget{ux4f8bux5404ux884cux306emedianux3092ux6c42ux3081ux308bux30ebux30fcux30d7}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{output <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\KeywordTok{ncol}\NormalTok{(df))  }\CommentTok{# 1. output}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)) \{            }\CommentTok{# 2. sequence}
-\NormalTok{  output[[i]] <-}\StringTok{ }\KeywordTok{median}\NormalTok{(df[[i]])      }\CommentTok{# 3. body}
+\NormalTok{output }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\FunctionTok{ncol}\NormalTok{(df))  }\CommentTok{\# 1. output}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(df)) \{            }\CommentTok{\# 2. sequence}
+\NormalTok{  output[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(df[[i]])      }\CommentTok{\# 3. body}
 \NormalTok{\}}
 \NormalTok{output}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] -0.2082671 -0.3499398 -0.4117896 -0.3206133
+## [1] -0.19615324 -0.14534759  0.02139694  0.05740757
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}[fragile]{ループの構成要素 output}
-
+\protect\hypertarget{ux30ebux30fcux30d7ux306eux69cbux6210ux8981ux7d20-output}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{output <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\KeywordTok{ncol}\NormalTok{(df))}
+\NormalTok{output }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\FunctionTok{ncol}\NormalTok{(df))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -215,19 +240,22 @@ FPに関わるのは\texttt{purrr}ライブラリ
   ループの出力の器
 \item
   ループが始まる前に作る
-\item
-  \texttt{vector}関数で型と長さを指定する
-\item
-  長さを指定しないと処理が遅くなる
-\end{itemize}
 
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{vector}関数で型と長さを指定する
+  \item
+    長さを指定しないと処理が遅くなる
+  \end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{ループの構成要素 sequence}
-
+\protect\hypertarget{ux30ebux30fcux30d7ux306eux69cbux6210ux8981ux7d20-sequence}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)}
+\NormalTok{i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(df)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -248,14 +276,13 @@ FPに関わるのは\texttt{purrr}ライブラリ
     \texttt{length(df)}が\texttt{0}のときだけ違う
   \end{itemize}
 \end{itemize}
-
 \end{frame}
 
 \begin{frame}[fragile]{ループの構成要素 body}
-
+\protect\hypertarget{ux30ebux30fcux30d7ux306eux69cbux6210ux8981ux7d20-body}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{output[[i]] <-}\StringTok{ }\KeywordTok{median}\NormalTok{(df[[i]])}
+\NormalTok{output[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(df[[i]])}
 \end{Highlighting}
 \end{Shaded}
 
@@ -274,19 +301,16 @@ FPに関わるのは\texttt{purrr}ライブラリ
     \ldots{}
   \end{itemize}
 \end{itemize}
-
 \end{frame}
 
 \begin{frame}{21.2.1 Exercises}
-
+\protect\hypertarget{exercises}{}
 1を見てみる
-
 \end{frame}
 
 \begin{frame}{21.3 For loop variations}
-
+\protect\hypertarget{for-loop-variations}{}
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
   オブジェクトを修正するループ（作成するのではなく）
@@ -297,45 +321,41 @@ FPに関わるのは\texttt{purrr}ライブラリ
 \item
   ループ回数が不明の場合
 \end{enumerate}
-
 \end{frame}
 
 \begin{frame}[fragile]{21.3.1 Modifying an existing object}
-
+\protect\hypertarget{modifying-an-existing-object}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{a =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{), }\DataTypeTok{b =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{), }\DataTypeTok{c =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{), }\DataTypeTok{d =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{))}
-\NormalTok{rescale01 <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
-\NormalTok{    rng <-}\StringTok{ }\KeywordTok{range}\NormalTok{(x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
-\NormalTok{  (x }\OperatorTok{-}\StringTok{ }\NormalTok{rng[}\DecValTok{1}\NormalTok{]) }\OperatorTok{/}\StringTok{ }\NormalTok{(rng[}\DecValTok{2}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{rng[}\DecValTok{1}\NormalTok{])}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{a =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{), }\AttributeTok{b =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{), }\AttributeTok{c =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{), }\AttributeTok{d =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{))}
+\NormalTok{rescale01 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{    rng }\OtherTok{\textless{}{-}} \FunctionTok{range}\NormalTok{(x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  (x }\SpecialCharTok{{-}}\NormalTok{ rng[}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{/}\NormalTok{ (rng[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ rng[}\DecValTok{1}\NormalTok{])}
 \NormalTok{\} }
-\NormalTok{df}\OperatorTok{$}\NormalTok{a <-}\StringTok{ }\KeywordTok{rescale01}\NormalTok{(df}\OperatorTok{$}\NormalTok{a)}
-\NormalTok{df}\OperatorTok{$}\NormalTok{b <-}\StringTok{ }\KeywordTok{rescale01}\NormalTok{(df}\OperatorTok{$}\NormalTok{b)}
-\NormalTok{df}\OperatorTok{$}\NormalTok{c <-}\StringTok{ }\KeywordTok{rescale01}\NormalTok{(df}\OperatorTok{$}\NormalTok{c)}
-\NormalTok{df}\OperatorTok{$}\NormalTok{d <-}\StringTok{ }\KeywordTok{rescale01}\NormalTok{(df}\OperatorTok{$}\NormalTok{d)}
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{rescale01}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{a)}
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{b }\OtherTok{\textless{}{-}} \FunctionTok{rescale01}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{b)}
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{c }\OtherTok{\textless{}{-}} \FunctionTok{rescale01}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{c)}
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{rescale01}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{d)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{block}{等価}
-
+\protect\hypertarget{ux7b49ux4fa1}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)) \{}
-\NormalTok{    df[[i]] <-}\StringTok{ }\KeywordTok{rescale01}\NormalTok{(df[[i]])}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(df)) \{}
+\NormalTok{    df[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{rescale01}\NormalTok{(df[[i]])}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
-
 \end{block}
-
 \end{frame}
 
 \begin{frame}[fragile]{21.3.2 Looping patterns}
-
+\protect\hypertarget{looping-patterns}{}
 ループを回すときのsequenceの作法
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
   \texttt{for\ (i\ in\ seq\_along(xs))}
@@ -375,66 +395,61 @@ FPに関わるのは\texttt{purrr}ライブラリ
     \end{itemize}
   \end{itemize}
 \end{enumerate}
-
 \end{frame}
 
 \begin{frame}[fragile]{インデックスを使った方法が最も汎用的}
-
+\protect\hypertarget{ux30a4ux30f3ux30c7ux30c3ux30afux30b9ux3092ux4f7fux3063ux305fux65b9ux6cd5ux304cux6700ux3082ux6c4eux7528ux7684}{}
 インデックスを使った方法は他の２つをシミュレートできる
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(x)) \{}
-\NormalTok{  name <-}\StringTok{ }\KeywordTok{names}\NormalTok{(x)[[i]]}
-\NormalTok{  value <-}\StringTok{ }\NormalTok{x[[i]]}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(x)) \{}
+\NormalTok{  name }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(x)[[i]]}
+\NormalTok{  value }\OtherTok{\textless{}{-}}\NormalTok{ x[[i]]}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
-
 \end{frame}
 
 \begin{frame}{21.3.3 Unknown output length}
-
+\protect\hypertarget{unknown-output-length}{}
 ループする前に出力の長さがわからないとき
-
 \end{frame}
 
 \begin{frame}[fragile]{乱数でベクトルの長さが変わる場合}
-
-\begin{block}{ダメな例}
-
+\protect\hypertarget{ux4e71ux6570ux3067ux30d9ux30afux30c8ux30ebux306eux9577ux3055ux304cux5909ux308fux308bux5834ux5408}{}
+\begin{block}{下手な例}
+\protect\hypertarget{ux4e0bux624bux306aux4f8b}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{means <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)}
-\NormalTok{output <-}\StringTok{ }\KeywordTok{double}\NormalTok{()}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(means)) \{}
-\NormalTok{  n <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{)}
-\NormalTok{  output <-}\StringTok{ }\KeywordTok{c}\NormalTok{(output, }\KeywordTok{rnorm}\NormalTok{(n, means[[i]]))}
+\NormalTok{means }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{output }\OtherTok{\textless{}{-}} \FunctionTok{double}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(means)) \{}
+\NormalTok{  n }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{  output }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(output, }\FunctionTok{rnorm}\NormalTok{(n, means[[i]]))}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
 毎回全データコピーするので\(O(n^2)\)の計算量がかかる
-
 \end{block}
-
 \end{frame}
 
 \begin{frame}[fragile]{良い例}
-
+\protect\hypertarget{ux826fux3044ux4f8b}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{out <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"list"}\NormalTok{, }\KeywordTok{length}\NormalTok{(means))}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(means)) \{}
-\NormalTok{  n <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{)}
-\NormalTok{  out[[i]] <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(n, means[[i]])}
+\NormalTok{out }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"list"}\NormalTok{, }\FunctionTok{length}\NormalTok{(means))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(means)) \{}
+\NormalTok{  n }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{  out[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(n, means[[i]])}
 \NormalTok{\}}
-\NormalTok{output <-}\StringTok{ }\KeywordTok{unlist}\NormalTok{(out)}
+\NormalTok{output }\OtherTok{\textless{}{-}} \FunctionTok{unlist}\NormalTok{(out)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{block}{他の例}
-
+\protect\hypertarget{ux4ed6ux306eux4f8b}{}
 \begin{itemize}
 \tightlist
 \item
@@ -442,23 +457,20 @@ FPに関わるのは\texttt{purrr}ライブラリ
 \item
   データフレームの行を追加していくのではなく、リストで作って\texttt{bind\_rows(output)}でくっつける
 \end{itemize}
-
 \end{block}
-
 \end{frame}
 
 \begin{frame}{21.3.4 Unknown sequence length}
-
+\protect\hypertarget{unknown-sequence-length}{}
 事前にループする回数がわからないとき
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{while}}
-
+\protect\hypertarget{while}{}
 \begin{Shaded}
 \begin{Highlighting}[]
 \ControlFlowTok{while}\NormalTok{ (condition)\{}
-  \CommentTok{#body}
+  \CommentTok{\#body}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -470,73 +482,69 @@ FPに関わるのは\texttt{purrr}ライブラリ
 \item
   精度が出るまで反復する、とか
 \end{itemize}
-
 \end{frame}
 
 \begin{frame}{21.3.5 Exercises}
-
+\protect\hypertarget{exercises-1}{}
 \end{frame}
 
 \begin{frame}{21.4 For loops vs.~functionals}
-
+\protect\hypertarget{for-loops-vs.-functionals}{}
 関数型プログラミングとは
-
 \end{frame}
 
 \begin{frame}[fragile]{for loopを使った例}
-
+\protect\hypertarget{for-loopux3092ux4f7fux3063ux305fux4f8b}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{a =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
-         \DataTypeTok{b =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
-         \DataTypeTok{c =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
-         \DataTypeTok{d =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{))}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{a =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
+         \AttributeTok{b =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
+         \AttributeTok{c =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
+         \AttributeTok{d =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{))}
 
-\NormalTok{output <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\KeywordTok{length}\NormalTok{(df))}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)) \{}
-\NormalTok{    output[[i]] <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(df[[i]])}
+\NormalTok{output }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\FunctionTok{length}\NormalTok{(df))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(df)) \{}
+\NormalTok{    output[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(df[[i]])}
 \NormalTok{\}}
 \NormalTok{output}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1]  0.04440174 -0.64643055 -0.06354274 -0.68199421
+## [1]  0.15225352 -0.04314978  0.45884743  0.11583575
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}[fragile]{何回も使いそうだから関数にする}
-
+\protect\hypertarget{ux4f55ux56deux3082ux4f7fux3044ux305dux3046ux3060ux304bux3089ux95a2ux6570ux306bux3059ux308b}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{col_mean <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df) \{}
-\NormalTok{    output <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\KeywordTok{length}\NormalTok{(df))}
-  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)) \{}
-\NormalTok{        output[i] <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(df[[i]])}
+\NormalTok{col\_mean }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df) \{}
+\NormalTok{    output }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\FunctionTok{length}\NormalTok{(df))}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(df)) \{}
+\NormalTok{        output[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(df[[i]])}
 \NormalTok{    \}}
 \NormalTok{    output}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
-
 \end{frame}
 
 \begin{frame}[fragile]{平均以外の集計でも使うだろう}
-
+\protect\hypertarget{ux5e73ux5747ux4ee5ux5916ux306eux96c6ux8a08ux3067ux3082ux4f7fux3046ux3060ux308dux3046}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{col_median <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df) \{}
-\NormalTok{    output <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\KeywordTok{length}\NormalTok{(df))}
-  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)) \{}
-\NormalTok{        output[i] <-}\StringTok{ }\KeywordTok{median}\NormalTok{(df[[i]])}
+\NormalTok{col\_median }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df) \{}
+\NormalTok{    output }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\FunctionTok{length}\NormalTok{(df))}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(df)) \{}
+\NormalTok{        output[i] }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(df[[i]])}
 \NormalTok{    \}}
 \NormalTok{    output}
 \NormalTok{\}}
-\NormalTok{col_sd <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df) \{}
-\NormalTok{    output <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\KeywordTok{length}\NormalTok{(df))}
-  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)) \{}
-\NormalTok{        output[i] <-}\StringTok{ }\KeywordTok{sd}\NormalTok{(df[[i]])}
+\NormalTok{col\_sd }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df) \{}
+\NormalTok{    output }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\FunctionTok{length}\NormalTok{(df))}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(df)) \{}
+\NormalTok{        output[i] }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(df[[i]])}
 \NormalTok{    \}}
 \NormalTok{    output}
 \NormalTok{\}}
@@ -544,95 +552,92 @@ FPに関わるのは\texttt{purrr}ライブラリ
 \end{Shaded}
 
 二回以上のコピペをしてしまった！
-
 \end{frame}
 
 \begin{frame}[fragile]{関数型プログラミング}
-
+\protect\hypertarget{ux95a2ux6570ux578bux30d7ux30edux30b0ux30e9ux30dfux30f3ux30b0}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{col_summary <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df, fun) \{}
-\NormalTok{    out <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\KeywordTok{length}\NormalTok{(df))}
-  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(df)) \{}
-\NormalTok{        out[i] <-}\StringTok{ }\KeywordTok{fun}\NormalTok{(df[[i]])}
+\NormalTok{col\_summary }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df, fun) \{}
+\NormalTok{    out }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\FunctionTok{length}\NormalTok{(df))}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(df)) \{}
+\NormalTok{        out[i] }\OtherTok{\textless{}{-}} \FunctionTok{fun}\NormalTok{(df[[i]])}
 \NormalTok{    \}}
 \NormalTok{    out}
 \NormalTok{\}}
-\KeywordTok{col_summary}\NormalTok{(df, median)}
-\KeywordTok{col_summary}\NormalTok{(df, sd)}
+\FunctionTok{col\_summary}\NormalTok{(df, median)}
+\FunctionTok{col\_summary}\NormalTok{(df, sd)}
 \end{Highlighting}
 \end{Shaded}
 
 Rでは関数の引数として関数を渡すことができる
 
 \(\Rightarrow\)関数型プログラミング
-
 \end{frame}
 
 \begin{frame}{21.4.1 Exercises}
-
+\protect\hypertarget{exercises-2}{}
 1,2
-
 \end{frame}
 
 \begin{frame}[fragile]{21.5 The map functions}
-
+\protect\hypertarget{the-map-functions}{}
 for loopをfunctionalで置き換える関数\texttt{purrr::map}
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{purrr::map}}
-
+\protect\hypertarget{purrrmap}{}
 \begin{block}{Usage}
-
+\protect\hypertarget{usage}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{map}\NormalTok{(.x, .f, ...)}
+\FunctionTok{map}\NormalTok{(.x, .f, ...)}
 \end{Highlighting}
 \end{Shaded}
-
 \end{block}
 
 \begin{block}{Arguments}
-
+\protect\hypertarget{arguments}{}
 \begin{longtable}[]{@{}ll@{}}
-\toprule
-\textbf{.x} & listかatomic vector\tabularnewline
-\textbf{.f} & 関数かformula\tabularnewline
+\toprule()
+\endhead
+\textbf{.x} & listかatomic vector \\
+\textbf{.f} & 関数かformula \\
 \textbf{\ldots{}} &
-関数に渡すパラメータ。たとえば\texttt{na.rm\ =\ TRUE}\tabularnewline
-\bottomrule
+関数に渡すパラメータ。たとえば\texttt{na.rm\ =\ TRUE} \\
+\bottomrule()
 \end{longtable}
-
 \end{block}
 
 \begin{block}{return}
-
+\protect\hypertarget{return}{}
 ベクトル\texttt{.x}の要素をそれぞれ関数\texttt{.f}に適用し、その結果をリストで返す
-
 \end{block}
+\end{frame}
 
+\begin{frame}{イメージ図}
+\protect\hypertarget{ux30a4ux30e1ux30fcux30b8ux56f3}{}
+\begin{center}\includegraphics[width=9.01in]{../img/map_advr} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Example 1}
-
+\protect\hypertarget{example-1}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sheets <-}\StringTok{ }\KeywordTok{c}\NormalTok{( }\StringTok{"（NAP）全国"}\NormalTok{,}
+\NormalTok{sheets }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{( }\StringTok{"（NAP）全国"}\NormalTok{,}
         \StringTok{"（NAP）関西"}\NormalTok{,}
         \StringTok{"（NAP）関西以外"}\NormalTok{)}
 
-\NormalTok{poo <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sheets,}
-\NormalTok{       read_excel,}
-       \DataTypeTok{path =} \StringTok{"input/★【weekly】POO_Flex_Histrical_Data.xlsx"}\NormalTok{,}
-       \DataTypeTok{trim_ws =}\NormalTok{ F)}
+\NormalTok{poo }\OtherTok{\textless{}{-}} \FunctionTok{map}\NormalTok{(sheets,}
+\NormalTok{       read\_excel,}
+       \AttributeTok{path =} \StringTok{"input/★【weekly】POO\_Flex\_Histrical\_Data.xlsx"}\NormalTok{,}
+       \AttributeTok{trim\_ws =}\NormalTok{ F)}
 \end{Highlighting}
 \end{Shaded}
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{map}一族}
-
+\protect\hypertarget{mapux4e00ux65cf}{}
 戻り値をリストではない形式に変換して返すこともできる
 
 \begin{itemize}
@@ -652,27 +657,26 @@ for loopをfunctionalで置き換える関数\texttt{purrr::map}
 \end{itemize}
 
 これらが使えるかは\texttt{.f}の戻り値しだい
-
 \end{frame}
 
 \begin{frame}[fragile]{Example 2}
-
+\protect\hypertarget{example-2}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{    data_all <-}\StringTok{ }\KeywordTok{left_join}\NormalTok{(data_used_mean,data_used_sgm,}\DataTypeTok{by=}\NormalTok{grp) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{left_join}\NormalTok{(data_used_sgm2,}\DataTypeTok{by=}\NormalTok{grp) }\OperatorTok{%>%}\StringTok{       }
-\StringTok{      }\KeywordTok{left_join}\NormalTok{(data_used_max,}\DataTypeTok{by=}\NormalTok{grp) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{right_join}\NormalTok{(data_used_att,}\DataTypeTok{by=}\NormalTok{grp) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{map_df}\NormalTok{(prod_chkin) }\CommentTok{#xベクトル内の全ての要素に対して関数prod_chkinを適用するイメージ}
+\NormalTok{sheets }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{( }\StringTok{"（NAP）全国"}\NormalTok{,}
+        \StringTok{"（NAP）関西"}\NormalTok{,}
+        \StringTok{"（NAP）関西以外"}\NormalTok{)}
+
+\NormalTok{poo }\OtherTok{\textless{}{-}} \FunctionTok{map\_df}\NormalTok{(sheets,}
+\NormalTok{       read\_excel,}
+       \AttributeTok{path =} \StringTok{"input/★【weekly】POO\_Flex\_Histrical\_Data.xlsx"}\NormalTok{,}
+       \AttributeTok{trim\_ws =}\NormalTok{ F)}
 \end{Highlighting}
 \end{Shaded}
-
-\texttt{prod\_chkin}はdataframeの各変数をベクトルからベクトルに変換する関数
-
 \end{frame}
 
 \begin{frame}{\texttt{map}でやると何がいいのか}
-
+\protect\hypertarget{mapux3067ux3084ux308bux3068ux4f55ux304cux3044ux3044ux306eux304b}{}
 \begin{itemize}
 \tightlist
 \item
@@ -694,67 +698,81 @@ for loopをfunctionalで置き換える関数\texttt{purrr::map}
     内部的にはCで処理しているから少し早い
   \end{itemize}
 \end{itemize}
-
 \end{frame}
 
 \begin{frame}[fragile]{21.5.1 Shortcuts}
-
+\protect\hypertarget{shortcuts}{}
 \texttt{map}を使う上でのテクニック
-
 \end{frame}
 
 \begin{frame}[fragile]{余裕のあるやり方}
-
+\protect\hypertarget{ux4f59ux88d5ux306eux3042ux308bux3084ux308aux65b9}{}
 関数を定義する
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mylm <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df)\{}
-  \KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{wt, }\DataTypeTok{data =}\NormalTok{ df)}
+\NormalTok{mylm }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df)\{}
+  \FunctionTok{lm}\NormalTok{(mpg }\SpecialCharTok{\textasciitilde{}}\NormalTok{ wt, }\AttributeTok{data =}\NormalTok{ df)}
 \NormalTok{\}}
-\NormalTok{models <-}\StringTok{ }\NormalTok{mtcars }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{cyl) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{map}\NormalTok{(mylm)}
+\NormalTok{models }\OtherTok{\textless{}{-}}\NormalTok{ mtcars }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{split}\NormalTok{(.}\SpecialCharTok{$}\NormalTok{cyl) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{map}\NormalTok{(mylm)}
 \end{Highlighting}
 \end{Shaded}
-
 \end{frame}
 
 \begin{frame}[fragile]{せっかちなやり方}
-
+\protect\hypertarget{ux305bux3063ux304bux3061ux306aux3084ux308aux65b9}{}
 \begin{block}{無名関数}
-
+\protect\hypertarget{ux7121ux540dux95a2ux6570}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{models <-}\StringTok{ }\NormalTok{mtcars }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{cyl) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(df)}\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{wt, }\DataTypeTok{data =}\NormalTok{ df))}
+\NormalTok{models }\OtherTok{\textless{}{-}}\NormalTok{ mtcars }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{split}\NormalTok{(.}\SpecialCharTok{$}\NormalTok{cyl) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(df)}\FunctionTok{lm}\NormalTok{(mpg }\SpecialCharTok{\textasciitilde{}}\NormalTok{ wt, }\AttributeTok{data =}\NormalTok{ df))}
 \end{Highlighting}
 \end{Shaded}
-
 \end{block}
 
 \begin{block}{formula}
-
+\protect\hypertarget{formula}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{models <-}\StringTok{ }\NormalTok{mtcars }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{cyl) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{wt, }\DataTypeTok{data =}\NormalTok{ .))}
+\NormalTok{models }\OtherTok{\textless{}{-}}\NormalTok{ mtcars }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{split}\NormalTok{(.}\SpecialCharTok{$}\NormalTok{cyl) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{map}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{lm}\NormalTok{(mpg }\SpecialCharTok{\textasciitilde{}}\NormalTok{ wt, }\AttributeTok{data =}\NormalTok{ .))}
 \end{Highlighting}
 \end{Shaded}
-
 \end{block}
+\end{frame}
 
+\begin{frame}[fragile]{Example 3}
+\protect\hypertarget{example-3}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sheets }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{( }\StringTok{"（NAP）全国"}\NormalTok{,}
+        \StringTok{"（NAP）関西"}\NormalTok{,}
+        \StringTok{"（NAP）関西以外"}\NormalTok{)}
+
+\NormalTok{poo }\OtherTok{\textless{}{-}} \FunctionTok{map\_df}\NormalTok{(sheets,}
+       \SpecialCharTok{\textasciitilde{}}\FunctionTok{read\_excel}\NormalTok{(}
+         \AttributeTok{sheet =}\NormalTok{ .,}
+         \AttributeTok{path =} \StringTok{"input/★【weekly】POO\_Flex\_Histrical\_Data.xlsx"}\NormalTok{,}
+         \AttributeTok{trim\_ws =} \ConstantTok{FALSE}
+\NormalTok{       ) }\SpecialCharTok{\%\textgreater{}\%} 
+         \FunctionTok{mutate}\NormalTok{(}\AttributeTok{sheet\_name =}\NormalTok{ .)}
+\NormalTok{     ) }
+\end{Highlighting}
+\end{Shaded}
 \end{frame}
 
 \begin{frame}[fragile]{リストの各要素から情報を取り出す}
-
+\protect\hypertarget{ux30eaux30b9ux30c8ux306eux5404ux8981ux7d20ux304bux3089ux60c5ux5831ux3092ux53d6ux308aux51faux3059}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{models }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{map}\NormalTok{(summary) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{map_dbl}\NormalTok{(}\OperatorTok{~}\NormalTok{.}\OperatorTok{$}\NormalTok{r.squared)}
+\NormalTok{models }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{map}\NormalTok{(summary) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{map\_dbl}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{.}\SpecialCharTok{$}\NormalTok{r.squared)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -764,71 +782,63 @@ for loopをfunctionalで置き換える関数\texttt{purrr::map}
 \end{verbatim}
 
 \begin{block}{shortcut}
-
+\protect\hypertarget{shortcut}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{models }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{map}\NormalTok{(summary) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{map_dbl}\NormalTok{(}\StringTok{"r.squared"}\NormalTok{)}
+\NormalTok{models }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{map}\NormalTok{(summary) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{map\_dbl}\NormalTok{(}\StringTok{"r.squared"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
 \end{block}
-
 \end{frame}
 
 \begin{frame}[fragile]{21.5.2 BaseR}
-
+\protect\hypertarget{baser}{}
 \texttt{lapply}, \texttt{sapply},
 \texttt{vapply}という関数がbaseにある。
 
 \texttt{map}を学べば不要
-
 \end{frame}
 
 \begin{frame}{21.5.3 Exercises}
-
+\protect\hypertarget{exercises-3}{}
 全部自分でやらなければ身につかない
-
 \end{frame}
 
 \begin{frame}[fragile]{21.6 Dealing with failure}
-
+\protect\hypertarget{dealing-with-failure}{}
 \texttt{map}関数を使ったプログラムのデバッグ技術
 
 \texttt{map}中に一つエラーがあると全部出力しなくてむかつく
 
 \begin{block}{for programmer}
-
+\protect\hypertarget{for-programmer}{}
 例外処理
-
 \end{block}
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{purrr::safely}}
-
+\protect\hypertarget{purrrsafely}{}
 関数\texttt{safely}は関数\texttt{.f}を引数として、\texttt{.f}を修正した関数を返す。
 
 修正された関数は必ず長さ2のリストを返す関数で、その戻り値は下記の通り
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
   要素\texttt{result}は元々の関数\texttt{.f}の結果。ただしその結果がエラーだった場合は\texttt{NULL}
 \item
   要素\texttt{error}はエラーオブジェクト。\texttt{.f}の結果がエラーでなければ\texttt{NULL}
 \end{enumerate}
-
 \end{frame}
 
 \begin{frame}[fragile]{Example 1}
-
+\protect\hypertarget{example-1-1}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{safe_log <-}\StringTok{ }\KeywordTok{safely}\NormalTok{(log)}
-\KeywordTok{safe_log}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{safe\_log }\OtherTok{\textless{}{-}} \FunctionTok{safely}\NormalTok{(log)}
+\FunctionTok{safe\_log}\NormalTok{(}\DecValTok{10}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -842,7 +852,7 @@ for loopをfunctionalで置き換える関数\texttt{purrr::map}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{safe_log}\NormalTok{(}\StringTok{"a"}\NormalTok{)}
+\FunctionTok{safe\_log}\NormalTok{(}\StringTok{"a"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -851,18 +861,17 @@ for loopをfunctionalで置き換える関数\texttt{purrr::map}
 ## NULL
 ## 
 ## $error
-## <simpleError in .Primitive("log")(x, base): non-numeric argument to mathematical function>
+## <simpleError in .Primitive("log")(x, base):  数学関数に数値でない引数が渡されました >
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}[fragile]{Example 2}
-
+\protect\hypertarget{example-2-1}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{, }\StringTok{"a"}\NormalTok{)}
-\NormalTok{y <-}\StringTok{ }\NormalTok{x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{map}\NormalTok{(}\KeywordTok{safely}\NormalTok{(log))}
-\KeywordTok{str}\NormalTok{(y)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{, }\StringTok{"a"}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}}\NormalTok{ x }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{map}\NormalTok{(}\FunctionTok{safely}\NormalTok{(log))}
+\FunctionTok{str}\NormalTok{(y)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -877,21 +886,20 @@ for loopをfunctionalで置き換える関数\texttt{purrr::map}
 ##  $ :List of 2
 ##   ..$ result: NULL
 ##   ..$ error :List of 2
-##   .. ..$ message: chr "non-numeric argument to mathematical function"
+##   .. ..$ message: chr " 数学関数に数値でない引数が渡されました "
 ##   .. ..$ call   : language .Primitive("log")(x, base)
 ##   .. ..- attr(*, "class")= chr [1:3] "simpleError" "error" "condition"
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{purrr::transpose}}
-
+\protect\hypertarget{purrrtranspose}{}
 関数\texttt{transpose}でもっと見易く
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{y <-}\StringTok{ }\NormalTok{y }\OperatorTok{%>%}\StringTok{ }\NormalTok{transpose}
-\KeywordTok{str}\NormalTok{(y)}
+\NormalTok{y }\OtherTok{\textless{}{-}}\NormalTok{ y }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ transpose}
+\FunctionTok{str}\NormalTok{(y)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -905,21 +913,20 @@ for loopをfunctionalで置き換える関数\texttt{purrr::map}
 ##   ..$ : NULL
 ##   ..$ : NULL
 ##   ..$ :List of 2
-##   .. ..$ message: chr "non-numeric argument to mathematical function"
+##   .. ..$ message: chr " 数学関数に数値でない引数が渡されました "
 ##   .. ..$ call   : language .Primitive("log")(x, base)
 ##   .. ..- attr(*, "class")= chr [1:3] "simpleError" "error" "condition"
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}[fragile]{一族 \texttt{purrr::possibly}}
-
+\protect\hypertarget{ux4e00ux65cf-purrrpossibly}{}
 関数\texttt{.f}がエラーのときに返す値を第二引数に指定できる。
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{possibly_log <-}\StringTok{ }\KeywordTok{possibly}\NormalTok{(log, }\OtherTok{NA}\NormalTok{)}
-\KeywordTok{possibly_log}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{possibly\_log }\OtherTok{\textless{}{-}} \FunctionTok{possibly}\NormalTok{(log, }\ConstantTok{NA}\NormalTok{)}
+\FunctionTok{possibly\_log}\NormalTok{(}\DecValTok{10}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -929,7 +936,7 @@ for loopをfunctionalで置き換える関数\texttt{purrr::map}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{possibly_log}\NormalTok{(}\StringTok{"a"}\NormalTok{)}
+\FunctionTok{possibly\_log}\NormalTok{(}\StringTok{"a"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -938,221 +945,207 @@ for loopをfunctionalで置き換える関数\texttt{purrr::map}
 \end{verbatim}
 
 全くエラーを返さなくなる
-
 \end{frame}
 
 \begin{frame}[fragile]{21.7 Mapping over multiple arguments}
-
+\protect\hypertarget{mapping-over-multiple-arguments}{}
 複数入力の\texttt{map}
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{purrr::map2}}
-
+\protect\hypertarget{purrrmap2}{}
 \begin{block}{Usage}
-
+\protect\hypertarget{usage-1}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{map2}\NormalTok{(.x, .y, .f, ...)}
+\FunctionTok{map2}\NormalTok{(.x, .y, .f, ...)}
 \end{Highlighting}
 \end{Shaded}
-
 \end{block}
 
 \begin{block}{Arguments}
-
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-\textbf{.x} & listかatomic vector\tabularnewline
+\protect\hypertarget{arguments-1}{}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule()
+\endhead
+\textbf{.x} & listかatomic vector \\
 \textbf{.y} & listかatomic
-vector。.xと.yとのそれぞれのベクトルの長さが同じでなければならない\tabularnewline
-\textbf{.f} & 関数かformula\tabularnewline
+vector。.xと.yとのそれぞれのベクトルの長さが同じでなければならない \\
+\textbf{.f} & 関数かformula \\
 \textbf{\ldots{}} &
-関数に渡すパラメータ。たとえば\texttt{na.rm\ =\ TRUE}\tabularnewline
-\bottomrule
+関数に渡すパラメータ。たとえば\texttt{na.rm\ =\ TRUE} \\
+\bottomrule()
 \end{longtable}
-
 \end{block}
 
 \begin{block}{return}
-
+\protect\hypertarget{return-1}{}
 ベクトル\texttt{.x},\texttt{.y}の要素をそれぞれ関数\texttt{.f}に適用し、その結果をリストで返す
-
 \end{block}
-
 \end{frame}
 
 \begin{frame}[fragile]{Example}
-
+\protect\hypertarget{example}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mu <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{, }\OperatorTok{-}\DecValTok{3}\NormalTok{)}
-\NormalTok{sigma <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
-\KeywordTok{map2}\NormalTok{(mu, sigma, rnorm, }\DataTypeTok{n =} \DecValTok{5}\NormalTok{)}
+\NormalTok{mu }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{)}
+\NormalTok{sigma }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\FunctionTok{map2}\NormalTok{(mu, sigma, rnorm, }\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## [[1]]
-## [1] 5.489210 5.734225 3.690561 5.714282 4.897131
+## [1] 4.406548 3.787894 5.002558 4.143748 4.264373
 ## 
 ## [[2]]
-## [1] 13.599892  4.208838 12.638960  6.875779 26.941896
+## [1]  9.009236  9.457236  8.820623 14.652523 12.621634
 ## 
 ## [[3]]
-## [1]  -2.985130 -11.045972  -9.563942   1.819610 -10.467585
+## [1]   5.089128   3.706198 -13.411853   7.017456 -14.014834
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}{Visualization of map2}
-
+\protect\hypertarget{visualization-of-map2}{}
 \begin{figure}
 \centering
 \includegraphics{../img/lists-map2.png}
 \caption{structure of map2}
 \end{figure}
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{purrr::pmap}}
-
+\protect\hypertarget{purrrpmap}{}
 入力が３つ以上の場合
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{n <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{)}
-\NormalTok{args2 <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{mean =}\NormalTok{ mu, }\DataTypeTok{sd =}\NormalTok{ sigma, }\DataTypeTok{n =}\NormalTok{ n)}
-\NormalTok{args2 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{pmap}\NormalTok{(rnorm) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{str}\NormalTok{()}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{args2 }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =}\NormalTok{ mu, }\AttributeTok{sd =}\NormalTok{ sigma, }\AttributeTok{n =}\NormalTok{ n)}
+\NormalTok{args2 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{pmap}\NormalTok{(rnorm) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{str}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## List of 3
-##  $ : num 4.17
-##  $ : num [1:3] 0.442 7.228 4.561
-##  $ : num [1:5] 3.988 4.514 -0.806 1.765 -5.19
+##  $ : num 5.45
+##  $ : num [1:3] 13.8 18.2 15.3
+##  $ : num [1:5] -3.02 -5.15 -23.11 -13.03 -2.59
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}{Visualization of pmap}
-
+\protect\hypertarget{visualization-of-pmap}{}
 \begin{figure}
 \centering
 \includegraphics{../img/lists-pmap-named.png}
 \caption{structure of pmap}
 \end{figure}
-
 \end{frame}
 
 \begin{frame}[fragile]{これでもいいよ}
-
+\protect\hypertarget{ux3053ux308cux3067ux3082ux3044ux3044ux3088}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{params <-}\StringTok{ }\KeywordTok{tribble}\NormalTok{(}
-          \OperatorTok{~}\NormalTok{mean, }\OperatorTok{~}\NormalTok{sd, }\OperatorTok{~}\NormalTok{n,}
+\NormalTok{params }\OtherTok{\textless{}{-}} \FunctionTok{tribble}\NormalTok{(}
+          \SpecialCharTok{\textasciitilde{}}\NormalTok{mean, }\SpecialCharTok{\textasciitilde{}}\NormalTok{sd, }\SpecialCharTok{\textasciitilde{}}\NormalTok{n,}
           \DecValTok{5}\NormalTok{,     }\DecValTok{1}\NormalTok{,   }\DecValTok{1}\NormalTok{,}
           \DecValTok{10}\NormalTok{,    }\DecValTok{5}\NormalTok{,   }\DecValTok{3}\NormalTok{,}
-          \OperatorTok{-}\DecValTok{3}\NormalTok{,    }\DecValTok{10}\NormalTok{,  }\DecValTok{5}\NormalTok{)}
-\NormalTok{params }\OperatorTok{%>%}\StringTok{ }\KeywordTok{pmap}\NormalTok{(rnorm)}
+          \SpecialCharTok{{-}}\DecValTok{3}\NormalTok{,    }\DecValTok{10}\NormalTok{,  }\DecValTok{5}\NormalTok{)}
+\NormalTok{params }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{pmap}\NormalTok{(rnorm)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## [[1]]
-## [1] 4.882609
+## [1] 5.027279
 ## 
 ## [[2]]
-## [1] 10.2085411 -0.3950189  4.3204454
+## [1] 7.741559 9.245711 6.816939
 ## 
 ## [[3]]
-## [1] -16.573692  15.466755   1.642132  -1.366528  -2.030175
+## [1]  5.370907 -9.774716 -1.475768  5.704987 -4.147142
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}[fragile]{21.7.1 Involing different functions}
-
+\protect\hypertarget{involing-different-functions}{}
 入力変数だけでなく処理する関数すら変えたい場合
 
 \begin{block}{Notes!!}
-
+\protect\hypertarget{notes}{}
 現在\texttt{invoke\_map}は非推奨になっている。\texttt{exec}で代用するべしとある
-
 \end{block}
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{invoke\_map}}
-
+\protect\hypertarget{invoke_map}{}
 関数名を文字列でわたす
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{f <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"runif"}\NormalTok{, }\StringTok{"rnorm"}\NormalTok{, }\StringTok{"rpois"}\NormalTok{)}
-\NormalTok{param <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
-          \KeywordTok{list}\NormalTok{(}\DataTypeTok{min =} \OperatorTok{-}\DecValTok{1}\NormalTok{, }\DataTypeTok{max =} \DecValTok{1}\NormalTok{), }
-          \KeywordTok{list}\NormalTok{(}\DataTypeTok{sd =} \DecValTok{5}\NormalTok{), }
-          \KeywordTok{list}\NormalTok{(}\DataTypeTok{lambda =} \DecValTok{10}\NormalTok{))}
-\KeywordTok{invoke_map}\NormalTok{(f, param, }\DataTypeTok{n =} \DecValTok{5}\NormalTok{)}
+\NormalTok{f }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"runif"}\NormalTok{, }\StringTok{"rnorm"}\NormalTok{, }\StringTok{"rpois"}\NormalTok{)}
+\NormalTok{param }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+          \FunctionTok{list}\NormalTok{(}\AttributeTok{min =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{max =} \DecValTok{1}\NormalTok{), }
+          \FunctionTok{list}\NormalTok{(}\AttributeTok{sd =} \DecValTok{5}\NormalTok{), }
+          \FunctionTok{list}\NormalTok{(}\AttributeTok{lambda =} \DecValTok{10}\NormalTok{))}
+\FunctionTok{invoke\_map}\NormalTok{(f, param, }\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## [[1]]
-## [1] -0.0002563163  0.0044804169  0.5215238971  0.6526673199 -0.2975950576
+## [1]  0.91406237 -0.48443496  0.68515139 -0.03189625  0.45374870
 ## 
 ## [[2]]
-## [1] -8.0675832 -0.6323985  3.9644148  4.9581136  3.8533626
+## [1] -7.78456256  4.06060522  5.02826919 -0.05041309  1.03358154
 ## 
 ## [[3]]
-## [1] 11 11 11 12 14
+## [1] 18 10 11  6 14
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}{Visualization of \texttt{invoke\_map}}
-
+\protect\hypertarget{visualization-of-invoke_map}{}
 \begin{figure}
 \centering
 \includegraphics{../img/lists-invoke.png}
 \caption{structure of invoke}
 \end{figure}
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{exec}で置き換え}
-
+\protect\hypertarget{execux3067ux7f6eux304dux63dbux3048}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Before:}
-\KeywordTok{invoke_map}\NormalTok{(fns, }\KeywordTok{list}\NormalTok{(args))}
-\KeywordTok{invoke_map}\NormalTok{(fns, }\KeywordTok{list}\NormalTok{(args1, args2))}
+\CommentTok{\# Before:}
+\FunctionTok{invoke\_map}\NormalTok{(fns, }\FunctionTok{list}\NormalTok{(args))}
+\FunctionTok{invoke\_map}\NormalTok{(fns, }\FunctionTok{list}\NormalTok{(args1, args2))}
 
-\CommentTok{# After:}
-\KeywordTok{map}\NormalTok{(fns, exec, }\OperatorTok{!!!}\NormalTok{args)}
-\KeywordTok{map2}\NormalTok{(fns, }\KeywordTok{list}\NormalTok{(args1, args2), }\ControlFlowTok{function}\NormalTok{(fn, args) }\KeywordTok{exec}\NormalTok{(fn, }\OperatorTok{!!!}\NormalTok{args))}
+\CommentTok{\# After:}
+\FunctionTok{map}\NormalTok{(fns, exec, }\SpecialCharTok{!!!}\NormalTok{args)}
+\FunctionTok{map2}\NormalTok{(fns, }\FunctionTok{list}\NormalTok{(args1, args2), }\ControlFlowTok{function}\NormalTok{(fn, args) }\FunctionTok{exec}\NormalTok{(fn, }\SpecialCharTok{!!!}\NormalTok{args))}
 \end{Highlighting}
 \end{Shaded}
 
 \url{https://github.com/tidyverse/purrr/blob/master/NEWS.md\#retirement-of-invoke}
-
 \end{frame}
 
 \begin{frame}{21.8 Walk}
-
+\protect\hypertarget{walk}{}
 副作用を目的にFPを
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{purrr::walk}}
-
+\protect\hypertarget{purrrwalk}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{, }\StringTok{"a"}\NormalTok{, }\DecValTok{3}\NormalTok{) }
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{, }\StringTok{"a"}\NormalTok{, }\DecValTok{3}\NormalTok{) }
 
-\NormalTok{x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{walk}\NormalTok{(print)}
+\NormalTok{x }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{walk}\NormalTok{(print)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1161,46 +1154,42 @@ vector。.xと.yとのそれぞれのベクトルの長さが同じでなけれ�
 ## [1] "a"
 ## [1] 3
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{purrr::pwalk}}
-
+\protect\hypertarget{purrrpwalk}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{plots <-}\StringTok{ }\NormalTok{mtcars }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{cyl) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(mpg, wt)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{())}
-\NormalTok{paths <-}\StringTok{ }\NormalTok{stringr}\OperatorTok{::}\KeywordTok{str_c}\NormalTok{(}\KeywordTok{names}\NormalTok{(plots), }\StringTok{".pdf"}\NormalTok{) }
-\KeywordTok{pwalk}\NormalTok{(}\KeywordTok{list}\NormalTok{(paths, plots), ggsave, }\DataTypeTok{path =} \KeywordTok{tempdir}\NormalTok{())}
+\NormalTok{plots }\OtherTok{\textless{}{-}}\NormalTok{ mtcars }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{split}\NormalTok{(.}\SpecialCharTok{$}\NormalTok{cyl) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{map}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{ggplot}\NormalTok{(., }\FunctionTok{aes}\NormalTok{(mpg, wt)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{())}
+\NormalTok{paths }\OtherTok{\textless{}{-}}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_c}\NormalTok{(}\FunctionTok{names}\NormalTok{(plots), }\StringTok{".pdf"}\NormalTok{) }
+\FunctionTok{pwalk}\NormalTok{(}\FunctionTok{list}\NormalTok{(paths, plots), ggsave, }\AttributeTok{path =} \FunctionTok{tempdir}\NormalTok{())}
 \end{Highlighting}
 \end{Shaded}
-
 \end{frame}
 
 \begin{frame}[fragile]{21.9 Other patterns of for loops}
-
+\protect\hypertarget{other-patterns-of-for-loops}{}
 FPのバリエーション
 
 \texttt{map}ほどは使わないが頭のどこかに置いておくといいことがあるかもしれない
-
 \end{frame}
 
 \begin{frame}{21.9.1 Predicate functions}
-
+\protect\hypertarget{predicate-functions}{}
 入力関数として出力が論理値の関数を受け付けて特殊な動作をする
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{purrr::keep}と\texttt{purrr::discard}}
-
+\protect\hypertarget{purrrkeepux3068purrrdiscard}{}
 入力ベクトルの要素のうち、関数の判定が\texttt{TRUE}の要素のみを残す（捨てる）
 
 入力がデータフレームなら\texttt{dplyr::select\_if}と同じ
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{iris }\OperatorTok{%>%}\StringTok{ }\KeywordTok{keep}\NormalTok{(is.factor) }\OperatorTok{%>%}\StringTok{ }\NormalTok{str}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{keep}\NormalTok{(is.factor) }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1211,7 +1200,7 @@ FPのバリエーション
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{iris }\OperatorTok{%>%}\StringTok{ }\KeywordTok{discard}\NormalTok{(is.factor) }\OperatorTok{%>%}\StringTok{ }\NormalTok{str}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{discard}\NormalTok{(is.factor) }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1222,18 +1211,17 @@ FPのバリエーション
 ##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
 ##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{purrr::some}と\texttt{purrr::every}}
-
+\protect\hypertarget{purrrsomeux3068purrrevery}{}
 入力ベクトルの要素のうち、関数の判定がどれか（すべて）が\texttt{TRUE}なら\texttt{TRUE}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, letters, }\KeywordTok{list}\NormalTok{(}\DecValTok{10}\NormalTok{))}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, letters, }\FunctionTok{list}\NormalTok{(}\DecValTok{10}\NormalTok{))}
 
-\NormalTok{x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{some}\NormalTok{(is_character)}
+\NormalTok{x }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{some}\NormalTok{(is\_character)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1243,72 +1231,60 @@ FPのバリエーション
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{every}\NormalTok{(is_vector)}
+\NormalTok{x }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{every}\NormalTok{(is\_vector)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## [1] TRUE
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{purrr::detect}}
-
+\protect\hypertarget{purrrdetect}{}
 条件が成立する最初の要素の値を返す。
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{10}\NormalTok{)}
 \NormalTok{x}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 10  9  5  3  1  8  7  6  4  2
+##  [1]  2  4  6  1  5  3  7 10  9  8
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{detect}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{. }\OperatorTok{>}\StringTok{ }\DecValTok{5}\NormalTok{)}
+\NormalTok{x }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{detect}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ . }\SpecialCharTok{\textgreater{}} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 10
+## [1] 6
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{detect_index}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{. }\OperatorTok{>}\StringTok{ }\DecValTok{5}\NormalTok{)}
+\NormalTok{x }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{detect\_index}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ . }\SpecialCharTok{\textgreater{}} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1
+## [1] 3
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{purrr::head\_while}と\texttt{purrr::tail\_while}}
-
+\protect\hypertarget{purrrhead_whileux3068purrrtail_while}{}
 条件が成り立つまでの要素をすべて返す。
 
 前から調べるか、後ろから調べるか
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head_while}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{. }\OperatorTok{>}\StringTok{ }\DecValTok{5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 10  9
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{tail_while}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{. }\OperatorTok{>}\StringTok{ }\DecValTok{5}\NormalTok{)}
+\NormalTok{x }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head\_while}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ . }\SpecialCharTok{\textgreater{}} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1316,24 +1292,32 @@ FPのバリエーション
 ## integer(0)
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{tail\_while}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ . }\SpecialCharTok{\textgreater{}} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  7 10  9  8
+\end{verbatim}
 \end{frame}
 
 \begin{frame}{21.9.2 Reduce and accumulate}
-
+\protect\hypertarget{reduce-and-accumulate}{}
 ２入力１出力関数のみを受け付ける特殊な関数
 
 ２つの入力の順序を入れ替えても出力の値が変わらない場合が望ましい
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{purrr::reduce}}
-
+\protect\hypertarget{purrrreduce}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dfs <-}\StringTok{ }\KeywordTok{list}\NormalTok{( }\DataTypeTok{age =} \KeywordTok{tibble}\NormalTok{(}\DataTypeTok{name =} \StringTok{"John"}\NormalTok{, }\DataTypeTok{age =} \DecValTok{30}\NormalTok{),}
-        \DataTypeTok{sex =} \KeywordTok{tibble}\NormalTok{(}\DataTypeTok{name =} \KeywordTok{c}\NormalTok{(}\StringTok{"John"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{), }\DataTypeTok{sex =} \KeywordTok{c}\NormalTok{(}\StringTok{"M"}\NormalTok{, }\StringTok{"F"}\NormalTok{)),}
-        \DataTypeTok{trt =} \KeywordTok{tibble}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Mary"}\NormalTok{, }\DataTypeTok{treatment =} \StringTok{"A"}\NormalTok{))}
-\NormalTok{dfs }\OperatorTok{%>%}\StringTok{ }\KeywordTok{reduce}\NormalTok{(full_join)}
+\NormalTok{dfs }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{( }\AttributeTok{age =} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{name =} \StringTok{"John"}\NormalTok{, }\AttributeTok{age =} \DecValTok{30}\NormalTok{),}
+        \AttributeTok{sex =} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{name =} \FunctionTok{c}\NormalTok{(}\StringTok{"John"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{), }\AttributeTok{sex =} \FunctionTok{c}\NormalTok{(}\StringTok{"M"}\NormalTok{, }\StringTok{"F"}\NormalTok{)),}
+        \AttributeTok{trt =} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{name =} \StringTok{"Mary"}\NormalTok{, }\AttributeTok{treatment =} \StringTok{"A"}\NormalTok{))}
+\NormalTok{dfs }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{reduce}\NormalTok{(full\_join)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1349,38 +1333,35 @@ FPのバリエーション
 ## 1 John     30 M     <NA>     
 ## 2 Mary     NA F     A
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{purrr::accumulate}}
-
+\protect\hypertarget{purrraccumulate}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{10}\NormalTok{)}
 \NormalTok{x}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  6  4  5  3  1  2  8  7 10  9
+##  [1]  2  1  7  4  9  6  3  8 10  5
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{accumulate}\NormalTok{(}\StringTok{`}\DataTypeTok{+}\StringTok{`}\NormalTok{)}
+\NormalTok{x }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{accumulate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{+}\StringTok{\textasciigrave{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  6 10 15 18 19 21 29 36 46 55
+##  [1]  2  3 10 14 23 29 32 40 50 55
 \end{verbatim}
-
 \end{frame}
 
 \begin{frame}{21.9.3 Exercises}
-
+\protect\hypertarget{exercises-4}{}
 頭の訓練に
-
 \end{frame}
 
 \end{document}
