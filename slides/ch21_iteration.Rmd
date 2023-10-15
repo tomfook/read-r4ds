@@ -303,7 +303,7 @@ poo <- map(sheets,
 - `map_int` makes an integer vector.
 - `map_dbl` makes a double vector.
 - `map_chr` makes a character vector.
-- `map_df` makes a dataframe **特に重要**
+- `map_df` makes a dataframe 
 
 これらが使えるかは`.f`の戻り値しだい
 
@@ -353,7 +353,7 @@ models <- mtcars %>%
 ```{r map.formula}
 models <- mtcars %>%
   split(.$cyl) %>%
-  map(~lm(mpg ~ wt, data = .))
+  map(~lm(mpg ~ wt, data = .x))
 ```
 
 ## Example 3
@@ -364,11 +364,11 @@ sheets <- c( "（NAP）全国",
 
 poo <- map_df(sheets,
 	   ~read_excel(
-	     sheet = .,
+	     sheet = .x,
 	     path = "input/★【weekly】POO_Flex_Histrical_Data.xlsx",
 	     trim_ws = FALSE
 	   ) %>% 
-	     mutate(sheet_name = .)
+	     mutate(sheet_name = .x)
 	 ) 
 ```
 
