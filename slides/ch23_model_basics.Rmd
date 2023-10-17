@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Model basics
-モデルを作る基本
+モデルを作る基本となる理論
  
 ### 準備
 ```{r prep, message=FALSE}
@@ -22,21 +22,22 @@ library(modelr)
 options(na.action = na.warn)
 ```
 
-> モデルの目的は真実を明らかにすることではない
-> 役に立つシンプルな近似を見つけることだ
+> モデルの目的は真実を明らかにすることではない<br>
+> 役に立つ近似を見つけることだ
 
 ## 23.1 Introduction
 
 ## モデルを作る手順
-### Step1 使うモデル群を決める
+### Step1 Model Familyを決める
 - 直線 or 二次曲線 or etc.
 - 説明変数
-- データが持つ何かしらのパターンを捕らえられるもの
-### Step2 モデルを当てはめる (fit)
-- モデル群のうち最も良いモデルを採用する
-- 良さ：訓練データを使った予測結果と実際が一番近い
-- 近さ：様々な基準がある(e.g. 二乗誤差)
-- trainingともいう
+- データが持つパターンを捕らえる
+
+### Step2 Model Fit
+- Model Familyのうち最も良いモデルを採用する
+- 良さ ⇒ 訓練データを使った予測結果と実際が一番近い
+- 近さ ⇒ 基準を決める(e.g. 二乗誤差)
+- 機械学習ではtrainingともいう
 
 ## 23.2 A simple model
 単純なモデルを使って直線モデル当てはめの基本
@@ -70,7 +71,7 @@ model1(c(7, 1.5), sim1)
 ```
 - `a[1]`: 切片
 - `a[2]`: 傾き
-- `data`: 実際のデータ（data.frameでx列に説明変数
+- `data`: data.frameでx列が説明変数の実データ
  
 ## モデル予測の誤差
 ```{r sim1_error}
@@ -110,7 +111,7 @@ ggplot(models, aes(a1, a2)) +
   geom_point(aes(color = -dist))
 ```
 
-## ベストなモデル(理解しなくてもよい)
+## 誤差の最適化
 ```{r sim1_bestmodel, fig.height=3}
 best <- optim(c(0, 0), measure_distance, data = sim1)
 best$par
@@ -157,5 +158,131 @@ data_grid(data, ..., .model = NULL)
 | **...** | `tidyr::expand()` に渡すパラメータ|
 | **.model** | もし設定された場合、モデルに使われている変数も出力する
 
-### return
-データフレームの指定された変数について（変数が複数指定された場合は変数のすべての組み合わせについて）実データのレンジに基づいてグリッドを作る
+### Value
+`data` の指定された変数について実データの値の取る範囲に基づいてグリッドを作る。
+作られたグリッドがデータフレームとして返ってくる
+
+## 下準備 {.columns-2}
+ 
+```{r sim1_grid}
+grid <- sim1 %>% data_grid(x)
+grid
+```
+
+```{r sim1_remember}
+# Remember
+sim1 
+```
+
+
+## `modelr::add_predictions()`
+### Usage
+```{r usage.addpred, eval=FALSE}
+add_predictions(data, model, var = "pred", type = NULL)
+```
+
+### Arguments
+||
+|---|---|
+| **data** | 予測をする対象になるデータ(data.frame) |
+| **model** | 予測を行うモデル |
+| **var** | 予測を出力する列名 |
+| **type** | 予測タイプ。通常は自動設定される |
+
+### Value
+`data` で定められたdata.frameに予測列を追加したdata.frame
+
+## 予測を得る 
+```{r sim1_getpred}
+# sim1_mod <- lm(y~x, data = sim1)
+grid <- grid %>% 
+  add_predictions(sim1_mod)
+grid
+```
+
+## 予測能力を可視化
+```{r sim1_predplot}
+ggplot(sim1, aes(x)) +
+  geom_point(aes(y = y)) +
+  geom_line(aes(y = pred), data = grid, color = "red", size = 1)
+```
+
+## 23.3.2 Residuals
+モデルが捉えなかったもの
+
+## `modelr::add_residuals`
+### Usage
+```{r usage.addresid, eval=FALSE}
+add_residuals(data, model, var = "resid")
+```
+
+### Arguments
+||
+|---|---|
+| **data** | 予測する対象になるデータ(data.frame) |
+| **model** | 予測を行うモデル |
+| **var** | 予測を出力する列名 |
+
+### Value
+`data` で定められたdata.frameに予測誤差を追加したdata.frame
+
+## 残差を得る
+```{r sim1_getresid}
+sim1 <- sim1 %>%
+  add_predictions(sim1_mod) %>%  #Remember
+  add_residuals(sim1_mod)
+sim1
+```
+
+## 残差の可視化１ (誤差分布)
+```{r sim1_vizresid1}
+ggplot(sim1, aes(resid)) +
+  geom_freqpoly(binwidth = 0.5)
+```
+ 
+## 残差の可視化２ (vs説明変数)
+```{r sim1_vizresid2}
+ggplot(sim1, aes(x, resid)) +
+  geom_ref_line(h = 0) +
+  geom_point()
+```
+
+## 23.3.3 Exercises
+
+## 23.4 Formulas and model families
+Formulaを使ってModel familyを設定する
+
+### Model Family = 統計モデル + モデル式(Formula)
+- 統計モデルの例： 線形モデル、ニューラルネットワーク
+- モデル式：要するに説明変数の設定
+- 機械学習の分野ではモデル式の設定を **特長量エンジニアリング** と言ったりする
+
+### 目次
+- 基本の説明変数
+- 離散値の説明変数
+- 相互作用
+- 変数の変換
+ 
+## Model Formula
+Rの多くのモデル関数ではFormulaという文法でモデル式を設定できる
+
+### 文法： 目的変数 ~ 説明変数の構造
+
+### 例
+線形モデルのモデル関数 `lm` で Formula `y ~ x` を指定する
+```{r lm_formula, eval=FALSE}
+lm(formula = y~x, data = sim1)
+```
+
+これは $y$ を $a_0+a_1 x$ というModel Familyを使って予測するということ 
+
+
+## Model Formulaの調整
+|formula|linear model|説明|
+|---|---|---|
+|`y~x`|$y\sim a_0+a_1x$|標準的な線形回帰|
+|`y~x-1`|$y\sim a_1x$|切片ゼロ。比例関係|
+|`y~x1+x2`|$y\sim a_0+a_1x_1+a_2x_2$|二変数。いわゆる重回帰|
+
+## 21.4.1 Categorical variables
+カテゴリー変数（要は文字列やファクタ）で回帰分析する
