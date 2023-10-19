@@ -376,7 +376,7 @@ poo <- map_df(sheets,
 ```{r extract.r2}
 models %>% 
   map(summary) %>% 
-  map_dbl(~.$r.squared)
+  map_dbl(~.x$r.squared)
 ```
 
 ### shortcut
