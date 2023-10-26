@@ -345,7 +345,7 @@ ggplot(sim2, aes(x)) +
 ```
 
 ## 23.4.2 交互作用(連続-カテゴリ)
-二つの説明変数 $x_1$(連続) と $x_2$(カテゴリ) で回帰分析するとき、 $x_1$ の回帰係数を $x_2$ の値によって変える
+説明変数２つ $x_1$(連続) と $x_2$(カテゴリ) で回帰分析するとき、２変数にシナジーがある
 
 ### Model Formula
 ```{r interaction_concat, eval=FALSE}
@@ -356,8 +356,8 @@ y ~ x1 * x2
 $$
 y \sim \left\{
  \begin{array}{ll}
-  a_0 + a_1 x_1 + a_21 + a_3 x_1 1 = a_0 + (a_1+a_3)x_1 &(x_2 = \mathrm{value1})\\ 
-  a_0 + a_1 x_1 + a_2 0 + a_3 x_1 0 = a_0 + a_1x_1& (x_2 = \mathrm{value2})
+  a_0 + a_1 x_1 + a_21 + a_3 x_1 1  &(x_2 = \mathrm{value1})\\ 
+  a_0 + a_1 x_1 + a_2 0 + a_3 x_1 0 & (x_2 = \mathrm{value2})
  \end{array} \right.
 $$
 
@@ -376,3 +376,37 @@ grid <- sim3 %>%
   gather_predictions(mod1, mod2)
 grid
 ```
+
+## モデルの可視化
+```{r sim3_model_plot, fig.height=4}
+ggplot(sim3, aes(x1, y, color = x2)) +
+  geom_point() +
+  geom_line(data = grid, aes(y = pred)) +
+  facet_wrap(~ model)
+```
+
+## 残差の可視化
+```{r sim3_model_residplot, fig.height=3.8}
+sim3 %>% 
+  gather_residuals(mod1, mod2) %>% 
+  ggplot(aes(x1, resid, color = x2)) +
+  geom_point() +
+  facet_grid(model ~ x2)
+```
+
+## 23.4.3 交互作用（連続-連続)
+説明変数２つ $x_1$(連続), $x_2$(連続) で回帰分析するとき、２変数にシナジーがある
+
+### Model formula
+```{r interaction_conccon, eval=FALSE}
+y ~ x1 * x2
+```
+
+### 数式
+$$
+y \sim a_0 + a_1 x_1 + a_2 x_2 + a_3 x_1x_2
+$$
+
+## お題
+
+
