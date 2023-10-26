@@ -23,7 +23,7 @@ knitr::include_graphics("../img/data-science-model.png")
 - model building: Rでモデルを作る技術
 - many models: 複雑なデータをモデルを量産して理解する
 
-## 目的 
+## モデルの目的 
 データをシグナルとノイズに分割する 
 
 - シグナル：我々が興味のある対象のパターン
