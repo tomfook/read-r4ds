@@ -1,0 +1,53 @@
+---
+title: "Transformation"
+subtitle: "a suppliment of R4DS ch.23"
+author: "Tomoya Fukumoto"
+date: "2023-11-03"
+output:
+  ioslides_presentation:
+    widescreen: true 
+    css: style/style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+## たった一つの言いたいこと
+```{r plot1, echo=FALSE}
+n <- 500
+df <- tibble(
+  x = runif(n, 1, 100),
+  y = x/4 * rnorm(n, 4, 1)
+)
+ggplot(df, aes(x, y)) + geom_point()
+```
+
+**こういうデータに素朴な線形回帰はしない！**
+
+## 対数変換
+変数変換するとこうなる
+```{r plot2, echo=FALSE}
+ggplot(df, aes(log(x), log(y))) + geom_point()
+```
+
+## つまり
+$$
+\begin{eqnarray}
+&\log(y) &=& a_0 + a_1\log(x) + \epsilon \\
+\Leftrightarrow &y &=& \mathrm{e}^{a_0}x^{a_1} \mathrm{e}^\epsilon
+\end{eqnarray}
+$$
+
+以下の性質を持つ場合、明らかに対数変換した線形モデルが妥当
+
+- $x$ がゼロのときはゼロ
+- $x$ の$+$ではなく$\times$が$y$に影響する
+- 誤差が$+$ではなく$\times$で効いてくる
+
+## 結果の違い{.columns-2}
+```{r lm_naked}
+lm(y~x, df)
+lm(log(y)~log(x), df) 
+```
