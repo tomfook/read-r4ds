@@ -327,7 +327,7 @@ y \sim \left\{ \begin{array}{ll} a_0 + a_1 & (\mathrm{sex} = \mathrm{male})\\ a_
 $$
 
 
-## 準備 {.columns-2}
+## お題 {.columns-2}
 ```{r sim2_plot}
 sim2
 mod2 <- lm(y ~ x, data = sim2)
@@ -337,7 +337,7 @@ grid <- sim2 %>%
 grid
 ```
 
-## 回帰分析（カテゴリ変数）
+## 分析
 ```{r sim2_plotpred}
 ggplot(sim2, aes(x)) +
   geom_point(aes(y = y)) +
@@ -407,6 +407,89 @@ $$
 y \sim a_0 + a_1 x_1 + a_2 x_2 + a_3 x_1x_2
 $$
 
-## お題
+## お題 {.columns-2}
+```{r sim4_viz, fig.width=5, fig.height=4}
+sim4
+ggplot(sim4, aes(x1, x2)) +
+  geom_tile(aes(fill = y))
+```
 
+## 分析 
+```{r sim4_analysis}
+mod1 <- lm(y ~ x1 + x2, data = sim4) #交互作用なし
+mod2 <- lm(y ~ x1 * x2, data = sim4) #交互作用あり
+grid <- sim4 %>% 
+  data_grid( x1 = seq_range(x1, 5), x2 = seq_range(x2, 5) ) %>% 
+  gather_predictions(mod1, mod2)
+grid
+```
 
+## モデルの可視化{.columns-2}
+```{r sim4_modelviz1, fig.width=5, fig.height=4}
+ggplot(grid, aes(x1, pred)) +
+  geom_line(aes(color = x2, group = x2)) + 
+  facet_wrap(~ model)
+ggplot(grid, aes(x2, pred)) +
+  geom_line(aes(color = x1, group = x1)) +
+   facet_wrap(~ model)
+```
+
+## 残差の可視化{.columns-2}
+```{r sim4_residviz, message=FALSE, fig.width=5, fig.height=4}
+sim4 <- gather_residuals(sim4, mod1, mod2) 
+ggplot(sim4, aes(x = resid))  +
+  geom_freqpoly(aes(color = model))
+ggplot(sim4, aes(x1, x2))  +
+  geom_tile(aes(fill = resid)) +
+  facet_wrap(~model)
+```
+
+## モデルの統計的な指標たち
+```{r sim4_model_summary}
+summary(mod2)
+```
+
+## 23.4.4 変換
+説明変数や目的変数を初等関数を使って変換する
+
+### Model formula
+```{r transformation}
+I(y) ~ I(x)
+```
+   
+## 具体例
+|formula|model|説明|
+|---|---|---|
+|`y~x+I(x^2)`|$y\sim a_0+a_1x+a_2x^2$|線形でない、二乗項を使った回帰|
+|`y~poly(x, 3)`|$y\sim a_0+a_1+a_2x^2+a_3x^3$|三次回帰|
+|`I(log(y))~I(log(x))`|$\log y\sim a_0 + a_1 \log x$|もうめちゃくちゃ重要|
+
+## いろいろと理論的なよもやま話
+
+- 多項式モデル `poly(x, p)` を使って、多項式の次数 $p$ を無限大にすると任意の曲線を近似できちゃう（テイラーの定理）
+- 多項式の次元を大きくすると $x$ が極端に大きいときは急速に大きく/小さく なるので現実と合わない
+- ナイスな代案はスプラインを使うこと、特に **自然スプライン** は有益だ
+- 自然スプラインとは直線、二次曲線、三次曲線をいい感じに繋いで一つのグラフを作る方法
+- `ns(x, p)` という関数を使えば自然スプラインのFormulaが自動的に書けちゃう。ただし $p$ は自由度
+
+## 23.4.5 Exercises
+
+## 23.5 欠損値
+
+- 欠損値はモデル学習には利用できない
+- 選択肢
+    - 欠損値のある行をすべて削除してしまう
+    - 欠損値を何かの値で代用する（ゼロとか）
+    - 欠損値を平均値などで埋める（高級なテクニック）
+    
+非常にテクニカルなので詳細は立ち入らない
+
+## 23.6 その他のモデル
+
+- 一般化線形モデル `stats::glm()`
+- 一般化加法モデル `mgcv::gam()`
+- ペナルティ付き線形モデル（正則化） `glmnet::glmnet()`
+- ロバスト線形回帰 `MASS::rlm()`
+- 決定木 `rpart::rpart()`
+    - ランダムフォレスト `randomForest::randomForest()`
+    - 勾配ブースティング `xgboost::xgboost()`
