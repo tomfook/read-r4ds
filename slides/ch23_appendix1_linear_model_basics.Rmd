@@ -1,0 +1,80 @@
+---
+title: "Linear Model basics"
+subtitle: "a suppliment of R4DS ch.23"
+author: "Tomoya Fukumoto"
+date: "2023-11-03"
+output:
+  ioslides_presentation:
+    widescreen: true 
+    css: style/style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 統計的学習モデル
+### 問題
+データ $(x_1, y_1), \ldots, (x_N,y_N)$ を持っている。
+このとき $x$から$y$ を推定する適切な関数 $f(x)$ を見つけたい。
+
+### モデル
+データの背景には次の関係式があると **仮定する** 。
+$$
+y = f_a(x) + \epsilon
+$$
+ただし $\epsilon$ は誤差要因で確率的に変動するものとする。また $a$はいわゆるパラメータでモデルの自由度
+
+### ゴール
+我々の仮定が最も妥当になるようにパラメータ $a$ を決定する
+ 
+## パラメータ推定方法
+### 方針
+我々の仮定の下で、実際のデータが発生する確率*を計算する。
+その確率が最も高いパラメータ$a$が最も妥当なパラメータと言える
+
+### 尤度
+$$
+L(a) = p\left[(x_1,y_1), (x_2,x_2),\ldots,(x_N,y_N)\right]
+$$
+
+### 最尤推定
+尤度 $L(a)$ が一番高くなるパラメータ $a$ を見つけよ
+
+*厳密には確率密度関数の関数値
+
+## 最も単純な線形回帰モデル
+### 仮定
+1. 関数$f_a(x)$ は線形すなわち $a_0+a_1x$ で表されるとする
+2. 確率要因 $\epsilon$ は平均0 標準偏差 $\sigma$ の正規分布に **独立に** 従うとする
+
+### 参考: 正規分布の確率密度関数
+$\epsilon$の確率密度関数は
+$$
+P[\epsilon] = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{\epsilon^2}{2\sigma^2}\right)
+$$
+ 
+## 線形回帰モデルの最尤推定 
+### 尤度の計算
+誤差$e_i$は独立としたので同時確率はそれぞれの確率の積で計算できる  
+$$
+\begin{eqnarray}
+L(a) &=& \prod_{i=1}^N P[y_i-(a_0+a_1x)] \\
+    &=& \frac{1}{(2\pi\sigma^2)^{N/2}}\exp\left(-\frac{1}{2\sigma^2}\sum_{i=1}^N(y_i-(a_0+a_1x_i))^2\right)\\
+    &=& \frac{1}{(2\pi\sigma^2)^{N/2}}\exp\left(-\frac{N}{2\sigma^2}\mathrm{RMSE^2}\right)
+\end{eqnarray}
+$$
+
+### 定理
+$L(a)$ を最大にする $a_0,a_1$ は RMSE を最小にする$a_0,a_1$ に等しい
+
+## 結論
+線形モデルの仮定2よりパラメータの最尤推定値と最小二乗推定値が一致するため、最小二乗推定値を計算することで最尤推定値が得られる。
+
+### 利用上の注意
+誤差の分布が
+
+- 平均ゼロの正規分布に従うか？
+- 誤差の間で統計的に独立か？
+
+を確認することで我々の仮定が妥当かどうか判別できる
