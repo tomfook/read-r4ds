@@ -1,0 +1,66 @@
+---
+title: "Model building"
+author: "Tomoya Fukumoto"
+date: "2023-11-04"
+output:
+  ioslides_presentation:
+    widescreen: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Rでモデルを作る技法
+実データでモデルを使ったデータ理解のワークフローを追う
+
+### 準備
+```{r prep, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(modelr)
+options(na.action = na.warn)
+
+library(nycflights13)
+library(lubridate)
+```
+
+
+## 24.1 Introduction 
+- 私たちは対象についてのふわっとした知識を持っている
+- その知識を形式的で定量的なモデルに変換する
+- そのモデルを使えば期待できる
+    - 我々の知識を使った予測
+    - データに潜む未知の知識の発見
+
+### 別のアプローチ（機械学習）
+
+- 予測精度をひたすら高める
+- データが複雑すぎる場合はしゃーない？
+- ブラックボックスになりがち
+    - うまくいく理由も条件も分からない
+    - 将来大きな変化があっても機能するだろうか？
+
+## 24.2 なぜ低品質なダイヤモンドの方が高価なのか？
+ダイヤモンドの品質は次の4Cで決まる(はず？)
+
+- carat: ダイヤモンドの重さ
+- cut: カット（形状、仕上がり）
+- color: 色。一般的には色が無い方が偉い。Dが最も無色でZに向かって色有り
+- clarity: 透明度。I1, SI2, SI1, VS2, VS1, VVS2, VVS1, IFの順に良い
+
+## cutが悪い方が高価？
+```{r diamond_viz_cutprice}
+ggplot(diamonds, aes(cut, price)) + geom_boxplot()
+```
+
+## colorが悪い方が高価？
+colorはDが一番良くて、Jが一番悪い
+```{r diamonds_viz_colorprice}
+ggplot(diamonds, aes(color, price)) + geom_boxplot()
+```
+
+## clarityが悪い方が高価？
+```{r diamonds_viz_clarityprice}
+ggplot(diamonds, aes(clarity, price)) + geom_boxplot()
+```
+
