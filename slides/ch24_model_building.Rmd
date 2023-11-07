@@ -64,3 +64,8 @@ ggplot(diamonds, aes(color, price)) + geom_boxplot()
 ggplot(diamonds, aes(clarity, price)) + geom_boxplot()
 ```
 
+## 24.2.1 価格とカラット
+交絡因子カラット
+```{r diamonds_caratprice}
+ggplot(diamonds, aes(carat, price)) + geom_hex(bins = 50)
+```
