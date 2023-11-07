@@ -27,10 +27,10 @@ library(lubridate)
 
 ## 24.1 Introduction 
 - 私たちは対象についてのふわっとした知識を持っている
-- その知識を形式的で定量的なモデルに変換する
-- そのモデルを使えば期待できる
+- その知識を形式的で定量的なモデルへと変換する
+- そのモデルを使って以下が可能になる
     - 我々の知識を使った予測
-    - データに潜む未知の知識の発見
+    - データに潜む新たな知識の発見
 
 ### 別のアプローチ（機械学習）
 
@@ -41,7 +41,7 @@ library(lubridate)
     - 将来大きな変化があっても機能するだろうか？
 
 ## 24.2 なぜ低品質なダイヤモンドの方が高価なのか？
-ダイヤモンドの品質は次の4Cで決まる(はず？)
+ダイヤモンドの品質は次の4Cで決まる(はず)
 
 - carat: ダイヤモンドの重さ
 - cut: カット（形状、仕上がり）
@@ -69,3 +69,99 @@ ggplot(diamonds, aes(clarity, price)) + geom_boxplot()
 ```{r diamonds_caratprice}
 ggplot(diamonds, aes(carat, price)) + geom_hex(bins = 50)
 ```
+
+## 方針
+- モデルを使って価格を決める最大の因子 `carat` の影響を除去する
+- `carat` の影響を除去したときに他の因子が価格にどう影響するかを調べる
+
+### 準備
+```{r diamond2}
+diamonds2 <- diamonds %>% 
+  filter(carat <= 2.5) %>%  #低カラットに絞り込む(全体の99.7%)
+  mutate(lprice = log2(price), lcarat = log2(carat)) #対数変換
+```
+
+## 可視化 {.columns-2} 
+```{r diamonds_caratprice1, echo=FALSE, fig.width = 5}
+ggplot(diamonds2, aes(carat, price)) +
+  geom_hex(bins=50) +
+  labs(
+    title = "carat vs price",
+    subtitle = "線形関係ではない"
+  )
+```
+
+```{r diamonds_lcaratlprice, echo=FALSE, fig.width=5}
+ggplot(diamonds2, aes(lcarat, lprice)) +
+  geom_hex(bins=50) +
+  labs(
+    title = "lcarat vs lprice",
+    subtitle = "対数変換することで線形関係になった"
+  )
+```
+
+## モデル分析
+```{r diamonds_model_lcaratlprice}
+mod_diamond <- lm(lprice ~ lcarat, data = diamonds2)
+summary(mod_diamond)
+```
+
+## モデル可視化
+```{r diamonds_model_lcaratlprice_viz, fig.height=3.6}
+grid <- diamonds2 %>%  data_grid(carat = seq_range(carat, 20)) %>% 
+  mutate(lcarat = log2(carat)) %>% 
+  add_predictions(mod_diamond, "lprice") %>%  mutate(price = 2 ^ lprice) 
+ggplot(diamonds2, aes(carat, price)) + 
+  geom_hex(bins = 50) +  geom_line(data = grid, colour = "red", size = 1)
+```
+
+## 残差の可視化
+```{r diamonds_model_lcaratlprice_resid_viz}
+diamonds2 <- diamonds2 %>%  add_residuals(mod_diamond, "lresid") 
+ggplot(diamonds2, aes(lcarat, lresid)) +  geom_hex(bins = 50)
+```
+
+## cut vs 残差
+```{r diamond_viz_cutlresid}
+ggplot(diamonds2, aes(cut, lresid)) + geom_boxplot()
+```
+
+## color vs 残差
+```{r diamonds_viz_colorlresid}
+ggplot(diamonds2, aes(color, lresid)) + geom_boxplot()
+```
+
+## clarity vs 残差
+```{r diamonds_viz_claritylresid}
+ggplot(diamonds2, aes(clarity, lresid)) + geom_boxplot()
+```
+
+## 24.2.2 より複雑なモデル
+```{r diamonds_mod2_multiple}
+mod_diamond2 <- lm(lprice ~ lcarat + color + cut + clarity, data = diamonds2)
+summary(mod_diamond2)
+```
+
+## モデル予測(cutの周辺)
+```{r option_double, include=FALSE}
+options(pillar.sigfig = 4)
+```
+
+```{r diamonds_mod2_cut}
+grid <- diamonds2 %>% 
+  data_grid(cut, .model = mod_diamond2) %>% 
+  add_predictions(mod_diamond2)
+grid
+```
+
+$2^{0.1}\sim1.07$ 
+
+## 残差の可視化
+```{r diamonds_mod2_residviz}
+diamonds2 <- diamonds2 %>%  add_residuals(mod_diamond2, "lresid2") 
+ggplot(diamonds2, aes(lcarat, lresid2)) +  geom_hex(bins = 50)
+```
+
+## 24.2.3 Exercise
+
+## 24.3 一日のフライト数に影響を与える要素は何か？
