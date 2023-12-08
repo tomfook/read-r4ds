@@ -468,7 +468,7 @@ I(y) ~ I(x)
 
 - 多項式モデル `poly(x, p)` を使って、次数 $p$ を無限大にすると任意の曲線を近似できるテイラーの定理）
     - 多項式の次元を大きくすると $x$ が極端に大きいときは急速に大きく/小さく なってうまくいかない
-    - またモデルの自由度が高すぎると過学習(overfitting)して予測はうまくいかない
+    - またモデルの自由度が高すぎると[過学習/overfitting](https://www.ibm.com/jp-ja/topics/overfitting)して予測はうまくいかない
 - ナイスな代案はスプラインを使うこと、特に **自然スプライン** は有益だ
 - 自然スプラインとは直線、二次曲線、三次曲線をいい感じに繋いで一つのグラフを作る方法
 - `ns(x, p)` という関数を使えば自然スプラインのFormulaが自動的に書けちゃう。ただし $p$ は自由度
@@ -492,5 +492,5 @@ I(y) ~ I(x)
 - ペナルティ付き線形モデル（正則化） `glmnet::glmnet()`
 - ロバスト線形回帰 `MASS::rlm()`
 - 決定木 `rpart::rpart()`
-    - ランダムフォレスト `randomForest::randomForest()`
-    - 勾配ブースティング `xgboost::xgboost()`
+    - [ランダムフォレスト](https://www.ibm.com/jp-ja/topics/random-forest) `randomForest::randomForest()`
+    - [勾配ブースティング](https://www.ibm.com/jp-ja/topics/boosting) `xgboost::xgboost()`
