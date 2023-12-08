@@ -3069,18 +3069,21 @@ var loadDeck = function(event) {
   });
 };
 
-if (document.readyState !== "loading" &&
-    document.querySelector('slides') === null) { 
-  // if the document is done loading but our element hasn't yet appeared, defer
-  // loading of the deck
-  window.setTimeout(function() {
-    loadDeck(null);
-  }, 0);
-} else {
-  // still loading the DOM, so wait until it's finished
-  document.addEventListener("DOMContentLoaded", loadDeck);
-}
+if (!window.Shiny) {
+  // If Shiny is loaded, the slide deck is initialized in ioslides template
 
+  if (document.readyState !== "loading" &&
+      document.querySelector('slides') === null) {
+    // if the document is done loading but our element hasn't yet appeared, defer
+    // loading of the deck
+    window.setTimeout(function() {
+      loadDeck(null);
+    }, 0);
+  } else {
+    // still loading the DOM, so wait until it's finished
+    document.addEventListener("DOMContentLoaded", loadDeck);
+  }
+}
 
 
 </script>
@@ -3248,10 +3251,10 @@ library(lubridate)</pre>
 <p>ダイヤモンドの品質は次の4Cで決まる(はず)</p>
 
 <ul>
-<li>carat: ダイヤモンドの重さ</li>
-<li>cut: カット（形状、仕上がり）</li>
-<li>color: 色。一般的には色が無い方が偉い。Dが最も無色でZに向かって色有り</li>
-<li>clarity: 透明度。I1, SI2, SI1, VS2, VS1, VVS2, VVS1, IFの順に良い</li>
+<li>carat: <a href='https://www.brilliance.co.jp/engagement/select/carat.html' title=''>カラット</a>ダイヤモンドの重さ。1 ct=0.2 g</li>
+<li>cut: <a href='https://www.brilliance.co.jp/engagement/select/cut.html' title=''>カット</a>（形状、仕上がり）</li>
+<li>color: <a href='https://www.brilliance.co.jp/engagement/select/color.html' title=''>色</a>。一般的には色が無い方が偉い。Dが最も無色でZに向かって色有り</li>
+<li>clarity: <a href='https://www.brilliance.co.jp/engagement/select/clarity.html' title=''>透明度</a>。I1, SI2, SI1, VS2, VS1, VVS2, VVS1, IFの順に良い</li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>cutが悪い方が高価？</h2></hgroup><article  id="cutが悪い方が高価">
@@ -3363,43 +3366,28 @@ ggplot(diamonds2, aes(lcarat, lresid)) +  geom_hex(bins = 50)</pre>
 </article></slide><slide class=""><hgroup><h2>24.2.2 より複雑なモデル</h2></hgroup><article  id="より複雑なモデル">
 
 <pre class = 'prettyprint lang-r'>mod_diamond2 &lt;- lm(lprice ~ lcarat + color + cut + clarity, data = diamonds2)
-summary(mod_diamond2)</pre>
+summary(mod_diamond2)$coefficients</pre>
 
-<pre >## 
-## Call:
-## lm(formula = lprice ~ lcarat + color + cut + clarity, data = diamonds2)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.17388 -0.12437 -0.00094  0.11920  2.78322 
-## 
-## Coefficients:
-##              Estimate Std. Error  t value Pr(&gt;|t|)    
-## (Intercept) 12.206978   0.001693 7211.806  &lt; 2e-16 ***
-## lcarat       1.886239   0.001124 1677.809  &lt; 2e-16 ***
-## color.L     -0.633998   0.002910 -217.872  &lt; 2e-16 ***
-## color.Q     -0.137580   0.002676  -51.409  &lt; 2e-16 ***
-## color.C     -0.022072   0.002503   -8.819  &lt; 2e-16 ***
-## color^4      0.016570   0.002297    7.213 5.54e-13 ***
-## color^5     -0.002828   0.002169   -1.304    0.192    
-## color^6      0.003533   0.001971    1.793    0.073 .  
-## cut.L        0.173866   0.003386   51.349  &lt; 2e-16 ***
-## cut.Q       -0.050346   0.002980  -16.897  &lt; 2e-16 ***
-## cut.C        0.019129   0.002583    7.407 1.31e-13 ***
-## cut^4       -0.002410   0.002066   -1.166    0.243    
-## clarity.L    1.308155   0.005179  252.598  &lt; 2e-16 ***
-## clarity.Q   -0.334090   0.004839  -69.047  &lt; 2e-16 ***
-## clarity.C    0.178423   0.004140   43.093  &lt; 2e-16 ***
-## clarity^4   -0.088059   0.003298  -26.697  &lt; 2e-16 ***
-## clarity^5    0.035885   0.002680   13.389  &lt; 2e-16 ***
-## clarity^6   -0.001371   0.002327   -0.589    0.556    
-## clarity^7    0.048221   0.002051   23.512  &lt; 2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.1916 on 53795 degrees of freedom
-## Multiple R-squared:  0.9828, Adjusted R-squared:  0.9828 
-## F-statistic: 1.706e+05 on 18 and 53795 DF,  p-value: &lt; 2.2e-16</pre>
+<pre >##                 Estimate  Std. Error      t value      Pr(&gt;|t|)
+## (Intercept) 12.206977965 0.001692638 7211.8056242  0.000000e+00
+## lcarat       1.886239132 0.001124227 1677.8093006  0.000000e+00
+## color.L     -0.633998257 0.002909964 -217.8715403  0.000000e+00
+## color.Q     -0.137579548 0.002676159  -51.4093408  0.000000e+00
+## color.C     -0.022071806 0.002502875   -8.8185817  1.193052e-18
+## color^4      0.016569789 0.002297151    7.2131908  5.537381e-13
+## color^5     -0.002828016 0.002169283   -1.3036640  1.923537e-01
+## color^6      0.003533157 0.001970679    1.7928629  7.300046e-02
+## cut.L        0.173865808 0.003385948   51.3492207  0.000000e+00
+## cut.Q       -0.050345645 0.002979518  -16.8972432  6.894817e-64
+## cut.C        0.019128669 0.002582593    7.4067691  1.313014e-13
+## cut^4       -0.002410361 0.002066319   -1.1664995  2.434177e-01
+## clarity.L    1.308155179 0.005178801  252.5980787  0.000000e+00
+## clarity.Q   -0.334089571 0.004838561  -69.0473035  0.000000e+00
+## clarity.C    0.178422700 0.004140442   43.0926673  0.000000e+00
+## clarity^4   -0.088059278 0.003298473  -26.6969813 5.332347e-156
+## clarity^5    0.035884717 0.002680109   13.3892766  8.121885e-41
+## clarity^6   -0.001371424 0.002327080   -0.5893324  5.556408e-01
+## clarity^7    0.048221081 0.002050947   23.5116140 1.278000e-121</pre>
 
 </article></slide><slide class=""><hgroup><h2>モデル予測(cutの周辺)</h2></hgroup><article  id="モデル予測cutの周辺">
 
@@ -3455,6 +3443,11 @@ ggplot(diamonds2, aes(lcarat, lresid2)) +  geom_hex(bins = 50)</pre>
        window.jQuery(document).on('slideenter', function(e) {
          window.jQuery(e.target).trigger('shown');
       });
+    }
+    if (window.Shiny) {
+      // Initialize slides when this script appears on the page, since it
+      // indicates that the <slides> markup has been fully loaded.
+      window.loadDeck();
     }
   })();
 </script>

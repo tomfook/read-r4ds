@@ -43,10 +43,10 @@ library(lubridate)
 ## 24.2 なぜ低品質なダイヤモンドの方が高価なのか？
 ダイヤモンドの品質は次の4Cで決まる(はず)
 
-- carat: ダイヤモンドの重さ
-- cut: カット（形状、仕上がり）
-- color: 色。一般的には色が無い方が偉い。Dが最も無色でZに向かって色有り
-- clarity: 透明度。I1, SI2, SI1, VS2, VS1, VVS2, VVS1, IFの順に良い
+- carat: [カラット](https://www.brilliance.co.jp/engagement/select/carat.html)ダイヤモンドの重さ。1 ct=0.2 g
+- cut: [カット](https://www.brilliance.co.jp/engagement/select/cut.html)（形状、仕上がり）
+- color: [色](https://www.brilliance.co.jp/engagement/select/color.html)。一般的には色が無い方が偉い。Dが最も無色でZに向かって色有り
+- clarity: [透明度](https://www.brilliance.co.jp/engagement/select/clarity.html)。I1, SI2, SI1, VS2, VS1, VVS2, VVS1, IFの順に良い
 
 ## cutが悪い方が高価？
 ```{r diamond_viz_cutprice}
@@ -139,7 +139,7 @@ ggplot(diamonds2, aes(clarity, lresid)) + geom_boxplot()
 ## 24.2.2 より複雑なモデル
 ```{r diamonds_mod2_multiple}
 mod_diamond2 <- lm(lprice ~ lcarat + color + cut + clarity, data = diamonds2)
-summary(mod_diamond2)
+summary(mod_diamond2)$coefficients
 ```
 
 ## モデル予測(cutの周辺)
